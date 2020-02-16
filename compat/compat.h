@@ -5,6 +5,14 @@
  * to be a placeholder.
  */
 
+/* Reference from Apple's archived OS X (now macOS documentation 
+we need to import this else we are going to get a "declaration expected at line 
+29" */
+#if defined __APPLE__
+    #include <pwd.h>
+    #include <grp.h>
+#endif
+
 /* setmode.c */
 mode_t getmode(const void *, mode_t);
 void *setmode(const char *);
@@ -16,8 +24,16 @@ long long strtonum(const char *, long long, long long, const char **);
 void strmode(int, char *);
 
 /* pwcache.c */
-char *user_from_uid(uid_t, int);
-char *group_from_gid(gid_t, int);
+/* Darwin (OSX/macOS) requires the nouser and no group
+to be added */
+
+#if defined __APPLE__
+    char *user_from_uid(uid_t, int nouser);
+    char *group_from_gid(gid_t, int nogroup);
+#elif __linux
+    char *user_from_uid(uid_t, int);
+    char *group_from_gid(gid_t, int);
+#endif
 
 /* logwtmp.c */
 void logwtmp(const char *, const char *, const char *);
@@ -57,4 +73,4 @@ void *recallocarray(void *, size_t, size_t, size_t);
  * fmt_scaled(3) specific flags.
  * This comes from lib/libutil/util.h in the OpenBSD source.
  */
-#define	FMT_SCALED_STRSIZE	7	/* minus sign, 4 digits, suffix, null byte */
+#define FMT_SCALED_STRSIZE 7 /* minus sign, 4 digits, suffix, null byte */
