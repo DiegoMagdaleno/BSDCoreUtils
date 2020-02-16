@@ -24,13 +24,13 @@ long long strtonum(const char *, long long, long long, const char **);
 void strmode(int, char *);
 
 /* pwcache.c */
-/* Darwin (OSX/macOS) requires the nouser and no group
+/* Darwin (OSX/macOS) requires the nouser and nogroup
 to be added */
 
 #if defined __APPLE__
     char *user_from_uid(uid_t, int nouser);
     char *group_from_gid(gid_t, int nogroup);
-#elif __linux
+#else
     char *user_from_uid(uid_t, int);
     char *group_from_gid(gid_t, int);
 #endif
