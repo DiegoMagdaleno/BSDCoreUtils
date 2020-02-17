@@ -57,6 +57,10 @@ int heapsort(void *, size_t, size_t, int (*)(const void *, const void *));
 /* recallocarray.c */
 void *recallocarray(void *, size_t, size_t, size_t);
 
+/* reallocarray.c */
+void *reallocarray(void *ptr, size_t nmemb, size_t size);
+
+
 /*
  * MAXBSIZE does not exist on Linux because filesystem block size
  * limits are per filesystem and not consistently enforced across
