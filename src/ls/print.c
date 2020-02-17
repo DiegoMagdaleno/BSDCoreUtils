@@ -38,7 +38,11 @@
 #include <sys/param.h>
 #include <sys/types.h>
 #include <sys/stat.h>
-#include <sys/sysmacros.h>
+#ifdef __APPLE__
+
+#else
+	#include <sys/sysmacros.h>
+#endif
 
 #include <err.h>
 #include <errno.h>
