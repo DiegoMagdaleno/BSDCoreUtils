@@ -21,7 +21,11 @@
 
 #include "config.h"
 
-#include <sys/sysmacros.h>
+#ifdef __APPLE__
+
+#else
+	#include <sys/sysmacros.h>
+#endif
 #include <sys/stat.h>
 
 #include <err.h>
