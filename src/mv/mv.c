@@ -54,6 +54,12 @@
 
 #include "compat.h"
 
+#if defined(__APPLE__) || defined(__NetBSD__) 
+	#define st_atim st_atimespec
+	#define st_ctim st_ctimespec
+	#define st_mtim st_mtimespec
+#endif
+
 extern char *__progname;
 
 int fflg, iflg, vflg;
