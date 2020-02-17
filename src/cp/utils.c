@@ -261,9 +261,16 @@ setfile(struct stat *fs, int fd)
 
 	rval = 0;
 	fs->st_mode &= S_ISVTX | S_ISUID | S_ISGID | S_IRWXU | S_IRWXG | S_IRWXO;
-
-	ts[0] = fs->st_atim;
-	ts[1] = fs->st_mtim;
+    
+	/* macOS names almost all time related 
+	stuff differently, use Darwin's name here */
+	#ifdef __APPLE__
+		ts[0] = fs->st_atimespec;
+		ts[1] = fs->st_mtimespec;
+	#else
+		ts[0] = fs->st_atim;
+		ts[1] = fs->st_mtim;
+	#endif
 	if (fd >= 0 ? futimens(fd, ts) :
 	    utimensat(AT_FDCWD, to.p_path, ts, AT_SYMLINK_NOFOLLOW)) {
 		warn("update times: %s", to.p_path);
