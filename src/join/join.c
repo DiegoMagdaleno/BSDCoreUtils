@@ -42,6 +42,13 @@
 #include <unistd.h>
 #include "compat.h"
 
+/* macOS doesn't know the deffiniton of u_long
+(short for unsigned long) that was used on legacy BSD
+codebases, however, types.h allows us to define it */
+#ifdef __APPLE__
+	#include <sys/types.h>
+#endif
+
 #define MAXIMUM(a, b)	(((a) > (b)) ? (a) : (b))
 
 /*
