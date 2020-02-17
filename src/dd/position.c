@@ -39,7 +39,13 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/ioctl.h>
-#include <sys/mtio.h>
+
+#ifdef __APPLE__
+	#include "compat/compat.h"
+#else 
+	#include <sys/mtio.h>
+#endif
+
 #include <sys/time.h>
 
 #include <err.h>

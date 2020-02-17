@@ -5,12 +5,18 @@
  * to be a placeholder.
  */
 
-/* Reference from Apple's archived OS X (now macOS documentation 
-we need to import this else we are going to get a "declaration expected at line 
-29" */
+/* 
+ * Reference from Apple's archived OS X (now macOS documentation 
+ * we need to import this else we are going to get a "declaration expected at line 
+ * 29" 
+ * 
+ * including types.h allows us to fix erros in the mget declaration
+ * 
+ */
 #if defined __APPLE__
     #include <pwd.h>
     #include <grp.h>
+    #include <sys/types.h>
 #endif
 
 /* setmode.c */
@@ -60,6 +66,34 @@ void *recallocarray(void *, size_t, size_t, size_t);
 /* reallocarray.c */
 void *reallocarray(void *ptr, size_t nmemb, size_t size);
 
+/* 
+ * macOS doesn't have a mtio.h
+ * so the solution we perform here
+ * is declaring the necesary definitions
+ * and structures
+ */
+#ifdef __APPLE__
+
+    struct mtop {
+	short	mt_op;		
+	daddr_t	mt_count;	
+    };
+    #define MTFSR		3	
+    #define MTBSR		4	
+    #define	MTIOCTOP	_IOW('m', 1, struct mtop)	
+
+    struct mtget {
+        short	mt_type;	
+        short	mt_dsreg;	
+        short	mt_erreg;	
+        short	mt_resid;	
+        daddr_t	mt_fileno;	
+        daddr_t	mt_blkno;	
+    };
+
+    #define	MTIOCGET	_IOR('m', 2, struct mtget)
+
+#endif
 
 /*
  * MAXBSIZE does not exist on Linux because filesystem block size
