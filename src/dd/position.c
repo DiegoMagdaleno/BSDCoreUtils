@@ -41,7 +41,7 @@
 #include <sys/ioctl.h>
 
 #ifdef __APPLE__
-	#include "compat/compat.h"
+	#include "compat.h"
 #else 
 	#include <sys/mtio.h>
 #endif

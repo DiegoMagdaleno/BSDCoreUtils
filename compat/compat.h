@@ -14,9 +14,9 @@
  * 
  */
 #if defined __APPLE__
-    #include <pwd.h>
-    #include <grp.h>
-    #include <sys/types.h>
+#include <pwd.h>
+#include <grp.h>
+#include <sys/types.h>
 #endif
 
 /* setmode.c */
@@ -34,11 +34,11 @@ void strmode(int, char *);
 to be added */
 
 #if defined __APPLE__
-    char *user_from_uid(uid_t, int nouser);
-    char *group_from_gid(gid_t, int nogroup);
+char *user_from_uid(uid_t, int nouser);
+char *group_from_gid(gid_t, int nogroup);
 #else
-    char *user_from_uid(uid_t, int);
-    char *group_from_gid(gid_t, int);
+char *user_from_uid(uid_t, int);
+char *group_from_gid(gid_t, int);
 #endif
 
 /* logwtmp.c */
@@ -74,28 +74,77 @@ void *reallocarray(void *ptr, size_t nmemb, size_t size);
  */
 #ifdef __APPLE__
 
-    struct mtop {
-	short	mt_op;		
-	daddr_t	mt_count;	
-    };
-    #define MTFSR		3	
-    #define MTBSR		4	
-    #define	MTIOCTOP	_IOW('m', 1, struct mtop)	
+struct mtop
+{
+    short mt_op;
+    daddr_t mt_count;
+};
+#define MTFSR 3
+#define MTBSR 4
+#define MTIOCTOP _IOW('m', 1, struct mtop)
 
-    struct mtget {
-        short	mt_type;	
-        short	mt_dsreg;	
-        short	mt_erreg;	
-        short	mt_resid;	
-        daddr_t	mt_fileno;	
-        daddr_t	mt_blkno;	
-    };
+struct mtget
+{
+    short mt_type;
+    short mt_dsreg;
+    short mt_erreg;
+    short mt_resid;
+    daddr_t mt_fileno;
+    daddr_t mt_blkno;
+};
 
-    #define	MTIOCGET	_IOR('m', 2, struct mtget)
+#define MTIOCGET _IOR('m', 2, struct mtget)
 
 #endif
 
+/*
+ * Darwin comes with an outdated version of sys/queue.h
+ * however since Darwin is BSD based we can fix this by 
+ * using a fake queue, and redefinging a lot of the structures
+ */
+#ifdef __APPLE__
+#undef SIMPLEQ_HEAD
+#undef SIMPLEQ_ENTRY
+#undef SIMPLEQ_FOREACH
+#undef SIMPLEQ_INSERT_TAIL
+#undef SIMPLEQ_FIRST
+#undef SIMPLEQ_END
+#undef SIMPLEQ_NEXT
 
+#define	SIMPLEQ_FIRST(head)	    ((head)->sqh_first)
+#define	SIMPLEQ_EMPTY(head)	    (SIMPLEQ_FIRST(head) == SIMPLEQ_END(head))
+#define	SIMPLEQ_END(head)	    NULL
+#define	SIMPLEQ_NEXT(elm, field)    ((elm)->field.sqe_next)
+
+#define SIMPLEQ_HEAD(name, type)                                \
+    struct name                                                 \
+    {                                                           \
+        struct type *sqh_first; /* first element */             \
+        struct type **sqh_last; /* addr of last next element */ \
+    }
+
+#define SIMPLEQ_ENTRY(type)                       \
+    struct                                        \
+    {                                             \
+        struct type *sqe_next; /* next element */ \
+    }
+
+#define SIMPLEQ_INSERT_TAIL(head, elm, field)      \
+    do                                             \
+    {                                              \
+        (elm)->field.sqe_next = NULL;              \
+        *(head)->sqh_last = (elm);                 \
+        (head)->sqh_last = &(elm)->field.sqe_next; \
+    } while (0)
+
+#define SIMPLEQ_HEAD_INITIALIZER(head)					\
+	{ NULL, &(head).sqh_first }
+
+#define SIMPLEQ_FOREACH(var, head, field) \
+    for ((var) = SIMPLEQ_FIRST(head);     \
+         (var) != SIMPLEQ_END(head);      \
+         (var) = SIMPLEQ_NEXT(var, field))
+#endif
 /*
  * MAXBSIZE does not exist on Linux because filesystem block size
  * limits are per filesystem and not consistently enforced across
