@@ -35,7 +35,11 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/mount.h>
-#include <sys/random.h>
+#ifdef __APPLE__
+
+#else
+	#include <sys/random.h>
+#endif
 #include <sys/statvfs.h>
 
 #include <err.h>
@@ -50,7 +54,12 @@
 #include <pwd.h>
 #include <grp.h>
 
-#include "compat.h"
+
+#ifdef __APPLE__
+
+#else
+	#include "compat.h"
+#endif
 
 #define MAXIMUM(a, b)	(((a) > (b)) ? (a) : (b))
 
@@ -347,8 +356,12 @@ pass(int fd, off_t len, char *buf, size_t bsize)
 
 	for (; len > 0; len -= wlen) {
 		wlen = len < bsize ? len : bsize;
-		if (getrandom(buf, wlen, GRND_RANDOM|GRND_NONBLOCK) == -1)
+		#ifdef __APPLE__
+		 		arc4random_buf(buf, wlen); 
+		#else
+			if (getrandom(buf, wlen, GRND_RANDOM|GRND_NONBLOCK) == -1)
 			err(1, "getrandom()");
+		#endif
 		if (write(fd, buf, wlen) != wlen)
 			return (0);
 	}
