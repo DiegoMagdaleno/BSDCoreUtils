@@ -25,6 +25,10 @@
       truncate
       unlink
 
+- FIXME Darwin: 
+      - RM doesn't build (Lacks a syscall only available on GLIBC)
+      - Join doesn't build (I don't know what it lacks, but however I am fixing it)
+
 - Maybe incorporate find and xargs in to the tree.
 
 - Maybe incorporate bc and dc in to the tree.
