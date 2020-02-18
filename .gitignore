@@ -91,3 +91,5 @@ who
 xargs
 xinstall
 yes
+.vscode/settings.json
+.DS_Store
