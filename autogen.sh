@@ -1,5 +1,9 @@
 #!/bin/sh
-libtoolize --copy --force
+if hash glibtoolize 2>/dev/null; then
+    glibtoolize --copy --force
+else 
+    libtoolize --copy --force
+fi
 aclocal
 autoconf
 autoheader --force
