@@ -32,6 +32,10 @@
 #include <err.h>
 #include <stdio.h>
 #include <string.h>
+#if defined __APPLE__
+#include "compat.h"
+#endif
+
 
 #include "mem.h"
 /*
