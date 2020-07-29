@@ -1,0 +1,31 @@
+Patches is a basic set of patches for an imported
+OpenBSD vanilla source code.
+
+The plan is to make this as easy as possible to patch 
+when new versions arrive.
+
+The structure of the patches is is based on the patches we need
+for compatibility (aka undefined stuff in other operating systems
+that aren't BSD) and the others that we need for the source to run.
+
+It is strongly recommended to try and patch for both Darwin and Linux, 
+remember that, libc's are different, so there is no such thing as universal 
+patches. In order to achieve this, you should use compiler macros.
+
+To create a patch, you need to use the diff tool, and it needs to be able to be applied 
+using 'patch -p0'. For example:
+
+    cd src/arch/
+    cp -p arch.c arch.c.orig
+    # edit arch.c
+    mkdir -p ../../patches/src/arch
+    diff -u arch.c.orig arch.c > ../../patches/src/arch/arch.c.patch
+
+NOTE: All patches are applied *after* common edits to source files are
+done by import-src.sh.  Be sure to look at that script first if you
+need clarification on what fits that category.
+
+Also remember to add credits to CREDITS file in this subdirectory in case
+some of the patches are by third parties.
+
+Happy hacking!
