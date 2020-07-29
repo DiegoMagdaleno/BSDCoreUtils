@@ -9,6 +9,23 @@
 #
 
 OS="$(uname)"
+if  [ "$OS" = "Darwin" ]; then
+    PATH=/bin:/usr/bin:/usr/local/bin
+else
+    PATH=/bin:/usr/bin
+fi
+
+if [ "$OS" = "Darwin" ]; then
+    if hash greadlink 2>/dev/null; then
+        CWD="$(dirname "$(greadlink -f "$0")")"
+    else    
+        echo "You need GNU coreutils to run this script on Darwin"
+        exit 1
+    fi
+else
+    CWD="$(dirname "$(readlink -f "$0")")"
+fi
+
 if [ "$OS" = "Darwin" ]; then
     if hash gmktemp 2>/dev/null; then
         TMPDIR="$(gmktemp -d --tmpdir=${CWD})"
@@ -20,29 +37,15 @@ else
     TMPDIR="$(mktemp -d --tmpdir=${CWD})"
 fi
 
-
-PATH=/bin:/usr/bin
-
-if [ "$OS" = Darwin ]; then
+if [ "$OS" = "Darwin" ]; then
     if hash greadlink 2>/dev/null; then
-        CWD="$(dirname "$(greadlink -f "$0")")"
+        FILE_SOURCE_LIST=($(find $CWD/configurations -type f \( -name "*.conf" \) -exec greadlink -f {} \;))
     else
         echo "You need GNU coreutils to run this script on Darwin"
         exit 1
     fi
 else
-    CWD="$(dirname "$(readlink -f "$0")")"
-fi
-
-if ["$OS" = Darwin]; then
-    if hash greadlink 2>/dev/null; then
-        FILE_SOURCE_LIST=($(find $CWD/configurations -type f \( -name "*.conf"\) -exec greadlink -f {} \;))
-    else
-        echo "You need GNU coreutils to run this script on Darwin"
-        exit 1
-    fi
-else
-    FILE_SOURCE_LIST=($(find $CWD/configurations -type f \( -name "*.conf"\) -exec readlink -f {} \;)) #TODO: Verifiy this works properly on Linux. Due to the use of GNU find
+    FILE_SOURCE_LIST=($(find $CWD/configurations -type f \( -name "*.conf" \) -exec readlink -f {} \;))#TODO: Verifiy this works properly on Linux. Due to the use of GNU find
 fi
 
 for configuration in "${FILE_SOURCE_LIST[@]}"
