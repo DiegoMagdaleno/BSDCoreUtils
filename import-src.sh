@@ -5,11 +5,24 @@
 #                 a new version of OpenBSD comes out.
 #
 # Author: David Cantrell <david.l.cantrell@gmail.com>
+# Author: Diego Magdaleno <diegomagdaleno@protonmail.com>
 #
+
+OS="$(uname)"
+if [ "$OS" = "Darwin" ]; then
+    if hash gmktemp 2>/dev/null; then
+        TMPDIR="$(gmktemp -d --tmpdir=${CWD})"
+    else
+        echo "You need GNU coreutils to run this script"
+        exit 1
+    fi
+else
+    TMPDIR="$(mktemp -d --tmpdir=${CWD})"
+fi
+
 
 PATH=/bin:/usr/bin
 CWD="$(pwd)"
-TMPDIR="$(mktemp -d --tmpdir=${CWD})"
 . ${CWD}/upstream.conf
 
 fail_exit() {
