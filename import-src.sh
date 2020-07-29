@@ -25,6 +25,14 @@ PATH=/bin:/usr/bin
 CWD="$(pwd)"
 . ${CWD}/upstream.conf
 
+function diegos_patch(){
+    if [ "$OS" = "Linux" ]; then
+        echo "Diego's patch is only required on Darwin based operating systems please re run this script without --with-diegos-patch"
+        exit 1
+    fi
+}
+
+
 fail_exit() {
     cd ${CWD}
     rm -rf ${TMPDIR}
