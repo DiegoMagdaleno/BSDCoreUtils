@@ -93,3 +93,4 @@ xinstall
 yes
 .vscode/settings.json
 .DS_Store
+tmp.*

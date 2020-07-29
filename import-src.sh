@@ -8,6 +8,12 @@
 # Author: Diego Magdaleno <diegomagdaleno@protonmail.com>
 #
 
+function fail_exit() {
+    cd ${CWD}
+    rm -rf ${TMPDIR}
+    exit 1
+}
+
 OS="$(uname)"
 if  [ "$OS" = "Darwin" ]; then
     PATH=/bin:/usr/bin:/usr/local/bin
@@ -53,18 +59,21 @@ do
     . $configuration
 done
 
-fail_exit() {
-    cd ${CWD}
-    rm -rf ${TMPDIR}
-    exit 1
-}
-
 for sub in compat src ; do
     [ -d ${CWD}/${sub} ] || mkdir -p ${CWD}/${sub}
 done
 
 cd ${TMPDIR}
 curl -L --retry 3 --ftp-pasv -O ${SRC} || fail_exit
+if [ "$OS" = "Darwin" ]; then
+    SHA256OFSRC="$(shasum -a 256 src.tar.gz | awk '{print $1}')"
+else
+    SHA256OFSRC="$(sha256sum src.tar.gz)"
+fi
+if [ "$SHA256OFSRC" != ${SHA256} ]; then
+    echo "Error, the integrity of the file failed, operating is unsafe and cannot continue."
+    exit 1
+fi
 gzip -dc src.tar.gz | tar -xvf -
 
 for p in ${CMDS} ; do
