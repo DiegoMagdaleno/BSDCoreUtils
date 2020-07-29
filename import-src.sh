@@ -104,10 +104,10 @@ done
 
 for header in "${COMPAT_TOOLS_HEADERS[@]}"
 do
-    if [ ! -d ${CWD}/headers ]; then
-        mkdir -p ${CWD}/headers
+    if [ ! -d ${CWD}/compat/headers ]; then
+        mkdir -p ${CWD}/compat/headers
     fi
-    cp -p $header ${CWD}/headers/
+    cp -p $header ${CWD}/compat/headers/
 done
 
 for filef in "${FACTOR_C[@]}"
