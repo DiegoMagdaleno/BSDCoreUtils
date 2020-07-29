@@ -88,24 +88,25 @@ if [ "$OS" = "Linux" ]; then
     rm ${CWD}/src/chmod/chflags.1
 fi
 
-# 'compat' is our static library with a subset of BSD library functions
-cp -p lib/libc/gen/pwcache.c ${CWD}/compat
-cp -p lib/libc/gen/setmode.c ${CWD}/compat
-cp -p lib/libc/gen/getbsize.c ${CWD}/compat
-cp -p lib/libc/gen/devname.c ${CWD}/compat
-cp -p lib/libc/stdlib/merge.c ${CWD}/compat
-cp -p lib/libc/stdlib/recallocarray.c ${CWD}/compat
-cp -p lib/libc/stdlib/strtonum.c ${CWD}/compat
-cp -p lib/libc/string/strmode.c ${CWD}/compat
-cp -p lib/libutil/logwtmp.c ${CWD}/compat
-cp -p lib/libutil/ohash.c ${CWD}/compat
-cp -p lib/libutil/ohash.h ${CWD}/compat
-cp -p lib/libutil/fmt_scaled.h ${CWD}/compat
+for file in "${COMPAT_TOOLS_C[@]}"
+do
+    cp -p $file ${CWD}/compat
+done
 
-# These files are needed for the factor command
-cp -p games/primes/primes.h ${CWD}/src/factor
-cp -p games/primes/pattern.c ${CWD}/src/factor
-cp -p games/primes/pr_tbl.c ${CWD}/src/factor
+for header in "${COMPAT_TOOLS_HEADERS[@]}"
+do 
+    cp -p $header ${CWD}/headers/
+done
+
+for filef in "${FACTOR_C[@]}"
+do
+    cp -p $filef ${CWD}/src/factor
+done
+
+for headerf in "${FACTOR_HEADER[@]}"
+do
+    cp -p $filef ${CWD}/src/factor
+done
 
 # Clean up
 rm -rf ${TMPDIR}
