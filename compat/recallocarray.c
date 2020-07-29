@@ -15,8 +15,6 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-#include "config.h"
-
 #include <errno.h>
 #include <stdlib.h>
 #include <stdint.h>
@@ -80,3 +78,4 @@ recallocarray(void *ptr, size_t oldnmemb, size_t newnmemb, size_t size)
 
 	return newptr;
 }
+DEF_WEAK(recallocarray);

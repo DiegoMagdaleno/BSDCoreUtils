@@ -1,4 +1,4 @@
-/*	$OpenBSD: logwtmp.c,v 1.10 2016/08/30 14:44:45 guenther Exp $	*/
+/*	$OpenBSD: logwtmp.c,v 1.11 2019/06/28 13:32:43 deraadt Exp $	*/
 /*
  * Copyright (c) 1988, 1993
  *	The Regents of the University of California.  All rights reserved.
@@ -28,17 +28,16 @@
  * SUCH DAMAGE.
  */
 
-#include "config.h"
-
 #include <sys/types.h>
 #include <sys/time.h>
 #include <sys/stat.h>
 
 #include <fcntl.h>
 #include <string.h>
-#include <time.h>
 #include <unistd.h>
 #include <utmp.h>
+
+#include "util.h"
 
 void
 logwtmp(const char *line, const char *name, const char *host)
@@ -47,13 +46,13 @@ logwtmp(const char *line, const char *name, const char *host)
 	struct utmp ut;
 	int fd;
 
-	if ((fd = open(_PATH_WTMP, O_WRONLY|O_APPEND|O_CLOEXEC)) < 0)
+	if ((fd = open(_PATH_WTMP, O_WRONLY|O_APPEND|O_CLOEXEC)) == -1)
 		return;
 	if (fstat(fd, &buf) == 0) {
 		(void) strncpy(ut.ut_line, line, sizeof(ut.ut_line));
 		(void) strncpy(ut.ut_name, name, sizeof(ut.ut_name));
 		(void) strncpy(ut.ut_host, host, sizeof(ut.ut_host));
-		(void) time((time_t *) &ut.ut_time);
+		(void) time(&ut.ut_time);
 		if (write(fd, &ut, sizeof(struct utmp)) !=
 		    sizeof(struct utmp))
 			(void) ftruncate(fd, buf.st_size);
