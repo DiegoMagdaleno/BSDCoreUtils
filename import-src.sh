@@ -98,12 +98,15 @@ if [ "$OS" = "Linux" ]; then
 fi
 
 for file in "${COMPAT_TOOLS_C[@]}"
-do
+do 
     cp -p $file ${CWD}/compat
 done
 
 for header in "${COMPAT_TOOLS_HEADERS[@]}"
-do 
+do
+    if [ ! -d ${CWD}/headers ]; then
+        mkdir -p ${CWD}/headers
+    fi
     cp -p $header ${CWD}/headers/
 done
 
@@ -118,4 +121,4 @@ do
 done
 
 # Clean up
-rm -rf ${TMPDIR}
+#rm -rf ${TMPDIR}
