@@ -28,6 +28,7 @@
  * SUCH DAMAGE.
  */
 
+
 #include <sys/types.h>
 #include <sys/time.h>
 #include <sys/stat.h>
@@ -35,9 +36,11 @@
 #include <fcntl.h>
 #include <string.h>
 #include <unistd.h>
+#include <time.h>
 #include <utmp.h>
 
 #include "util.h"
+#include "config.h"
 
 void
 logwtmp(const char *line, const char *name, const char *host)

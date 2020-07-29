@@ -48,6 +48,8 @@
 
 #define	SET_LEN	6		/* initial # of bitcmd struct to malloc */
 #define	SET_LEN_INCR 4		/* # of bitcmd structs to add as needed */
+#include "config.h"	
+#include "compat.h"	
 
 typedef struct bitcmd {
 	char	cmd;

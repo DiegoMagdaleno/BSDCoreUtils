@@ -15,12 +15,14 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
+
 #include <stddef.h>
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <limits.h>
 #include "ohash.h"
+#include "config.h"
 
 struct _ohash_record {
 	uint32_t	hv;

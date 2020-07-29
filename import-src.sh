@@ -30,6 +30,7 @@ function diegos_patch(){
         echo "Diego's patch is only required on Darwin based operating systems please re run this script without --with-diegos-patch"
         exit 1
     fi
+    
 }
 
 
