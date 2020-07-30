@@ -32,6 +32,9 @@
 #include <string.h>
 
 #include "mem.h"
+#if defined __APPLE__
+#include "compat.h"
+#endif
 
 /*
  * malloc() wrapper.

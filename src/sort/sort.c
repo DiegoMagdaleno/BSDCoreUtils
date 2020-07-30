@@ -27,11 +27,15 @@
  * SUCH DAMAGE.
  */
 
+#if !defined __APPLE__
 #include <sys/random.h>
+#endif
 #include <sys/resource.h>
 #include <sys/stat.h>
 #include <sys/types.h>
+#if !defined __APPLE__
 #include <sys/auxv.h>
+#endif
 
 #include <err.h>
 #include <errno.h>
@@ -782,9 +786,12 @@ set_random_seed(void)
 		fclose(fp);
 	} else {
 		unsigned char rsd[1024];
-
+		#ifdef __APPLE__
+			arc4random_buf(rsd, sizeof(rsd)); 
+		#else
 		if (getrandom(rsd, sizeof(rsd), GRND_RANDOM|GRND_NONBLOCK) == -1)
 			err(1, "getrandom()");
+		#endif
 		MD5_Update(&md5_ctx, rsd, sizeof(rsd));
 	}
 }
