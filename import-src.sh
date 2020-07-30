@@ -8,6 +8,7 @@
 # Author: Diego Magdaleno <diegomagdaleno@protonmail.com>
 #
 
+# Set our fail exist function, this is useful for Downdalos
 function fail_exit() {
     cd ${CWD}
     rm -rf ${TMPDIR}
@@ -63,18 +64,35 @@ for sub in compat src ; do
     [ -d ${CWD}/${sub} ] || mkdir -p ${CWD}/${sub}
 done
 
+# While it doesn't really make sense we are copying and pasting the code
+# for the same operating and this could be a function
+# the problem is, this is bash, so positional paremeters just suck, so its better
+# to write a few lines and just avoid problems.
+
+# Note for Diego of the future if you screw up, you did this to yourself.
 cd ${TMPDIR}
 curl -L --retry 3 --ftp-pasv -O ${SRC} || fail_exit
 if [ "$OS" = "Darwin" ]; then
     SHA256OFSRC="$(shasum -a 256 src.tar.gz | awk '{print $1}')"
 else
-    SHA256OFSRC="$(sha256sum src.tar.gz)"
+    SHA256OFSRC="$(sha256sum --check src.tar.gz)"
 fi
-if [ "$SHA256OFSRC" != ${SHA256} ]; then
+if [ "$SHA256OFSRC" != ${SHA256SRC} ]; then
     echo "Error, the integrity of the file failed, operating is unsafe and cannot continue."
     exit 1
 fi
 gzip -dc src.tar.gz | tar -xvf -
+curl -L --retry 3 --ftp-pasv -O ${SYS} || fail_exit
+if [ "$OS" = "Darwin" ]; then
+    SHA256OFSYS="$(shasum -a 256 sys.tar.gz | awk '{print $1}')"
+else
+    SHA256OFSYS="$(sha256sum --check sys.tar.gz)"
+fi
+if [ "$SHA256OFSYS" != ${SHA256SYS} ]; then
+    echo "Error, the integrity of the file failed, operating is unsafe and cannot continue."
+    exit 1
+fi
+gzip -dc sys.tar.gz | tar -xvf -
 
 for p in ${CMDS} ; do
     sp="$(basename ${p})"
