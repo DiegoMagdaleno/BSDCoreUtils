@@ -28,6 +28,10 @@
 #include <unistd.h>
 #include <ohash.h>
 
+#if defined __APPLE__
+#include "compat.h"
+#endif
+
 /* The complexity of topological sorting is O(e), where e is the
  * size of input.  While reading input, vertices have to be identified,
  * thus add the complexity of e keys retrieval among v keys using
