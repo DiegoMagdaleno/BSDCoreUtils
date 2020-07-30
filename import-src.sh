@@ -209,6 +209,7 @@ if [ -d ${CWD}/patches/compat ]; then
             gpatch -d ${CWD}/compat -p0 -b -z .orig < ${patchfile}
         else
             patch -d ${CWD}/compat -p0 -b -z .orig < ${patchfile}
+        fi
     done
 fi
 
@@ -223,6 +224,7 @@ if [ -d ${CWD}/patches/src ]; then
                 gpatch -d ${CWD}/src/${subdir} -p0 -b -z .orig < ${patchfile}
             else
                 patch -d ${CWD}/src/${subdir} -p0 -b -z .orig < ${patchfile}
+            fi
         done
     done
 fi
