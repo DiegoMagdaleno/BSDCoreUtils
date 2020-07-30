@@ -20,6 +20,12 @@ we need to import this else we are going to get a "declaration expected at line
 #if defined __APPLE__
 #include "headers/simpleq.h"
 #include "headers/mthio.h"
+#define user_from_uid user_from_uid_orig
+#define group_from_gid group_from_gid_orig
+#include <grp.h>
+#include <pwd.h>
+#undef  user_from_uid
+#undef group_from_gid
 #endif
 
 /* setmode.c */

@@ -45,11 +45,11 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#include <util.h>
 
+#include "compat/headers/util.h"
 #include <sys/param.h>
 #include "compat.h"
-#include "tree.h"
+#include "compat/headers/tree.h"
 
 int	 linkchk(FTSENT *);
 void	 prtout(int64_t, char *, int);
