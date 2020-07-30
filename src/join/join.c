@@ -45,6 +45,14 @@
 
 #define MAXIMUM(a, b)	(((a) > (b)) ? (a) : (b))
 
+/* macOS doesn't know the deffiniton of u_long
+(short for unsigned long) that was used on legacy BSD
+codebases, however, types.h allows us to define it */
+#ifdef __APPLE__
+	#include <sys/types.h>
+	#include "compat.h"
+#endif
+
 /*
  * There's a structure per input file which encapsulates the state of the
  * file.  We repeatedly read lines from each file until we've read in all
