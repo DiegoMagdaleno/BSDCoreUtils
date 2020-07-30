@@ -36,7 +36,15 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <paths.h>
+#if defined __APPLE__
+#define user_from_uid user_from_uid_orig
+#define group_from_gid group_from_gid_orig
 #include <pwd.h>
+#undef  user_from_uid
+#undef group_from_gid
+#else
+#include <pwd.h>
+#endif
 #include <utmp.h>
 #include <stdio.h>
 #include <string.h>

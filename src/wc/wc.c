@@ -39,9 +39,14 @@
 #include <ctype.h>
 #include <err.h>
 #include <unistd.h>
+#ifdef __APPLE__
+#include "headers/util.h"
+#else
 #include <util.h>
+#endif
 #include <wchar.h>
 #include <wctype.h>
+
 #include "compat.h"
 
 int64_t	tlinect, twordct, tcharct;

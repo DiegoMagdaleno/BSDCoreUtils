@@ -39,6 +39,10 @@
 #include <unistd.h>
 #include <utmp.h>
 
+#if defined __APPLE__
+#include "compat.h"
+#endif
+
 typedef char	namebuf[UT_NAMESIZE];
 
 int scmp(const void *, const void *);
