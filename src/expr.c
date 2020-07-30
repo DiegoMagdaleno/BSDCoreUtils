@@ -24,7 +24,7 @@ int		 to_integer(struct val *, const char **);
 void		 to_string(struct val *);
 int		 is_zero_or_null(struct val *);
 void		 nexttoken(int);
-__dead void	 error(void);
+void	 error(void);
 struct val	*eval6(void);
 struct val	*eval5(void);
 struct val	*eval4(void);
@@ -205,7 +205,7 @@ nexttoken(int pat)
 	return;
 }
 
-__dead void
+void
 error(void)
 {
 	errx(2, "syntax error");

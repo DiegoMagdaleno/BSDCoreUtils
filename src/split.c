@@ -58,7 +58,7 @@ int	 sufflen = 2;			/* File name suffix length. */
 void newfile(void);
 void split1(void);
 void split2(void);
-__dead void usage(void);
+void usage(void);
 
 int
 main(int argc, char *argv[])
@@ -306,7 +306,7 @@ newfile(void)
 	file_open = 1;
 }
 
-__dead void
+void
 usage(void)
 {
 	extern char *__progname;

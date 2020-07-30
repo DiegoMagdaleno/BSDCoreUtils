@@ -92,7 +92,7 @@ enum op { FILE_TO_FILE, FILE_TO_DIR, DIR_TO_DNE };
 static int copy(char *[], enum op, int);
 static char *find_last_component(char *);
 
-static void __dead
+static void
 usage(void)
 {
 	(void)fprintf(stderr,

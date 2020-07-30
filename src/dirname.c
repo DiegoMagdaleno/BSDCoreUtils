@@ -22,7 +22,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-static void __dead usage(void);
+static void usage(void);
 
 int
 main(int argc, char *argv[])
@@ -53,7 +53,7 @@ main(int argc, char *argv[])
 
 extern char *__progname;
 
-static void __dead
+static void
 usage(void)
 {
 	(void)fprintf(stderr, "usage: %s pathname\n", __progname);

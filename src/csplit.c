@@ -66,7 +66,7 @@ char	*get_line(void);
 void	 handlesig(int);
 FILE	*newfile(void);
 void	 toomuch(FILE *, long);
-static void __dead usage(void);
+static void usage(void);
 
 /*
  * Command line options
@@ -208,7 +208,7 @@ main(int argc, char *argv[])
 	return (0);
 }
 
-static void __dead
+static void
 usage(void)
 {
 	extern char *__progname;

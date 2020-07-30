@@ -50,7 +50,7 @@ extern char *__progname;
 
 gid_t a_gid(const char *);
 uid_t a_uid(const char *, int);
-static void __dead usage(void);
+static void usage(void);
 
 int
 main(int argc, char *argv[])
@@ -340,7 +340,7 @@ a_gid(const char *s)
 	return (gid);
 }
 
-static void __dead
+static void
 usage(void)
 {
 	fprintf(stderr,

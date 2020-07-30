@@ -27,8 +27,8 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  */
+#include "compat.h"
 
-#include "config.h"	
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <string.h>
@@ -139,4 +139,3 @@ strmode(int mode, char *p)
 	*p++ = ' ';		/* will be a '+' if ACL's implemented */
 	*p = '\0';
 }
-DEF_WEAK(strmode);

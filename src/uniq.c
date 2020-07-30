@@ -54,7 +54,7 @@ FILE	*file(char *, char *);
 void	 show(FILE *, char *);
 char	*skip(char *);
 void	 obsolete(char *[]);
-__dead void	usage(void);
+void	usage(void);
 
 int
 main(int argc, char *argv[])
@@ -254,7 +254,7 @@ obsolete(char *argv[])
 	}
 }
 
-__dead void
+void
 usage(void)
 {
 	extern char *__progname;

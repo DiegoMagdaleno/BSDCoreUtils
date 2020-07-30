@@ -41,7 +41,7 @@ struct node {
 
 static int domakenodes(struct node *, int);
 static dev_t compute_device(int, char **);
-__dead static void usage(int);
+static void usage(int);
 
 int
 main(int argc, char *argv[])
@@ -206,7 +206,7 @@ domakenodes(struct node *node, int n)
 	return rv;
 }
 
-__dead static void
+static void
 usage(int ismkfifo)
 {
 

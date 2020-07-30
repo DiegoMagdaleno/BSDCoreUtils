@@ -40,7 +40,7 @@
 extern char *__progname;
 
 int rm_path(char *);
-static void __dead usage(void);
+static void usage(void);
 
 int
 main(int argc, char *argv[])
@@ -105,7 +105,7 @@ rm_path(char *path)
 	return (0);
 }
 
-static void __dead
+static void
 usage(void)
 {
 	fprintf(stderr, "usage: %s [-p] directory ...\n", __progname);

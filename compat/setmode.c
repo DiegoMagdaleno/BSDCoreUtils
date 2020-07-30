@@ -32,6 +32,7 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  */
+#include "compat.h"
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -48,8 +49,6 @@
 
 #define	SET_LEN	6		/* initial # of bitcmd struct to malloc */
 #define	SET_LEN_INCR 4		/* # of bitcmd structs to add as needed */
-#include "config.h"	
-#include "compat.h"	
 
 typedef struct bitcmd {
 	char	cmd;

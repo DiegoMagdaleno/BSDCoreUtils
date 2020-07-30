@@ -49,7 +49,7 @@ static unsigned long getulong(void);
 static char	*getstr(void);
 static char	*mklong(const char *, int); 
 static void      check_conversion(const char *, const char *);
-static void __dead usage(void);
+static void usage(void);
      
 static int	rval;
 static char  **gargv;
@@ -493,7 +493,7 @@ check_conversion(const char *s, const char *ep)
 	}
 }
 
-static void __dead
+static void
 usage(void)
 {
 	(void)fprintf(stderr, "usage: printf format [argument ...]\n");

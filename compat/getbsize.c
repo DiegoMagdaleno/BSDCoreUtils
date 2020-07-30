@@ -27,8 +27,8 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  */
+#include "compat.h"
 
-#include "config.h"
 #include <err.h>
 #include <stdio.h>
 #include <stdlib.h>

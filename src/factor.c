@@ -76,7 +76,7 @@ extern const int pattern_size;
 static void		pr_fact(u_int64_t);	/* print factors of a value */
 static void		pr_bigfact(u_int64_t);
 static u_int64_t	usqrt(u_int64_t);
-static void __dead	usage(void);
+static void usage(void);
 
 int
 main(int argc, char *argv[])
@@ -302,7 +302,7 @@ usqrt(u_int64_t n)
 	return x;
 }
 
-static void __dead
+static void
 usage(void)
 {
 	(void)fprintf(stderr, "usage: %s [number ...]\n", getprogname());

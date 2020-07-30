@@ -151,7 +151,7 @@ sort_modifier_empty(struct sort_mods *sm)
 /*
  * Print out usage text.
  */
-static __dead void
+static void
 usage(int exit_val)
 {
 	fprintf(exit_val ? stderr : stdout,

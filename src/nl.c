@@ -72,7 +72,7 @@ static struct numbering_property numbering_properties[NP_LAST + 1] = {
 
 void		filter(void);
 void		parse_numbering(const char *, int);
-__dead void	usage(void);
+void	usage(void);
 
 /*
  * Delimiter characters that indicate the start of a logical page section.
@@ -359,7 +359,7 @@ parse_numbering(const char *argstr, int section)
 	}
 }
 
-__dead void
+void
 usage(void)
 {
 	(void)fprintf(stderr, "usage: %s [-p] [-b type] [-d delim] [-f type] "

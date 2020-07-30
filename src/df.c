@@ -57,7 +57,7 @@ static void	 prthumanval(long long);
 static void	 prtstat(struct statfs *, int, int, int);
 static long	 regetmntinfo(struct statfs **, long);
 static int	 selected(const char *);
-static __dead void usage(void);
+static void usage(void);
 
 extern int	 e2fs_df(int, char *, struct statfs *);
 extern int	 ffs_df(int, char *, struct statfs *);
@@ -451,7 +451,7 @@ bread(int rfd, off_t off, void *buf, int cnt)
 	return (1);
 }
 
-static __dead void
+static void
 usage(void)
 {
 	(void)fprintf(stderr,

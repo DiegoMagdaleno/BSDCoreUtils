@@ -39,7 +39,7 @@
 
 extern char *__progname;
 static char *getcwd_logical(void);
-__dead static void usage(void);
+static void usage(void);
 
 int
 main(int argc, char *argv[])

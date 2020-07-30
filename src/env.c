@@ -36,7 +36,7 @@
 #include <string.h>
 #include <unistd.h>
 
-static void __dead usage(void);
+static void usage(void);
 
 int
 main(int argc, char *argv[])
@@ -86,7 +86,7 @@ main(int argc, char *argv[])
 	return 0;
 }
 
-static void __dead
+static void
 usage(void)
 {
 	extern char *__progname;

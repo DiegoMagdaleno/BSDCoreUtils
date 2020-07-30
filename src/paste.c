@@ -46,7 +46,7 @@ char *delim;
 int delimcnt;
 
 int	tr(char *);
-__dead void usage(void);
+void usage(void);
 void	parallel(char **);
 void	sequential(char **);
 
@@ -240,7 +240,7 @@ tr(char *arg)
 	return cnt;
 }
 
-__dead void
+void
 usage(void)
 {
 	extern char *__progname;

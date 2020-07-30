@@ -27,9 +27,8 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  */
-
-#include "config.h"	
 #include "compat.h"
+
 #include <sys/stat.h>
 #include <sys/types.h>
 
@@ -102,4 +101,3 @@ devname(dev_t dev, mode_t type)
 	}
 	return (name ? name : "??");
 }
-DEF_WEAK(devname);

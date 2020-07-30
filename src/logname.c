@@ -35,7 +35,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-static void __dead
+static void
 usage(void)
 {
 	(void)fprintf(stderr, "usage: logname\n");

@@ -153,7 +153,7 @@ static int getn(const char *s);
 static int newerf(const char *, const char *);
 static int olderf(const char *, const char *);
 static int equalf(const char *, const char *);
-static __dead void syntax(const char *op, char *msg);
+static void syntax(const char *op, char *msg);
 
 int
 main(int argc, char *argv[])
@@ -210,7 +210,7 @@ main(int argc, char *argv[])
 	return res;
 }
 
-static __dead void
+static void
 syntax(const char *op, char *msg)
 {
 	if (op && *op)

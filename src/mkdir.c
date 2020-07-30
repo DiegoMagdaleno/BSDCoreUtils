@@ -43,7 +43,7 @@
 extern char *__progname;
 
 int	mkpath(char *, mode_t, mode_t);
-static void __dead usage(void);
+static void usage(void);
 
 int
 main(int argc, char *argv[])
@@ -166,7 +166,7 @@ mkpath(char *path, mode_t mode, mode_t dir_mode)
 	return (0);
 }
 
-static void __dead
+static void
 usage(void)
 {
 	(void)fprintf(stderr, "usage: %s [-p] [-m mode] directory ...\n",

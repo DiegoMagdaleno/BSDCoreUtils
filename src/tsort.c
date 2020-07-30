@@ -113,7 +113,7 @@ struct array {
 
 static void nodes_init(struct ohash *);
 static struct node *node_lookup(struct ohash *, const char *, const char *);
-static __dead void usage(void);
+static void usage(void);
 static struct node *new_node(const char *, const char *);
 
 static unsigned int read_pairs(FILE *, struct ohash *, int,

@@ -173,8 +173,8 @@ done
 # Remove unnecessary declarations in compat/util.h
 if [ "$OS" = "Darwin" ]; then
     strtline=$(ggrep -n "^__BEGIN_DECLS" ${CWD}/compat/headers/util.h | gcut -d ':' -f 1)
-    lastline=$(ggrep -n "^__END_DECLS" ${CWD}/compat/headersutil.h | gcut -d ':' -f 1)
-    gsed -i -e "${strtline},${lastline}d" ${CWD}/compat/headers/util.h
+    lastline=$(ggrep -n "^__END_DECLS" ${CWD}/compat/headers/util.h | gcut -d ':' -f 1)
+    ggsed -i -e "${strtline},${lastline}d" ${CWD}/compat/headers/util.h
 else
     strtline=$(grep -n "^__BEGIN_DECLS" ${CWD}/compat/headers/util.h | cut -d ':' -f 1)
     lastline=$(grep -n "^__END_DECLS" ${CWD}/compat/headersutil.h | cut -d ':' -f 1)

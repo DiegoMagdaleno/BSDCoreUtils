@@ -44,7 +44,7 @@
 #include <unistd.h>
 
 int		main(int, char **);
-__dead void	usage(void);
+void	usage(void);
 
 int
 main(int argc, char **argv)
@@ -137,7 +137,7 @@ main(int argc, char **argv)
 	/* NOTREACHED */
 }
 
-__dead void
+void
 usage(void)
 {
 	extern char *__progname;

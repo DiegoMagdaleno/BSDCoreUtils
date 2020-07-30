@@ -49,7 +49,7 @@ int	Pflag;				/* Hard link to symlink. */
 int	sflag;				/* Symbolic, not hard, link. */
 
 int	linkit(char *, char *, int);
-void	usage(void) __dead;
+void	usage(void);
 
 int
 main(int argc, char *argv[])

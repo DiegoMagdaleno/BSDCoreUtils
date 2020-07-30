@@ -42,7 +42,7 @@
 #include <err.h>
 
 static void dofile(void);
-__dead static void usage(void);
+static void usage(void);
 
 /*
  * nohup shall exit with one of the following values:
@@ -131,7 +131,7 @@ dupit:
 	(void)fprintf(stderr, "sending output to %s\n", p);
 }
 
-__dead static void
+static void
 usage(void)
 {
 	(void)fprintf(stderr, "usage: nohup utility [arg ...]\n");

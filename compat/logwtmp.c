@@ -27,7 +27,7 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  */
-
+#include "compat.h"
 
 #include <sys/types.h>
 #include <sys/time.h>
@@ -36,11 +36,9 @@
 #include <fcntl.h>
 #include <string.h>
 #include <unistd.h>
-#include <time.h>
 #include <utmp.h>
 
 #include "util.h"
-#include "config.h"
 
 void
 logwtmp(const char *line, const char *name, const char *host)

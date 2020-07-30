@@ -53,7 +53,7 @@ int slidetime;
 
 static void setthetime(char *, const char *);
 static void badformat(void);
-static void __dead usage(void);
+static void usage(void);
 
 int
 main(int argc, char *argv[])
@@ -258,7 +258,7 @@ badformat(void)
 	usage();
 }
 
-static void __dead
+static void
 usage(void)
 {
 	fprintf(stderr,

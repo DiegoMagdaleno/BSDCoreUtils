@@ -1,4 +1,4 @@
-/*	$OpenBSD: reallocarray.c,v 1.2 2014/12/08 03:45:00 bcook Exp $	*/
+/*	$OpenBSD: reallocarray.c,v 1.3 2015/09/13 08:31:47 guenther Exp $	*/
 /*
  * Copyright (c) 2008 Otto Moerbeek <otto@drijf.net>
  *
@@ -14,9 +14,7 @@
  * ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
-
-#include <sys/cdefs.h>
-__FBSDID("$FreeBSD$");
+#include "compat.h"
 
 #include <sys/types.h>
 #include <errno.h>
@@ -29,20 +27,13 @@ __FBSDID("$FreeBSD$");
  */
 #define MUL_NO_OVERFLOW	((size_t)1 << (sizeof(size_t) * 4))
 
-/*Declare explicit_bzero I dont remember having this issue in Catalina, maybe something changed
-in big sur? */
-#if defined __APPLE__
-void explicit_bzero(void *s, size_t n);
-#endif
-
 void *
 reallocarray(void *optr, size_t nmemb, size_t size)
 {
-
 	if ((nmemb >= MUL_NO_OVERFLOW || size >= MUL_NO_OVERFLOW) &&
 	    nmemb > 0 && SIZE_MAX / nmemb < size) {
 		errno = ENOMEM;
-		return (NULL);
+		return NULL;
 	}
-	return (realloc(optr, size * nmemb));
+	return realloc(optr, size * nmemb);
 }

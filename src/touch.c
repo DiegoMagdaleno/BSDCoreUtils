@@ -48,7 +48,7 @@ void		stime_arg1(char *, struct timespec *);
 void		stime_arg2(char *, int, struct timespec *);
 void		stime_argd(char *, struct timespec *);
 void		stime_file(char *, struct timespec *);
-static void __dead usage(void);
+static void usage(void);
 
 int
 main(int argc, char *argv[])
@@ -321,7 +321,7 @@ terr:		errx(1,
 	tsp[1] = tsp[0];
 }
 
-static void __dead
+static void
 usage(void)
 {
 	(void)fprintf(stderr,
