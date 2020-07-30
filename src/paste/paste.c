@@ -42,7 +42,9 @@
 #include <string.h>
 #include <unistd.h>
 
-#include "compat/compat.h"
+#ifdef __APPLE__
+#include "compat.h"
+#endif
 
 char *delim;
 int delimcnt;
