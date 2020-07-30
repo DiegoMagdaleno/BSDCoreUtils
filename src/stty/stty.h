@@ -32,7 +32,11 @@
  *	@(#)stty.h	8.1 (Berkeley) 5/31/93
  */
 
+#if defined __APPLE__
+#include <util.h>
+#else
 #include <pty.h>
+#endif
 
 struct info {
 	int fd;					/* file descriptor */
