@@ -34,7 +34,9 @@
 #include <sys/stat.h>
 #include <sys/mount.h>
 #include <sys/statvfs.h>
+#if !defined (__APPLE__)
 #include <sys/random.h>
+#endif
 
 #include <err.h>
 #include <errno.h>
@@ -45,8 +47,17 @@
 #include <string.h>
 #include <unistd.h>
 #include <limits.h>
-#include <pwd.h>
+#if defined __APPLE__
+#define user_from_uid user_from_uid_orig
+#define group_from_gid group_from_gid_orig
 #include <grp.h>
+#include <pwd.h>
+#undef  user_from_uid
+#undef group_from_gid
+#else
+#include <grp.h>
+#include <pwd.h>
+#endif
 
 #include "compat.h"
 
@@ -345,8 +356,12 @@ pass(int fd, off_t len, char *buf, size_t bsize)
 
 	for (; len > 0; len -= wlen) {
 		wlen = len < bsize ? len : bsize;
+		#ifdef __APPLE__
+			arc4random_buf(buf, wlen); 
+		#else
 		if (getrandom(buf, wlen, GRND_RANDOM|GRND_NONBLOCK) == -1)
 			err(1, "getrandom()");
+		#endif
 		if (write(fd, buf, wlen) != wlen)
 			return (0);
 	}
