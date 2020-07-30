@@ -138,5 +138,36 @@ do
     cp -p $filef ${CWD}/src/factor
 done
 
+################
+# COMMON EDITS #
+################
+
+# Perform some common compatibility edits on the imported source
+for cfile in ${CWD}/compat/*.c ; do
+    # This macro does not exist and we don't want it #TODO: Does this exist on Darwin?
+    sed -i -e '/DEF_WEAK/d' ${cfile}
+
+    # Include our 'compat.h' header before other includes
+    if ! grep -q "compat\.h" ${cfile} 2>&1 ; then
+        linenum=$(($(grep -n ^#include ${cfile} | sort -n | head -n 1 | cut -d ':' -f 1) - 1))
+        [ ${linenum} = 0 ] && linenum=1
+        sed -i -e "${linenum}i #include \"compat.h\"" ${cfile}
+    fi
+done
+
+# Remove unnecessary declarations in compat/util.h
+strtline=$(grep -n "^__BEGIN_DECLS" ${CWD}/compat/headers/util.h | cut -d ':' -f 1)
+lastline=$(grep -n "^__END_DECLS" ${CWD}/compat/headersutil.h | cut -d ':' -f 1)
+sed -i -e "${strtline},${lastline}d" ${CWD}/compat/headers/util.h
+
+# Common edits needed for src/ files
+for cfile in $(find ${CWD}/src -type f -name '*.c' -print) ; do
+    # remove __dead
+    sed -i -r 's|\s+__dead\s+| |g' ${cfile}
+    sed -i -r 's|^__dead\s+||g' ${cfile}
+    sed -i -r 's|\s+__dead$||g' ${cfile}
+    sed -i -r 's|\s+__dead;|;|g' ${cfile}
+done
+
 # Clean up
 #rm -rf ${TMPDIR}
