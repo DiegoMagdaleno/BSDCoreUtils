@@ -79,5 +79,49 @@ struct termios;
 struct utmp;
 struct winsize;
 
+__BEGIN_DECLS
+char   *fparseln(struct __sFILE *, size_t *, size_t *, const char[3], int);
+void	login(struct utmp *);
+int	login_tty(int);
+int	logout(const char *);
+void	logwtmp(const char *, const char *, const char *);
+int	opendev(const char *, int, int, char **);
+int	pidfile(const char *);
+void	pw_setdir(const char *);
+char   *pw_file(const char *);
+int	pw_lock(int);
+int	pw_mkdb(char *, int);
+int	pw_abort(void);
+void	pw_init(void);
+void	pw_edit(int, const char *);
+void	pw_prompt(void);
+void	pw_copy(int, int, const struct passwd *, const struct passwd *);
+int	pw_scan(char *, struct passwd *, int *);
+void	pw_error(const char *, int, int);
+int	getptmfd(void);
+int	openpty(int *, int *, char *, struct termios *, struct winsize *);
+int	fdopenpty(int, int *, int *, char *, struct termios *,
+	    struct winsize *);
+int	opendisk(const char *, int, char *, size_t, int);
+pid_t	forkpty(int *, char *, struct termios *, struct winsize *);
+pid_t	fdforkpty(int, int *, char *, struct termios *, struct winsize *);
+int	getmaxpartitions(void);
+int	getrawpartition(void);
+void	login_fbtab(const char *, uid_t, gid_t);
+int	login_check_expire(struct __sFILE *, struct passwd *, char *, int);
+char   *readlabelfs(char *, int);
+const char *uu_lockerr(int);
+int     uu_lock(const char *);
+int	uu_lock_txfr(const char *, pid_t);
+int     uu_unlock(const char *);
+int	fmt_scaled(long long, char *);
+int	scan_scaled(char *, long long *);
+int	isduid(const char *, int);
+int	pkcs5_pbkdf2(const char *, size_t, const uint8_t *, size_t,
+    uint8_t *, size_t, unsigned int);
+int	bcrypt_pbkdf(const char *, size_t, const uint8_t *, size_t,
+    uint8_t *, size_t, unsigned int);
+
+__END_DECLS
 
 #endif /* !_UTIL_H_ */
