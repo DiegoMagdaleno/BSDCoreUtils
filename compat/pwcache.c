@@ -32,18 +32,26 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  */
-#include "compat.h"
 
 #include <sys/types.h>
 
 #include <assert.h>
+#if defined __APPLE__
+#define user_from_uid user_from_uid_orig
+#define group_from_gid group_from_gid_orig
 #include <grp.h>
 #include <pwd.h>
+#undef  user_from_uid
+#undef group_from_gid
+#else
+#include <grp.h>
+#include <pwd.h>
+#endif
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-
+#include "compat.h"
 /*
  * Constants and data structures used to implement group and password file
  * caches.  Name lengths have been chosen to be as large as those supported

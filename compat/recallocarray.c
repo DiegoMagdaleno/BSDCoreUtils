@@ -28,6 +28,12 @@
  */
 #define MUL_NO_OVERFLOW ((size_t)1 << (sizeof(size_t) * 4))
 
+/*Declare explicit_bzero I dont remember having this issue in Catalina, maybe something changed
+in big sur? */
+#if defined __APPLE__
+void explicit_bzero(void *s, size_t n);
+#endif
+
 void *
 recallocarray(void *ptr, size_t oldnmemb, size_t newnmemb, size_t size)
 {

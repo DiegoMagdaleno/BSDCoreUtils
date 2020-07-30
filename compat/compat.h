@@ -13,6 +13,10 @@
  * including types.h allows us to fix erros in the mget declaration
  * 
  */
+
+/* Reference from Apple's archived OS X (now macOS documentation 
+we need to import this else we are going to get a "declaration expected at line 
+42" */
 #if defined __APPLE__
 #include "headers/simpleq.h"
 #include "headers/mthio.h"
@@ -33,11 +37,15 @@ void strmode(int, char *);
 to be added */
 
 #if defined __APPLE__
-char *user_from_uid(uid_t, int nouser);
-char *group_from_gid(gid_t, int nogroup);
+const char *user_from_uid(uid_t, int nouser);
+const char *group_from_gid(gid_t, int nogroup);
+int uid_from_user(const char *, uid_t *);
+int gid_from_group(const char *, gid_t *);
 #else
-char *user_from_uid(uid_t, int);
-char *group_from_gid(gid_t, int);
+const char *user_from_uid(uid_t, int);
+const char *group_from_gid(gid_t, int);
+int uid_from_user(const char *, uid_t *);
+int gid_from_group(const char *, gid_t *);
 #endif
 
 /* logwtmp.c */
@@ -82,3 +90,7 @@ void *reallocarray(void *ptr, size_t nmemb, size_t size);
  * This comes from lib/libutil/util.h in the OpenBSD source.
  */
 #define FMT_SCALED_STRSIZE 7 /* minus sign, 4 digits, suffix, null byte */
+
+/* Buffer sizes */
+#define _PW_BUF_LEN sysconf(_SC_GETPW_R_SIZE_MAX)
+#define _GR_BUF_LEN sysconf(_SC_GETGR_R_SIZE_MAX)

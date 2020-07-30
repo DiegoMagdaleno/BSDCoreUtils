@@ -38,7 +38,7 @@
 #include <unistd.h>
 #include <utmp.h>
 
-#include "util.h"
+#include "headers/util.h"
 
 void
 logwtmp(const char *line, const char *name, const char *host)
