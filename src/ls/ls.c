@@ -41,8 +41,17 @@
 #include <err.h>
 #include <errno.h>
 #include <fts.h>
+#if defined __APPLE__
+#define user_from_uid user_from_uid_orig
+#define group_from_gid group_from_gid_orig
 #include <grp.h>
 #include <pwd.h>
+#undef  user_from_uid
+#undef group_from_gid
+#else
+#include <grp.h>
+#include <pwd.h>
+#endif
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
