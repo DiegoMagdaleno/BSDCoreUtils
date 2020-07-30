@@ -42,6 +42,8 @@
 #include <string.h>
 #include <unistd.h>
 
+#include "compat/compat.h"
+
 char *delim;
 int delimcnt;
 
