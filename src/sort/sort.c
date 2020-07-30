@@ -244,7 +244,12 @@ set_hw_params(void)
 static void
 set_tmpdir(void)
 {
-	if (!getauxval(AT_SECURE)) {
+	#ifdef __APPLE__
+		if(!issetugid())
+	#else
+	if (!getauxval(AT_SECURE))
+	#endif
+	{
 		char *td;
 
 		td = getenv("TMPDIR");
