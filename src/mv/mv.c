@@ -47,10 +47,25 @@
 #include <string.h>
 #include <unistd.h>
 #include <limits.h>
-#include <pwd.h>
+#if defined __APPLE__
+#define user_from_uid user_from_uid_orig
+#define group_from_gid group_from_gid_orig
 #include <grp.h>
+#include <pwd.h>
+#undef  user_from_uid
+#undef group_from_gid
+#else
+#include <grp.h>
+#include <pwd.h>
+#endif
 
 #include "compat.h"
+
+#if defined(__APPLE__) || defined(__NetBSD__) 
+	#define st_atim st_atimespec
+	#define st_ctim st_ctimespec
+	#define st_mtim st_mtimespec
+#endif
 
 extern char *__progname;
 
