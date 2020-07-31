@@ -12,9 +12,6 @@ SUBDIRS += csplit
 SUBDIRS += cut
 SUBDIRS += date
 SUBDIRS += dd
-if LINUX
-    SUBDIRS += df
-endif
 SUBDIRS += dirname
 SUBDIRS += du
 SUBDIRS += echo
@@ -54,9 +51,6 @@ if LINUX
     SUBDIRS += stty
 endif
 SUBDIRS += sync
-if LINUX
-    SUBDIRS += tail
-endif
 SUBDIRS += tee
 SUBDIRS += test
 SUBDIRS += touch
