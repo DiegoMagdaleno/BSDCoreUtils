@@ -68,7 +68,7 @@ case "${host_os}" in
 esac
 
 AM_CONDITIONAL([LINUX], [test "$build_linux" = "yes"])
-AM_CONDITIONAL([DARWIN], [test "$build_mac" = "yes"])
+AM_CONDITIONAL([DARWIN], [test "$build_macos" = "yes"])
 
 # We need OpenSSL or LibreSSL for MD5 functions since glibc doesn't offer them.
 PKG_CHECK_MODULES(OPENSSL, openssl)
