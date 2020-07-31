@@ -112,3 +112,8 @@ void *reallocarray(void *ptr, size_t nmemb, size_t size);
 /* Buffer sizes */
 #define _PW_BUF_LEN sysconf(_SC_GETPW_R_SIZE_MAX)
 #define _GR_BUF_LEN sysconf(_SC_GETGR_R_SIZE_MAX)
+
+/* Linux spelling differences */
+#if defined __linux__
+#define S_ISTXT S_ISVTX
+#endif
