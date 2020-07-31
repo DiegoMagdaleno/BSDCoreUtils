@@ -26,7 +26,14 @@ we need to import this else we are going to get a "declaration expected at line
 #include <pwd.h>
 #undef  user_from_uid
 #undef group_from_gid
+#else
+#include <unistd.h>
+#include <string.h>
+#include <stddef.h>
+#include <sys/types.h>
+#include <sys/stat.h>
 #endif
+
 
 /* setmode.c */
 mode_t getmode(const void *, mode_t);
