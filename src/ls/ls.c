@@ -62,6 +62,7 @@
 #include "compat/headers/util.h"
 #else
 #include <util.h>
+#endif
 #include "ls.h"
 #include "extern.h"
 
