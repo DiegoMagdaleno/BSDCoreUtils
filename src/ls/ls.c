@@ -58,8 +58,10 @@
 #include <unistd.h>
 #include <limits.h>
 #include <locale.h>
+#if defined __linux__
+#include "compat/headers/util.h"
+#else
 #include <util.h>
-
 #include "ls.h"
 #include "extern.h"
 
