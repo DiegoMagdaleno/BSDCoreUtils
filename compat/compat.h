@@ -87,7 +87,10 @@ void *recallocarray(void *, size_t, size_t, size_t);
 void *reallocarray(void *ptr, size_t nmemb, size_t size);
 
 /*
- * MAXBSIZE does not exist on Linux because filesystem block size
+ * MAXBSIZE does not exist on Linux  however, since Darwin is an OS
+ * that derives from FreesBD this does exist on Darwin, so we dont 
+ * need to get oursevels, an extra warning for redefining a macro, 
+ * however this is the explainaition for Linux because filesystem block size
  * limits are per filesystem and not consistently enforced across
  * the different filesystems.  If you look at e2fsprogs and its
  * header files, you'll see the max block size is defined as 65536
@@ -96,7 +99,9 @@ void *reallocarray(void *ptr, size_t nmemb, size_t size);
  * 65536.  So we'll just define that here so as to avoid having
  * bsdutils depend on e2fsprogs to compile.
  */
+#if !defined __APPLE__ 
 #define MAXBSIZE (64 * 1024)
+#endif
 
 /*
  * fmt_scaled(3) specific flags.
