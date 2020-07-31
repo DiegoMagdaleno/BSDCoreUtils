@@ -12,7 +12,9 @@ SUBDIRS += csplit
 SUBDIRS += cut
 SUBDIRS += date
 SUBDIRS += dd
-#SUBDIRS += df
+if LINUX
+    SUBDIRS += df
+endif
 SUBDIRS += dirname
 SUBDIRS += du
 SUBDIRS += echo
@@ -48,9 +50,13 @@ SUBDIRS += sleep
 SUBDIRS += sort
 SUBDIRS += split
 SUBDIRS += stat
-#SUBDIRS += stty
+if LINUX
+    SUBDIRS += stty
+endif
 SUBDIRS += sync
-#SUBDIRS += tail
+if LINUX
+    SUBDIRS += tail
+endif
 SUBDIRS += tee
 SUBDIRS += test
 SUBDIRS += touch
@@ -65,5 +71,7 @@ SUBDIRS += users
 SUBDIRS += wc
 SUBDIRS += who
 SUBDIRS += xargs
-#SUBDIRS += xinstall
+if LINUX
+    SUBDIRS += xinstall
+endif
 SUBDIRS += yes

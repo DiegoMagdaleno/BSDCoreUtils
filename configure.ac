@@ -1,5 +1,6 @@
 AC_PREREQ([2.69])
-AC_INIT([bsdutils], [1.0], [david.l.cantrell@gmail.com])
+# Please check that your version here matches with the version you set in configurations/upstream.conf
+AC_INIT([bsdutils], [6.7], [david.l.cantrell@gmail.com])
 AM_INIT_AUTOMAKE([foreign])
 AC_CONFIG_SRCDIR([src/ls/ls.c])
 AC_CONFIG_HEADERS([config.h])
@@ -49,6 +50,25 @@ AC_FUNC_REALLOC
 AC_FUNC_STRCOLL
 AC_FUNC_STRTOD
 AC_CHECK_FUNCS([atexit btowc bzero clock_gettime dup2 endpwent ftruncate getcwd getdelim getmntinfo gettimeofday getusershell isascii iswprint lchown localeconv mblen mbrlen memchr memmove memset mkdir mkfifo munmap nl_langinfo realpath reallocarray regcomp rmdir setenv setlocale strchr strcspn strdup strerror strpbrk strrchr strspn strstr strtol strtoul strtoull uname wcwidth])
+
+AC_CANONICAL_HOST
+build_linux=no
+build_macos=no
+
+case "${host_os}" in
+        linux*)
+            build_linux=yes
+            ;;
+        darwin*)
+            build_macos=yes
+            ;;
+        *)
+            AC_MSG_ERROR(["OS $host_os is not supported", please open an issue on GitHub])
+            ;;
+esac
+
+AM_CONDITIONAL([LINUX], [test "$build_linux" = "yes"])
+AM_CONDITIONAL([DARWIN], [test "$build_mac" = "yes"])
 
 # We need OpenSSL or LibreSSL for MD5 functions since glibc doesn't offer them.
 PKG_CHECK_MODULES(OPENSSL, openssl)
