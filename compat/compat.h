@@ -84,7 +84,15 @@ int heapsort(void *, size_t, size_t, int (*)(const void *, const void *));
 void *recallocarray(void *, size_t, size_t, size_t);
 
 /* reallocarray.c */
+#if defined __APPLE__
 void *reallocarray(void *ptr, size_t nmemb, size_t size);
+#endif
+
+/* strlcpy.c */
+#if defined __linux__
+size_t strlcpy(char *, const char *, size_t);
+#endif
+
 
 /*
  * MAXBSIZE does not exist on Linux  however, since Darwin is an OS
