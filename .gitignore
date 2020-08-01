@@ -94,3 +94,4 @@ yes
 .vscode/settings.json
 .DS_Store
 tmp.*
+src/bsdvers/bsdvers

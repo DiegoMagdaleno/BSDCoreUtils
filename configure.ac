@@ -78,6 +78,7 @@ AC_CONFIG_FILES([Makefile
                  src/Makefile
                  src/arch/Makefile
                  src/basename/Makefile
+                 src/bsdvers/Makefile
                  src/cat/Makefile
                  src/chmod/Makefile
                  src/chroot/Makefile

@@ -3,6 +3,7 @@ SUBDIRS =
 
 SUBDIRS += arch
 SUBDIRS += basename
+SUBDIRS += bsdvers
 SUBDIRS += cat
 SUBDIRS += chmod
 SUBDIRS += chroot
