@@ -38,14 +38,18 @@
 #include <string.h>
 #include <unistd.h>
 #include <utmp.h>
-
 #if defined __APPLE__
+#include <utmpx.h>
 #include "compat.h"
 #endif
 
 typedef char	namebuf[UT_NAMESIZE];
 
 int scmp(const void *, const void *);
+
+#if defined __APPLE__
+#define _PATH_UTMP _PATH_UTMPX
+#endif
 
 int
 main(int argc, char *argv[])

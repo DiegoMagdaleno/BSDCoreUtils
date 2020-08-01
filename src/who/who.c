@@ -54,6 +54,9 @@
 #include <err.h>
 #include <locale.h>
 #include "compat.h"
+#if defined __APPLE__
+#include <utmpx.h>
+#endif
 
 void  output(struct utmp *);
 void  output_labels(void);
@@ -69,6 +72,10 @@ int show_quick;			/* quick, names only */
 
 #define NAME_WIDTH	8
 #define HOST_WIDTH	45
+
+#if defined __APPLE__
+#define _PATH_UTMP _PATH_UTMPX
+#endif
 
 int hostwidth = HOST_WIDTH;
 char *mytty;
