@@ -82,6 +82,7 @@ AC_CONFIG_FILES([Makefile
                  src/cat/Makefile
                  src/chmod/Makefile
                  src/chroot/Makefile
+                 src/colorls/Makefile
                  src/comm/Makefile
                  src/cp/Makefile
                  src/csplit/Makefile

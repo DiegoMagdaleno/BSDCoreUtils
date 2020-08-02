@@ -41,8 +41,17 @@
 #include <err.h>
 #include <errno.h>
 #include <fts.h>
+#if defined __APPLE__
+#define user_from_uid user_from_uid_orig
+#define group_from_gid group_from_gid_orig
 #include <grp.h>
 #include <pwd.h>
+#undef  user_from_uid
+#undef group_from_gid
+#else
+#include <grp.h>
+#include <pwd.h>
+#endif
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -53,6 +62,7 @@
 
 #include "ls.h"
 #include "extern.h"
+#include "compat.h"
 
 static void	 display(FTSENT *, FTSENT *);
 static int	 mastercmp(const FTSENT **, const FTSENT **);
@@ -124,15 +134,12 @@ ls_main(int argc, char *argv[])
 	if (termwidth == 0)
 		termwidth = 80;
 
-	if (pledge("stdio rpath getpw", NULL) == -1)
-		err(1, "pledge");
-
 	/* Root is -A automatically. */
 	if (!getuid())
 		f_listdot = 1;
 
 	fts_options = FTS_PHYSICAL;
-	while ((ch = getopt(argc, argv, "1ACFHLRSTacdfghiklmnopqrstux")) != -1) {
+	while ((ch = getopt(argc, argv, "1ACFHLRSTacdfghiklmnpqrstux")) != -1) {
 		switch (ch) {
 		/*
 		 * The -1, -C and -l, -m, -n and -x options all override each
@@ -219,9 +226,6 @@ ls_main(int argc, char *argv[])
 		case 'k':
 			blocksize = 1024;
 			kflag = 1;
-			break;
-		case 'o':
-			f_flags = 1;
 			break;
 		case 'p':
 			f_typedir = 1;
@@ -506,14 +510,7 @@ display(FTSENT *p, FTSENT *list)
 					maxuser = ulen;
 				if ((glen = strlen(group)) > maxgroup)
 					maxgroup = glen;
-				if (f_flags) {
-					flags = fflagstostr(sp->st_flags);
-					if (*flags == '\0')
-						flags = "-";
-					if ((flen = strlen(flags)) > maxflags)
-						maxflags = flen;
-				} else
-					flen = 0;
+				flen = 0;
 
 				if ((np = malloc(sizeof(NAMES) +
 				    ulen + 1 + glen + 1 + flen + 1)) == NULL)
