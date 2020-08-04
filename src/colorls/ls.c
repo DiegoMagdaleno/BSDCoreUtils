@@ -577,13 +577,6 @@ display(FTSENT *p, FTSENT *list)
 					maxuser = ulen;
 				if ((glen = strlen(group)) > maxgroup)
 					maxgroup = glen;
-				if (f_flags) {
-					flags = fflagstostr(sp->st_flags);
-					if (*flags == '\0')
-						flags = "-";
-					if ((flen = strlen(flags)) > maxflags)
-						maxflags = flen;
-				} else
 					flen = 0;
 
 				if ((np = malloc(sizeof(NAMES) +
