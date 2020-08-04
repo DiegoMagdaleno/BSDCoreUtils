@@ -71,9 +71,6 @@
 #include "ls.h"
 #include "extern.h"
 #include "compat.h"
-#ifndef __APPLE__
-#include "lomac.h"
-#endif /* __APPLE__ */
 
 static void	 display(FTSENT *, FTSENT *);
 static int	 mastercmp(const FTSENT **, const FTSENT **);
