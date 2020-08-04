@@ -59,6 +59,11 @@
 #if !defined(__APPLE__)
 #include <util.h>
 #endif
+#ifdef COLORLS
+#include <ctype.h>
+#include <termcap.h>
+#include <signal.h>
+#endif
 
 #include "ls.h"
 #include "extern.h"
@@ -70,6 +75,10 @@ static void	printsize(int, off_t);
 static void	printtime(time_t);
 static int	printtype(mode_t);
 static int	compute_columns(DISPLAY *, int *);
+#ifdef COLORLS
+static void	endcolor(int);
+static int	colortype(mode_t);
+#endif
 
 #define	IS_NOPRINT(p)	((p)->fts_number == NO_PRINT)
 
@@ -77,6 +86,33 @@ static int	compute_columns(DISPLAY *, int *);
 
 #define	SECSPERDAY	(24 * 60 * 60)
 #define	SIXMONTHS	(SECSPERDAY * 365 / 2)
+
+#ifdef COLORLS
+/* Most of these are taken from <sys/stat.h> */
+typedef enum Colors {
+	C_DIR,		/* directory */
+	C_LNK,		/* symbolic link */
+	C_SOCK,		/* socket */
+	C_FIFO,		/* pipe */
+	C_EXEC,		/* executable */
+	C_BLK,		/* block special */
+	C_CHR,		/* character special */
+	C_SUID,		/* setuid executable */
+	C_SGID,		/* setgid executable */
+	C_WSDIR,	/* directory writable to others, with sticky bit */
+	C_WDIR,		/* directory writable to others, without sticky bit */
+	C_NUMCOLORS	/* just a place-holder */
+} Colors ;
+
+const char *defcolors = "exfxcxdxbxegedabagacad";
+
+/* colors for file types */
+static struct {
+	int num[2];
+	int bold;
+} colors[C_NUMCOLORS];
+#endif
+
 
 void
 printscol(DISPLAY *dp)
@@ -98,7 +134,9 @@ printlong(DISPLAY *dp)
 	FTSENT *p;
 	NAMES *np;
 	char buf[20];
-
+	#ifdef COLORLS
+		int color_printed = 0;
+#endif
 	if (dp->list->fts_level != FTS_ROOTLEVEL && (f_longform || f_size))
 		(void)printf("total %llu\n", howmany(dp->btotal, blocksize));
 
