@@ -58,7 +58,11 @@
 #include <unistd.h>
 #include <limits.h>
 #include <locale.h>
+#if defined __linux__
+#include "compat/headers/util.h"
+#else
 #include <util.h>
+#endif
 #ifdef COLORLS
 #include <termcap.h>
 #include <signal.h>
@@ -70,6 +74,7 @@
 #ifndef __APPLE__
 #include "lomac.h"
 #endif /* __APPLE__ */
+
 static void	 display(FTSENT *, FTSENT *);
 static int	 mastercmp(const FTSENT **, const FTSENT **);
 static void	 traverse(int, char **, int);
