@@ -56,7 +56,9 @@
 #include <time.h>
 #include <unistd.h>
 #include <limits.h>
-#if !defined(__APPLE__)
+#if defined __linux__
+#include "compat/headers/util.h"
+#else
 #include <util.h>
 #endif
 #ifdef COLORLS
