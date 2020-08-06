@@ -96,3 +96,4 @@ yes
 tmp.*
 src/bsdvers/bsdvers
 src/colorls/colorls
+src/pathchk/pathchk
