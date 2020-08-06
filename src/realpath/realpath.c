@@ -38,7 +38,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-static void usage(void) __dead2;
+static void usage(void);
 extern char *__progname;
 
 int
