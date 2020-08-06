@@ -95,3 +95,4 @@ yes
 .DS_Store
 tmp.*
 src/bsdvers/bsdvers
+src/colorls/colorls

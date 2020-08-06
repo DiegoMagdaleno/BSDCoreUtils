@@ -115,7 +115,6 @@ static struct {
 } colors[C_NUMCOLORS];
 #endif
 
-
 void
 printscol(DISPLAY *dp)
 {
@@ -136,9 +135,10 @@ printlong(DISPLAY *dp)
 	FTSENT *p;
 	NAMES *np;
 	char buf[20];
-	#ifdef COLORLS
-		int color_printed = 0;
+#ifdef COLORLS
+	int color_printed = 0;
 #endif
+
 	if (dp->list->fts_level != FTS_ROOTLEVEL && (f_longform || f_size))
 		(void)printf("total %llu\n", howmany(dp->btotal, blocksize));
 
@@ -175,7 +175,15 @@ printlong(DISPLAY *dp)
 			printtime(sp->st_ctime);
 		else
 			printtime(sp->st_mtime);
+#ifdef COLORLS
+		if (f_color)
+			color_printed = colortype(sp->st_mode);
+#endif
 		(void)mbsprint(p->fts_name, 1);
+#ifdef COLORLS
+		if (f_color && color_printed)
+			endcolor(0);
+#endif
 		if (f_type || (f_typedir && S_ISDIR(sp->st_mode)))
 			(void)printtype(sp->st_mode);
 		if (S_ISLNK(sp->st_mode))
@@ -275,6 +283,9 @@ printaname(FTSENT *p, int inodefield, int sizefield)
 {
 	struct stat *sp;
 	int chcnt;
+#ifdef COLORLS
+	int color_printed = 0;
+#endif
 
 	sp = p->fts_statp;
 	chcnt = 0;
@@ -284,7 +295,15 @@ printaname(FTSENT *p, int inodefield, int sizefield)
 	if (f_size)
 		chcnt += printf("%*lld ", sizefield,
 		    howmany((long long)sp->st_blocks, blocksize));
+#ifdef COLORLS
+	if (f_color)
+		color_printed = colortype(sp->st_mode);
+#endif
 	chcnt += mbsprint(p->fts_name, 1);
+#ifdef COLORLS
+	if (f_color && color_printed)
+		endcolor(0);
+#endif
 	if (f_type || (f_typedir && S_ISDIR(sp->st_mode)))
 		chcnt += printtype(sp->st_mode);
 	return (chcnt);
@@ -397,6 +416,151 @@ printtype(mode_t mode)
 	}
 	return (0);
 }
+
+#ifdef COLORLS
+static int
+putch(int c)
+{
+	(void)putchar(c);
+	return 0;
+}
+
+static int
+writech(int c)
+{
+	char tmp = c;
+
+	(void)write(STDOUT_FILENO, &tmp, 1);
+	return 0;
+}
+
+static void
+printcolor(Colors c)
+{
+	char *ansiseq;
+
+	if (colors[c].bold)
+		tputs(enter_bold, 1, putch);
+
+	if (colors[c].num[0] != -1) {
+		ansiseq = tgoto(ansi_fgcol, 0, colors[c].num[0]);
+		if (ansiseq)
+			tputs(ansiseq, 1, putch);
+	}
+	if (colors[c].num[1] != -1) {
+		ansiseq = tgoto(ansi_bgcol, 0, colors[c].num[1]);
+		if (ansiseq)
+			tputs(ansiseq, 1, putch);
+	}
+}
+
+static void
+endcolor(int sig)
+{
+	tputs(ansi_coloff, 1, sig ? writech : putch);
+	tputs(attrs_off, 1, sig ? writech : putch);
+}
+
+static int
+colortype(mode_t mode)
+{
+	switch (mode & S_IFMT) {
+	case S_IFDIR:
+		if (mode & S_IWOTH)
+			if (mode & S_ISTXT)
+				printcolor(C_WSDIR);
+			else
+				printcolor(C_WDIR);
+		else
+			printcolor(C_DIR);
+		return (1);
+	case S_IFLNK:
+		printcolor(C_LNK);
+		return (1);
+	case S_IFSOCK:
+		printcolor(C_SOCK);
+		return (1);
+	case S_IFIFO:
+		printcolor(C_FIFO);
+		return (1);
+	case S_IFBLK:
+		printcolor(C_BLK);
+		return (1);
+	case S_IFCHR:
+		printcolor(C_CHR);
+		return (1);
+	default:;
+	}
+	if (mode & (S_IXUSR | S_IXGRP | S_IXOTH)) {
+		if (mode & S_ISUID)
+			printcolor(C_SUID);
+		else if (mode & S_ISGID)
+			printcolor(C_SGID);
+		else
+			printcolor(C_EXEC);
+		return (1);
+	}
+	return (0);
+}
+
+void
+parsecolors(const char *cs)
+{
+	int i;
+	int j;
+	size_t len;
+	char c[2];
+	short legacy_warn = 0;
+
+	if (cs == NULL)
+		cs = "";	/* LSCOLORS not set */
+	len = strlen(cs);
+	for (i = 0; i < (int)C_NUMCOLORS ; i++) {
+		colors[i].bold = 0;
+
+		if (len <= 2 * (size_t)i) {
+			c[0] = defcolors[2 * i];
+			c[1] = defcolors[2 * i + 1];
+		} else {
+			c[0] = cs[2 * i];
+			c[1] = cs[2 * i + 1];
+		}
+		for (j = 0; j < 2 ; j++) {
+			/* Legacy colours used 0-7 */
+			if (c[j] >= '0' && c[j] <= '7') {
+				colors[i].num[j] = c[j] - '0';
+				if (!legacy_warn) {
+					warnx("LSCOLORS should use "
+					    "characters a-h instead of 0-9 ("
+					    "see the manual page)");
+				}
+				legacy_warn = 1;
+			} else if (c[j] >= 'a' && c[j] <= 'h')
+				colors[i].num[j] = c[j] - 'a';
+			else if (c[j] >= 'A' && c[j] <= 'H') {
+				colors[i].num[j] = c[j] - 'A';
+				colors[i].bold = 1;
+			} else if (tolower((unsigned char)c[j]) == 'x')
+				colors[i].num[j] = -1;
+			else {
+				warnx("invalid character '%c' in LSCOLORS"
+				    " env var", c[j]);
+				colors[i].num[j] = -1;
+			}
+		}
+	}
+}
+
+void
+colorquit(int sig)
+{
+	endcolor(sig);
+
+	(void)signal(sig, SIG_DFL);
+	(void)kill(getpid(), sig);
+}
+
+#endif /* COLORLS */
 
 static void
 printlink(FTSENT *p)
