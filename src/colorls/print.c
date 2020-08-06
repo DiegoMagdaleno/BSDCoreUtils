@@ -58,6 +58,7 @@
 #include <limits.h>
 #if defined __linux__
 #include "compat/headers/util.h"
+#include <sys/param.h>
 #else
 #include <util.h>
 #endif
