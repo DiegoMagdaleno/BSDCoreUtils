@@ -113,6 +113,7 @@ AC_CONFIG_FILES([Makefile
                  src/nl/Makefile
                  src/nohup/Makefile
                  src/paste/Makefile
+                 src/pathchk/Makefile
                  src/pr/Makefile
                  src/printenv/Makefile
                  src/printf/Makefile

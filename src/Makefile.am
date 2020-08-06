@@ -38,6 +38,7 @@ SUBDIRS += nice
 SUBDIRS += nl
 SUBDIRS += nohup
 SUBDIRS += paste
+SUBDIRS += pathchk
 SUBDIRS += pr
 SUBDIRS += printenv
 SUBDIRS += printf
