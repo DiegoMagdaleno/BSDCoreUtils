@@ -44,6 +44,7 @@ SUBDIRS += printenv
 SUBDIRS += printf
 SUBDIRS += pwd
 SUBDIRS += readlink
+SUBDIRS += realpath
 SUBDIRS += rm
 SUBDIRS += rmdir
 SUBDIRS += sleep

@@ -119,6 +119,7 @@ AC_CONFIG_FILES([Makefile
                  src/printf/Makefile
                  src/pwd/Makefile
                  src/readlink/Makefile
+                 src/realpath/Makefile
                  src/rm/Makefile
                  src/rmdir/Makefile
                  src/sleep/Makefile
