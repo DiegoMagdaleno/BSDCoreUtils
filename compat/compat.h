@@ -89,7 +89,7 @@ void *reallocarray(void *ptr, size_t nmemb, size_t size);
 #endif
 
 /* strlcat.c */
-#if defined __linux
+#if defined __linux__
 size_t strlcat(char *, const char *, size_t);
 #endif
 

@@ -7,7 +7,9 @@ SUBDIRS += bsdvers
 SUBDIRS += cat
 SUBDIRS += chmod
 SUBDIRS += chroot
-SUBDIRS += colorls
+if DARWIN
+    SUBDIRS += colorls
+endif
 SUBDIRS += comm
 SUBDIRS += cp
 SUBDIRS += csplit
