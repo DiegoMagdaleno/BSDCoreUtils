@@ -58,13 +58,11 @@
 #include <limits.h>
 #if defined __linux__
 #include "compat/headers/util.h"
+#include <sys/sysmacros.h>
 #else
 #include <util.h>
 #endif
 #include <sys/param.h>
-#if !defined(__APPLE__)
-#include <sys/sysmacros.h>
-#endif
 
 #include "ls.h"
 #include "extern.h"
