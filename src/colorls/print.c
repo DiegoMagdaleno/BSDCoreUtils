@@ -59,6 +59,7 @@
 #if defined __linux__
 #include "compat/headers/util.h"
 #include <sys/param.h>
+#include <sys/sysmacros.h>
 #else
 #include <util.h>
 #endif
