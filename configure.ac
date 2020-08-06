@@ -100,6 +100,7 @@ AC_CONFIG_FILES([Makefile
                  src/fmt/Makefile
                  src/fold/Makefile
                  src/head/Makefile
+                 src/hexdump/Makefile
                  src/id/Makefile
                  src/join/Makefile
                  src/ln/Makefile
