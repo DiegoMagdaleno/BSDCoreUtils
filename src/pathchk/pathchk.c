@@ -54,6 +54,8 @@ static void	 usage(void);
 static int	 pflag;			/* Perform portability checks */
 static int	 Pflag;			/* Check for empty paths, leading '-' */
 
+extern char *__progname;
+
 int
 main(int argc, char *argv[])
 {
@@ -90,7 +92,7 @@ static void
 usage(void)
 {
 
-	fprintf(stderr, "usage: pathchk [-Pp] pathname ...\n");
+	fprintf(stderr, "usage: %s [-Pp] pathname ...\n", __progname);
 	exit(1);
 }
 
