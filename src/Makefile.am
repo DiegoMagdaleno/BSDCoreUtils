@@ -25,7 +25,9 @@ SUBDIRS += false
 SUBDIRS += fmt
 SUBDIRS += fold
 SUBDIRS += head
-SUBDIRS += hexdump
+if DARWIN
+    SUBDIRS += hexdump
+endif
 SUBDIRS += id
 SUBDIRS += join
 SUBDIRS += ln
