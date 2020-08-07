@@ -33,7 +33,9 @@
 #include <sys/cdefs.h>
 
 #include <sys/param.h>
-//#include <sys/conf.h>
+#if !defined __linux__
+#include <sys/conf.h>
+#endif
 #include <sys/ioctl.h>
 #include <sys/stat.h>
 
@@ -45,6 +47,9 @@
 #include <string.h>
 #include <unistd.h>
 #include "hexdump.h"
+#if defined __linux__
+#include "compat.h"
+#endif
 
 enum _vflag vflag = FIRST;
 

@@ -130,3 +130,8 @@ size_t strlcpy(char *, const char *, size_t);
 #if defined __linux__
 #define S_ISTXT S_ISVTX
 #endif
+
+#if defined __linux__
+#define D_TAPE  1
+#endif
+
