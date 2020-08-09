@@ -98,3 +98,5 @@ src/bsdvers/bsdvers
 src/colorls/colorls
 src/pathchk/pathchk
 src/realpath/realpath
+*.tar.gz
+bsdutils-*

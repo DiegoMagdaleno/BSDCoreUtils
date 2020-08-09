@@ -13,4 +13,4 @@ if DARWIN
     libcompat_la_SOURCES += reallocarray.c
 endif
 
-EXTRA_DIST = compat.h $(top_srcdir)/headers/ohash.h $(top_srcdir)/headers/tree.h $(top_srcdir)/headers/util.h $(top_srcdir)/headers/simpleq.h $(top_srcdir)/headers/mthio.h
+EXTRA_DIST = compat.h headers/ohash.h headers/tree.h headers/util.h headers/simpleq.h headers/mthio.h

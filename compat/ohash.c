@@ -21,7 +21,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <limits.h>
-#include "ohash.h"
+#include "headers/ohash.h"
 
 struct _ohash_record {
 	uint32_t	hv;
