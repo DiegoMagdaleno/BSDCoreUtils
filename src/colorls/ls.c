@@ -59,7 +59,7 @@
 #include <limits.h>
 #include <locale.h>
 #if defined __linux__
-#include "compat/headers/util.h"
+#include "headers/util.h"
 #else
 #include <util.h>
 #endif
