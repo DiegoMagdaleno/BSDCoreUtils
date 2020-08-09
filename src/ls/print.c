@@ -57,7 +57,7 @@
 #include <unistd.h>
 #include <limits.h>
 #if defined __linux__
-#include "compat/headers/util.h"
+#include "headers/util.h"
 #include <sys/sysmacros.h>
 #else
 #include <util.h>
