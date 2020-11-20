@@ -47,10 +47,6 @@ typedef char	namebuf[UT_NAMESIZE];
 
 int scmp(const void *, const void *);
 
-#if defined __APPLE__
-#define _PATH_UTMP _PATH_UTMPX
-#endif
-
 int
 main(int argc, char *argv[])
 {
@@ -58,7 +54,11 @@ main(int argc, char *argv[])
 	int ncnt = 0;
 	int nmax = 0;
 	int cnt;
+	#ifdef __APPLE__
+	struct utmpx utmp;
+	#else
 	struct utmp utmp;
+	#endif
 	int ch;
 
 	while ((ch = getopt(argc, argv, "")) != -1)
@@ -71,13 +71,26 @@ main(int argc, char *argv[])
 	argc -= optind;
 	argv += optind;
 
-	if (!freopen(_PATH_UTMP, "r", stdin)) {
-		err(1, "can't open %s", _PATH_UTMP);
+	#ifdef __APPLE__
+	if (!freopen(_PATH_UTMPX, "r", stdin)) {
+		err(1, "can't open %s", _PATH_UTMPX);
 		/* NOTREACHED */
 	}
+	#else
+	if (!freopen(_PATH_UTMPX, "r", stdin)) {
+		err(1, "can't open %s", _PATH_UTMPX);
+		/* NOTREACHED */
+	}
+	#endif 
 
 	while (fread((char *)&utmp, sizeof(utmp), 1, stdin) == 1) {
-		if (*utmp.ut_name) {
+		#ifdef __APPLE__
+		char target_property = *utmp.ut_user;
+		#else
+		char target_property = *utmp.ut_name;
+		#endif
+
+		if (target_property) {
 			if (ncnt >= nmax) {
 				size_t newmax = nmax + 32;
 				namebuf *newnames;
@@ -93,7 +106,7 @@ main(int argc, char *argv[])
 				nmax = newmax;
 			}
 
-			(void)strncpy(names[ncnt], utmp.ut_name, UT_NAMESIZE);
+			(void)strncpy(names[ncnt], &target_property, UT_NAMESIZE);
 			++ncnt;
 		}
 	}
