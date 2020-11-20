@@ -81,8 +81,8 @@ main(int argc, char *argv[])
 		/* NOTREACHED */
 	}
 	#else
-	if (!freopen(_PATH_UTMPX, "r", stdin)) {
-		err(1, "can't open %s", _PATH_UTMPX);
+	if (!freopen(_PATH_UTMP, "r", stdin)) {
+		err(1, "can't open %s", _PATH_UTMP);
 		/* NOTREACHED */
 	}
 	#endif 
