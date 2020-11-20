@@ -236,14 +236,22 @@ setthetime(char *p, const char *pformat)
 			err(1, "adjtime");
 	} else {
 #ifndef SMALL
+	#ifdef __APPLE__
+		darwinlogwtmpx("|", "date", "");
+	#else
 		logwtmp("|", "date", "");
+	#endif
 #endif
 		tv.tv_sec = tval;
 		tv.tv_usec = 0;
 		if (settimeofday(&tv, NULL))
 			err(1, "settimeofday");
 #ifndef SMALL
+	#ifdef __APPLE__
+		darwinlogwtmpx("{", "date", "");
+	#else
 		logwtmp("{", "date", "");
+	#endif
 #endif
 	}
 

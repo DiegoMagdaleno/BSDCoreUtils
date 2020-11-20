@@ -11,7 +11,7 @@
 #include <utmpx.h>
 
 void
-darwinlogtmpx(const char *line, const char *name, const char *host)
+darwinlogwtmpx(const char *line, const char *name, const char *host)
 {
 	struct stat buf;
 	struct utmpx ut;
