@@ -43,7 +43,11 @@
 #include "compat.h"
 #endif
 
-typedef char	namebuf[UT_NAMESIZE];
+#ifdef __APPLE__
+typedef char	namebuf[_UTX_USERSIZE];
+#else
+typedef char 	namebuf[UT_NAMESIZE];
+#endif
 
 int scmp(const void *, const void *);
 
@@ -55,7 +59,7 @@ main(int argc, char *argv[])
 	int nmax = 0;
 	int cnt;
 	#ifdef __APPLE__
-	struct utmpx utmp;
+	struct utmpx *utmp;
 	#else
 	struct utmp utmp;
 	#endif
@@ -83,13 +87,26 @@ main(int argc, char *argv[])
 	}
 	#endif 
 
-	while (fread((char *)&utmp, sizeof(utmp), 1, stdin) == 1) {
-		#ifdef __APPLE__
-		char target_property = *utmp.ut_user;
-		#else
-		char target_property = *utmp.ut_name;
-		#endif
 
+	#ifdef __APPLE__
+	setutxent();
+	while((utmp=getutxent()) != NULL){
+		if (*utmp->ut_user && utmp->ut_type	== USER_PROCESS){
+			if (ncnt >= nmax) {
+				nmax += 32;
+				names = realloc(names, sizeof(*names) * nmax);
+
+				if (!names) {
+					err(1, "realloc");
+					/* NOTREACHED */
+				}
+			}
+			(void)strncpy(names[ncnt], utmp->ut_user, _UTX_USERSIZE);
+			++ncnt;
+		}
+	}
+	#else
+	while (fread((char *)&utmp, sizeof(utmp), 1, stdin) == 1) {
 		if (target_property) {
 			if (ncnt >= nmax) {
 				size_t newmax = nmax + 32;
@@ -105,19 +122,28 @@ main(int argc, char *argv[])
 				names = newnames;
 				nmax = newmax;
 			}
-
 			(void)strncpy(names[ncnt], &target_property, UT_NAMESIZE);
 			++ncnt;
 		}
 	}
+	#endif
 
 	if (ncnt) {
+		#ifdef __APPLE__
+		qsort(names, ncnt, _UTX_USERSIZE, scmp);
+		(void)printf("%.*s", _UTX_USERSIZE, names[0]);
+		for (cnt = 1; cnt < ncnt; ++cnt)
+			if (strncmp(names[cnt], names[cnt -1], _UTX_USERSIZE))
+				(void)printf(" %.*s", _UTX_USERSIZE, names[cnt]);
+		(void)printf("\n");
+		#else
 		qsort(names, ncnt, UT_NAMESIZE, scmp);
 		(void)printf("%.*s", UT_NAMESIZE, names[0]);
 		for (cnt = 1; cnt < ncnt; ++cnt)
 			if (strncmp(names[cnt], names[cnt - 1], UT_NAMESIZE))
 				(void)printf(" %.*s", UT_NAMESIZE, names[cnt]);
 		(void)printf("\n");
+		#endif
 	}
 	exit(0);
 }
@@ -125,5 +151,9 @@ main(int argc, char *argv[])
 int
 scmp(const void *p, const void *q)
 {
+	#ifdef __APPLE__
+	return(strncmp((char *) p, (char *) q, _UTX_USERSIZE));
+	#else
 	return(strncmp((char *) p, (char *) q, UT_NAMESIZE));
+	#endif
 }
