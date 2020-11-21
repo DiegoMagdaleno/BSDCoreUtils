@@ -14,12 +14,15 @@
  * 
  */
 
+
+
 /* Reference from Apple's archived OS X (now macOS documentation 
 we need to import this else we are going to get a "declaration expected at line 
 42" */
 #if defined __APPLE__
 #include "headers/simpleq.h"
 #include "headers/mthio.h"
+#include <sys/stat.h>
 #define user_from_uid user_from_uid_orig
 #define group_from_gid group_from_gid_orig
 #include <grp.h>

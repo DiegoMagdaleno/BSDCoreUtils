@@ -37,9 +37,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/ioctl.h>
-#ifdef __APPLE__
-	#include "compat.h"
-#else 
+#ifndef __APPLE__
 	#include <sys/mtio.h>
 #endif
 
@@ -53,6 +51,12 @@
 #include <string.h>
 #include <time.h>
 #include <unistd.h>
+
+#ifdef __APPLE__
+#include <sys/filio.h>
+#include <sys/conf.h>
+#include <sys/param.h>
+#endif
 
 #include "dd.h"
 #include "extern.h"
@@ -201,6 +205,39 @@ setup(void)
 	clock_gettime(CLOCK_MONOTONIC, &st.start);
 }
 
+
+#ifdef __APPLE__
+static void
+getfdtype(IO *io)
+{
+	struct stat sb;
+	int type;
+
+	if (fstat(io->fd, &sb) == -1)
+		err(1, "%s", io->name);
+	if (S_ISREG(sb.st_mode))
+		io->flags |= ISTRUNC;
+	if (S_ISCHR(sb.st_mode) || S_ISBLK(sb.st_mode)) {
+		if(ioctl(io->fd, FIODTYPE, &type) == -1) {
+			err(1, "%s", io->name);
+		} else {
+			if(type == D_TAPE)
+				io->flags |= ISTAPE;
+			else if (type == D_DISK || type == D_TTY) {
+				io->flags |= ISSEEK;
+			}
+		if (S_ISCHR(sb.st_mode) && (type != D_TAPE))
+			io->flags |= ISCHR;
+		}
+		return;
+	}
+	errno = 0;
+	if (lseek(io->fd, (off_t)0, SEEK_CUR) == -1 && errno == ESPIPE)
+		io->flags |= ISPIPE;
+	else
+		io->flags |= ISSEEK;
+}
+#else
 static void
 getfdtype(IO *io)
 {
@@ -214,6 +251,7 @@ getfdtype(IO *io)
 	if (S_ISFIFO(sb.st_mode) || S_ISSOCK(sb.st_mode))
 		io->flags |= ISPIPE;
 }
+#endif
 
 static void
 swapbytes(void *v, size_t len)

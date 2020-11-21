@@ -37,9 +37,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/ioctl.h>
-#ifdef __APPLE__
-	#include "compat.h"
-#else 
+#ifndef __APPLE__
 	#include <sys/mtio.h>
 #endif
 #include <sys/time.h>
@@ -114,7 +112,43 @@ pos_in(void)
 		err(1, "%s", in.name);
 	}
 }
+#ifdef __APPLE__
+void
+pos_out(void)
+{
+	off_t cnt;
+	ssize_t n;
+	if (out.flags & (ISSEEK | ISPIPE)) {
+		errno = 0;
+		if (lseek(out.fd, out.offset * out.dbsz, SEEK_CUR) == -1 &&
+		    errno != 0)
+			err(1, "%s", out.name);
+		return;
+	}
 
+	/* Don't try to read a really weird amount (like negative). */
+	if (out.offset < 0)
+		errx(1, "%s: illegal offset", "oseek/seek");
+
+	/* Read it. */
+	for (cnt = 0; cnt < out.offset; ++cnt) {
+		if ((n = read(out.fd, out.db, out.dbsz)) > 0)
+			continue;
+
+		if (n == -1)
+			err(1, "%s", out.name);
+
+		while (cnt++ < out.offset) {
+			n = write(out.fd, out.db, out.dbsz);
+			if (n == -1)
+				err(1, "%s", out.name);
+			if ((size_t)n != out.dbsz)
+				errx(1, "%s: write failure", out.name);
+		}
+		break;
+	}
+}
+#else
 void
 pos_out(void)
 {
@@ -167,3 +201,4 @@ pos_out(void)
 		break;
 	}
 }
+#endif

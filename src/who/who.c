@@ -58,9 +58,14 @@
 #include <utmpx.h>
 #endif
 
+
+#ifdef __APPLE__
+void output_darwin(struct utmpx *);
+#else
 void  output(struct utmp *);
+#endif
 void  output_labels(void);
-void  who_am_i(FILE *);
+void  who_am_i(FILE *);	
 void  usage(void);
 FILE *file(char *);
 
@@ -73,17 +78,27 @@ int show_quick;			/* quick, names only */
 #define NAME_WIDTH	8
 #define HOST_WIDTH	45
 
-#if defined __APPLE__
-#define _PATH_UTMP _PATH_UTMPX
-#endif
-
 int hostwidth = HOST_WIDTH;
 char *mytty;
+
+#ifdef __APPLE__
+#define TARGET_UTMP _PATH_UTMPX
+#define TARGET_NAMESIZE _UTX_USERSIZE
+#define TARGET_LINESIZE _UTX_LINESIZE
+#else
+#define TARGET_UTMP _PATH_UTMP
+#define TARGET_NAMESIZE UT_NAMESIZE
+#define TARGET_LINESIZE UT_LINESIZE
+#endif
 
 int
 main(int argc, char *argv[])
 {
+	#ifdef __APPLE__
+	struct utmpx usr;
+	#else
 	struct utmp usr;
+	#endif
 	FILE *ufp;
 	char *t;
 	int c;
@@ -137,7 +152,7 @@ main(int argc, char *argv[])
 
 	switch (argc) {
 	case 0:					/* who */
-		ufp = file(_PATH_UTMP);
+		ufp = file(TARGET_UTMP);
 
 		if (only_current_term) {
 			who_am_i(ufp);
@@ -145,12 +160,21 @@ main(int argc, char *argv[])
 			int count = 0;
 	
 			while (fread((char *)&usr, sizeof(usr), 1, ufp) == 1) {
+				#ifdef __APPLE__
+				if(*usr.ut_user && *usr.ut_line) {
+					(void)printf("%-*.*s ", NAME_WIDTH,
+						TARGET_NAMESIZE, usr.ut_user);
+					if ((++count % 8) != 0)
+						(void) printf("\n");
+				}
+				#else
 				if (*usr.ut_name && *usr.ut_line) {
 					(void)printf("%-*.*s ", NAME_WIDTH,
-						UT_NAMESIZE, usr.ut_name);
+						TARGET_NAMESIZE, usr.ut_name);
 					if ((++count % 8) == 0)
 						(void) printf("\n");
 				}
+				#endif
 			}
 			if (count % 8)
 				(void) printf("\n");
@@ -158,8 +182,13 @@ main(int argc, char *argv[])
 		} else {
 			/* only entries with both name and line fields */
 			while (fread((char *)&usr, sizeof(usr), 1, ufp) == 1)
+			#ifdef __APPLE__
+				if (*usr.ut_user && *usr.ut_line)
+					output_darwin(&usr);
+				#else
 				if (*usr.ut_name && *usr.ut_line)
-					output(&usr);
+					ouput(&usr);
+				#endif
 		}
 		break;
 	case 1:					/* who utmp_file */
@@ -171,24 +200,38 @@ main(int argc, char *argv[])
 			int count = 0;
 
 			while (fread((char *)&usr, sizeof(usr), 1, ufp) == 1) {
-				if (*usr.ut_name && *usr.ut_line) {
+				#ifdef __APPLE__
+				if (*usr.ut_user && *usr.ut_line) {
 					(void)printf("%-*.*s ", NAME_WIDTH,
-						UT_NAMESIZE, usr.ut_name);
+						TARGET_NAMESIZE, usr.ut_user);
 					if ((++count % 8) == 0)
 						(void) printf("\n");
 				}
+				#else
+				if (*usr.ut_name && *usr.ut_line) {
+					(void)printf("%-*.*s ", NAME_WIDTH,
+						TARGET_NAMESIZE, usr.ut_name);
+					if ((++count % 8) == 0)
+						(void) printf("\n");
+				}
+				#endif
 			}
 			if (count % 8)
 				(void) printf("\n");
+				printf("here");
 			(void) printf ("# users=%d\n", count);
 		} else {
 			/* all entries */
 			while (fread((char *)&usr, sizeof(usr), 1, ufp) == 1)
+			#ifdef __APPLE__
+				output_darwin(&usr);
+			#else
 				output(&usr);
+			#endif
 		}
 		break;
 	case 2:					/* who am i */
-		ufp = file(_PATH_UTMP);
+		ufp = file(TARGET_UTMP);
 		who_am_i(ufp);
 		break;
 	default:
@@ -200,28 +243,91 @@ main(int argc, char *argv[])
 
 void
 who_am_i(FILE *ufp)
-{
+{	
+	#ifdef __APPLE__
+	struct utmpx usr;
+	#else
 	struct utmp usr;
+	#endif
 	struct passwd *pw;
 
 	/* search through the utmp and find an entry for this tty */
 	if (mytty) {
 		while (fread((char *)&usr, sizeof(usr), 1, ufp) == 1)
-			if (*usr.ut_name && !strncmp(usr.ut_line, mytty, UT_LINESIZE)) {
+			if (*usr.ut_user && !strncmp(usr.ut_line, mytty, TARGET_LINESIZE)) {
+				#ifdef __APPLE__
+				output_darwin(&usr);
+				#else
 				output(&usr);
+				#endif
 				return;
 			}
 		/* well, at least we know what the tty is */
-		(void)strncpy(usr.ut_line, mytty, UT_LINESIZE);
+		(void)strncpy(usr.ut_line, mytty, TARGET_LINESIZE);
 	} else
-		(void)strncpy(usr.ut_line, "tty??", UT_LINESIZE);
+		(void)strncpy(usr.ut_line, "tty??", TARGET_LINESIZE);
 
 	pw = getpwuid(getuid());
-	(void)strncpy(usr.ut_name, pw ? pw->pw_name : "?", UT_NAMESIZE);
-	(void)time((time_t *) &usr.ut_time);
+	(void)strncpy(usr.ut_user, pw ? pw->pw_name : "?", TARGET_NAMESIZE);
+	(void)time((time_t *) &usr.ut_tv.tv_sec);
 	*usr.ut_host = '\0';
-	output(&usr);
+	#ifdef __APPLE__
+	output_darwin(&usr);
+	#else
+	output(&usr)
+	#endif
 }
+
+
+void
+output_darwin(struct utmpx *up)
+{
+	struct stat sb;
+	char line[sizeof(_PATH_DEV) + sizeof(up->ut_line)];
+	char state = '?';
+	static time_t now = 0;
+	time_t idle =  0;
+	if (show_term || show_idle) {
+		if (now == 0)
+		time(&now);
+	memset(line, 0, sizeof line);
+	strlcpy(line, _PATH_DEV, sizeof line);
+	strlcat(line, up->ut_line, sizeof line);
+
+	if (stat(line, &sb) == 0) {
+		state = (sb.st_mode & 020) ? '+' : '-';
+		idle = now - sb.st_atimespec.tv_sec;
+	} else {
+		state = '?';
+		idle = 0;
+	}
+	}
+
+	(void)printf("%-*.*s ", NAME_WIDTH, TARGET_NAMESIZE, up->ut_user);
+
+	if (show_term) {
+		(void)printf("%c ", state);
+	}
+
+	(void)printf("%-*.*s ", _UTX_LINESIZE, _UTX_LINESIZE, up->ut_line);
+	(void)printf("%.12s ", ctime((long int *) &up->ut_user) + 4);
+
+	if (show_idle) {
+		if (idle < 60) 
+			(void)printf("  .   ");
+		else if (idle < (24 * 60 * 60))
+			(void)printf("%02d:%02d ", 
+				     ((int)idle / (60 * 60)),
+				     ((int)idle % (60 * 60)) / 60);
+		else
+			(void)printf(" old  ");
+	}
+	
+	if (*up->ut_host)
+		printf("  (%.*s)", hostwidth, up->ut_host);
+	(void)putchar('\n');
+}
+
 
 void
 output(struct utmp *up)
@@ -250,13 +356,13 @@ output(struct utmp *up)
 		
 	}
 
-	(void)printf("%-*.*s ", NAME_WIDTH, UT_NAMESIZE, up->ut_name);
+	(void)printf("%-*.*s ", NAME_WIDTH, TARGET_NAMESIZE, up->ut_name);
 
 	if (show_term) {
 		(void)printf("%c ", state);
 	}
 
-	(void)printf("%-*.*s ", UT_LINESIZE, UT_LINESIZE, up->ut_line);
+	(void)printf("%-*.*s ", TARGET_LINESIZE, TARGET_LINESIZE, up->ut_line);
 	(void)printf("%.12s ", ctime((long int *) &up->ut_time) + 4);
 
 	if (show_idle) {
@@ -278,12 +384,12 @@ output(struct utmp *up)
 void
 output_labels(void)
 {
-	(void)printf("%-*.*s ", NAME_WIDTH, UT_NAMESIZE, "USER");
+	(void)printf("%-*.*s ", NAME_WIDTH, TARGET_NAMESIZE, "USER");
 
 	if (show_term)
 		(void)printf("S ");
 
-	(void)printf("%-*.*s ", UT_LINESIZE, UT_LINESIZE, "LINE");
+	(void)printf("%-*.*s ", TARGET_LINESIZE, TARGET_LINESIZE, "LINE");
 	(void)printf("WHEN         ");
 
 	if (show_idle)
