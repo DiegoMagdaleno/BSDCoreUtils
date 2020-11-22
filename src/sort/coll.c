@@ -35,7 +35,7 @@
 #include <limits.h>
 #include <math.h>
 #ifdef __linux__
-#include <openssh/md5>
+#include <openssl/md5.h>
 #endif
 #ifndef __APPLE__
 #include <md5.h>
