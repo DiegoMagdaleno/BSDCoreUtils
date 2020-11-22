@@ -34,8 +34,11 @@
 #include <math.h>
 #include <stdlib.h>
 #include <string.h>
+#ifdef __linux__
+#include <bsd/wchar.h>
+#else
 #include <wchar.h>
-#include <wctype.h>
+#endif 
 
 #include "bwstring.h"
 #include "sort.h"

@@ -35,14 +35,18 @@
 #include <limits.h>
 #include <math.h>
 #ifdef __linux__
-#include <openssl/mdd5>
+#include <openssl/md5>
 #endif
 #ifndef __APPLE__
 #include <md5.h>
 #endif
 #include <stdlib.h>
 #include <string.h>
+#ifdef __linux__
+#include <bsd/wchar.h>
+#else
 #include <wchar.h>
+#endif 
 #include <wctype.h>
 
 #include "coll.h"
