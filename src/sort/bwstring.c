@@ -36,6 +36,7 @@
 #include <string.h>
 #ifdef __linux__
 #include <bsd/wchar.h>
+#include <bsd/stdio.h>
 #else
 #include <wchar.h>
 #endif 
