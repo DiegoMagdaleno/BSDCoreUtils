@@ -8,7 +8,7 @@ if DARWIN
     colorls_CFLAGS += -D_DARWIN_C_SOURCE
 endif
 if LINUX
-    colorls_CFLAGS += -D_DEFAULT_SOURCE
+    colorls_CFLAGS += -D_GNU_SOURCE
 endif
 
 EXTRA_DIST = extern.h ls.h
