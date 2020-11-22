@@ -75,7 +75,8 @@ PKG_CHECK_MODULES(OPENSSL, openssl)
 
 BSDUTILSDEFS=
 AC_ARG_WITH([colorful-ls], AC_HELP_STRING([--with-colorful-ls=<str>], [Patch ls to support colors]))
-AS_IF([test "x$with_colorful-ls" = "xyes"],BSDUTILSDEFS="-DCOLORLS")
+AS_IF([test "x$with_colorful_ls" = "xyes"],BSDUTILSDEFS="-DCOLORLS")
+AS_IF([test "x$with_colorful_ls" = "xno"],BSDUTILSDEFS="")
 AC_SUBST(BSDUTILSDEFS)
 
 AC_CONFIG_FILES([Makefile
@@ -87,7 +88,6 @@ AC_CONFIG_FILES([Makefile
                  src/cat/Makefile
                  src/chmod/Makefile
                  src/chroot/Makefile
-                 src/colorls/Makefile
                  src/comm/Makefile
                  src/cp/Makefile
                  src/csplit/Makefile

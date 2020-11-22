@@ -33,8 +33,6 @@
  * SUCH DAMAGE.
  */
 
-#include "config.h"
-
 #include <sys/types.h>
 #include <sys/stat.h>
 
@@ -116,7 +114,7 @@ revacccmp(const FTSENT *a, const FTSENT *b)
 		return (1);
 	else if (b->fts_statp->st_atim.tv_nsec > a->fts_statp->st_atim.tv_nsec)
 		return (-1);
-	else if (b->fts_statp->st_atim.tv_nsec < a->fts_statp->st_atim.tv_nsec)
+	else if (b->fts_statp->st_atim.tv_nsec > a->fts_statp->st_atim.tv_nsec)
 		return (1);
 	else
 		return (revnamecmp(a, b));
