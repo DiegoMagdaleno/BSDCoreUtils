@@ -36,17 +36,8 @@
 #include <sys/types.h>
 
 #include <assert.h>
-#if defined __APPLE__
-#define user_from_uid user_from_uid_orig
-#define group_from_gid group_from_gid_orig
 #include <grp.h>
 #include <pwd.h>
-#undef  user_from_uid
-#undef group_from_gid
-#else
-#include <grp.h>
-#include <pwd.h>
-#endif
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -200,7 +191,7 @@ grptb_start(void)
 	return 0;
 }
 
-/*
+#ifndef __APPLE__ /* Darwin already has this defenitions */
  * user_from_uid()
  *	caches the name (if any) for the uid. If noname clear, we always
  *	return the stored name (if valid or invalid match).
@@ -321,6 +312,7 @@ group_from_gid(gid_t gid, int noname)
 	}
 	return ptr->name;
 }
+#endif
 
 /*
  * uid_from_user()

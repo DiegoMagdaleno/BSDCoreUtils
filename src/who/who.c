@@ -36,16 +36,10 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <paths.h>
-#if defined __APPLE__
-#define user_from_uid user_from_uid_orig
-#define group_from_gid group_from_gid_orig
 #include <pwd.h>
-#undef  user_from_uid
-#undef group_from_gid
-#else
-#include <pwd.h>
-#endif
+#ifdef WITH_UTMP // So we set this for linux and other operating systems that might have UTMP
 #include <utmp.h>
+#endif
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -53,14 +47,17 @@
 #include <time.h>
 #include <err.h>
 #include <locale.h>
-#include "compat.h"
 #if defined __APPLE__
+#include <limits.h>
+#include <stdint.h>
 #include <utmpx.h>
 #endif
 
+#include "compat.h"
+
 
 #ifdef __APPLE__
-void output_darwin(struct utmpx *);
+void output(struct utmpx *);
 #else
 void  output(struct utmp *);
 #endif
@@ -182,13 +179,12 @@ main(int argc, char *argv[])
 		} else {
 			/* only entries with both name and line fields */
 			while (fread((char *)&usr, sizeof(usr), 1, ufp) == 1)
-			#ifdef __APPLE__
+				#ifdef __APPLE__
 				if (*usr.ut_user && *usr.ut_line)
-					output_darwin(&usr);
 				#else
 				if (*usr.ut_name && *usr.ut_line)
-					ouput(&usr);
 				#endif
+					output(&usr);
 		}
 		break;
 	case 1:					/* who utmp_file */
@@ -223,11 +219,7 @@ main(int argc, char *argv[])
 		} else {
 			/* all entries */
 			while (fread((char *)&usr, sizeof(usr), 1, ufp) == 1)
-			#ifdef __APPLE__
-				output_darwin(&usr);
-			#else
 				output(&usr);
-			#endif
 		}
 		break;
 	case 2:					/* who am i */
@@ -255,11 +247,7 @@ who_am_i(FILE *ufp)
 	if (mytty) {
 		while (fread((char *)&usr, sizeof(usr), 1, ufp) == 1)
 			if (*usr.ut_user && !strncmp(usr.ut_line, mytty, TARGET_LINESIZE)) {
-				#ifdef __APPLE__
-				output_darwin(&usr);
-				#else
 				output(&usr);
-				#endif
 				return;
 			}
 		/* well, at least we know what the tty is */
@@ -271,16 +259,12 @@ who_am_i(FILE *ufp)
 	(void)strncpy(usr.ut_user, pw ? pw->pw_name : "?", TARGET_NAMESIZE);
 	(void)time((time_t *) &usr.ut_tv.tv_sec);
 	*usr.ut_host = '\0';
-	#ifdef __APPLE__
-	output_darwin(&usr);
-	#else
-	output(&usr)
-	#endif
+	output(&usr);
 }
 
-
+#ifdef __APPLE__
 void
-output_darwin(struct utmpx *up)
+output(struct utmpx *up)
 {
 	struct stat sb;
 	char line[sizeof(_PATH_DEV) + sizeof(up->ut_line)];
@@ -325,10 +309,9 @@ output_darwin(struct utmpx *up)
 	
 	if (*up->ut_host)
 		printf("  (%.*s)", hostwidth, up->ut_host);
-	(void)putchar('\n');
+	(void)putchar('\n');	
 }
-
-
+#else
 void
 output(struct utmp *up)
 {
@@ -380,6 +363,7 @@ output(struct utmp *up)
 		printf("  (%.*s)", hostwidth, up->ut_host);
 	(void)putchar('\n');
 }
+#endif
 
 void
 output_labels(void)

@@ -22,12 +22,8 @@ we need to import this else we are going to get a "declaration expected at line
 #if defined __APPLE__
 #include "headers/simpleq.h"
 #include <sys/stat.h>
-#define user_from_uid user_from_uid_orig
-#define group_from_gid group_from_gid_orig
 #include <grp.h>
 #include <pwd.h>
-#undef  user_from_uid
-#undef group_from_gid
 #else
 #include <unistd.h>
 #include <string.h>
@@ -51,17 +47,13 @@ void strmode(int, char *);
 /* Darwin (OSX/macOS) requires the nouser and nogroup
 to be added */
 
-#if defined __APPLE__
-const char *user_from_uid(uid_t, int nouser);
-const char *group_from_gid(gid_t, int nogroup);
-int uid_from_user(const char *, uid_t *);
-int gid_from_group(const char *, gid_t *);
-#else
+#ifndef __APPLE__
 const char *user_from_uid(uid_t, int);
 const char *group_from_gid(gid_t, int);
+#endif 
+
 int uid_from_user(const char *, uid_t *);
 int gid_from_group(const char *, gid_t *);
-#endif
 
 /* logwtmp.c */
 void logwtmp(const char *, const char *, const char *);
