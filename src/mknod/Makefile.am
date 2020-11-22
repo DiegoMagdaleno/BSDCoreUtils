@@ -7,3 +7,7 @@ mknod_LDADD = $(top_builddir)/compat/libcompat.la
 
 install-data-local:
 	ln -s mknod $(DESTDIR)$(bindir)/mkfifo
+
+if LINUX
+    mknod_CFLAGS += -D_GNU_SOURCE
+endif
