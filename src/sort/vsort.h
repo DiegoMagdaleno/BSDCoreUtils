@@ -1,4 +1,4 @@
-/*	$OpenBSD: vsort.h,v 1.1 2015/03/17 17:45:13 millert Exp $	*/
+/*	$FreeBSD: head/usr.bin/sort/vsort.h 264744 2014-04-21 22:52:18Z pfg $	*/
 
 /*-
  * Copyright (C) 2012 Oleg Moskalenko <mom040267@gmail.com>

@@ -1,4 +1,4 @@
-/*	$OpenBSD: radixsort.h,v 1.1 2015/03/17 17:45:13 millert Exp $	*/
+/*	$FreeBSD$	*/
 
 /*-
  * Copyright (C) 2012 Oleg Moskalenko <mom040267@gmail.com>

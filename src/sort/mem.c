@@ -1,5 +1,3 @@
-/*	$OpenBSD: mem.c,v 1.6 2015/04/02 20:30:45 millert Exp $	*/
-
 /*-
  * Copyright (C) 2009 Gabor Kovesdan <gabor@FreeBSD.org>
  * Copyright (C) 2012 Oleg Moskalenko <mom040267@gmail.com>
@@ -27,14 +25,14 @@
  * SUCH DAMAGE.
  */
 
+#include <sys/cdefs.h>
+__FBSDID("$FreeBSD: head/usr.bin/sort/mem.c 281132 2015-04-06 02:35:55Z pfg $");
+
 #include <err.h>
-#include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 #include "mem.h"
-#if defined __APPLE__
-#include "compat.h"
-#endif
 
 /*
  * malloc() wrapper.
@@ -46,40 +44,30 @@ sort_malloc(size_t size)
 
 	if ((ptr = malloc(size)) == NULL)
 		err(2, NULL);
-	return ptr;
-}
-
-/*
- * calloc() wrapper.
- */
-void *
-sort_calloc(size_t nmemb, size_t size)
-{
-	void *ptr;
-
-	if ((ptr = calloc(nmemb, size)) == NULL)
-		err(2, NULL);
-	return ptr;
+	return (ptr);
 }
 
 /*
  * free() wrapper.
  */
 void
-sort_free(void *ptr)
+sort_free(const void *ptr)
 {
-	free(ptr);
+
+	if (ptr)
+		free(__DECONST(void *, ptr));
 }
 
 /*
- * reallocarray() wrapper.
+ * realloc() wrapper.
  */
 void *
-sort_reallocarray(void *ptr, size_t nmemb, size_t size)
+sort_realloc(void *ptr, size_t size)
 {
-	if ((ptr = reallocarray(ptr, nmemb, size)) == NULL)
+
+	if ((ptr = realloc(ptr, size)) == NULL)
 		err(2, NULL);
-	return ptr;
+	return (ptr);
 }
 
 char *
@@ -89,20 +77,5 @@ sort_strdup(const char *str)
 
 	if ((dup = strdup(str)) == NULL)
 		err(2, NULL);
-	return dup;
-}
-
-int
-sort_asprintf(char **ret, const char *fmt, ...)
-{
-	int len;
-	va_list ap;
-
-	va_start(ap, fmt);
-	len = vasprintf(ret, fmt, ap);
-	va_end(ap);
-
-	if (len == -1)
-		err(2, NULL);
-	return len;
+	return (dup);
 }

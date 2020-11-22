@@ -1,4 +1,4 @@
-/*	$OpenBSD: file.h,v 1.4 2015/04/02 22:14:51 deraadt Exp $	*/
+/*	$FreeBSD$	*/
 
 /*-
  * Copyright (C) 2009 Gabor Kovesdan <gabor@FreeBSD.org>
@@ -39,13 +39,14 @@
 #define	SORT_HEAPSORT	3
 #define	SORT_RADIXSORT  4
 
-#define	DEFAULT_SORT_ALGORITHM SORT_HEAPSORT
-#define	DEFAULT_SORT_FUNC heapsort
+#define	DEFAULT_SORT_ALGORITHM SORT_MERGESORT
+#define	DEFAULT_SORT_FUNC mergesort
 
 /*
  * List of data to be sorted.
  */
-struct sort_list {
+struct sort_list
+{
 	struct sort_list_item	**list;
 	unsigned long long	 memsize;
 	size_t			 count;
@@ -61,7 +62,8 @@ struct file_reader;
 /*
  * List of files to be sorted
  */
-struct file_list {
+struct file_list
+{
 	char			**fns;
 	size_t			 count;
 	size_t			 sz;
@@ -72,6 +74,7 @@ struct file_list {
 
 /**/
 
+extern unsigned long long free_memory;
 extern unsigned long long available_free_memory;
 
 /* Are we using mmap ? */
