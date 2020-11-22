@@ -39,6 +39,8 @@
 #include <sys/types.h>
 #ifdef __APPLE__
 #include "commoncrypto.h"
+#elif __linux__
+#include <openssl/md5.h>
 #else
 #include <md5.h>
 #endif
