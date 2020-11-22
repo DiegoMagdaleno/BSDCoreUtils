@@ -1,5 +1,4 @@
-/*	$OpenBSD: who.c,v 1.28 2018/08/08 22:55:14 deraadt Exp $	*/
-/*	$NetBSD: who.c,v 1.4 1994/12/07 04:28:49 jtc Exp $	*/
+/*	$NetBSD: who.c,v 1.23 2008/07/24 15:35:41 christos Exp $	*/
 
 /*
  * Copyright (c) 1989, 1993
@@ -33,100 +32,137 @@
  * SUCH DAMAGE.
  */
 
+#include <sys/cdefs.h>
+
 #include <sys/types.h>
 #include <sys/stat.h>
-#include <paths.h>
-#include <pwd.h>
-#ifdef WITH_UTMP // So we set this for linux and other operating systems that might have UTMP
-#include <utmp.h>
-#endif
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <time.h>
+
 #include <err.h>
 #include <locale.h>
-#if defined __APPLE__
-#include <limits.h>
-#include <stdint.h>
+#include <pwd.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
+#include <unistd.h>
+#ifdef SUPPORT_UTMP
+#include <utmp.h>
+#endif
+#ifdef SUPPORT_UTMPX
 #include <utmpx.h>
 #endif
+#ifdef __APPLE__
+#include <limits.h>
+#include <paths.h>
+#include <stdint.h>
+#endif /* __APPLE__ */
 
-#include "compat.h"
-
+#include "utmpentry.h"
 
 #ifdef __APPLE__
-void output(struct utmpx *);
-#else
-void  output(struct utmp *);
-#endif
-void  output_labels(void);
-void  who_am_i(FILE *);	
-void  usage(void);
-FILE *file(char *);
+#define __UNCONST(a)	((void *)(unsigned long)(const void *)(a))
+#endif /* __APPLE__ */
 
-int only_current_term;		/* show info about the current terminal only */
-int show_term;			/* show term state */
-int show_idle;			/* show idle time */
-int show_labels;		/* show column labels */
-int show_quick;			/* quick, names only */
+static void output_labels(void);
+static void who_am_i(const char *, int);
+static void usage(void) __dead;
+static void process(const char *, int);
+static void eprint(const struct utmpentry *);
+static void print(const char *, const char *, time_t, const char *, pid_t pid,
+    uint16_t term, uint16_t xit, uint16_t sess, uint16_t type);
+static void quick(const char *);
 
-#define NAME_WIDTH	8
-#define HOST_WIDTH	45
+static int show_term;			/* show term state */
+static int show_idle;			/* show idle time */
+#ifndef __APPLE__
+static int show_details;		/* show exit status etc. */
+#endif /* !__APPLE__ */
 
-int hostwidth = HOST_WIDTH;
-char *mytty;
-
-#ifdef __APPLE__
-#define TARGET_UTMP _PATH_UTMPX
-#define TARGET_NAMESIZE _UTX_USERSIZE
-#define TARGET_LINESIZE _UTX_LINESIZE
-#else
-#define TARGET_UTMP _PATH_UTMP
-#define TARGET_NAMESIZE UT_NAMESIZE
-#define TARGET_LINESIZE UT_LINESIZE
-#endif
+struct ut_type_names {
+  int type;
+  const char *name;
+} ut_type_names[] = {
+#ifdef SUPPORT_UTMPX
+  { EMPTY, "empty" }, 
+  { RUN_LVL, "run level" }, 
+  { BOOT_TIME, "boot time" }, 
+  { OLD_TIME, "old time" }, 
+  { NEW_TIME, "new time" }, 
+  { INIT_PROCESS, "init process" }, 
+  { LOGIN_PROCESS, "login process" }, 
+  { USER_PROCESS, "user process" }, 
+  { DEAD_PROCESS, "dead process" }, 
+#if defined(_NETBSD_SOURCE)
+  { ACCOUNTING, "accounting" }, 
+  { SIGNATURE, "signature" },
+  { DOWN_TIME, "down time" },
+#endif /* _NETBSD_SOURCE */
+#endif /* SUPPORT_UTMPX */
+  { -1, "unknown" }
+};
 
 int
 main(int argc, char *argv[])
 {
-	#ifdef __APPLE__
-	struct utmpx usr;
-	#else
-	struct utmp usr;
-	#endif
-	FILE *ufp;
-	char *t;
-	int c;
+	int c, only_current_term, show_labels, quick_mode, default_mode;
+	int et = 0;
 
 	setlocale(LC_ALL, "");
 
-	if ((mytty = ttyname(0))) {
-		/* strip any directory component */
-		if ((t = strrchr(mytty, '/')))
-			mytty = t + 1;
-	}
-
 	only_current_term = show_term = show_idle = show_labels = 0;
-	show_quick = 0;
-	while ((c = getopt(argc, argv, "HmqTu")) != -1) {
+	quick_mode = default_mode = 0;
+
+	while ((c = getopt(argc, argv, "abdHlmpqrsTtuv")) != -1) {
 		switch (c) {
+		case 'a':
+			et = -1;
+#ifdef __APPLE__
+			show_idle = 1;
+#else /* !__APPLE__ */
+			show_idle = show_details = 1;
+#endif /* __APPLE__ */
+			break;
+		case 'b':
+			et |= (1 << BOOT_TIME);
+			break;
+		case 'd':
+			et |= (1 << DEAD_PROCESS);
+			break;
 		case 'H':
 			show_labels = 1;
+			break;
+		case 'l':
+			et |= (1 << LOGIN_PROCESS);
 			break;
 		case 'm':
 			only_current_term = 1;
 			break;
+		case 'p':
+			et |= (1 << INIT_PROCESS);
+			break;
 		case 'q':
-			show_quick = 1;
+			quick_mode = 1;
+			break;
+		case 'r':
+			et |= (1 << RUN_LVL);
+			break;
+		case 's':
+			default_mode = 1;
 			break;
 		case 'T':
 			show_term = 1;
 			break;
+		case 't':
+			et |= (1 << NEW_TIME);
+			break;
 		case 'u':
 			show_idle = 1;
 			break;
+#ifndef __APPLE__
+		case 'v':
+			show_details = 1;
+			break;
+#endif /* !__APPLE__ */
 		default:
 			usage();
 			/* NOTREACHED */
@@ -135,270 +171,272 @@ main(int argc, char *argv[])
 	argc -= optind;
 	argv += optind;
 
-	if (show_quick) {
-		only_current_term = show_term = show_idle = show_labels = 0;
-	}
-	
-	if (show_term)
-		hostwidth -= 2;
-	if (show_idle)
-		hostwidth -= 6;
+	if (et != 0)
+		etype = et;
 
-	if (show_labels)
-		output_labels();
+#ifndef __APPLE__
+	if (chdir("/dev")) {
+		err(EXIT_FAILURE, "cannot change directory to /dev");
+		/* NOTREACHED */
+	}
+#endif /* !__APPLE__ */
+
+	if (default_mode)
+		only_current_term = show_term = show_idle = 0;
 
 	switch (argc) {
 	case 0:					/* who */
-		ufp = file(TARGET_UTMP);
-
-		if (only_current_term) {
-			who_am_i(ufp);
-		} else if (show_quick) {
-			int count = 0;
-	
-			while (fread((char *)&usr, sizeof(usr), 1, ufp) == 1) {
-				#ifdef __APPLE__
-				if(*usr.ut_user && *usr.ut_line) {
-					(void)printf("%-*.*s ", NAME_WIDTH,
-						TARGET_NAMESIZE, usr.ut_user);
-					if ((++count % 8) != 0)
-						(void) printf("\n");
-				}
-				#else
-				if (*usr.ut_name && *usr.ut_line) {
-					(void)printf("%-*.*s ", NAME_WIDTH,
-						TARGET_NAMESIZE, usr.ut_name);
-					if ((++count % 8) == 0)
-						(void) printf("\n");
-				}
-				#endif
-			}
-			if (count % 8)
-				(void) printf("\n");
-			(void) printf ("# users=%d\n", count);
+		if (quick_mode) {
+			quick(NULL);
+		} else if (only_current_term) {
+			who_am_i(NULL, show_labels);
 		} else {
-			/* only entries with both name and line fields */
-			while (fread((char *)&usr, sizeof(usr), 1, ufp) == 1)
-				#ifdef __APPLE__
-				if (*usr.ut_user && *usr.ut_line)
-				#else
-				if (*usr.ut_name && *usr.ut_line)
-				#endif
-					output(&usr);
+			process(NULL, show_labels);
 		}
 		break;
 	case 1:					/* who utmp_file */
-		ufp = file(*argv);
-
-		if (only_current_term) {
-			who_am_i(ufp);
-		} else if (show_quick) {
-			int count = 0;
-
-			while (fread((char *)&usr, sizeof(usr), 1, ufp) == 1) {
-				#ifdef __APPLE__
-				if (*usr.ut_user && *usr.ut_line) {
-					(void)printf("%-*.*s ", NAME_WIDTH,
-						TARGET_NAMESIZE, usr.ut_user);
-					if ((++count % 8) == 0)
-						(void) printf("\n");
-				}
-				#else
-				if (*usr.ut_name && *usr.ut_line) {
-					(void)printf("%-*.*s ", NAME_WIDTH,
-						TARGET_NAMESIZE, usr.ut_name);
-					if ((++count % 8) == 0)
-						(void) printf("\n");
-				}
-				#endif
-			}
-			if (count % 8)
-				(void) printf("\n");
-				printf("here");
-			(void) printf ("# users=%d\n", count);
+		if (quick_mode) {
+			quick(*argv);
+		} else if (only_current_term) {
+			who_am_i(*argv, show_labels);
 		} else {
-			/* all entries */
-			while (fread((char *)&usr, sizeof(usr), 1, ufp) == 1)
-				output(&usr);
+			process(*argv, show_labels);
 		}
 		break;
 	case 2:					/* who am i */
-		ufp = file(TARGET_UTMP);
-		who_am_i(ufp);
+		who_am_i(NULL, show_labels);
 		break;
 	default:
 		usage();
 		/* NOTREACHED */
 	}
-	exit(0);
+
+	return 0;
 }
 
-void
-who_am_i(FILE *ufp)
-{	
-	#ifdef __APPLE__
-	struct utmpx usr;
-	#else
-	struct utmp usr;
-	#endif
+static char *
+strrstr(const char *str, const char *pat)
+{
+	const char *estr;
+	size_t len;
+	if (*pat == '\0')
+		return __UNCONST(str);
+
+	len = strlen(pat);
+
+	for (estr = str + strlen(str); str < estr; estr--)
+		if (strncmp(estr, pat, len) == 0)
+			return __UNCONST(estr);
+	return NULL;
+}
+
+static void
+who_am_i(const char *fname, int show_labels)
+{
 	struct passwd *pw;
+	const char *p;
+	char *t;
+	time_t now;
+	struct utmpentry *ehead, *ep;
 
 	/* search through the utmp and find an entry for this tty */
-	if (mytty) {
-		while (fread((char *)&usr, sizeof(usr), 1, ufp) == 1)
-			if (*usr.ut_user && !strncmp(usr.ut_line, mytty, TARGET_LINESIZE)) {
-				output(&usr);
+	if ((p = ttyname(STDIN_FILENO)) != NULL) {
+
+		/* strip directory prefixes for ttys */
+		if ((t = strrstr(p, "/pts/")) != NULL ||
+		    (t = strrchr(p, '/')) != NULL)
+			p = t + 1;
+
+		(void)getutentries(fname, &ehead);
+		for (ep = ehead; ep; ep = ep->next)
+			if (strcmp(ep->line, p) == 0) {
+				if (show_labels)
+					output_labels();
+				eprint(ep);
 				return;
 			}
-		/* well, at least we know what the tty is */
-		(void)strncpy(usr.ut_line, mytty, TARGET_LINESIZE);
 	} else
-		(void)strncpy(usr.ut_line, "tty??", TARGET_LINESIZE);
+		p = "tty??";
 
+	(void)time(&now);
 	pw = getpwuid(getuid());
-	(void)strncpy(usr.ut_user, pw ? pw->pw_name : "?", TARGET_NAMESIZE);
-	(void)time((time_t *) &usr.ut_tv.tv_sec);
-	*usr.ut_host = '\0';
-	output(&usr);
+	if (show_labels)
+		output_labels();
+	print(pw ? pw->pw_name : "?", p, now, "", getpid(), 0, 0, 0, 0);
 }
 
+static void
+process(const char *fname, int show_labels)
+{
+	struct utmpentry *ehead, *ep;
+	(void)getutentries(fname, &ehead);
+	if (show_labels)
+		output_labels();
+	for (ep = ehead; ep != NULL; ep = ep->next)
+		eprint(ep);
 #ifdef __APPLE__
-void
-output(struct utmpx *up)
+	if ((etype & (1 << RUN_LVL)) != 0) {
+		printf("   .       run-level 3\n");
+	}
+#endif /* __APPLE__ */
+}
+
+static void
+eprint(const struct utmpentry *ep)
+{
+	print(ep->name, ep->line, (time_t)ep->tv.tv_sec, ep->host, ep->pid,
+#ifdef __APPLE__
+	    0, 0, 0, ep->type);
+#else /* !__APPLE__ */
+	    ep->term, ep->exit, ep->sess, ep->type);
+#endif /* __APPLE__ */
+}
+
+static void
+print(const char *name, const char *line, time_t t, const char *host,
+    pid_t pid, uint16_t term, uint16_t xit, uint16_t sess, uint16_t type)
 {
 	struct stat sb;
-	char line[sizeof(_PATH_DEV) + sizeof(up->ut_line)];
-	char state = '?';
+	char state;
 	static time_t now = 0;
-	time_t idle =  0;
-	if (show_term || show_idle) {
-		if (now == 0)
-		time(&now);
-	memset(line, 0, sizeof line);
-	strlcpy(line, _PATH_DEV, sizeof line);
-	strlcat(line, up->ut_line, sizeof line);
+	time_t idle;
+	const char *types = NULL;
+	size_t i;
 
-	if (stat(line, &sb) == 0) {
-		state = (sb.st_mode & 020) ? '+' : '-';
-		idle = now - sb.st_atimespec.tv_sec;
-	} else {
-		state = '?';
-		idle = 0;
-	}
-	}
+	state = '?';
+	idle = 0;
 
-	(void)printf("%-*.*s ", NAME_WIDTH, TARGET_NAMESIZE, up->ut_user);
-
-	if (show_term) {
-		(void)printf("%c ", state);
-	}
-
-	(void)printf("%-*.*s ", _UTX_LINESIZE, _UTX_LINESIZE, up->ut_line);
-	(void)printf("%.12s ", ctime((long int *) &up->ut_user) + 4);
-
-	if (show_idle) {
-		if (idle < 60) 
-			(void)printf("  .   ");
-		else if (idle < (24 * 60 * 60))
-			(void)printf("%02d:%02d ", 
-				     ((int)idle / (60 * 60)),
-				     ((int)idle % (60 * 60)) / 60);
-		else
-			(void)printf(" old  ");
+	for (i = 0; ut_type_names[i].type >= 0; i++) {
+		types = ut_type_names[i].name;
+		if (ut_type_names[i].type == type)
+			break;
 	}
 	
-	if (*up->ut_host)
-		printf("  (%.*s)", hostwidth, up->ut_host);
-	(void)putchar('\n');	
-}
-#else
-void
-output(struct utmp *up)
-{
-	struct stat sb;
-	char line[sizeof(_PATH_DEV) + sizeof (up->ut_line)];
-	char state = '?';
-	static time_t now = 0;
-	time_t idle = 0;
-
 	if (show_term || show_idle) {
 		if (now == 0)
 			time(&now);
 		
-		memset(line, 0, sizeof line);
-		strlcpy(line, _PATH_DEV, sizeof line);
-		strlcat(line, up->ut_line, sizeof line);
-
+#ifdef __APPLE__
+		char tty[PATH_MAX + 1];
+		snprintf(tty, sizeof(tty), "%s%s", _PATH_DEV, line);
+		if (stat(tty, &sb) == 0) {
+#else /* !__APPLE__ */
 		if (stat(line, &sb) == 0) {
+#endif /* __APPLE__ */
 			state = (sb.st_mode & 020) ? '+' : '-';
 			idle = now - sb.st_atime;
-		} else {
-			state = '?';
-			idle = 0;
 		}
 		
 	}
 
-	(void)printf("%-*.*s ", NAME_WIDTH, TARGET_NAMESIZE, up->ut_name);
-
-	if (show_term) {
-		(void)printf("%c ", state);
+#ifdef __APPLE__
+	switch (type) {
+	case LOGIN_PROCESS:
+		(void)printf("%-*.*s ", maxname, maxname, "LOGIN");
+		break;
+	case BOOT_TIME:
+		(void)printf("%-*.*s ", maxname, maxname, "reboot");
+		break;
+	default:
+		(void)printf("%-*.*s ", maxname, maxname, name);
+		break;
 	}
+#else /* !__APPLE__ */
+	(void)printf("%-*.*s ", maxname, maxname, name);
+#endif /* __APPLE__ */
 
-	(void)printf("%-*.*s ", TARGET_LINESIZE, TARGET_LINESIZE, up->ut_line);
-	(void)printf("%.12s ", ctime((long int *) &up->ut_time) + 4);
+	if (show_term)
+		(void)printf("%c ", state);
+
+#ifdef __APPLE__
+	(void)printf("%-*.*s ", maxline, maxline, type == BOOT_TIME ? "~" : line);
+#else /* !__APPLE__ */
+	(void)printf("%-*.*s ", maxline, maxline, line);
+#endif /* __APPLE__ */
+	(void)printf("%.12s ", ctime(&t) + 4);
 
 	if (show_idle) {
 		if (idle < 60) 
 			(void)printf("  .   ");
 		else if (idle < (24 * 60 * 60))
-			(void)printf("%02d:%02d ", 
-				     ((int)idle / (60 * 60)),
-				     ((int)idle % (60 * 60)) / 60);
+			(void)printf("%02ld:%02ld ", 
+				     (long)(idle / (60 * 60)),
+				     (long)(idle % (60 * 60)) / 60);
 		else
 			(void)printf(" old  ");
+
+		(void)printf("\t%6d", pid);
+		
+#ifndef __APPLE__
+		if (show_details) {
+			if (type == RUN_LVL)
+				(void)printf("\tnew=%c old=%c", term, xit);
+			else
+				(void)printf("\tterm=%d exit=%d", term, xit);
+			(void)printf(" sess=%d", sess);
+			(void)printf(" type=%s ", types);
+		}
+#endif /* !__APPLE__ */
 	}
 	
-	if (*up->ut_host)
-		printf("  (%.*s)", hostwidth, up->ut_host);
+#ifdef __APPLE__
+	/* 6179576 */
+	if (type == DEAD_PROCESS)
+		(void)printf("\tterm=%d exit=%d", 0, 0);
+#endif /* __APPLE__ */
+
+	if (*host)
+		(void)printf("\t(%.*s)", maxhost, host);
 	(void)putchar('\n');
 }
-#endif
 
-void
+static void
 output_labels(void)
 {
-	(void)printf("%-*.*s ", NAME_WIDTH, TARGET_NAMESIZE, "USER");
+	(void)printf("%-*.*s ", maxname, maxname, "USER");
 
 	if (show_term)
 		(void)printf("S ");
-
-	(void)printf("%-*.*s ", TARGET_LINESIZE, TARGET_LINESIZE, "LINE");
+	
+	(void)printf("%-*.*s ", maxline, maxline, "LINE");
 	(void)printf("WHEN         ");
 
-	if (show_idle)
+	if (show_idle) {
 		(void)printf("IDLE  ");
-
-	(void)printf("  %.*s", hostwidth, "FROM");
+		(void)printf("\t   PID");
+	
+		(void)printf("\tCOMMENT");
+	}		
 
 	(void)putchar('\n');
 }
 
-FILE *
-file(char *name)
+static void
+quick(const char *fname)
 {
-	FILE *ufp;
+	struct utmpentry *ehead, *ep;
+	int num = 0;
 
-	if (!(ufp = fopen(name, "r"))) {
-		err(1, "%s", name);
-		/* NOTREACHED */
+	(void)getutentries(fname, &ehead);
+	for (ep = ehead; ep != NULL; ep = ep->next) {
+		(void)printf("%-*s ", maxname, ep->name);
+		if ((++num % 8) == 0)
+			(void)putchar('\n');
 	}
-	return(ufp);
+	if (num % 8)
+		(void)putchar('\n');
+
+	(void)printf("# users = %d\n", num);
 }
 
-void
+static void
 usage(void)
 {
-	(void)fprintf(stderr, "usage: who [-HmqTu] [file]\n       who am i\n");
-	exit(1);
+#ifdef __APPLE__
+	(void)fprintf(stderr, "Usage: %s [-abdHlmpqrsTtu] [file]\n\t%s am i\n",
+#else /* !__APPLE__ */
+	(void)fprintf(stderr, "Usage: %s [-abdHlmqrsTtuv] [file]\n\t%s am i\n",
+#endif /* __APPLE__ */
+	    getprogname(), getprogname());
+	exit(EXIT_FAILURE);
 }
