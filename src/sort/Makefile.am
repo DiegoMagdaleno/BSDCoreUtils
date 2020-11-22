@@ -6,7 +6,7 @@ sort_CFLAGS = -I$(top_srcdir)/compat $(OPENSSL_CFLAGS) -D_GNU_SOURCE
 sort_LDADD = $(top_builddir)/compat/libcompat.la $(OPENSSL_LIBS) -lcurses
 
 if DARWIN
-sort_SOURCES = commoncrypto.c
+sort_SOURCES += commoncrypto.c
 endif
 
 EXTRA_DIST = bwstring.h coll.h file.h mem.h radixsort.h sort.h vsort.h
