@@ -45,6 +45,10 @@
  * assumption about the input.
  */
 
+#ifdef __linux__
+#include "posixver.h"
+#endif
+
 #include <sys/types.h>
 
 #include <ctype.h>
@@ -269,8 +273,12 @@ cleanup(void)
 /* Read a line from the input into a static buffer. */
 char *
 get_line(void)
-{
+{	
+	#ifdef __linux__
+	static char lbuf[_POSIX2_LINE_MAX];
+	#else
 	static char lbuf[LINE_MAX];
+	#endif
 	FILE *src;
 
 	src = overfile != NULL ? overfile : infile;
