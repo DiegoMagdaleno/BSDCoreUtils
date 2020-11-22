@@ -73,6 +73,11 @@ AM_CONDITIONAL([DARWIN], [test "$build_macos" = "yes"])
 # We need OpenSSL or LibreSSL for MD5 functions since glibc doesn't offer them.
 PKG_CHECK_MODULES(OPENSSL, openssl)
 
+BSDUTILSDEFS=
+AC_ARG_WITH([colorful-ls], AC_HELP_STRING([--with-colorful-ls=<str>], [Patch ls to support colors]))
+AS_IF([test "x$with_colorful-ls" = "xyes"],BSDUTILSDEFS="-DCOLORLS")
+AC_SUBST(BSDUTILSDEFS)
+
 AC_CONFIG_FILES([Makefile
                  compat/Makefile
                  src/Makefile
