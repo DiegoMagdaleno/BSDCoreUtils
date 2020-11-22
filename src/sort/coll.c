@@ -34,10 +34,9 @@
 #include <langinfo.h>
 #include <limits.h>
 #include <math.h>
-#ifdef __linux__
+#if __linux__ || __APPLE__
 #include <openssl/md5.h>
-#endif
-#ifndef __APPLE__
+#else
 #include <md5.h>
 #endif
 #include <stdlib.h>

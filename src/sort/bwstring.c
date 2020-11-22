@@ -39,6 +39,7 @@
 #else
 #include <wchar.h>
 #endif 
+#include <wctype.h>
 
 #include "bwstring.h"
 #include "sort.h"
