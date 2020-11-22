@@ -192,6 +192,7 @@ grptb_start(void)
 }
 
 #ifndef __APPLE__ /* Darwin already has this defenitions */
+ /*
  * user_from_uid()
  *	caches the name (if any) for the uid. If noname clear, we always
  *	return the stored name (if valid or invalid match).
