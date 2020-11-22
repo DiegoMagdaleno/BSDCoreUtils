@@ -26,10 +26,13 @@
  */
 
 #include <sys/cdefs.h>
-__FBSDID("$FreeBSD$");
 
 #include <sys/stat.h>
+#ifdef __linux__
+#include <sys/auxv.h>
+#else
 #include <sys/sysctl.h>
+#endif
 #include <sys/types.h>
 
 #include <err.h>
@@ -37,7 +40,7 @@ __FBSDID("$FreeBSD$");
 #include <getopt.h>
 #include <limits.h>
 #include <locale.h>
-#ifndef __APPLE__
+#if !defined(__APPLE__) && !defined (__linux__)
 #include <md5.h>
 #endif
 #include <regex.h>
@@ -49,6 +52,9 @@ __FBSDID("$FreeBSD$");
 #include <unistd.h>
 #ifdef __linux__
 #include <bsd/wchar.h>
+#include <openssl/sha.h>
+#include "compat.h"
+#include <ctype.h>
 #else
 #include <wchar.h>
 #endif 
@@ -57,10 +63,15 @@ __FBSDID("$FreeBSD$");
 #include "coll.h"
 #include "file.h"
 #include "sort.h"
+#include "commoncrypto.h"
 
 #ifndef WITHOUT_NLS
 #include <nl_types.h>
 nl_catd catalog;
+#endif
+
+#ifdef __linux__
+extern char *__progname;
 #endif
 
 #define	OPTIONS	"bcCdfghik:Mmno:RrsS:t:T:uVz"
@@ -222,7 +233,11 @@ usage(bool opt_err)
 
 	out = opt_err ? stderr : stdout;
 
+	#ifdef __linux__
+	fprintf(out, getstr(12), __progname);
+	#else
 	fprintf(out, getstr(12), getprogname());
+	#endif
 	if (opt_err)
 		exit(2);
 	exit(0);
@@ -441,7 +456,12 @@ parse_memory_buffer_value(const char *value)
 				    100;
 				break;
 			default:
+				#ifdef __linux__
+				errno = EINVAL;
+				warn("%s", optarg);
+				#else
 				warnc(EINVAL, "%s", optarg);
+				#endif
 				membuf = available_free_memory;
 			}
 		}
@@ -1035,10 +1055,17 @@ main(int argc, char **argv)
 				memset(&(keys[keys_num - 1]), 0,
 				    sizeof(struct key_specs));
 
+				#ifdef __linux__
+				if (parse_k(optarg, &(keys[keys_num++])) < 0) {
+					errno = EINVAL;
+					err(2, "-k %s", optarg);
+				}
+				#else
 				if (parse_k(optarg, &(keys[keys_num - 1]))
 				    < 0) {
 					errc(2, EINVAL, "-k %s", optarg);
 				}
+				#endif
 
 				break;
 			}
@@ -1062,7 +1089,12 @@ main(int argc, char **argv)
 			case 't':
 				while (strlen(optarg) > 1) {
 					if (optarg[0] != '\\') {
+						#ifdef __linux__
+						errno = EINVAL;
+						err(2, "%s", optarg);
+						#else
 						errc(2, EINVAL, "%s", optarg);
+						#endif
 					}
 					optarg += 1;
 					if (*optarg == '0') {

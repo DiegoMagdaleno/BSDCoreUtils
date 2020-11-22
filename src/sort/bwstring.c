@@ -36,6 +36,8 @@
 #include <string.h>
 #ifdef __linux__
 #include <bsd/wchar.h>
+#include <openssl/sha.h>
+#include <bsd/stdio.h>
 #else
 #include <wchar.h>
 #endif 
@@ -482,7 +484,15 @@ bwsfgetln(FILE *f, size_t *len, bool zero_ended, struct reader_buffer *rb)
 	if (!zero_ended && (MB_CUR_MAX > 1)) {
 		wchar_t *ret;
 
+		#ifdef __linux__
+		if (getline((char **) &ret, len, f) == -1) {
+				if(!feof(f))
+					err(2, NULL);
+				return NULL;
+		}
+		#else
 		ret = fgetwln(f, len);
+		#endif
 
 		if (ret == NULL) {
 			if (!feof(f))
@@ -498,7 +508,15 @@ bwsfgetln(FILE *f, size_t *len, bool zero_ended, struct reader_buffer *rb)
 	} else if (!zero_ended && (MB_CUR_MAX == 1)) {
 		char *ret;
 
+		#ifdef __linux__ 
+		if(getline(&ret, len, f) == -1) {
+			if (!feof(f))
+				err(2, NULL);
+			return NULL;
+		}
+		#else
 		ret = fgetln(f, len);
+		#endif
 
 		if (ret == NULL) {
 			if (!feof(f))

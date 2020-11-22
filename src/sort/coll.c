@@ -35,7 +35,7 @@
 #include <limits.h>
 #include <math.h>
 #ifdef __linux__
-#include <openssl/md5.h>
+#include <openssl/sha.h>
 #endif
 #if !__APPLE__ && !__linux__
 #include <md5.h>
@@ -52,6 +52,7 @@
 
 #include "coll.h"
 #include "vsort.h"
+#include "commoncrypto.h"
 
 struct key_specs *keys;
 size_t keys_num = 0;

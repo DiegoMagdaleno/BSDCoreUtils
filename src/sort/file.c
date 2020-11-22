@@ -51,6 +51,7 @@
 #include <unistd.h>
 #ifdef __linux__
 #include <bsd/wchar.h>
+#include "compat.h"
 #else
 #include <wchar.h>
 #endif 
@@ -680,7 +681,7 @@ file_reader_init(const char *fsrc)
 			size_t sz = 0;
 			int fd, flags;
 
-#if defined(__APPLE__)
+#if defined(__APPLE__) || defined(__linux__)
 			flags = 0;
 #else
 			flags = MAP_NOCORE | MAP_NOSYNC;

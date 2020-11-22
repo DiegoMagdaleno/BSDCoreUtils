@@ -40,7 +40,7 @@
 #ifdef __APPLE__
 #include "commoncrypto.h"
 #elif __linux__
-#include <openssl/md5.h>
+#include <openssl/sha.h>
 #else
 #include <md5.h>
 #endif

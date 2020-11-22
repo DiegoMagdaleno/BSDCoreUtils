@@ -26,7 +26,6 @@
  */
 
 #include <sys/cdefs.h>
-__FBSDID("$FreeBSD: head/usr.bin/sort/vsort.c 281132 2015-04-06 02:35:55Z pfg $");
 
 #include <sys/types.h>
 
