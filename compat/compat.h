@@ -132,3 +132,14 @@ size_t strlcpy(char *, const char *, size_t);
 #define D_TAPE  1
 #endif
 
+#if defined __linux__ 
+extern const long NSEC;
+
+time_t gettime(void);
+
+void timespecadd(const struct timespec*, const struct timespec*, struct timespec*);
+void timespecsub(const struct timespec*, const struct timespec*, struct timespec*);
+int ts_cmp(const struct timespec*, const struct timespec*);
+#define timespeccmp(a, b, CMP) ((ts_cmp((a), (b)) CMP 0))
+#endif
+

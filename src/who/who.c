@@ -58,14 +58,19 @@
 #endif /* __APPLE__ */
 
 #include "utmpentry.h"
+#include "compat.h"
 
-#ifdef __APPLE__
+#if defined(__APPLE__) || defined(__linux__)
 #define __UNCONST(a)	((void *)(unsigned long)(const void *)(a))
 #endif /* __APPLE__ */
 
+#ifdef __linux__
+extern char *__progname;
+#endif
+
 static void output_labels(void);
 static void who_am_i(const char *, int);
-static void usage(void) __dead;
+static void usage(void);
 static void process(const char *, int);
 static void eprint(const struct utmpentry *);
 static void print(const char *, const char *, time_t, const char *, pid_t pid,
@@ -437,6 +442,10 @@ usage(void)
 #else /* !__APPLE__ */
 	(void)fprintf(stderr, "Usage: %s [-abdHlmqrsTtuv] [file]\n\t%s am i\n",
 #endif /* __APPLE__ */
+#ifdef __linux__
+		 __progname, __progname);
+#else
 	    getprogname(), getprogname());
+#endif
 	exit(EXIT_FAILURE);
 }
