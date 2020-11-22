@@ -26,7 +26,6 @@
  */
 
 #include <sys/cdefs.h>
-__FBSDID("$FreeBSD$");
 
 #include <sys/types.h>
 
@@ -35,6 +34,9 @@ __FBSDID("$FreeBSD$");
 #include <langinfo.h>
 #include <limits.h>
 #include <math.h>
+#ifdef __linux__
+#include <openssl/mdd5>
+#endif
 #ifndef __APPLE__
 #include <md5.h>
 #endif

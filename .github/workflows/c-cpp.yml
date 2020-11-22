@@ -12,6 +12,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: required-deps
+      run: sudo apt-get install libbsd-dev
     - uses: actions/checkout@v2
     - name: autogen
       run: ./autogen.sh
