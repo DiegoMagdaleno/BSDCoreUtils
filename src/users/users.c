@@ -85,7 +85,7 @@ main(int argc, char *argv[])
 		err(1, "can't open %s", _PATH_UTMP);
 		/* NOTREACHED */
 	}
-	#endif 
+	#endif
 
 
 	#ifdef __APPLE__
