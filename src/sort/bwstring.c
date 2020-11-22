@@ -36,7 +36,6 @@
 #include <string.h>
 #ifdef __linux__
 #include <bsd/wchar.h>
-#include <bsd/stdio.h>
 #else
 #include <wchar.h>
 #endif 
@@ -73,8 +72,8 @@ initialise_months(void)
 					printf("month[%d]=%s\n", i, tmp);
 				if (*tmp == '\0')
 					continue;
-				m = sort_strdup(tmp);
-				len = strlen(tmp);
+				m = (unsigned char*)sort_strdup((char *)tmp);
+				len = strlen((char *)tmp);
 				for (unsigned int j = 0; j < len; j++)
 					m[j] = toupper(m[j]);
 				cmonths[i] = m;
@@ -93,7 +92,7 @@ initialise_months(void)
 					printf("month[%d]=%s\n", i, tmp);
 				if (*tmp == '\0')
 					continue;
-				len = strlen(tmp);
+				len = strlen((char *)tmp);
 				m = sort_malloc(SIZEOF_WCHAR_STRING(len + 1));
 				if (mbstowcs(m, (char*)tmp, len) ==
 				    ((size_t) - 1)) {
