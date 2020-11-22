@@ -76,12 +76,12 @@ main(int argc, char *argv[])
 	argv += optind;
 
 	#ifdef __APPLE__
-	if (!freopen(_PATH_UTMPX, "r", stdin)) {
+	if (!freopen(_PATH_UTMPX, "r", stdin)){
 		err(1, "can't open %s", _PATH_UTMPX);
 		/* NOTREACHED */
 	}
 	#else
-	if (!freopen(_PATH_UTMP, "r", stdin)) {
+	if (!freopen(_PATH_UTMP, "r", stdin)) {
 		err(1, "can't open %s", _PATH_UTMP);
 		/* NOTREACHED */
 	}
@@ -107,7 +107,7 @@ main(int argc, char *argv[])
 	}
 	#else
 	while (fread((char *)&utmp, sizeof(utmp), 1, stdin) == 1) {
-		if (target_property) {
+		if (*utmp.ut_name) {
 			if (ncnt >= nmax) {
 				size_t newmax = nmax + 32;
 				namebuf *newnames;
@@ -122,7 +122,7 @@ main(int argc, char *argv[])
 				names = newnames;
 				nmax = newmax;
 			}
-			(void)strncpy(names[ncnt], &target_property, UT_NAMESIZE);
+			(void)strncpy(names[ncnt], utmp.ut_name, UT_NAMESIZE);
 			++ncnt;
 		}
 	}
