@@ -71,7 +71,12 @@ AM_CONDITIONAL([LINUX], [test "$build_linux" = "yes"])
 AM_CONDITIONAL([DARWIN], [test "$build_macos" = "yes"])
 
 # We need OpenSSL or LibreSSL for MD5 functions since glibc doesn't offer them.
-PKG_CHECK_MODULES(OPENSSL, openssl)
+# we only check if the user haves them on Linux on macOS we can use corecryto
+AS_CASE(
+    ["$build_linux"],
+    [yes], [PKG_CHECK_MODULES(OPENSSL, openssl)]
+)
+
 
 BSDUTILSDEFS=
 AC_ARG_WITH([colorful-ls], AC_HELP_STRING([--with-colorful-ls=<str>], [Patch ls to support colors]))

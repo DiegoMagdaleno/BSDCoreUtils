@@ -516,7 +516,7 @@ bwsfgetln(FILE *f, size_t *len, bool zero_ended, struct reader_buffer *rb)
 		}
 		#else
 		ret = fgetln(f, len);
-		#endif
+		#endif	
 
 		if (ret == NULL) {
 			if (!feof(f))
