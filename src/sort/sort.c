@@ -73,7 +73,7 @@ static const char *random_source = DEFAULT_RANDOM_SORT_SEED_FILE;
 static const void *random_seed;
 static size_t random_seed_size;
 
-MD5_CTX md5_ctx;
+SHA256_CTX sha256_ctx;
 
 /*
  * Default messages to use when NLS is disabled or no catalogue
@@ -453,8 +453,8 @@ parse_memory_buffer_value(const char *value)
  * Signal handler that clears the temporary files.
  */
 static void
-sig_handler(int sig __unused, siginfo_t *siginfo __unused,
-    void *context __unused)
+sig_handler(int sig, siginfo_t *siginfo,
+    void *context)
 {
 
 	clear_tmp_files();
@@ -921,7 +921,7 @@ set_random_seed(void)
 
 		if (strcmp(random_source, DEFAULT_RANDOM_SORT_SEED_FILE) == 0) {
 			FILE* fseed;
-			MD5_CTX ctx;
+			SHA256_CTX ctx;
 			char rsd[MAX_DEFAULT_RANDOM_SEED_DATA_SIZE];
 			size_t sz = 0;
 
@@ -941,18 +941,18 @@ set_random_seed(void)
 
 			closefile(fseed, random_source);
 
-			MD5Init(&ctx);
-			MD5Update(&ctx, rsd, sz);
+			SHA256Init(&ctx);
+			SHA256Update(&ctx, rsd, sz);
 
-			random_seed = MD5End(&ctx, NULL);
+			random_seed = SHA256End(&ctx, NULL);
 			random_seed_size = strlen(random_seed);
 
 		} else {
-			MD5_CTX ctx;
+			SHA256_CTX ctx;
 			char *b;
 
-			MD5Init(&ctx);
-			b = MD5File(random_source, NULL);
+			SHA256Init(&ctx);
+			b = SHA256File(random_source, NULL);
 			if (b == NULL)
 				err(2, NULL);
 
@@ -960,9 +960,9 @@ set_random_seed(void)
 			random_seed_size = strlen(b);
 		}
 
-		MD5Init(&md5_ctx);
+		SHA256Init(&sha256_ctx);
 		if(random_seed_size>0) {
-			MD5Update(&md5_ctx, random_seed, random_seed_size);
+			SHA256Update(&sha256_ctx, random_seed, random_seed_size);
 		}
 	}
 }

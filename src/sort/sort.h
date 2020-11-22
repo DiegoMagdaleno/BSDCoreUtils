@@ -72,7 +72,7 @@ extern bool debug_sort;
 /*
  * MD5 context for random hash function
  */
-extern MD5_CTX md5_ctx;
+extern SHA256_CTX sha256_ctx;
 
 /*
  * sort.c

@@ -34,9 +34,10 @@
 #include <langinfo.h>
 #include <limits.h>
 #include <math.h>
-#if __linux__ || __APPLE__
+#ifdef __linux__
 #include <openssl/md5.h>
-#else
+#endif
+#if !__APPLE__ && !__linux__
 #include <md5.h>
 #endif
 #include <stdlib.h>
@@ -1000,7 +1001,7 @@ randomcoll(struct key_value *kv1, struct key_value *kv2,
     size_t offset)
 {
 	struct bwstring *s1, *s2;
-	MD5_CTX ctx1, ctx2;
+	SHA256_CTX ctx1, ctx2;
 	char *b1, *b2;
 
 	s1 = kv1->k;
@@ -1014,13 +1015,13 @@ randomcoll(struct key_value *kv1, struct key_value *kv2,
 	if (s1 == s2)
 		return (0);
 
-	memcpy(&ctx1,&md5_ctx,sizeof(MD5_CTX));
-	memcpy(&ctx2,&md5_ctx,sizeof(MD5_CTX));
+	memcpy(&ctx1,&sha256_ctx,sizeof(SHA256_CTX));
+	memcpy(&ctx2,&sha256_ctx,sizeof(SHA256_CTX));
 
-	MD5Update(&ctx1, bwsrawdata(s1), bwsrawlen(s1));
-	MD5Update(&ctx2, bwsrawdata(s2), bwsrawlen(s2));
-	b1 = MD5End(&ctx1, NULL);
-	b2 = MD5End(&ctx2, NULL);
+	SHA256Update(&ctx1, bwsrawdata(s1), bwsrawlen(s1));
+	SHA256Update(&ctx2, bwsrawdata(s2), bwsrawlen(s2));
+	b1 = SHA256End(&ctx1, NULL);
+	b2 = SHA256End(&ctx2, NULL);
 	if (b1 == NULL) {
 		if (b2 == NULL)
 			return (0);
