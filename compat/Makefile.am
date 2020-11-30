@@ -6,11 +6,10 @@ libcompat_la_SOURCES = setmode.c strtonum.c strmode.c pwcache.c \
 
 if LINUX
     libcompat_la_CFLAGS += -I$(top_srcdir)/compat -D_GNU_SOURCE
-    libcompat_la_SOURCES += strlcpy.c strlcat.c logwtmp.c
-endif
+    libcompat_la_SOURCES += strlcpy.c strlcat.c
 
 if DARWIN
-    libcompat_la_SOURCES += reallocarray.c darwinlogwtmpx.c
+    libcompat_la_SOURCES += reallocarray.c 
 endif
 
 EXTRA_DIST = compat.h headers/ohash.h headers/tree.h headers/util.h headers/simpleq.h headers/mthio.h
