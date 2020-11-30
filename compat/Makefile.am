@@ -7,6 +7,7 @@ libcompat_la_SOURCES = setmode.c strtonum.c strmode.c pwcache.c \
 if LINUX
     libcompat_la_CFLAGS += -I$(top_srcdir)/compat -D_GNU_SOURCE
     libcompat_la_SOURCES += strlcpy.c strlcat.c
+endif
 
 if DARWIN
     libcompat_la_SOURCES += reallocarray.c 
