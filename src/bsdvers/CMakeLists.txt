@@ -1,0 +1,1 @@
+add_executable(bsdvers bsdvers.c)

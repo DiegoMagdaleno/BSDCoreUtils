@@ -1,4 +1,5 @@
-list(APPEND crossCompatibleBins arch
+list(APPEND crossCompatibleBins
+        arch
         basename
         bsdvers
         cat
@@ -68,3 +69,7 @@ list(APPEND crossCompatibleBins arch
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
     list(APPEND crossCompatibleBins xinstall stty)
 endif()
+
+foreach(binary ${crossCompatibleBins})
+    add_subdirectory(${binary})
+endforeach()
