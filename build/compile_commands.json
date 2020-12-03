@@ -1,0 +1,67 @@
+[
+{
+  "directory": "/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/build",
+  "command": "/bin/c99-gcc   -g -std=gnu11 -o CMakeFiles/bsdcoreutils.dir/compat/devname.c.o -c /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/devname.c",
+  "file": "/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/devname.c"
+},
+{
+  "directory": "/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/build",
+  "command": "/bin/c99-gcc   -g -std=gnu11 -o CMakeFiles/bsdcoreutils.dir/compat/fmt_scaled.c.o -c /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/fmt_scaled.c",
+  "file": "/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/fmt_scaled.c"
+},
+{
+  "directory": "/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/build",
+  "command": "/bin/c99-gcc   -g -std=gnu11 -o CMakeFiles/bsdcoreutils.dir/compat/getbsize.c.o -c /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/getbsize.c",
+  "file": "/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/getbsize.c"
+},
+{
+  "directory": "/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/build",
+  "command": "/bin/c99-gcc   -g -std=gnu11 -o CMakeFiles/bsdcoreutils.dir/compat/heapsort.c.o -c /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/heapsort.c",
+  "file": "/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/heapsort.c"
+},
+{
+  "directory": "/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/build",
+  "command": "/bin/c99-gcc   -g -std=gnu11 -o CMakeFiles/bsdcoreutils.dir/compat/merge.c.o -c /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/merge.c",
+  "file": "/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/merge.c"
+},
+{
+  "directory": "/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/build",
+  "command": "/bin/c99-gcc   -g -std=gnu11 -o CMakeFiles/bsdcoreutils.dir/compat/ohash.c.o -c /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/ohash.c",
+  "file": "/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/ohash.c"
+},
+{
+  "directory": "/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/build",
+  "command": "/bin/c99-gcc   -g -std=gnu11 -o CMakeFiles/bsdcoreutils.dir/compat/pwcache.c.o -c /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/pwcache.c",
+  "file": "/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/pwcache.c"
+},
+{
+  "directory": "/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/build",
+  "command": "/bin/c99-gcc   -g -std=gnu11 -o CMakeFiles/bsdcoreutils.dir/compat/reallocarray.c.o -c /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/reallocarray.c",
+  "file": "/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/reallocarray.c"
+},
+{
+  "directory": "/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/build",
+  "command": "/bin/c99-gcc   -g -std=gnu11 -o CMakeFiles/bsdcoreutils.dir/compat/recallocarray.c.o -c /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/recallocarray.c",
+  "file": "/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/recallocarray.c"
+},
+{
+  "directory": "/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/build",
+  "command": "/bin/c99-gcc   -g -std=gnu11 -o CMakeFiles/bsdcoreutils.dir/compat/setmode.c.o -c /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/setmode.c",
+  "file": "/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/setmode.c"
+},
+{
+  "directory": "/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/build",
+  "command": "/bin/c99-gcc   -g -std=gnu11 -o CMakeFiles/bsdcoreutils.dir/compat/strlcat.c.o -c /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/strlcat.c",
+  "file": "/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/strlcat.c"
+},
+{
+  "directory": "/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/build",
+  "command": "/bin/c99-gcc   -g -std=gnu11 -o CMakeFiles/bsdcoreutils.dir/compat/strlcpy.c.o -c /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/strlcpy.c",
+  "file": "/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/strlcpy.c"
+},
+{
+  "directory": "/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/build",
+  "command": "/bin/c99-gcc   -g -std=gnu11 -o CMakeFiles/bsdcoreutils.dir/compat/strmode.c.o -c /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/strmode.c",
+  "file": "/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/strmode.c"
+}
+]

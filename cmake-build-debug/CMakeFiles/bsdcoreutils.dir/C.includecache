@@ -1,0 +1,40 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/compat.h
+headers/simpleq.h
+/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/headers/simpleq.h
+sys/stat.h
+-
+grp.h
+-
+pwd.h
+-
+unistd.h
+-
+string.h
+-
+stddef.h
+-
+sys/types.h
+-
+sys/stat.h
+-
+
+/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/headers/simpleq.h
+
+/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/heapsort.c
+compat.h
+/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/compat.h
+sys/types.h
+-
+errno.h
+-
+stdlib.h
+-
+

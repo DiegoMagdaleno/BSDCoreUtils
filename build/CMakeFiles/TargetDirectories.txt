@@ -1,0 +1,3 @@
+/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/build/CMakeFiles/rebuild_cache.dir
+/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/build/CMakeFiles/edit_cache.dir
+/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/build/CMakeFiles/bsdcoreutils.dir
