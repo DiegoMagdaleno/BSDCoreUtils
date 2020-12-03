@@ -1,5 +1,6 @@
 #Basic list of libcompat on current supported operating systems
-list(BasicCompat setmode.c
+list(APPEND BasicCompat
+        setmode.c
         strtonum.c
         strmode.c
         pwcache.c
@@ -13,16 +14,16 @@ list(BasicCompat setmode.c
 
 
 if(LINUX)
-    list(BasicCompat APPEND strlcpy.c
+    list(APPEND BasicCompat strlcpy.c
             strlcat.c)
 endif()
 
 if(APPLE)
-    list(BasicCompat APPEND reallocarray.c)
+    list(APPEND BasicCompat reallocarray.c)
 endif()
 
 add_library(
-        libcompat
+        compat
         ${BasicCompat}
 )
 
