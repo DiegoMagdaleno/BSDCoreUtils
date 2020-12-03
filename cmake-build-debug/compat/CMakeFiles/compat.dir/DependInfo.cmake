@@ -13,6 +13,8 @@ set(CMAKE_DEPENDS_CHECK_C
   "/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/pwcache.c" "/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat/CMakeFiles/compat.dir/pwcache.c.o"
   "/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/recallocarray.c" "/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat/CMakeFiles/compat.dir/recallocarray.c.o"
   "/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/setmode.c" "/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat/CMakeFiles/compat.dir/setmode.c.o"
+  "/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/strlcat.c" "/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat/CMakeFiles/compat.dir/strlcat.c.o"
+  "/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/strlcpy.c" "/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat/CMakeFiles/compat.dir/strlcpy.c.o"
   "/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/strmode.c" "/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat/CMakeFiles/compat.dir/strmode.c.o"
   "/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/strtonum.c" "/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat/CMakeFiles/compat.dir/strtonum.c.o"
   )

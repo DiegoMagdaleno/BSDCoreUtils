@@ -13,12 +13,12 @@ list(APPEND BasicCompat
         recallocarray.c)
 
 
-if(LINUX)
+if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
     list(APPEND BasicCompat strlcpy.c
             strlcat.c)
 endif()
 
-if(APPLE)
+if(${CMAKE_SYSTEM_NAME} STREQUAL "Darwin")
     list(APPEND BasicCompat reallocarray.c)
 endif()
 

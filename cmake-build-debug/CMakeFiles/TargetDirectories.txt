@@ -3,3 +3,5 @@
 /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat/CMakeFiles/rebuild_cache.dir
 /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat/CMakeFiles/edit_cache.dir
 /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat/CMakeFiles/compat.dir
+/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/src/CMakeFiles/rebuild_cache.dir
+/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/src/CMakeFiles/edit_cache.dir

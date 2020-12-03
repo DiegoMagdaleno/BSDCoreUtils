@@ -14,3 +14,4 @@ if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
 endif()
 
 add_subdirectory(compat)
+add_subdirectory(src)

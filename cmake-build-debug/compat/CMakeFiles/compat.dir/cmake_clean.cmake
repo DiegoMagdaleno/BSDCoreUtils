@@ -8,6 +8,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/compat.dir/pwcache.c.o"
   "CMakeFiles/compat.dir/recallocarray.c.o"
   "CMakeFiles/compat.dir/setmode.c.o"
+  "CMakeFiles/compat.dir/strlcat.c.o"
+  "CMakeFiles/compat.dir/strlcpy.c.o"
   "CMakeFiles/compat.dir/strmode.c.o"
   "CMakeFiles/compat.dir/strtonum.c.o"
   "libcompat.a"

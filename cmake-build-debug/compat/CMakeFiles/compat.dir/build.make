@@ -200,6 +200,32 @@ compat/CMakeFiles/compat.dir/recallocarray.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/compat.dir/recallocarray.c.s"
 	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/recallocarray.c -o CMakeFiles/compat.dir/recallocarray.c.s
 
+compat/CMakeFiles/compat.dir/strlcpy.c.o: compat/CMakeFiles/compat.dir/flags.make
+compat/CMakeFiles/compat.dir/strlcpy.c.o: ../compat/strlcpy.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building C object compat/CMakeFiles/compat.dir/strlcpy.c.o"
+	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/compat.dir/strlcpy.c.o   -c /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/strlcpy.c
+
+compat/CMakeFiles/compat.dir/strlcpy.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/compat.dir/strlcpy.c.i"
+	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/strlcpy.c > CMakeFiles/compat.dir/strlcpy.c.i
+
+compat/CMakeFiles/compat.dir/strlcpy.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/compat.dir/strlcpy.c.s"
+	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/strlcpy.c -o CMakeFiles/compat.dir/strlcpy.c.s
+
+compat/CMakeFiles/compat.dir/strlcat.c.o: compat/CMakeFiles/compat.dir/flags.make
+compat/CMakeFiles/compat.dir/strlcat.c.o: ../compat/strlcat.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building C object compat/CMakeFiles/compat.dir/strlcat.c.o"
+	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/compat.dir/strlcat.c.o   -c /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/strlcat.c
+
+compat/CMakeFiles/compat.dir/strlcat.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/compat.dir/strlcat.c.i"
+	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/strlcat.c > CMakeFiles/compat.dir/strlcat.c.i
+
+compat/CMakeFiles/compat.dir/strlcat.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/compat.dir/strlcat.c.s"
+	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/strlcat.c -o CMakeFiles/compat.dir/strlcat.c.s
+
 # Object files for target compat
 compat_OBJECTS = \
 "CMakeFiles/compat.dir/setmode.c.o" \
@@ -212,7 +238,9 @@ compat_OBJECTS = \
 "CMakeFiles/compat.dir/devname.c.o" \
 "CMakeFiles/compat.dir/merge.c.o" \
 "CMakeFiles/compat.dir/heapsort.c.o" \
-"CMakeFiles/compat.dir/recallocarray.c.o"
+"CMakeFiles/compat.dir/recallocarray.c.o" \
+"CMakeFiles/compat.dir/strlcpy.c.o" \
+"CMakeFiles/compat.dir/strlcat.c.o"
 
 # External object files for target compat
 compat_EXTERNAL_OBJECTS =
@@ -228,9 +256,11 @@ compat/libcompat.a: compat/CMakeFiles/compat.dir/devname.c.o
 compat/libcompat.a: compat/CMakeFiles/compat.dir/merge.c.o
 compat/libcompat.a: compat/CMakeFiles/compat.dir/heapsort.c.o
 compat/libcompat.a: compat/CMakeFiles/compat.dir/recallocarray.c.o
+compat/libcompat.a: compat/CMakeFiles/compat.dir/strlcpy.c.o
+compat/libcompat.a: compat/CMakeFiles/compat.dir/strlcat.c.o
 compat/libcompat.a: compat/CMakeFiles/compat.dir/build.make
 compat/libcompat.a: compat/CMakeFiles/compat.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Linking C static library libcompat.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Linking C static library libcompat.a"
 	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && $(CMAKE_COMMAND) -P CMakeFiles/compat.dir/cmake_clean_target.cmake
 	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/compat.dir/link.txt --verbose=$(VERBOSE)
 
