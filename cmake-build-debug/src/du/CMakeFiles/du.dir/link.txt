@@ -1,0 +1,1 @@
+/usr/bin/cc -g CMakeFiles/du.dir/du.c.o -o du  ../../compat/libcompat.a 

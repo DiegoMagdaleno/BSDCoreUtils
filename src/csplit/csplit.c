@@ -46,7 +46,7 @@
  */
 
 #ifdef __linux__
-#include "src/posixver.h"
+#include "posixver.h"
 #endif
 
 #include <sys/types.h>

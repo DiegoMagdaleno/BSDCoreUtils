@@ -1,0 +1,1 @@
+/usr/bin/cc  -D_GNU_SOURCE -g CMakeFiles/expr.dir/expr.c.o -o expr  ../../compat/libcompat.a 

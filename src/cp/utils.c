@@ -45,7 +45,7 @@
 #include <unistd.h>
 #include <limits.h>
 
-#include "src/compat.h"
+#include "compat.h"
 
 #include "extern.h"
 

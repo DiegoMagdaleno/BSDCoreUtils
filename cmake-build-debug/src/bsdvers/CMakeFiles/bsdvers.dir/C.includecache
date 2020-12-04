@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/src/bsdvers/bsdvers.c
+stdio.h
+-
+colors.h
+/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/src/bsdvers/colors.h
+
+/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/src/bsdvers/colors.h
+

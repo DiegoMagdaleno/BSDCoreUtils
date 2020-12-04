@@ -1,0 +1,1 @@
+/usr/bin/cc -g CMakeFiles/bsdvers.dir/bsdvers.c.o -o bsdvers 

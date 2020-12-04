@@ -1,0 +1,1 @@
+/usr/bin/cc  -D__USE_POSIX2 -g CMakeFiles/comm.dir/comm.c.o -o comm  ../../compat/libcompat.a 

@@ -1,0 +1,1 @@
+/usr/bin/cc -g CMakeFiles/arch.dir/arch.c.o -o arch 

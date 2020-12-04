@@ -1,0 +1,3 @@
+add_executable(env env.c)
+
+INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/env.1 DESTINATION ${CMAKE_INSTALL_PREFIX}/man/man1)

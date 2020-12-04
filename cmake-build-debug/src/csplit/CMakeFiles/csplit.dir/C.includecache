@@ -1,0 +1,38 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../compat/src/posixver.h
+
+/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/src/csplit/csplit.c
+posixver.h
+/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/src/csplit/posixver.h
+sys/types.h
+-
+ctype.h
+-
+err.h
+-
+errno.h
+-
+limits.h
+-
+regex.h
+-
+signal.h
+-
+stdint.h
+-
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+unistd.h
+-
+

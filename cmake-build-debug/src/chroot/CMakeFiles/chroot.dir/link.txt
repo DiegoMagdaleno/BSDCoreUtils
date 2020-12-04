@@ -1,0 +1,1 @@
+/usr/bin/cc -g CMakeFiles/chroot.dir/chroot.c.o -o chroot 

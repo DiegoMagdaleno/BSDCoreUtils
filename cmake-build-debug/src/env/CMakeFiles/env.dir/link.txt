@@ -1,0 +1,1 @@
+/usr/bin/cc -g CMakeFiles/env.dir/env.c.o -o env 

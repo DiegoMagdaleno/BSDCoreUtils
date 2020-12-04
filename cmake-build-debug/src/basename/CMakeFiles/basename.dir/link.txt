@@ -1,0 +1,1 @@
+/usr/bin/cc -g CMakeFiles/basename.dir/basename.c.o -o basename 
