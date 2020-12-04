@@ -50,7 +50,7 @@
 #include <grp.h>
 #include <pwd.h>
 
-#include "src/compat.h"
+#include "compat.h"
 
 #define MAXIMUM(a, b)	(((a) > (b)) ? (a) : (b))
 

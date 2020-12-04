@@ -53,7 +53,7 @@
 #ifdef __linux__
 #include <bsd/wchar.h>
 #include <openssl/sha.h>
-#include "src/compat.h"
+#include "compat.h"
 #include <ctype.h>
 #else
 #include <wchar.h>

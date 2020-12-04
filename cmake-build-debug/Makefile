@@ -734,6 +734,71 @@ readlink/fast:
 	$(MAKE) $(MAKESILENT) -f src/readlink/CMakeFiles/readlink.dir/build.make src/readlink/CMakeFiles/readlink.dir/build
 .PHONY : readlink/fast
 
+#=============================================================================
+# Target rules for targets named realpath
+
+# Build rule for target.
+realpath: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 realpath
+.PHONY : realpath
+
+# fast build rule for target.
+realpath/fast:
+	$(MAKE) $(MAKESILENT) -f src/realpath/CMakeFiles/realpath.dir/build.make src/realpath/CMakeFiles/realpath.dir/build
+.PHONY : realpath/fast
+
+#=============================================================================
+# Target rules for targets named rm
+
+# Build rule for target.
+rm: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 rm
+.PHONY : rm
+
+# fast build rule for target.
+rm/fast:
+	$(MAKE) $(MAKESILENT) -f src/rm/CMakeFiles/rm.dir/build.make src/rm/CMakeFiles/rm.dir/build
+.PHONY : rm/fast
+
+#=============================================================================
+# Target rules for targets named rmdir
+
+# Build rule for target.
+rmdir: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 rmdir
+.PHONY : rmdir
+
+# fast build rule for target.
+rmdir/fast:
+	$(MAKE) $(MAKESILENT) -f src/rmdir/CMakeFiles/rmdir.dir/build.make src/rmdir/CMakeFiles/rmdir.dir/build
+.PHONY : rmdir/fast
+
+#=============================================================================
+# Target rules for targets named sleep
+
+# Build rule for target.
+sleep: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 sleep
+.PHONY : sleep
+
+# fast build rule for target.
+sleep/fast:
+	$(MAKE) $(MAKESILENT) -f src/sleep/CMakeFiles/sleep.dir/build.make src/sleep/CMakeFiles/sleep.dir/build
+.PHONY : sleep/fast
+
+#=============================================================================
+# Target rules for targets named sort
+
+# Build rule for target.
+sort: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 sort
+.PHONY : sort
+
+# fast build rule for target.
+sort/fast:
+	$(MAKE) $(MAKESILENT) -f src/sort/CMakeFiles/sort.dir/build.make src/sort/CMakeFiles/sort.dir/build
+.PHONY : sort/fast
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -789,6 +854,11 @@ help:
 	@echo "... printf"
 	@echo "... pwd"
 	@echo "... readlink"
+	@echo "... realpath"
+	@echo "... rm"
+	@echo "... rmdir"
+	@echo "... sleep"
+	@echo "... sort"
 .PHONY : help
 
 

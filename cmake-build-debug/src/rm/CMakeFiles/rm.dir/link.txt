@@ -1,0 +1,1 @@
+/usr/bin/cc -g CMakeFiles/rm.dir/rm.c.o -o rm  ../../compat/libcompat.a 

@@ -5,7 +5,7 @@
 		<Option title="bsdcoreutils"/>
 		<Option makefile_is_custom="1"/>
 		<Option compiler="gcc"/>
-		<Option virtualFolders="CMake Files\;CMake Files\compat\;CMake Files\src\;CMake Files\src\arch\;CMake Files\src\basename\;CMake Files\src\bsdvers\;CMake Files\src\cat\;CMake Files\src\chmod\;CMake Files\src\chroot\;CMake Files\src\comm\;CMake Files\src\cp\;CMake Files\src\csplit\;CMake Files\src\cut\;CMake Files\src\date\;CMake Files\src\dd\;CMake Files\src\dirname\;CMake Files\src\du\;CMake Files\src\echo\;CMake Files\src\env\;CMake Files\src\expand\;CMake Files\src\expr\;CMake Files\src\factor\;CMake Files\src\false\;CMake Files\src\fmt\;CMake Files\src\fold\;CMake Files\src\head\;CMake Files\src\id\;CMake Files\src\join\;CMake Files\src\ln\;CMake Files\src\logname\;CMake Files\src\ls\;CMake Files\src\mkdir\;CMake Files\src\mknod\;CMake Files\src\mktemp\;CMake Files\src\mv\;CMake Files\src\nice\;CMake Files\src\nl\;CMake Files\src\nohup\;CMake Files\src\paste\;CMake Files\src\pathchk\;CMake Files\src\pr\;CMake Files\src\printenv\;CMake Files\src\printf\;CMake Files\src\pwd\;CMake Files\src\readlink\;CMake Files\cmake\;"/>
+		<Option virtualFolders="CMake Files\;CMake Files\compat\;CMake Files\src\;CMake Files\src\arch\;CMake Files\src\basename\;CMake Files\src\bsdvers\;CMake Files\src\cat\;CMake Files\src\chmod\;CMake Files\src\chroot\;CMake Files\src\comm\;CMake Files\src\cp\;CMake Files\src\csplit\;CMake Files\src\cut\;CMake Files\src\date\;CMake Files\src\dd\;CMake Files\src\dirname\;CMake Files\src\du\;CMake Files\src\echo\;CMake Files\src\env\;CMake Files\src\expand\;CMake Files\src\expr\;CMake Files\src\factor\;CMake Files\src\false\;CMake Files\src\fmt\;CMake Files\src\fold\;CMake Files\src\head\;CMake Files\src\id\;CMake Files\src\join\;CMake Files\src\ln\;CMake Files\src\logname\;CMake Files\src\ls\;CMake Files\src\mkdir\;CMake Files\src\mknod\;CMake Files\src\mktemp\;CMake Files\src\mv\;CMake Files\src\nice\;CMake Files\src\nl\;CMake Files\src\nohup\;CMake Files\src\paste\;CMake Files\src\pathchk\;CMake Files\src\pr\;CMake Files\src\printenv\;CMake Files\src\printf\;CMake Files\src\pwd\;CMake Files\src\readlink\;CMake Files\src\realpath\;CMake Files\src\rm\;CMake Files\src\rmdir\;CMake Files\src\sleep\;CMake Files\src\sort\;CMake Files\cmake\;"/>
 		<Build>
 			<Target title="all">
 				<Option working_dir="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug"/>
@@ -2019,6 +2019,230 @@
 					<DistClean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/src/readlink/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
+			<Target title="realpath">
+				<Option output="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/src/realpath/realpath" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/src/realpath"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/src/realpath/Makefile&quot;  VERBOSE=1 realpath"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/src/realpath/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/src/realpath/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/src/realpath/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="realpath/fast">
+				<Option output="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/src/realpath/realpath" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/src/realpath"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/src/realpath/Makefile&quot;  VERBOSE=1 realpath/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/src/realpath/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/src/realpath/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/src/realpath/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rm">
+				<Option output="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/src/rm/rm" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/src/rm"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src"/>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/src/rm/Makefile&quot;  VERBOSE=1 rm"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/src/rm/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/src/rm/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/src/rm/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rm/fast">
+				<Option output="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/src/rm/rm" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/src/rm"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src"/>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/src/rm/Makefile&quot;  VERBOSE=1 rm/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/src/rm/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/src/rm/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/src/rm/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rmdir">
+				<Option output="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/src/rmdir/rmdir" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/src/rmdir"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/src/rmdir/Makefile&quot;  VERBOSE=1 rmdir"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/src/rmdir/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/src/rmdir/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/src/rmdir/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rmdir/fast">
+				<Option output="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/src/rmdir/rmdir" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/src/rmdir"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/src/rmdir/Makefile&quot;  VERBOSE=1 rmdir/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/src/rmdir/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/src/rmdir/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/src/rmdir/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="sleep">
+				<Option output="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/src/sleep/sleep" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/src/sleep"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/src/sleep/Makefile&quot;  VERBOSE=1 sleep"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/src/sleep/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/src/sleep/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/src/sleep/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="sleep/fast">
+				<Option output="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/src/sleep/sleep" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/src/sleep"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/src/sleep/Makefile&quot;  VERBOSE=1 sleep/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/src/sleep/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/src/sleep/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/src/sleep/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="sort">
+				<Option output="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/src/sort/sort" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/src/sort"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src"/>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/src/sort/Makefile&quot;  VERBOSE=1 sort"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/src/sort/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/src/sort/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/src/sort/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="sort/fast">
+				<Option output="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/src/sort/sort" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/src/sort"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src"/>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/src/sort/Makefile&quot;  VERBOSE=1 sort/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/src/sort/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/src/sort/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/src/sort/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
 		</Build>
 		<Unit filename="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/devname.c">
 			<Option target="compat"/>
@@ -2245,6 +2469,66 @@
 		<Unit filename="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/src/readlink/readlink.c">
 			<Option target="readlink"/>
 		</Unit>
+		<Unit filename="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/src/realpath/realpath.c">
+			<Option target="realpath"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/src/rm/rm.c">
+			<Option target="rm"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/src/rmdir/rmdir.c">
+			<Option target="rmdir"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/src/sleep/sleep.c">
+			<Option target="sleep"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/src/sort/bwstring.c">
+			<Option target="sort"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/src/sort/bwstring.h">
+			<Option target="sort"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/src/sort/coll.c">
+			<Option target="sort"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/src/sort/coll.h">
+			<Option target="sort"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/src/sort/commoncrypto.c">
+			<Option target="sort"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/src/sort/commoncrypto.h">
+			<Option target="sort"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/src/sort/file.c">
+			<Option target="sort"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/src/sort/file.h">
+			<Option target="sort"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/src/sort/mem.c">
+			<Option target="sort"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/src/sort/mem.h">
+			<Option target="sort"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/src/sort/radixsort.c">
+			<Option target="sort"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/src/sort/radixsort.h">
+			<Option target="sort"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/src/sort/sort.c">
+			<Option target="sort"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/src/sort/sort.h">
+			<Option target="sort"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/src/sort/vsort.c">
+			<Option target="sort"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/src/sort/vsort.h">
+			<Option target="sort"/>
+		</Unit>
 		<Unit filename="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
@@ -2379,6 +2663,21 @@
 		</Unit>
 		<Unit filename="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/src/readlink/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\src\readlink\"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/src/realpath/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\src\realpath\"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/src/rm/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\src\rm\"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/src/rmdir/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\src\rmdir\"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/src/sleep/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\src\sleep\"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/src/sort/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\src\sort\"/>
 		</Unit>
 		<Unit filename="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake/symlink.cmake">
 			<Option virtualFolder="CMake Files\cmake\"/>

@@ -56,6 +56,11 @@ set(CMAKE_MAKEFILE_DEPENDS
   "../src/printf/CMakeLists.txt"
   "../src/pwd/CMakeLists.txt"
   "../src/readlink/CMakeLists.txt"
+  "../src/realpath/CMakeLists.txt"
+  "../src/rm/CMakeLists.txt"
+  "../src/rmdir/CMakeLists.txt"
+  "../src/sleep/CMakeLists.txt"
+  "../src/sort/CMakeLists.txt"
   "/usr/share/cmake-3.18/Modules/CMakeCInformation.cmake"
   "/usr/share/cmake-3.18/Modules/CMakeCXXInformation.cmake"
   "/usr/share/cmake-3.18/Modules/CMakeCheckCompilerFlagCommonPatterns.cmake"
@@ -137,6 +142,11 @@ set(CMAKE_MAKEFILE_PRODUCTS
   "src/printf/CMakeFiles/CMakeDirectoryInformation.cmake"
   "src/pwd/CMakeFiles/CMakeDirectoryInformation.cmake"
   "src/readlink/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "src/realpath/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "src/rm/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "src/rmdir/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "src/sleep/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "src/sort/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
 # Dependency information for all targets:
@@ -184,4 +194,9 @@ set(CMAKE_DEPEND_INFO_FILES
   "src/printf/CMakeFiles/printf.dir/DependInfo.cmake"
   "src/pwd/CMakeFiles/pwd.dir/DependInfo.cmake"
   "src/readlink/CMakeFiles/readlink.dir/DependInfo.cmake"
+  "src/realpath/CMakeFiles/realpath.dir/DependInfo.cmake"
+  "src/rm/CMakeFiles/rm.dir/DependInfo.cmake"
+  "src/rmdir/CMakeFiles/rmdir.dir/DependInfo.cmake"
+  "src/sleep/CMakeFiles/sleep.dir/DependInfo.cmake"
+  "src/sort/CMakeFiles/sort.dir/DependInfo.cmake"
   )

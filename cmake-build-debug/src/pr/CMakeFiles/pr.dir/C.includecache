@@ -26,6 +26,18 @@ sys/types.h
 sys/stat.h
 -
 
+/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/src/pr/egetopt.c
+ctype.h
+-
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+extern.h
+/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/src/pr/extern.h
+
 /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/src/pr/extern.h
 
 /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/src/pr/pr.c

@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/src/realpath/realpath.c
+sys/cdefs.h
+-
+sys/param.h
+-
+err.h
+-
+stdio.h
+-
+stdlib.h
+-
+unistd.h
+-
+

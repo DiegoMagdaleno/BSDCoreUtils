@@ -41,8 +41,13 @@ list(APPEND crossCompatibleBins
         pr
         printenv
         printf
-        pwd
+        pwd 
         readlink
+        realpath
+        rm
+        rmdir
+        sleep
+        sort
         )
 
 # This tools are missing support for other platforms

@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/src/sleep/sleep.c
+sys/time.h
+-
+ctype.h
+-
+err.h
+-
+signal.h
+-
+stdio.h
+-
+stdlib.h
+-
+time.h
+-
+unistd.h
+-
+string.h
+-
+

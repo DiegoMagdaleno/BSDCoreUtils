@@ -51,7 +51,7 @@
 #include <unistd.h>
 #ifdef __linux__
 #include <bsd/wchar.h>
-#include "src/compat.h"
+#include "compat.h"
 #else
 #include <wchar.h>
 #endif 

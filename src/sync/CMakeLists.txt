@@ -1,0 +1,3 @@
+add_executable(sync sync.c)
+
+INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/sync.8 DESTINATION ${CMAKE_INSTALL_PREFIX}/man/man8)

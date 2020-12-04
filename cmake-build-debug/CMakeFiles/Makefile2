@@ -153,6 +153,11 @@ src/all: src/printenv/all
 src/all: src/printf/all
 src/all: src/pwd/all
 src/all: src/readlink/all
+src/all: src/realpath/all
+src/all: src/rm/all
+src/all: src/rmdir/all
+src/all: src/sleep/all
+src/all: src/sort/all
 
 .PHONY : src/all
 
@@ -199,6 +204,11 @@ src/preinstall: src/printenv/preinstall
 src/preinstall: src/printf/preinstall
 src/preinstall: src/pwd/preinstall
 src/preinstall: src/readlink/preinstall
+src/preinstall: src/realpath/preinstall
+src/preinstall: src/rm/preinstall
+src/preinstall: src/rmdir/preinstall
+src/preinstall: src/sleep/preinstall
+src/preinstall: src/sort/preinstall
 
 .PHONY : src/preinstall
 
@@ -245,6 +255,11 @@ src/clean: src/printenv/clean
 src/clean: src/printf/clean
 src/clean: src/pwd/clean
 src/clean: src/readlink/clean
+src/clean: src/realpath/clean
+src/clean: src/rm/clean
+src/clean: src/rmdir/clean
+src/clean: src/sleep/clean
+src/clean: src/sort/clean
 
 .PHONY : src/clean
 
@@ -1005,18 +1020,108 @@ src/readlink/clean: src/readlink/CMakeFiles/readlink.dir/clean
 .PHONY : src/readlink/clean
 
 #=============================================================================
+# Directory level rules for directory src/realpath
+
+# Recursive "all" directory target.
+src/realpath/all: src/realpath/CMakeFiles/realpath.dir/all
+
+.PHONY : src/realpath/all
+
+# Recursive "preinstall" directory target.
+src/realpath/preinstall:
+
+.PHONY : src/realpath/preinstall
+
+# Recursive "clean" directory target.
+src/realpath/clean: src/realpath/CMakeFiles/realpath.dir/clean
+
+.PHONY : src/realpath/clean
+
+#=============================================================================
+# Directory level rules for directory src/rm
+
+# Recursive "all" directory target.
+src/rm/all: src/rm/CMakeFiles/rm.dir/all
+
+.PHONY : src/rm/all
+
+# Recursive "preinstall" directory target.
+src/rm/preinstall:
+
+.PHONY : src/rm/preinstall
+
+# Recursive "clean" directory target.
+src/rm/clean: src/rm/CMakeFiles/rm.dir/clean
+
+.PHONY : src/rm/clean
+
+#=============================================================================
+# Directory level rules for directory src/rmdir
+
+# Recursive "all" directory target.
+src/rmdir/all: src/rmdir/CMakeFiles/rmdir.dir/all
+
+.PHONY : src/rmdir/all
+
+# Recursive "preinstall" directory target.
+src/rmdir/preinstall:
+
+.PHONY : src/rmdir/preinstall
+
+# Recursive "clean" directory target.
+src/rmdir/clean: src/rmdir/CMakeFiles/rmdir.dir/clean
+
+.PHONY : src/rmdir/clean
+
+#=============================================================================
+# Directory level rules for directory src/sleep
+
+# Recursive "all" directory target.
+src/sleep/all: src/sleep/CMakeFiles/sleep.dir/all
+
+.PHONY : src/sleep/all
+
+# Recursive "preinstall" directory target.
+src/sleep/preinstall:
+
+.PHONY : src/sleep/preinstall
+
+# Recursive "clean" directory target.
+src/sleep/clean: src/sleep/CMakeFiles/sleep.dir/clean
+
+.PHONY : src/sleep/clean
+
+#=============================================================================
+# Directory level rules for directory src/sort
+
+# Recursive "all" directory target.
+src/sort/all: src/sort/CMakeFiles/sort.dir/all
+
+.PHONY : src/sort/all
+
+# Recursive "preinstall" directory target.
+src/sort/preinstall:
+
+.PHONY : src/sort/preinstall
+
+# Recursive "clean" directory target.
+src/sort/clean: src/sort/CMakeFiles/sort.dir/clean
+
+.PHONY : src/sort/clean
+
+#=============================================================================
 # Target rules for target compat/CMakeFiles/compat.dir
 
 # All Build rule for target.
 compat/CMakeFiles/compat.dir/all:
 	$(MAKE) $(MAKESILENT) -f compat/CMakeFiles/compat.dir/build.make compat/CMakeFiles/compat.dir/depend
 	$(MAKE) $(MAKESILENT) -f compat/CMakeFiles/compat.dir/build.make compat/CMakeFiles/compat.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=13,14,15,16,17,18,19,20,21,22,23,24 "Built target compat"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=11,12,13,14,15,16,17,18,19,20,21 "Built target compat"
 .PHONY : compat/CMakeFiles/compat.dir/all
 
 # Build rule for subdir invocation for target.
 compat/CMakeFiles/compat.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 12
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 11
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 compat/CMakeFiles/compat.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 0
 .PHONY : compat/CMakeFiles/compat.dir/rule
@@ -1092,12 +1197,12 @@ src/basename/CMakeFiles/basename.dir/clean:
 src/bsdvers/CMakeFiles/bsdvers.dir/all:
 	$(MAKE) $(MAKESILENT) -f src/bsdvers/CMakeFiles/bsdvers.dir/build.make src/bsdvers/CMakeFiles/bsdvers.dir/depend
 	$(MAKE) $(MAKESILENT) -f src/bsdvers/CMakeFiles/bsdvers.dir/build.make src/bsdvers/CMakeFiles/bsdvers.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=4,5 "Built target bsdvers"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=4 "Built target bsdvers"
 .PHONY : src/bsdvers/CMakeFiles/bsdvers.dir/all
 
 # Build rule for subdir invocation for target.
 src/bsdvers/CMakeFiles/bsdvers.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 1
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/bsdvers/CMakeFiles/bsdvers.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 0
 .PHONY : src/bsdvers/CMakeFiles/bsdvers.dir/rule
@@ -1119,7 +1224,7 @@ src/bsdvers/CMakeFiles/bsdvers.dir/clean:
 src/cat/CMakeFiles/cat.dir/all:
 	$(MAKE) $(MAKESILENT) -f src/cat/CMakeFiles/cat.dir/build.make src/cat/CMakeFiles/cat.dir/depend
 	$(MAKE) $(MAKESILENT) -f src/cat/CMakeFiles/cat.dir/build.make src/cat/CMakeFiles/cat.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=6,7 "Built target cat"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=5,6 "Built target cat"
 .PHONY : src/cat/CMakeFiles/cat.dir/all
 
 # Build rule for subdir invocation for target.
@@ -1146,12 +1251,12 @@ src/cat/CMakeFiles/cat.dir/clean:
 src/chmod/CMakeFiles/chmod.dir/all: compat/CMakeFiles/compat.dir/all
 	$(MAKE) $(MAKESILENT) -f src/chmod/CMakeFiles/chmod.dir/build.make src/chmod/CMakeFiles/chmod.dir/depend
 	$(MAKE) $(MAKESILENT) -f src/chmod/CMakeFiles/chmod.dir/build.make src/chmod/CMakeFiles/chmod.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=8 "Built target chmod"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=7 "Built target chmod"
 .PHONY : src/chmod/CMakeFiles/chmod.dir/all
 
 # Build rule for subdir invocation for target.
 src/chmod/CMakeFiles/chmod.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 13
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 12
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/chmod/CMakeFiles/chmod.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 0
 .PHONY : src/chmod/CMakeFiles/chmod.dir/rule
@@ -1173,7 +1278,7 @@ src/chmod/CMakeFiles/chmod.dir/clean:
 src/chroot/CMakeFiles/chroot.dir/all:
 	$(MAKE) $(MAKESILENT) -f src/chroot/CMakeFiles/chroot.dir/build.make src/chroot/CMakeFiles/chroot.dir/depend
 	$(MAKE) $(MAKESILENT) -f src/chroot/CMakeFiles/chroot.dir/build.make src/chroot/CMakeFiles/chroot.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=9,10 "Built target chroot"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=8,9 "Built target chroot"
 .PHONY : src/chroot/CMakeFiles/chroot.dir/all
 
 # Build rule for subdir invocation for target.
@@ -1200,12 +1305,12 @@ src/chroot/CMakeFiles/chroot.dir/clean:
 src/comm/CMakeFiles/comm.dir/all: compat/CMakeFiles/compat.dir/all
 	$(MAKE) $(MAKESILENT) -f src/comm/CMakeFiles/comm.dir/build.make src/comm/CMakeFiles/comm.dir/depend
 	$(MAKE) $(MAKESILENT) -f src/comm/CMakeFiles/comm.dir/build.make src/comm/CMakeFiles/comm.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=11,12 "Built target comm"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=10 "Built target comm"
 .PHONY : src/comm/CMakeFiles/comm.dir/all
 
 # Build rule for subdir invocation for target.
 src/comm/CMakeFiles/comm.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 14
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 12
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/comm/CMakeFiles/comm.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 0
 .PHONY : src/comm/CMakeFiles/comm.dir/rule
@@ -1227,12 +1332,12 @@ src/comm/CMakeFiles/comm.dir/clean:
 src/cp/CMakeFiles/cp.dir/all: compat/CMakeFiles/compat.dir/all
 	$(MAKE) $(MAKESILENT) -f src/cp/CMakeFiles/cp.dir/build.make src/cp/CMakeFiles/cp.dir/depend
 	$(MAKE) $(MAKESILENT) -f src/cp/CMakeFiles/cp.dir/build.make src/cp/CMakeFiles/cp.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=25,26,27 "Built target cp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=22,23 "Built target cp"
 .PHONY : src/cp/CMakeFiles/cp.dir/all
 
 # Build rule for subdir invocation for target.
 src/cp/CMakeFiles/cp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 15
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 13
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/cp/CMakeFiles/cp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 0
 .PHONY : src/cp/CMakeFiles/cp.dir/rule
@@ -1254,7 +1359,7 @@ src/cp/CMakeFiles/cp.dir/clean:
 src/csplit/CMakeFiles/csplit.dir/all: compat/CMakeFiles/compat.dir/all
 	$(MAKE) $(MAKESILENT) -f src/csplit/CMakeFiles/csplit.dir/build.make src/csplit/CMakeFiles/csplit.dir/depend
 	$(MAKE) $(MAKESILENT) -f src/csplit/CMakeFiles/csplit.dir/build.make src/csplit/CMakeFiles/csplit.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=28 "Built target csplit"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=24,25 "Built target csplit"
 .PHONY : src/csplit/CMakeFiles/csplit.dir/all
 
 # Build rule for subdir invocation for target.
@@ -1281,12 +1386,12 @@ src/csplit/CMakeFiles/csplit.dir/clean:
 src/cut/CMakeFiles/cut.dir/all: compat/CMakeFiles/compat.dir/all
 	$(MAKE) $(MAKESILENT) -f src/cut/CMakeFiles/cut.dir/build.make src/cut/CMakeFiles/cut.dir/depend
 	$(MAKE) $(MAKESILENT) -f src/cut/CMakeFiles/cut.dir/build.make src/cut/CMakeFiles/cut.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=29,30 "Built target cut"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=26 "Built target cut"
 .PHONY : src/cut/CMakeFiles/cut.dir/all
 
 # Build rule for subdir invocation for target.
 src/cut/CMakeFiles/cut.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 14
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 12
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/cut/CMakeFiles/cut.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 0
 .PHONY : src/cut/CMakeFiles/cut.dir/rule
@@ -1308,12 +1413,12 @@ src/cut/CMakeFiles/cut.dir/clean:
 src/date/CMakeFiles/date.dir/all: compat/CMakeFiles/compat.dir/all
 	$(MAKE) $(MAKESILENT) -f src/date/CMakeFiles/date.dir/build.make src/date/CMakeFiles/date.dir/depend
 	$(MAKE) $(MAKESILENT) -f src/date/CMakeFiles/date.dir/build.make src/date/CMakeFiles/date.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=31,32 "Built target date"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=27,28 "Built target date"
 .PHONY : src/date/CMakeFiles/date.dir/all
 
 # Build rule for subdir invocation for target.
 src/date/CMakeFiles/date.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 14
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 13
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/date/CMakeFiles/date.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 0
 .PHONY : src/date/CMakeFiles/date.dir/rule
@@ -1335,12 +1440,12 @@ src/date/CMakeFiles/date.dir/clean:
 src/dd/CMakeFiles/dd.dir/all: compat/CMakeFiles/compat.dir/all
 	$(MAKE) $(MAKESILENT) -f src/dd/CMakeFiles/dd.dir/build.make src/dd/CMakeFiles/dd.dir/depend
 	$(MAKE) $(MAKESILENT) -f src/dd/CMakeFiles/dd.dir/build.make src/dd/CMakeFiles/dd.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=33,34,35,36,37,38 "Built target dd"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=29,30,31,32,33 "Built target dd"
 .PHONY : src/dd/CMakeFiles/dd.dir/all
 
 # Build rule for subdir invocation for target.
 src/dd/CMakeFiles/dd.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 18
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 16
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/dd/CMakeFiles/dd.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 0
 .PHONY : src/dd/CMakeFiles/dd.dir/rule
@@ -1362,7 +1467,7 @@ src/dd/CMakeFiles/dd.dir/clean:
 src/dirname/CMakeFiles/dirname.dir/all:
 	$(MAKE) $(MAKESILENT) -f src/dirname/CMakeFiles/dirname.dir/build.make src/dirname/CMakeFiles/dirname.dir/depend
 	$(MAKE) $(MAKESILENT) -f src/dirname/CMakeFiles/dirname.dir/build.make src/dirname/CMakeFiles/dirname.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=39,40 "Built target dirname"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=34,35 "Built target dirname"
 .PHONY : src/dirname/CMakeFiles/dirname.dir/all
 
 # Build rule for subdir invocation for target.
@@ -1389,12 +1494,12 @@ src/dirname/CMakeFiles/dirname.dir/clean:
 src/du/CMakeFiles/du.dir/all: compat/CMakeFiles/compat.dir/all
 	$(MAKE) $(MAKESILENT) -f src/du/CMakeFiles/du.dir/build.make src/du/CMakeFiles/du.dir/depend
 	$(MAKE) $(MAKESILENT) -f src/du/CMakeFiles/du.dir/build.make src/du/CMakeFiles/du.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=41,42 "Built target du"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=36 "Built target du"
 .PHONY : src/du/CMakeFiles/du.dir/all
 
 # Build rule for subdir invocation for target.
 src/du/CMakeFiles/du.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 14
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 12
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/du/CMakeFiles/du.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 0
 .PHONY : src/du/CMakeFiles/du.dir/rule
@@ -1416,12 +1521,12 @@ src/du/CMakeFiles/du.dir/clean:
 src/echo/CMakeFiles/echo.dir/all:
 	$(MAKE) $(MAKESILENT) -f src/echo/CMakeFiles/echo.dir/build.make src/echo/CMakeFiles/echo.dir/depend
 	$(MAKE) $(MAKESILENT) -f src/echo/CMakeFiles/echo.dir/build.make src/echo/CMakeFiles/echo.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=43 "Built target echo"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=37,38 "Built target echo"
 .PHONY : src/echo/CMakeFiles/echo.dir/all
 
 # Build rule for subdir invocation for target.
 src/echo/CMakeFiles/echo.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 2
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/echo/CMakeFiles/echo.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 0
 .PHONY : src/echo/CMakeFiles/echo.dir/rule
@@ -1443,12 +1548,12 @@ src/echo/CMakeFiles/echo.dir/clean:
 src/env/CMakeFiles/env.dir/all:
 	$(MAKE) $(MAKESILENT) -f src/env/CMakeFiles/env.dir/build.make src/env/CMakeFiles/env.dir/depend
 	$(MAKE) $(MAKESILENT) -f src/env/CMakeFiles/env.dir/build.make src/env/CMakeFiles/env.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=44,45 "Built target env"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=39 "Built target env"
 .PHONY : src/env/CMakeFiles/env.dir/all
 
 # Build rule for subdir invocation for target.
 src/env/CMakeFiles/env.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 1
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/env/CMakeFiles/env.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 0
 .PHONY : src/env/CMakeFiles/env.dir/rule
@@ -1470,7 +1575,7 @@ src/env/CMakeFiles/env.dir/clean:
 src/expand/CMakeFiles/expand.dir/all:
 	$(MAKE) $(MAKESILENT) -f src/expand/CMakeFiles/expand.dir/build.make src/expand/CMakeFiles/expand.dir/depend
 	$(MAKE) $(MAKESILENT) -f src/expand/CMakeFiles/expand.dir/build.make src/expand/CMakeFiles/expand.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=46,47 "Built target expand"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=40,41 "Built target expand"
 .PHONY : src/expand/CMakeFiles/expand.dir/all
 
 # Build rule for subdir invocation for target.
@@ -1497,12 +1602,12 @@ src/expand/CMakeFiles/expand.dir/clean:
 src/expr/CMakeFiles/expr.dir/all: compat/CMakeFiles/compat.dir/all
 	$(MAKE) $(MAKESILENT) -f src/expr/CMakeFiles/expr.dir/build.make src/expr/CMakeFiles/expr.dir/depend
 	$(MAKE) $(MAKESILENT) -f src/expr/CMakeFiles/expr.dir/build.make src/expr/CMakeFiles/expr.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=48,49 "Built target expr"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=42 "Built target expr"
 .PHONY : src/expr/CMakeFiles/expr.dir/all
 
 # Build rule for subdir invocation for target.
 src/expr/CMakeFiles/expr.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 14
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 12
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/expr/CMakeFiles/expr.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 0
 .PHONY : src/expr/CMakeFiles/expr.dir/rule
@@ -1524,7 +1629,7 @@ src/expr/CMakeFiles/expr.dir/clean:
 src/factor/CMakeFiles/factor.dir/all:
 	$(MAKE) $(MAKESILENT) -f src/factor/CMakeFiles/factor.dir/build.make src/factor/CMakeFiles/factor.dir/depend
 	$(MAKE) $(MAKESILENT) -f src/factor/CMakeFiles/factor.dir/build.make src/factor/CMakeFiles/factor.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=50,51,52 "Built target factor"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=43,44,45 "Built target factor"
 .PHONY : src/factor/CMakeFiles/factor.dir/all
 
 # Build rule for subdir invocation for target.
@@ -1551,7 +1656,7 @@ src/factor/CMakeFiles/factor.dir/clean:
 src/false/CMakeFiles/false.dir/all:
 	$(MAKE) $(MAKESILENT) -f src/false/CMakeFiles/false.dir/build.make src/false/CMakeFiles/false.dir/depend
 	$(MAKE) $(MAKESILENT) -f src/false/CMakeFiles/false.dir/build.make src/false/CMakeFiles/false.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=53,54 "Built target false"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=46,47 "Built target false"
 .PHONY : src/false/CMakeFiles/false.dir/all
 
 # Build rule for subdir invocation for target.
@@ -1578,12 +1683,12 @@ src/false/CMakeFiles/false.dir/clean:
 src/fmt/CMakeFiles/fmt.dir/all: compat/CMakeFiles/compat.dir/all
 	$(MAKE) $(MAKESILENT) -f src/fmt/CMakeFiles/fmt.dir/build.make src/fmt/CMakeFiles/fmt.dir/depend
 	$(MAKE) $(MAKESILENT) -f src/fmt/CMakeFiles/fmt.dir/build.make src/fmt/CMakeFiles/fmt.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=55,56 "Built target fmt"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=48 "Built target fmt"
 .PHONY : src/fmt/CMakeFiles/fmt.dir/all
 
 # Build rule for subdir invocation for target.
 src/fmt/CMakeFiles/fmt.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 14
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 12
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/fmt/CMakeFiles/fmt.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 0
 .PHONY : src/fmt/CMakeFiles/fmt.dir/rule
@@ -1605,7 +1710,7 @@ src/fmt/CMakeFiles/fmt.dir/clean:
 src/fold/CMakeFiles/fold.dir/all: compat/CMakeFiles/compat.dir/all
 	$(MAKE) $(MAKESILENT) -f src/fold/CMakeFiles/fold.dir/build.make src/fold/CMakeFiles/fold.dir/depend
 	$(MAKE) $(MAKESILENT) -f src/fold/CMakeFiles/fold.dir/build.make src/fold/CMakeFiles/fold.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=57 "Built target fold"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=49,50 "Built target fold"
 .PHONY : src/fold/CMakeFiles/fold.dir/all
 
 # Build rule for subdir invocation for target.
@@ -1632,12 +1737,12 @@ src/fold/CMakeFiles/fold.dir/clean:
 src/head/CMakeFiles/head.dir/all: compat/CMakeFiles/compat.dir/all
 	$(MAKE) $(MAKESILENT) -f src/head/CMakeFiles/head.dir/build.make src/head/CMakeFiles/head.dir/depend
 	$(MAKE) $(MAKESILENT) -f src/head/CMakeFiles/head.dir/build.make src/head/CMakeFiles/head.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=58,59 "Built target head"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=51 "Built target head"
 .PHONY : src/head/CMakeFiles/head.dir/all
 
 # Build rule for subdir invocation for target.
 src/head/CMakeFiles/head.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 14
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 12
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/head/CMakeFiles/head.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 0
 .PHONY : src/head/CMakeFiles/head.dir/rule
@@ -1659,12 +1764,12 @@ src/head/CMakeFiles/head.dir/clean:
 src/id/CMakeFiles/id.dir/all: compat/CMakeFiles/compat.dir/all
 	$(MAKE) $(MAKESILENT) -f src/id/CMakeFiles/id.dir/build.make src/id/CMakeFiles/id.dir/depend
 	$(MAKE) $(MAKESILENT) -f src/id/CMakeFiles/id.dir/build.make src/id/CMakeFiles/id.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=60,61 "Built target id"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=52,53 "Built target id"
 .PHONY : src/id/CMakeFiles/id.dir/all
 
 # Build rule for subdir invocation for target.
 src/id/CMakeFiles/id.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 14
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 13
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/id/CMakeFiles/id.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 0
 .PHONY : src/id/CMakeFiles/id.dir/rule
@@ -1686,12 +1791,12 @@ src/id/CMakeFiles/id.dir/clean:
 src/join/CMakeFiles/join.dir/all: compat/CMakeFiles/compat.dir/all
 	$(MAKE) $(MAKESILENT) -f src/join/CMakeFiles/join.dir/build.make src/join/CMakeFiles/join.dir/depend
 	$(MAKE) $(MAKESILENT) -f src/join/CMakeFiles/join.dir/build.make src/join/CMakeFiles/join.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=62,63 "Built target join"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=54 "Built target join"
 .PHONY : src/join/CMakeFiles/join.dir/all
 
 # Build rule for subdir invocation for target.
 src/join/CMakeFiles/join.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 14
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 12
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/join/CMakeFiles/join.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 0
 .PHONY : src/join/CMakeFiles/join.dir/rule
@@ -1713,12 +1818,12 @@ src/join/CMakeFiles/join.dir/clean:
 src/ln/CMakeFiles/ln.dir/all:
 	$(MAKE) $(MAKESILENT) -f src/ln/CMakeFiles/ln.dir/build.make src/ln/CMakeFiles/ln.dir/depend
 	$(MAKE) $(MAKESILENT) -f src/ln/CMakeFiles/ln.dir/build.make src/ln/CMakeFiles/ln.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=64 "Built target ln"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=55,56 "Built target ln"
 .PHONY : src/ln/CMakeFiles/ln.dir/all
 
 # Build rule for subdir invocation for target.
 src/ln/CMakeFiles/ln.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 2
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/ln/CMakeFiles/ln.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 0
 .PHONY : src/ln/CMakeFiles/ln.dir/rule
@@ -1740,12 +1845,12 @@ src/ln/CMakeFiles/ln.dir/clean:
 src/logname/CMakeFiles/logname.dir/all: compat/CMakeFiles/compat.dir/all
 	$(MAKE) $(MAKESILENT) -f src/logname/CMakeFiles/logname.dir/build.make src/logname/CMakeFiles/logname.dir/depend
 	$(MAKE) $(MAKESILENT) -f src/logname/CMakeFiles/logname.dir/build.make src/logname/CMakeFiles/logname.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=65,66 "Built target logname"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=57,58 "Built target logname"
 .PHONY : src/logname/CMakeFiles/logname.dir/all
 
 # Build rule for subdir invocation for target.
 src/logname/CMakeFiles/logname.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 14
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 13
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/logname/CMakeFiles/logname.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 0
 .PHONY : src/logname/CMakeFiles/logname.dir/rule
@@ -1767,12 +1872,12 @@ src/logname/CMakeFiles/logname.dir/clean:
 src/ls/CMakeFiles/ls.dir/all: compat/CMakeFiles/compat.dir/all
 	$(MAKE) $(MAKESILENT) -f src/ls/CMakeFiles/ls.dir/build.make src/ls/CMakeFiles/ls.dir/depend
 	$(MAKE) $(MAKESILENT) -f src/ls/CMakeFiles/ls.dir/build.make src/ls/CMakeFiles/ls.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=67,68,69,70,71,72 "Built target ls"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=59,60,61,62,63 "Built target ls"
 .PHONY : src/ls/CMakeFiles/ls.dir/all
 
 # Build rule for subdir invocation for target.
 src/ls/CMakeFiles/ls.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 18
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 16
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/ls/CMakeFiles/ls.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 0
 .PHONY : src/ls/CMakeFiles/ls.dir/rule
@@ -1794,12 +1899,12 @@ src/ls/CMakeFiles/ls.dir/clean:
 src/mkdir/CMakeFiles/mkdir.dir/all: compat/CMakeFiles/compat.dir/all
 	$(MAKE) $(MAKESILENT) -f src/mkdir/CMakeFiles/mkdir.dir/build.make src/mkdir/CMakeFiles/mkdir.dir/depend
 	$(MAKE) $(MAKESILENT) -f src/mkdir/CMakeFiles/mkdir.dir/build.make src/mkdir/CMakeFiles/mkdir.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=73,74 "Built target mkdir"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=64 "Built target mkdir"
 .PHONY : src/mkdir/CMakeFiles/mkdir.dir/all
 
 # Build rule for subdir invocation for target.
 src/mkdir/CMakeFiles/mkdir.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 14
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 12
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/mkdir/CMakeFiles/mkdir.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 0
 .PHONY : src/mkdir/CMakeFiles/mkdir.dir/rule
@@ -1821,12 +1926,12 @@ src/mkdir/CMakeFiles/mkdir.dir/clean:
 src/mknod/CMakeFiles/mknod.dir/all: compat/CMakeFiles/compat.dir/all
 	$(MAKE) $(MAKESILENT) -f src/mknod/CMakeFiles/mknod.dir/build.make src/mknod/CMakeFiles/mknod.dir/depend
 	$(MAKE) $(MAKESILENT) -f src/mknod/CMakeFiles/mknod.dir/build.make src/mknod/CMakeFiles/mknod.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=75,76 "Built target mknod"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=65,66 "Built target mknod"
 .PHONY : src/mknod/CMakeFiles/mknod.dir/all
 
 # Build rule for subdir invocation for target.
 src/mknod/CMakeFiles/mknod.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 14
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 13
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/mknod/CMakeFiles/mknod.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 0
 .PHONY : src/mknod/CMakeFiles/mknod.dir/rule
@@ -1848,12 +1953,12 @@ src/mknod/CMakeFiles/mknod.dir/clean:
 src/mktemp/CMakeFiles/mktemp.dir/all:
 	$(MAKE) $(MAKESILENT) -f src/mktemp/CMakeFiles/mktemp.dir/build.make src/mktemp/CMakeFiles/mktemp.dir/depend
 	$(MAKE) $(MAKESILENT) -f src/mktemp/CMakeFiles/mktemp.dir/build.make src/mktemp/CMakeFiles/mktemp.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=77,78 "Built target mktemp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=67 "Built target mktemp"
 .PHONY : src/mktemp/CMakeFiles/mktemp.dir/all
 
 # Build rule for subdir invocation for target.
 src/mktemp/CMakeFiles/mktemp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 1
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/mktemp/CMakeFiles/mktemp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 0
 .PHONY : src/mktemp/CMakeFiles/mktemp.dir/rule
@@ -1875,12 +1980,12 @@ src/mktemp/CMakeFiles/mktemp.dir/clean:
 src/mv/CMakeFiles/mv.dir/all: compat/CMakeFiles/compat.dir/all
 	$(MAKE) $(MAKESILENT) -f src/mv/CMakeFiles/mv.dir/build.make src/mv/CMakeFiles/mv.dir/depend
 	$(MAKE) $(MAKESILENT) -f src/mv/CMakeFiles/mv.dir/build.make src/mv/CMakeFiles/mv.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=79,80,81 "Built target mv"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=68,69,70 "Built target mv"
 .PHONY : src/mv/CMakeFiles/mv.dir/all
 
 # Build rule for subdir invocation for target.
 src/mv/CMakeFiles/mv.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 15
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 14
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/mv/CMakeFiles/mv.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 0
 .PHONY : src/mv/CMakeFiles/mv.dir/rule
@@ -1902,12 +2007,12 @@ src/mv/CMakeFiles/mv.dir/clean:
 src/nice/CMakeFiles/nice.dir/all: compat/CMakeFiles/compat.dir/all
 	$(MAKE) $(MAKESILENT) -f src/nice/CMakeFiles/nice.dir/build.make src/nice/CMakeFiles/nice.dir/depend
 	$(MAKE) $(MAKESILENT) -f src/nice/CMakeFiles/nice.dir/build.make src/nice/CMakeFiles/nice.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=82,83 "Built target nice"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=71,72 "Built target nice"
 .PHONY : src/nice/CMakeFiles/nice.dir/all
 
 # Build rule for subdir invocation for target.
 src/nice/CMakeFiles/nice.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 14
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 13
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/nice/CMakeFiles/nice.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 0
 .PHONY : src/nice/CMakeFiles/nice.dir/rule
@@ -1929,12 +2034,12 @@ src/nice/CMakeFiles/nice.dir/clean:
 src/nl/CMakeFiles/nl.dir/all: compat/CMakeFiles/compat.dir/all
 	$(MAKE) $(MAKESILENT) -f src/nl/CMakeFiles/nl.dir/build.make src/nl/CMakeFiles/nl.dir/depend
 	$(MAKE) $(MAKESILENT) -f src/nl/CMakeFiles/nl.dir/build.make src/nl/CMakeFiles/nl.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=84,85 "Built target nl"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=73,74 "Built target nl"
 .PHONY : src/nl/CMakeFiles/nl.dir/all
 
 # Build rule for subdir invocation for target.
 src/nl/CMakeFiles/nl.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 14
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 13
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/nl/CMakeFiles/nl.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 0
 .PHONY : src/nl/CMakeFiles/nl.dir/rule
@@ -1956,12 +2061,12 @@ src/nl/CMakeFiles/nl.dir/clean:
 src/nohup/CMakeFiles/nohup.dir/all: compat/CMakeFiles/compat.dir/all
 	$(MAKE) $(MAKESILENT) -f src/nohup/CMakeFiles/nohup.dir/build.make src/nohup/CMakeFiles/nohup.dir/depend
 	$(MAKE) $(MAKESILENT) -f src/nohup/CMakeFiles/nohup.dir/build.make src/nohup/CMakeFiles/nohup.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=86 "Built target nohup"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=75 "Built target nohup"
 .PHONY : src/nohup/CMakeFiles/nohup.dir/all
 
 # Build rule for subdir invocation for target.
 src/nohup/CMakeFiles/nohup.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 13
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 12
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/nohup/CMakeFiles/nohup.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 0
 .PHONY : src/nohup/CMakeFiles/nohup.dir/rule
@@ -1983,12 +2088,12 @@ src/nohup/CMakeFiles/nohup.dir/clean:
 src/paste/CMakeFiles/paste.dir/all: compat/CMakeFiles/compat.dir/all
 	$(MAKE) $(MAKESILENT) -f src/paste/CMakeFiles/paste.dir/build.make src/paste/CMakeFiles/paste.dir/depend
 	$(MAKE) $(MAKESILENT) -f src/paste/CMakeFiles/paste.dir/build.make src/paste/CMakeFiles/paste.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=87,88 "Built target paste"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=76,77 "Built target paste"
 .PHONY : src/paste/CMakeFiles/paste.dir/all
 
 # Build rule for subdir invocation for target.
 src/paste/CMakeFiles/paste.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 14
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 13
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/paste/CMakeFiles/paste.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 0
 .PHONY : src/paste/CMakeFiles/paste.dir/rule
@@ -2010,12 +2115,12 @@ src/paste/CMakeFiles/paste.dir/clean:
 src/pathchk/CMakeFiles/pathchk.dir/all:
 	$(MAKE) $(MAKESILENT) -f src/pathchk/CMakeFiles/pathchk.dir/build.make src/pathchk/CMakeFiles/pathchk.dir/depend
 	$(MAKE) $(MAKESILENT) -f src/pathchk/CMakeFiles/pathchk.dir/build.make src/pathchk/CMakeFiles/pathchk.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=89,90 "Built target pathchk"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=78 "Built target pathchk"
 .PHONY : src/pathchk/CMakeFiles/pathchk.dir/all
 
 # Build rule for subdir invocation for target.
 src/pathchk/CMakeFiles/pathchk.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 1
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/pathchk/CMakeFiles/pathchk.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 0
 .PHONY : src/pathchk/CMakeFiles/pathchk.dir/rule
@@ -2037,12 +2142,12 @@ src/pathchk/CMakeFiles/pathchk.dir/clean:
 src/pr/CMakeFiles/pr.dir/all: compat/CMakeFiles/compat.dir/all
 	$(MAKE) $(MAKESILENT) -f src/pr/CMakeFiles/pr.dir/build.make src/pr/CMakeFiles/pr.dir/depend
 	$(MAKE) $(MAKESILENT) -f src/pr/CMakeFiles/pr.dir/build.make src/pr/CMakeFiles/pr.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=91,92 "Built target pr"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=79,80 "Built target pr"
 .PHONY : src/pr/CMakeFiles/pr.dir/all
 
 # Build rule for subdir invocation for target.
 src/pr/CMakeFiles/pr.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 14
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 13
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/pr/CMakeFiles/pr.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 0
 .PHONY : src/pr/CMakeFiles/pr.dir/rule
@@ -2064,7 +2169,7 @@ src/pr/CMakeFiles/pr.dir/clean:
 src/printenv/CMakeFiles/printenv.dir/all:
 	$(MAKE) $(MAKESILENT) -f src/printenv/CMakeFiles/printenv.dir/build.make src/printenv/CMakeFiles/printenv.dir/depend
 	$(MAKE) $(MAKESILENT) -f src/printenv/CMakeFiles/printenv.dir/build.make src/printenv/CMakeFiles/printenv.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=93,94 "Built target printenv"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=81,82 "Built target printenv"
 .PHONY : src/printenv/CMakeFiles/printenv.dir/all
 
 # Build rule for subdir invocation for target.
@@ -2091,12 +2196,12 @@ src/printenv/CMakeFiles/printenv.dir/clean:
 src/printf/CMakeFiles/printf.dir/all:
 	$(MAKE) $(MAKESILENT) -f src/printf/CMakeFiles/printf.dir/build.make src/printf/CMakeFiles/printf.dir/depend
 	$(MAKE) $(MAKESILENT) -f src/printf/CMakeFiles/printf.dir/build.make src/printf/CMakeFiles/printf.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=95,96 "Built target printf"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=83 "Built target printf"
 .PHONY : src/printf/CMakeFiles/printf.dir/all
 
 # Build rule for subdir invocation for target.
 src/printf/CMakeFiles/printf.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 1
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/printf/CMakeFiles/printf.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 0
 .PHONY : src/printf/CMakeFiles/printf.dir/rule
@@ -2118,7 +2223,7 @@ src/printf/CMakeFiles/printf.dir/clean:
 src/pwd/CMakeFiles/pwd.dir/all:
 	$(MAKE) $(MAKESILENT) -f src/pwd/CMakeFiles/pwd.dir/build.make src/pwd/CMakeFiles/pwd.dir/depend
 	$(MAKE) $(MAKESILENT) -f src/pwd/CMakeFiles/pwd.dir/build.make src/pwd/CMakeFiles/pwd.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=97,98 "Built target pwd"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=84,85 "Built target pwd"
 .PHONY : src/pwd/CMakeFiles/pwd.dir/all
 
 # Build rule for subdir invocation for target.
@@ -2145,7 +2250,7 @@ src/pwd/CMakeFiles/pwd.dir/clean:
 src/readlink/CMakeFiles/readlink.dir/all:
 	$(MAKE) $(MAKESILENT) -f src/readlink/CMakeFiles/readlink.dir/build.make src/readlink/CMakeFiles/readlink.dir/depend
 	$(MAKE) $(MAKESILENT) -f src/readlink/CMakeFiles/readlink.dir/build.make src/readlink/CMakeFiles/readlink.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=99,100 "Built target readlink"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=86,87 "Built target readlink"
 .PHONY : src/readlink/CMakeFiles/readlink.dir/all
 
 # Build rule for subdir invocation for target.
@@ -2164,6 +2269,141 @@ readlink: src/readlink/CMakeFiles/readlink.dir/rule
 src/readlink/CMakeFiles/readlink.dir/clean:
 	$(MAKE) $(MAKESILENT) -f src/readlink/CMakeFiles/readlink.dir/build.make src/readlink/CMakeFiles/readlink.dir/clean
 .PHONY : src/readlink/CMakeFiles/readlink.dir/clean
+
+#=============================================================================
+# Target rules for target src/realpath/CMakeFiles/realpath.dir
+
+# All Build rule for target.
+src/realpath/CMakeFiles/realpath.dir/all:
+	$(MAKE) $(MAKESILENT) -f src/realpath/CMakeFiles/realpath.dir/build.make src/realpath/CMakeFiles/realpath.dir/depend
+	$(MAKE) $(MAKESILENT) -f src/realpath/CMakeFiles/realpath.dir/build.make src/realpath/CMakeFiles/realpath.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=88 "Built target realpath"
+.PHONY : src/realpath/CMakeFiles/realpath.dir/all
+
+# Build rule for subdir invocation for target.
+src/realpath/CMakeFiles/realpath.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 1
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/realpath/CMakeFiles/realpath.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 0
+.PHONY : src/realpath/CMakeFiles/realpath.dir/rule
+
+# Convenience name for target.
+realpath: src/realpath/CMakeFiles/realpath.dir/rule
+
+.PHONY : realpath
+
+# clean rule for target.
+src/realpath/CMakeFiles/realpath.dir/clean:
+	$(MAKE) $(MAKESILENT) -f src/realpath/CMakeFiles/realpath.dir/build.make src/realpath/CMakeFiles/realpath.dir/clean
+.PHONY : src/realpath/CMakeFiles/realpath.dir/clean
+
+#=============================================================================
+# Target rules for target src/rm/CMakeFiles/rm.dir
+
+# All Build rule for target.
+src/rm/CMakeFiles/rm.dir/all: compat/CMakeFiles/compat.dir/all
+	$(MAKE) $(MAKESILENT) -f src/rm/CMakeFiles/rm.dir/build.make src/rm/CMakeFiles/rm.dir/depend
+	$(MAKE) $(MAKESILENT) -f src/rm/CMakeFiles/rm.dir/build.make src/rm/CMakeFiles/rm.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=89,90 "Built target rm"
+.PHONY : src/rm/CMakeFiles/rm.dir/all
+
+# Build rule for subdir invocation for target.
+src/rm/CMakeFiles/rm.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 13
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/rm/CMakeFiles/rm.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 0
+.PHONY : src/rm/CMakeFiles/rm.dir/rule
+
+# Convenience name for target.
+rm: src/rm/CMakeFiles/rm.dir/rule
+
+.PHONY : rm
+
+# clean rule for target.
+src/rm/CMakeFiles/rm.dir/clean:
+	$(MAKE) $(MAKESILENT) -f src/rm/CMakeFiles/rm.dir/build.make src/rm/CMakeFiles/rm.dir/clean
+.PHONY : src/rm/CMakeFiles/rm.dir/clean
+
+#=============================================================================
+# Target rules for target src/rmdir/CMakeFiles/rmdir.dir
+
+# All Build rule for target.
+src/rmdir/CMakeFiles/rmdir.dir/all:
+	$(MAKE) $(MAKESILENT) -f src/rmdir/CMakeFiles/rmdir.dir/build.make src/rmdir/CMakeFiles/rmdir.dir/depend
+	$(MAKE) $(MAKESILENT) -f src/rmdir/CMakeFiles/rmdir.dir/build.make src/rmdir/CMakeFiles/rmdir.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=91 "Built target rmdir"
+.PHONY : src/rmdir/CMakeFiles/rmdir.dir/all
+
+# Build rule for subdir invocation for target.
+src/rmdir/CMakeFiles/rmdir.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 1
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/rmdir/CMakeFiles/rmdir.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 0
+.PHONY : src/rmdir/CMakeFiles/rmdir.dir/rule
+
+# Convenience name for target.
+rmdir: src/rmdir/CMakeFiles/rmdir.dir/rule
+
+.PHONY : rmdir
+
+# clean rule for target.
+src/rmdir/CMakeFiles/rmdir.dir/clean:
+	$(MAKE) $(MAKESILENT) -f src/rmdir/CMakeFiles/rmdir.dir/build.make src/rmdir/CMakeFiles/rmdir.dir/clean
+.PHONY : src/rmdir/CMakeFiles/rmdir.dir/clean
+
+#=============================================================================
+# Target rules for target src/sleep/CMakeFiles/sleep.dir
+
+# All Build rule for target.
+src/sleep/CMakeFiles/sleep.dir/all:
+	$(MAKE) $(MAKESILENT) -f src/sleep/CMakeFiles/sleep.dir/build.make src/sleep/CMakeFiles/sleep.dir/depend
+	$(MAKE) $(MAKESILENT) -f src/sleep/CMakeFiles/sleep.dir/build.make src/sleep/CMakeFiles/sleep.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=92,93 "Built target sleep"
+.PHONY : src/sleep/CMakeFiles/sleep.dir/all
+
+# Build rule for subdir invocation for target.
+src/sleep/CMakeFiles/sleep.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 2
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/sleep/CMakeFiles/sleep.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 0
+.PHONY : src/sleep/CMakeFiles/sleep.dir/rule
+
+# Convenience name for target.
+sleep: src/sleep/CMakeFiles/sleep.dir/rule
+
+.PHONY : sleep
+
+# clean rule for target.
+src/sleep/CMakeFiles/sleep.dir/clean:
+	$(MAKE) $(MAKESILENT) -f src/sleep/CMakeFiles/sleep.dir/build.make src/sleep/CMakeFiles/sleep.dir/clean
+.PHONY : src/sleep/CMakeFiles/sleep.dir/clean
+
+#=============================================================================
+# Target rules for target src/sort/CMakeFiles/sort.dir
+
+# All Build rule for target.
+src/sort/CMakeFiles/sort.dir/all: compat/CMakeFiles/compat.dir/all
+	$(MAKE) $(MAKESILENT) -f src/sort/CMakeFiles/sort.dir/build.make src/sort/CMakeFiles/sort.dir/depend
+	$(MAKE) $(MAKESILENT) -f src/sort/CMakeFiles/sort.dir/build.make src/sort/CMakeFiles/sort.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=94,95,96,97,98,99,100 "Built target sort"
+.PHONY : src/sort/CMakeFiles/sort.dir/all
+
+# Build rule for subdir invocation for target.
+src/sort/CMakeFiles/sort.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 18
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/sort/CMakeFiles/sort.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 0
+.PHONY : src/sort/CMakeFiles/sort.dir/rule
+
+# Convenience name for target.
+sort: src/sort/CMakeFiles/sort.dir/rule
+
+.PHONY : sort
+
+# clean rule for target.
+src/sort/CMakeFiles/sort.dir/clean:
+	$(MAKE) $(MAKESILENT) -f src/sort/CMakeFiles/sort.dir/build.make src/sort/CMakeFiles/sort.dir/clean
+.PHONY : src/sort/CMakeFiles/sort.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.
