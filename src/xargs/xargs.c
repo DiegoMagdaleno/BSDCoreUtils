@@ -54,7 +54,7 @@
 
 #include "pathnames.h"
 
-#include "compat.h"
+#include "src/compat.h"
 
 static void	parse_input(int, char *[]);
 static void	prerun(int, char *[]);

@@ -301,7 +301,7 @@ CMAKE_GENERATOR_INSTANCE:INTERNAL=
 CMAKE_GENERATOR_PLATFORM:INTERNAL=
 //Name of generator toolset.
 CMAKE_GENERATOR_TOOLSET:INTERNAL=
-//Source directory with the top level CMakeLists.txt file for this
+//Source directory with the top level symlink.cmake file for this
 // project
 CMAKE_HOME_DIRECTORY:INTERNAL=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils
 //Install .so files without execute permission.

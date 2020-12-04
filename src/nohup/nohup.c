@@ -41,7 +41,7 @@
 #include <limits.h>
 #include <err.h>
 
-#include "compat.h"
+#include "src/compat.h"
 
 static void dofile(void);
 static void usage(void);

@@ -57,207 +57,207 @@ include compat/CMakeFiles/compat.dir/progress.make
 # Include the compile flags for this target's objects.
 include compat/CMakeFiles/compat.dir/flags.make
 
-compat/CMakeFiles/compat.dir/setmode.c.o: compat/CMakeFiles/compat.dir/flags.make
-compat/CMakeFiles/compat.dir/setmode.c.o: ../compat/setmode.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object compat/CMakeFiles/compat.dir/setmode.c.o"
-	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/compat.dir/setmode.c.o   -c /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/setmode.c
+compat/CMakeFiles/compat.dir/src/setmode.c.o: compat/CMakeFiles/compat.dir/flags.make
+compat/CMakeFiles/compat.dir/src/setmode.c.o: ../compat/src/setmode.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object compat/CMakeFiles/compat.dir/src/setmode.c.o"
+	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/compat.dir/src/setmode.c.o   -c /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/setmode.c
 
-compat/CMakeFiles/compat.dir/setmode.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/compat.dir/setmode.c.i"
-	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/setmode.c > CMakeFiles/compat.dir/setmode.c.i
+compat/CMakeFiles/compat.dir/src/setmode.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/compat.dir/src/setmode.c.i"
+	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/setmode.c > CMakeFiles/compat.dir/src/setmode.c.i
 
-compat/CMakeFiles/compat.dir/setmode.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/compat.dir/setmode.c.s"
-	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/setmode.c -o CMakeFiles/compat.dir/setmode.c.s
+compat/CMakeFiles/compat.dir/src/setmode.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/compat.dir/src/setmode.c.s"
+	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/setmode.c -o CMakeFiles/compat.dir/src/setmode.c.s
 
-compat/CMakeFiles/compat.dir/strtonum.c.o: compat/CMakeFiles/compat.dir/flags.make
-compat/CMakeFiles/compat.dir/strtonum.c.o: ../compat/strtonum.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object compat/CMakeFiles/compat.dir/strtonum.c.o"
-	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/compat.dir/strtonum.c.o   -c /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/strtonum.c
+compat/CMakeFiles/compat.dir/src/strtonum.c.o: compat/CMakeFiles/compat.dir/flags.make
+compat/CMakeFiles/compat.dir/src/strtonum.c.o: ../compat/src/strtonum.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object compat/CMakeFiles/compat.dir/src/strtonum.c.o"
+	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/compat.dir/src/strtonum.c.o   -c /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/strtonum.c
 
-compat/CMakeFiles/compat.dir/strtonum.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/compat.dir/strtonum.c.i"
-	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/strtonum.c > CMakeFiles/compat.dir/strtonum.c.i
+compat/CMakeFiles/compat.dir/src/strtonum.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/compat.dir/src/strtonum.c.i"
+	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/strtonum.c > CMakeFiles/compat.dir/src/strtonum.c.i
 
-compat/CMakeFiles/compat.dir/strtonum.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/compat.dir/strtonum.c.s"
-	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/strtonum.c -o CMakeFiles/compat.dir/strtonum.c.s
+compat/CMakeFiles/compat.dir/src/strtonum.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/compat.dir/src/strtonum.c.s"
+	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/strtonum.c -o CMakeFiles/compat.dir/src/strtonum.c.s
 
-compat/CMakeFiles/compat.dir/strmode.c.o: compat/CMakeFiles/compat.dir/flags.make
-compat/CMakeFiles/compat.dir/strmode.c.o: ../compat/strmode.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object compat/CMakeFiles/compat.dir/strmode.c.o"
-	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/compat.dir/strmode.c.o   -c /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/strmode.c
+compat/CMakeFiles/compat.dir/src/strmode.c.o: compat/CMakeFiles/compat.dir/flags.make
+compat/CMakeFiles/compat.dir/src/strmode.c.o: ../compat/src/strmode.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object compat/CMakeFiles/compat.dir/src/strmode.c.o"
+	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/compat.dir/src/strmode.c.o   -c /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/strmode.c
 
-compat/CMakeFiles/compat.dir/strmode.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/compat.dir/strmode.c.i"
-	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/strmode.c > CMakeFiles/compat.dir/strmode.c.i
+compat/CMakeFiles/compat.dir/src/strmode.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/compat.dir/src/strmode.c.i"
+	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/strmode.c > CMakeFiles/compat.dir/src/strmode.c.i
 
-compat/CMakeFiles/compat.dir/strmode.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/compat.dir/strmode.c.s"
-	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/strmode.c -o CMakeFiles/compat.dir/strmode.c.s
+compat/CMakeFiles/compat.dir/src/strmode.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/compat.dir/src/strmode.c.s"
+	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/strmode.c -o CMakeFiles/compat.dir/src/strmode.c.s
 
-compat/CMakeFiles/compat.dir/pwcache.c.o: compat/CMakeFiles/compat.dir/flags.make
-compat/CMakeFiles/compat.dir/pwcache.c.o: ../compat/pwcache.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object compat/CMakeFiles/compat.dir/pwcache.c.o"
-	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/compat.dir/pwcache.c.o   -c /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/pwcache.c
+compat/CMakeFiles/compat.dir/src/pwcache.c.o: compat/CMakeFiles/compat.dir/flags.make
+compat/CMakeFiles/compat.dir/src/pwcache.c.o: ../compat/src/pwcache.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object compat/CMakeFiles/compat.dir/src/pwcache.c.o"
+	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/compat.dir/src/pwcache.c.o   -c /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/pwcache.c
 
-compat/CMakeFiles/compat.dir/pwcache.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/compat.dir/pwcache.c.i"
-	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/pwcache.c > CMakeFiles/compat.dir/pwcache.c.i
+compat/CMakeFiles/compat.dir/src/pwcache.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/compat.dir/src/pwcache.c.i"
+	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/pwcache.c > CMakeFiles/compat.dir/src/pwcache.c.i
 
-compat/CMakeFiles/compat.dir/pwcache.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/compat.dir/pwcache.c.s"
-	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/pwcache.c -o CMakeFiles/compat.dir/pwcache.c.s
+compat/CMakeFiles/compat.dir/src/pwcache.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/compat.dir/src/pwcache.c.s"
+	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/pwcache.c -o CMakeFiles/compat.dir/src/pwcache.c.s
 
-compat/CMakeFiles/compat.dir/ohash.c.o: compat/CMakeFiles/compat.dir/flags.make
-compat/CMakeFiles/compat.dir/ohash.c.o: ../compat/ohash.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object compat/CMakeFiles/compat.dir/ohash.c.o"
-	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/compat.dir/ohash.c.o   -c /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/ohash.c
+compat/CMakeFiles/compat.dir/src/ohash.c.o: compat/CMakeFiles/compat.dir/flags.make
+compat/CMakeFiles/compat.dir/src/ohash.c.o: ../compat/src/ohash.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object compat/CMakeFiles/compat.dir/src/ohash.c.o"
+	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/compat.dir/src/ohash.c.o   -c /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/ohash.c
 
-compat/CMakeFiles/compat.dir/ohash.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/compat.dir/ohash.c.i"
-	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/ohash.c > CMakeFiles/compat.dir/ohash.c.i
+compat/CMakeFiles/compat.dir/src/ohash.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/compat.dir/src/ohash.c.i"
+	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/ohash.c > CMakeFiles/compat.dir/src/ohash.c.i
 
-compat/CMakeFiles/compat.dir/ohash.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/compat.dir/ohash.c.s"
-	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/ohash.c -o CMakeFiles/compat.dir/ohash.c.s
+compat/CMakeFiles/compat.dir/src/ohash.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/compat.dir/src/ohash.c.s"
+	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/ohash.c -o CMakeFiles/compat.dir/src/ohash.c.s
 
-compat/CMakeFiles/compat.dir/fmt_scaled.c.o: compat/CMakeFiles/compat.dir/flags.make
-compat/CMakeFiles/compat.dir/fmt_scaled.c.o: ../compat/fmt_scaled.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object compat/CMakeFiles/compat.dir/fmt_scaled.c.o"
-	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/compat.dir/fmt_scaled.c.o   -c /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/fmt_scaled.c
+compat/CMakeFiles/compat.dir/src/fmt_scaled.c.o: compat/CMakeFiles/compat.dir/flags.make
+compat/CMakeFiles/compat.dir/src/fmt_scaled.c.o: ../compat/src/fmt_scaled.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object compat/CMakeFiles/compat.dir/src/fmt_scaled.c.o"
+	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/compat.dir/src/fmt_scaled.c.o   -c /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/fmt_scaled.c
 
-compat/CMakeFiles/compat.dir/fmt_scaled.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/compat.dir/fmt_scaled.c.i"
-	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/fmt_scaled.c > CMakeFiles/compat.dir/fmt_scaled.c.i
+compat/CMakeFiles/compat.dir/src/fmt_scaled.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/compat.dir/src/fmt_scaled.c.i"
+	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/fmt_scaled.c > CMakeFiles/compat.dir/src/fmt_scaled.c.i
 
-compat/CMakeFiles/compat.dir/fmt_scaled.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/compat.dir/fmt_scaled.c.s"
-	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/fmt_scaled.c -o CMakeFiles/compat.dir/fmt_scaled.c.s
+compat/CMakeFiles/compat.dir/src/fmt_scaled.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/compat.dir/src/fmt_scaled.c.s"
+	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/fmt_scaled.c -o CMakeFiles/compat.dir/src/fmt_scaled.c.s
 
-compat/CMakeFiles/compat.dir/getbsize.c.o: compat/CMakeFiles/compat.dir/flags.make
-compat/CMakeFiles/compat.dir/getbsize.c.o: ../compat/getbsize.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object compat/CMakeFiles/compat.dir/getbsize.c.o"
-	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/compat.dir/getbsize.c.o   -c /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/getbsize.c
+compat/CMakeFiles/compat.dir/src/getbsize.c.o: compat/CMakeFiles/compat.dir/flags.make
+compat/CMakeFiles/compat.dir/src/getbsize.c.o: ../compat/src/getbsize.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object compat/CMakeFiles/compat.dir/src/getbsize.c.o"
+	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/compat.dir/src/getbsize.c.o   -c /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/getbsize.c
 
-compat/CMakeFiles/compat.dir/getbsize.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/compat.dir/getbsize.c.i"
-	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/getbsize.c > CMakeFiles/compat.dir/getbsize.c.i
+compat/CMakeFiles/compat.dir/src/getbsize.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/compat.dir/src/getbsize.c.i"
+	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/getbsize.c > CMakeFiles/compat.dir/src/getbsize.c.i
 
-compat/CMakeFiles/compat.dir/getbsize.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/compat.dir/getbsize.c.s"
-	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/getbsize.c -o CMakeFiles/compat.dir/getbsize.c.s
+compat/CMakeFiles/compat.dir/src/getbsize.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/compat.dir/src/getbsize.c.s"
+	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/getbsize.c -o CMakeFiles/compat.dir/src/getbsize.c.s
 
-compat/CMakeFiles/compat.dir/devname.c.o: compat/CMakeFiles/compat.dir/flags.make
-compat/CMakeFiles/compat.dir/devname.c.o: ../compat/devname.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building C object compat/CMakeFiles/compat.dir/devname.c.o"
-	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/compat.dir/devname.c.o   -c /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/devname.c
+compat/CMakeFiles/compat.dir/src/devname.c.o: compat/CMakeFiles/compat.dir/flags.make
+compat/CMakeFiles/compat.dir/src/devname.c.o: ../compat/src/devname.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building C object compat/CMakeFiles/compat.dir/src/devname.c.o"
+	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/compat.dir/src/devname.c.o   -c /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/devname.c
 
-compat/CMakeFiles/compat.dir/devname.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/compat.dir/devname.c.i"
-	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/devname.c > CMakeFiles/compat.dir/devname.c.i
+compat/CMakeFiles/compat.dir/src/devname.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/compat.dir/src/devname.c.i"
+	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/devname.c > CMakeFiles/compat.dir/src/devname.c.i
 
-compat/CMakeFiles/compat.dir/devname.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/compat.dir/devname.c.s"
-	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/devname.c -o CMakeFiles/compat.dir/devname.c.s
+compat/CMakeFiles/compat.dir/src/devname.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/compat.dir/src/devname.c.s"
+	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/devname.c -o CMakeFiles/compat.dir/src/devname.c.s
 
-compat/CMakeFiles/compat.dir/merge.c.o: compat/CMakeFiles/compat.dir/flags.make
-compat/CMakeFiles/compat.dir/merge.c.o: ../compat/merge.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building C object compat/CMakeFiles/compat.dir/merge.c.o"
-	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/compat.dir/merge.c.o   -c /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/merge.c
+compat/CMakeFiles/compat.dir/src/merge.c.o: compat/CMakeFiles/compat.dir/flags.make
+compat/CMakeFiles/compat.dir/src/merge.c.o: ../compat/src/merge.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building C object compat/CMakeFiles/compat.dir/src/merge.c.o"
+	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/compat.dir/src/merge.c.o   -c /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/merge.c
 
-compat/CMakeFiles/compat.dir/merge.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/compat.dir/merge.c.i"
-	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/merge.c > CMakeFiles/compat.dir/merge.c.i
+compat/CMakeFiles/compat.dir/src/merge.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/compat.dir/src/merge.c.i"
+	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/merge.c > CMakeFiles/compat.dir/src/merge.c.i
 
-compat/CMakeFiles/compat.dir/merge.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/compat.dir/merge.c.s"
-	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/merge.c -o CMakeFiles/compat.dir/merge.c.s
+compat/CMakeFiles/compat.dir/src/merge.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/compat.dir/src/merge.c.s"
+	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/merge.c -o CMakeFiles/compat.dir/src/merge.c.s
 
-compat/CMakeFiles/compat.dir/heapsort.c.o: compat/CMakeFiles/compat.dir/flags.make
-compat/CMakeFiles/compat.dir/heapsort.c.o: ../compat/heapsort.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building C object compat/CMakeFiles/compat.dir/heapsort.c.o"
-	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/compat.dir/heapsort.c.o   -c /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/heapsort.c
+compat/CMakeFiles/compat.dir/src/heapsort.c.o: compat/CMakeFiles/compat.dir/flags.make
+compat/CMakeFiles/compat.dir/src/heapsort.c.o: ../compat/src/heapsort.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building C object compat/CMakeFiles/compat.dir/src/heapsort.c.o"
+	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/compat.dir/src/heapsort.c.o   -c /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/heapsort.c
 
-compat/CMakeFiles/compat.dir/heapsort.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/compat.dir/heapsort.c.i"
-	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/heapsort.c > CMakeFiles/compat.dir/heapsort.c.i
+compat/CMakeFiles/compat.dir/src/heapsort.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/compat.dir/src/heapsort.c.i"
+	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/heapsort.c > CMakeFiles/compat.dir/src/heapsort.c.i
 
-compat/CMakeFiles/compat.dir/heapsort.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/compat.dir/heapsort.c.s"
-	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/heapsort.c -o CMakeFiles/compat.dir/heapsort.c.s
+compat/CMakeFiles/compat.dir/src/heapsort.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/compat.dir/src/heapsort.c.s"
+	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/heapsort.c -o CMakeFiles/compat.dir/src/heapsort.c.s
 
-compat/CMakeFiles/compat.dir/recallocarray.c.o: compat/CMakeFiles/compat.dir/flags.make
-compat/CMakeFiles/compat.dir/recallocarray.c.o: ../compat/recallocarray.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building C object compat/CMakeFiles/compat.dir/recallocarray.c.o"
-	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/compat.dir/recallocarray.c.o   -c /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/recallocarray.c
+compat/CMakeFiles/compat.dir/src/recallocarray.c.o: compat/CMakeFiles/compat.dir/flags.make
+compat/CMakeFiles/compat.dir/src/recallocarray.c.o: ../compat/src/recallocarray.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building C object compat/CMakeFiles/compat.dir/src/recallocarray.c.o"
+	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/compat.dir/src/recallocarray.c.o   -c /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/recallocarray.c
 
-compat/CMakeFiles/compat.dir/recallocarray.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/compat.dir/recallocarray.c.i"
-	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/recallocarray.c > CMakeFiles/compat.dir/recallocarray.c.i
+compat/CMakeFiles/compat.dir/src/recallocarray.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/compat.dir/src/recallocarray.c.i"
+	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/recallocarray.c > CMakeFiles/compat.dir/src/recallocarray.c.i
 
-compat/CMakeFiles/compat.dir/recallocarray.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/compat.dir/recallocarray.c.s"
-	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/recallocarray.c -o CMakeFiles/compat.dir/recallocarray.c.s
+compat/CMakeFiles/compat.dir/src/recallocarray.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/compat.dir/src/recallocarray.c.s"
+	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/recallocarray.c -o CMakeFiles/compat.dir/src/recallocarray.c.s
 
-compat/CMakeFiles/compat.dir/strlcpy.c.o: compat/CMakeFiles/compat.dir/flags.make
-compat/CMakeFiles/compat.dir/strlcpy.c.o: ../compat/strlcpy.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building C object compat/CMakeFiles/compat.dir/strlcpy.c.o"
-	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/compat.dir/strlcpy.c.o   -c /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/strlcpy.c
+compat/CMakeFiles/compat.dir/src/strlcpy.c.o: compat/CMakeFiles/compat.dir/flags.make
+compat/CMakeFiles/compat.dir/src/strlcpy.c.o: ../compat/src/strlcpy.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building C object compat/CMakeFiles/compat.dir/src/strlcpy.c.o"
+	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/compat.dir/src/strlcpy.c.o   -c /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/strlcpy.c
 
-compat/CMakeFiles/compat.dir/strlcpy.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/compat.dir/strlcpy.c.i"
-	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/strlcpy.c > CMakeFiles/compat.dir/strlcpy.c.i
+compat/CMakeFiles/compat.dir/src/strlcpy.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/compat.dir/src/strlcpy.c.i"
+	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/strlcpy.c > CMakeFiles/compat.dir/src/strlcpy.c.i
 
-compat/CMakeFiles/compat.dir/strlcpy.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/compat.dir/strlcpy.c.s"
-	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/strlcpy.c -o CMakeFiles/compat.dir/strlcpy.c.s
+compat/CMakeFiles/compat.dir/src/strlcpy.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/compat.dir/src/strlcpy.c.s"
+	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/strlcpy.c -o CMakeFiles/compat.dir/src/strlcpy.c.s
 
-compat/CMakeFiles/compat.dir/strlcat.c.o: compat/CMakeFiles/compat.dir/flags.make
-compat/CMakeFiles/compat.dir/strlcat.c.o: ../compat/strlcat.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building C object compat/CMakeFiles/compat.dir/strlcat.c.o"
-	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/compat.dir/strlcat.c.o   -c /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/strlcat.c
+compat/CMakeFiles/compat.dir/src/strlcat.c.o: compat/CMakeFiles/compat.dir/flags.make
+compat/CMakeFiles/compat.dir/src/strlcat.c.o: ../compat/src/strlcat.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building C object compat/CMakeFiles/compat.dir/src/strlcat.c.o"
+	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/compat.dir/src/strlcat.c.o   -c /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/strlcat.c
 
-compat/CMakeFiles/compat.dir/strlcat.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/compat.dir/strlcat.c.i"
-	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/strlcat.c > CMakeFiles/compat.dir/strlcat.c.i
+compat/CMakeFiles/compat.dir/src/strlcat.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/compat.dir/src/strlcat.c.i"
+	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/strlcat.c > CMakeFiles/compat.dir/src/strlcat.c.i
 
-compat/CMakeFiles/compat.dir/strlcat.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/compat.dir/strlcat.c.s"
-	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/strlcat.c -o CMakeFiles/compat.dir/strlcat.c.s
+compat/CMakeFiles/compat.dir/src/strlcat.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/compat.dir/src/strlcat.c.s"
+	cd /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/strlcat.c -o CMakeFiles/compat.dir/src/strlcat.c.s
 
 # Object files for target compat
 compat_OBJECTS = \
-"CMakeFiles/compat.dir/setmode.c.o" \
-"CMakeFiles/compat.dir/strtonum.c.o" \
-"CMakeFiles/compat.dir/strmode.c.o" \
-"CMakeFiles/compat.dir/pwcache.c.o" \
-"CMakeFiles/compat.dir/ohash.c.o" \
-"CMakeFiles/compat.dir/fmt_scaled.c.o" \
-"CMakeFiles/compat.dir/getbsize.c.o" \
-"CMakeFiles/compat.dir/devname.c.o" \
-"CMakeFiles/compat.dir/merge.c.o" \
-"CMakeFiles/compat.dir/heapsort.c.o" \
-"CMakeFiles/compat.dir/recallocarray.c.o" \
-"CMakeFiles/compat.dir/strlcpy.c.o" \
-"CMakeFiles/compat.dir/strlcat.c.o"
+"CMakeFiles/compat.dir/src/setmode.c.o" \
+"CMakeFiles/compat.dir/src/strtonum.c.o" \
+"CMakeFiles/compat.dir/src/strmode.c.o" \
+"CMakeFiles/compat.dir/src/pwcache.c.o" \
+"CMakeFiles/compat.dir/src/ohash.c.o" \
+"CMakeFiles/compat.dir/src/fmt_scaled.c.o" \
+"CMakeFiles/compat.dir/src/getbsize.c.o" \
+"CMakeFiles/compat.dir/src/devname.c.o" \
+"CMakeFiles/compat.dir/src/merge.c.o" \
+"CMakeFiles/compat.dir/src/heapsort.c.o" \
+"CMakeFiles/compat.dir/src/recallocarray.c.o" \
+"CMakeFiles/compat.dir/src/strlcpy.c.o" \
+"CMakeFiles/compat.dir/src/strlcat.c.o"
 
 # External object files for target compat
 compat_EXTERNAL_OBJECTS =
 
-compat/libcompat.a: compat/CMakeFiles/compat.dir/setmode.c.o
-compat/libcompat.a: compat/CMakeFiles/compat.dir/strtonum.c.o
-compat/libcompat.a: compat/CMakeFiles/compat.dir/strmode.c.o
-compat/libcompat.a: compat/CMakeFiles/compat.dir/pwcache.c.o
-compat/libcompat.a: compat/CMakeFiles/compat.dir/ohash.c.o
-compat/libcompat.a: compat/CMakeFiles/compat.dir/fmt_scaled.c.o
-compat/libcompat.a: compat/CMakeFiles/compat.dir/getbsize.c.o
-compat/libcompat.a: compat/CMakeFiles/compat.dir/devname.c.o
-compat/libcompat.a: compat/CMakeFiles/compat.dir/merge.c.o
-compat/libcompat.a: compat/CMakeFiles/compat.dir/heapsort.c.o
-compat/libcompat.a: compat/CMakeFiles/compat.dir/recallocarray.c.o
-compat/libcompat.a: compat/CMakeFiles/compat.dir/strlcpy.c.o
-compat/libcompat.a: compat/CMakeFiles/compat.dir/strlcat.c.o
+compat/libcompat.a: compat/CMakeFiles/compat.dir/src/setmode.c.o
+compat/libcompat.a: compat/CMakeFiles/compat.dir/src/strtonum.c.o
+compat/libcompat.a: compat/CMakeFiles/compat.dir/src/strmode.c.o
+compat/libcompat.a: compat/CMakeFiles/compat.dir/src/pwcache.c.o
+compat/libcompat.a: compat/CMakeFiles/compat.dir/src/ohash.c.o
+compat/libcompat.a: compat/CMakeFiles/compat.dir/src/fmt_scaled.c.o
+compat/libcompat.a: compat/CMakeFiles/compat.dir/src/getbsize.c.o
+compat/libcompat.a: compat/CMakeFiles/compat.dir/src/devname.c.o
+compat/libcompat.a: compat/CMakeFiles/compat.dir/src/merge.c.o
+compat/libcompat.a: compat/CMakeFiles/compat.dir/src/heapsort.c.o
+compat/libcompat.a: compat/CMakeFiles/compat.dir/src/recallocarray.c.o
+compat/libcompat.a: compat/CMakeFiles/compat.dir/src/strlcpy.c.o
+compat/libcompat.a: compat/CMakeFiles/compat.dir/src/strlcat.c.o
 compat/libcompat.a: compat/CMakeFiles/compat.dir/build.make
 compat/libcompat.a: compat/CMakeFiles/compat.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Linking C static library libcompat.a"

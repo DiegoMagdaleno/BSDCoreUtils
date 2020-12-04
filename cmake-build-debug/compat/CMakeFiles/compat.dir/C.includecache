@@ -6,9 +6,9 @@
 
 #IncludeRegexTransform: 
 
-/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/compat.h
+/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/compat.h
 headers/simpleq.h
-/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/headers/simpleq.h
+/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/headers/simpleq.h
 sys/stat.h
 -
 grp.h
@@ -26,9 +26,9 @@ sys/types.h
 sys/stat.h
 -
 
-/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/devname.c
+/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/devname.c
 compat.h
-/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/compat.h
+/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/compat.h
 sys/stat.h
 -
 sys/types.h
@@ -48,9 +48,9 @@ string.h
 stdlib.h
 -
 
-/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/fmt_scaled.c
+/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/fmt_scaled.c
 compat.h
-/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/compat.h
+/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/compat.h
 stdio.h
 -
 stdlib.h
@@ -63,12 +63,12 @@ ctype.h
 -
 limits.h
 -
-headers/util.h
-/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/headers/util.h
+util.h
+/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/util.h
 
-/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/getbsize.c
+/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/getbsize.c
 compat.h
-/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/compat.h
+/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/compat.h
 err.h
 -
 stdio.h
@@ -78,17 +78,9 @@ stdlib.h
 string.h
 -
 
-/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/headers/ohash.h
-
-/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/headers/simpleq.h
-
-/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/headers/util.h
-sys/types.h
--
-
-/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/heapsort.c
+/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/heapsort.c
 compat.h
-/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/compat.h
+/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/compat.h
 sys/types.h
 -
 errno.h
@@ -96,9 +88,9 @@ errno.h
 stdlib.h
 -
 
-/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/merge.c
+/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/merge.c
 compat.h
-/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/compat.h
+/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/compat.h
 sys/types.h
 -
 errno.h
@@ -108,9 +100,9 @@ stdlib.h
 string.h
 -
 
-/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/ohash.c
+/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/ohash.c
 compat.h
-/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/compat.h
+/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/compat.h
 stddef.h
 -
 stdint.h
@@ -121,10 +113,12 @@ string.h
 -
 limits.h
 -
-headers/ohash.h
-/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/headers/ohash.h
+ohash.h
+/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/ohash.h
 
-/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/pwcache.c
+/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/ohash.h
+
+/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/pwcache.c
 sys/types.h
 -
 assert.h
@@ -142,11 +136,11 @@ string.h
 unistd.h
 -
 compat.h
-/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/compat.h
+/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/compat.h
 
-/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/recallocarray.c
+/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/recallocarray.c
 compat.h
-/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/compat.h
+/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/compat.h
 errno.h
 -
 stdlib.h
@@ -158,9 +152,9 @@ string.h
 unistd.h
 -
 
-/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/setmode.c
+/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/setmode.c
 compat.h
-/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/compat.h
+/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/compat.h
 sys/types.h
 -
 sys/stat.h
@@ -178,9 +172,25 @@ unistd.h
 stdio.h
 -
 
-/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/strmode.c
+/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/strlcat.c
 compat.h
-/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/compat.h
+/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/compat.h
+sys/types.h
+-
+string.h
+-
+
+/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/strlcpy.c
+compat.h
+/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/compat.h
+sys/types.h
+-
+string.h
+-
+
+/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/strmode.c
+compat.h
+/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/compat.h
 sys/types.h
 -
 sys/stat.h
@@ -188,13 +198,17 @@ sys/stat.h
 string.h
 -
 
-/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/strtonum.c
+/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/strtonum.c
 compat.h
-/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/compat.h
+/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/compat.h
 errno.h
 -
 limits.h
 -
 stdlib.h
+-
+
+/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/util.h
+sys/types.h
 -
 

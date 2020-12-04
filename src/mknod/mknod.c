@@ -33,7 +33,7 @@
 #include <sys/sysmacros.h>
 #endif
 
-#include "compat.h"
+#include "src/compat.h"
 
 extern char *__progname;
 

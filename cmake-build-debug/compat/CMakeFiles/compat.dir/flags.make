@@ -6,5 +6,5 @@ C_FLAGS = -g   -std=gnu11
 
 C_DEFINES = 
 
-C_INCLUDES = 
+C_INCLUDES = -I/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src 
 

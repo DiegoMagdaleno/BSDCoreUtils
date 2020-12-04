@@ -46,10 +46,10 @@
 #include <string.h>
 #include <unistd.h>
 
-#include "headers/util.h"
+#include "src/util.h"
 #include <sys/param.h>
-#include "compat.h"
-#include "headers/tree.h"
+#include "src/compat.h"
+#include "src/tree.h"
 
 int	 linkchk(FTSENT *);
 void	 prtout(int64_t, char *, int);

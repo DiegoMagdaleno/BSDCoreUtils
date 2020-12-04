@@ -57,7 +57,7 @@
 #include <unistd.h>
 #include <limits.h>
 #if defined __linux__
-#include "headers/util.h"
+#include "src/util.h"
 #include <sys/param.h>
 #include <sys/sysmacros.h>
 #else
@@ -71,7 +71,7 @@
 
 #include "ls.h"
 #include "extern.h"
-#include "compat.h"
+#include "src/compat.h"
 
 static int	printaname(FTSENT *, int, int);
 static void	printlink(FTSENT *);

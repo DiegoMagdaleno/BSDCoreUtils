@@ -50,7 +50,7 @@
 #include <limits.h>
 #include <locale.h>
 #if defined __linux__
-#include "headers/util.h"
+#include "src/util.h"
 #else
 #include <util.h>
 #endif
@@ -61,7 +61,7 @@
 
 #include "ls.h"
 #include "extern.h"
-#include "compat.h"
+#include "src/compat.h"
 
 static void	 display(FTSENT *, FTSENT *);
 static int	 mastercmp(const FTSENT **, const FTSENT **);

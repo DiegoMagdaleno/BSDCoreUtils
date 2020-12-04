@@ -46,7 +46,7 @@
 #include <time.h>
 #include <unistd.h>
 
-#include "compat.h"
+#include "src/compat.h"
 
 #include <grp.h>
 #include <pwd.h>

@@ -43,7 +43,7 @@
 #include <unistd.h>
 #include <wchar.h>
 
-#include "compat.h"
+#include "src/compat.h"
 
 #define	DEFLINEWIDTH	80
 

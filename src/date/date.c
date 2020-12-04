@@ -44,13 +44,13 @@
 #include <time.h>
 #include <unistd.h>
 #if defined __linux__
-#include "headers/util.h"
+#include "src/util.h"
 #else
 #include <util.h>
 #endif
 #include <utmp.h>
 
-#include "compat.h"
+#include "src/compat.h"
 
 extern	char *__progname;
 

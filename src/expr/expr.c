@@ -16,7 +16,7 @@
 #include <regex.h>
 #include <err.h>
 
-#include "compat.h"
+#include "src/compat.h"
 
 struct val	*make_int(int64_t);
 struct val	*make_str(char *);

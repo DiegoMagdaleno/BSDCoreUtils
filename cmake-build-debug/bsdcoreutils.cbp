@@ -5,13 +5,53 @@
 		<Option title="bsdcoreutils"/>
 		<Option makefile_is_custom="1"/>
 		<Option compiler="gcc"/>
-		<Option virtualFolders="CMake Files\;CMake Files\compat\;CMake Files\src\;"/>
+		<Option virtualFolders="CMake Files\;CMake Files\compat\;CMake Files\src\;CMake Files\src\chmod\;CMake Files\cmake\;"/>
 		<Build>
 			<Target title="all">
 				<Option working_dir="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
 					<Build command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install/strip">
+				<Option working_dir="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/Makefile&quot;  VERBOSE=1 install/strip"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install/local">
+				<Option working_dir="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/Makefile&quot;  VERBOSE=1 install/local"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install">
+				<Option working_dir="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/Makefile&quot;  VERBOSE=1 install"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="list_install_components">
+				<Option working_dir="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/Makefile&quot;  VERBOSE=1 list_install_components"/>
 					<CompileFile command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
@@ -44,6 +84,7 @@
 				<Option type="2"/>
 				<Option compiler="gcc"/>
 				<Compiler>
+					<Add directory="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src"/>
 					<Add directory="/usr/include/c++/9"/>
 					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
 					<Add directory="/usr/include/c++/9/backward"/>
@@ -66,6 +107,7 @@
 				<Option type="2"/>
 				<Option compiler="gcc"/>
 				<Compiler>
+					<Add directory="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src"/>
 					<Add directory="/usr/include/c++/9"/>
 					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
 					<Add directory="/usr/include/c++/9/backward"/>
@@ -81,45 +123,97 @@
 					<DistClean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/compat/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
+			<Target title="chmod">
+				<Option output="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/src/chmod/chmod" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/src/chmod"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src"/>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/src/chmod/Makefile&quot;  VERBOSE=1 chmod"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/src/chmod/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/src/chmod/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/src/chmod/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="chmod/fast">
+				<Option output="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/src/chmod/chmod" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/src/chmod"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src"/>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/src/chmod/Makefile&quot;  VERBOSE=1 chmod/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/src/chmod/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/src/chmod/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/src/chmod/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
 		</Build>
-		<Unit filename="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/devname.c">
+		<Unit filename="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/devname.c">
 			<Option target="compat"/>
 		</Unit>
-		<Unit filename="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/fmt_scaled.c">
+		<Unit filename="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/fmt_scaled.c">
 			<Option target="compat"/>
 		</Unit>
-		<Unit filename="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/getbsize.c">
+		<Unit filename="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/getbsize.c">
 			<Option target="compat"/>
 		</Unit>
-		<Unit filename="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/heapsort.c">
+		<Unit filename="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/heapsort.c">
 			<Option target="compat"/>
 		</Unit>
-		<Unit filename="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/merge.c">
+		<Unit filename="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/merge.c">
 			<Option target="compat"/>
 		</Unit>
-		<Unit filename="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/ohash.c">
+		<Unit filename="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/ohash.c">
 			<Option target="compat"/>
 		</Unit>
-		<Unit filename="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/pwcache.c">
+		<Unit filename="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/ohash.h">
 			<Option target="compat"/>
 		</Unit>
-		<Unit filename="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/recallocarray.c">
+		<Unit filename="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/pwcache.c">
 			<Option target="compat"/>
 		</Unit>
-		<Unit filename="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/setmode.c">
+		<Unit filename="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/recallocarray.c">
 			<Option target="compat"/>
 		</Unit>
-		<Unit filename="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/strlcat.c">
+		<Unit filename="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/setmode.c">
 			<Option target="compat"/>
 		</Unit>
-		<Unit filename="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/strlcpy.c">
+		<Unit filename="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/strlcat.c">
 			<Option target="compat"/>
 		</Unit>
-		<Unit filename="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/strmode.c">
+		<Unit filename="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/strlcpy.c">
 			<Option target="compat"/>
 		</Unit>
-		<Unit filename="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/strtonum.c">
+		<Unit filename="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/strmode.c">
 			<Option target="compat"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/compat/src/strtonum.c">
+			<Option target="compat"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/src/chmod/chmod.c">
+			<Option target="chmod"/>
 		</Unit>
 		<Unit filename="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
@@ -129,6 +223,12 @@
 		</Unit>
 		<Unit filename="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/src/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\src\"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/src/chmod/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\src\chmod\"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake/symlink.cmake">
+			<Option virtualFolder="CMake Files\cmake\"/>
 		</Unit>
 	</Project>
 </CodeBlocks_project_file>

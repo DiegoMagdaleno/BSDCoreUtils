@@ -70,6 +70,8 @@ if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
     list(APPEND crossCompatibleBins xinstall stty)
 endif()
 
-foreach(binary ${crossCompatibleBins})
-    add_subdirectory(${binary})
-endforeach()
+#foreach(binary ${crossCompatibleBins})
+ #   add_subdirectory(${binary})
+#endforeach()
+
+add_subdirectory(chmod)

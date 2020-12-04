@@ -50,7 +50,7 @@
 #include <grp.h>
 #include <pwd.h>
 
-#include "compat.h"
+#include "src/compat.h"
 
 #if defined(__APPLE__) || defined(__NetBSD__) 
 	#define st_atim st_atimespec

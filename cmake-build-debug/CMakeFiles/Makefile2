@@ -92,19 +92,37 @@ compat/clean: compat/CMakeFiles/compat.dir/clean
 # Directory level rules for directory src
 
 # Recursive "all" directory target.
-src/all:
+src/all: src/chmod/all
 
 .PHONY : src/all
 
 # Recursive "preinstall" directory target.
-src/preinstall:
+src/preinstall: src/chmod/preinstall
 
 .PHONY : src/preinstall
 
 # Recursive "clean" directory target.
-src/clean:
+src/clean: src/chmod/clean
 
 .PHONY : src/clean
+
+#=============================================================================
+# Directory level rules for directory src/chmod
+
+# Recursive "all" directory target.
+src/chmod/all: src/chmod/CMakeFiles/chmod.dir/all
+
+.PHONY : src/chmod/all
+
+# Recursive "preinstall" directory target.
+src/chmod/preinstall:
+
+.PHONY : src/chmod/preinstall
+
+# Recursive "clean" directory target.
+src/chmod/clean: src/chmod/CMakeFiles/chmod.dir/clean
+
+.PHONY : src/chmod/clean
 
 #=============================================================================
 # Target rules for target compat/CMakeFiles/compat.dir
@@ -113,7 +131,7 @@ src/clean:
 compat/CMakeFiles/compat.dir/all:
 	$(MAKE) -f compat/CMakeFiles/compat.dir/build.make compat/CMakeFiles/compat.dir/depend
 	$(MAKE) -f compat/CMakeFiles/compat.dir/build.make compat/CMakeFiles/compat.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14 "Built target compat"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=3,4,5,6,7,8,9,10,11,12,13,14,15,16 "Built target compat"
 .PHONY : compat/CMakeFiles/compat.dir/all
 
 # Build rule for subdir invocation for target.
@@ -132,6 +150,33 @@ compat: compat/CMakeFiles/compat.dir/rule
 compat/CMakeFiles/compat.dir/clean:
 	$(MAKE) -f compat/CMakeFiles/compat.dir/build.make compat/CMakeFiles/compat.dir/clean
 .PHONY : compat/CMakeFiles/compat.dir/clean
+
+#=============================================================================
+# Target rules for target src/chmod/CMakeFiles/chmod.dir
+
+# All Build rule for target.
+src/chmod/CMakeFiles/chmod.dir/all: compat/CMakeFiles/compat.dir/all
+	$(MAKE) -f src/chmod/CMakeFiles/chmod.dir/build.make src/chmod/CMakeFiles/chmod.dir/depend
+	$(MAKE) -f src/chmod/CMakeFiles/chmod.dir/build.make src/chmod/CMakeFiles/chmod.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=1,2 "Built target chmod"
+.PHONY : src/chmod/CMakeFiles/chmod.dir/all
+
+# Build rule for subdir invocation for target.
+src/chmod/CMakeFiles/chmod.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 16
+	$(MAKE) -f CMakeFiles/Makefile2 src/chmod/CMakeFiles/chmod.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 0
+.PHONY : src/chmod/CMakeFiles/chmod.dir/rule
+
+# Convenience name for target.
+chmod: src/chmod/CMakeFiles/chmod.dir/rule
+
+.PHONY : chmod
+
+# clean rule for target.
+src/chmod/CMakeFiles/chmod.dir/clean:
+	$(MAKE) -f src/chmod/CMakeFiles/chmod.dir/build.make src/chmod/CMakeFiles/chmod.dir/clean
+.PHONY : src/chmod/CMakeFiles/chmod.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

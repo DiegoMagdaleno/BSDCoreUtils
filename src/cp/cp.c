@@ -66,7 +66,7 @@
 
 #include "extern.h"
 
-#include "compat.h"
+#include "src/compat.h"
 
 #define	fts_dne(_x)	(_x->fts_pointer != NULL)
 

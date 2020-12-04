@@ -45,7 +45,7 @@
 #include <wchar.h>
 #include <wctype.h>
 
-#include "compat.h"
+#include "src/compat.h"
 
 #define	MAXLINELEN	(8 * 1024)
 
