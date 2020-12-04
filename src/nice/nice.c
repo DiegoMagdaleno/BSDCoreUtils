@@ -39,7 +39,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-#include "src/compat.h"
+#include "compat.h"
 
 #define	DEFNICE	10
 

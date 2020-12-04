@@ -41,7 +41,7 @@
 #include <unistd.h>
 #include <wchar.h>
 
-#include "src/compat.h"
+#include "compat.h"
 
 extern char *__progname;
 

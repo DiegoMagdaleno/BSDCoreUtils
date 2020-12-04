@@ -1,0 +1,30 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/src/pathchk/pathchk.c
+sys/cdefs.h
+-
+sys/types.h
+-
+sys/stat.h
+-
+err.h
+-
+errno.h
+-
+limits.h
+-
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+unistd.h
+-
+

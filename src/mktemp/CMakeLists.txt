@@ -1,0 +1,5 @@
+add_executable(mktemp mktemp.c)
+
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D_GNU_SOURCE")
+
+INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/mktemp.1 DESTINATION ${CMAKE_INSTALL_PREFIX}/man/man1)

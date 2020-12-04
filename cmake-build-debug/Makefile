@@ -552,6 +552,188 @@ ls/fast:
 	$(MAKE) $(MAKESILENT) -f src/ls/CMakeFiles/ls.dir/build.make src/ls/CMakeFiles/ls.dir/build
 .PHONY : ls/fast
 
+#=============================================================================
+# Target rules for targets named mkdir
+
+# Build rule for target.
+mkdir: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mkdir
+.PHONY : mkdir
+
+# fast build rule for target.
+mkdir/fast:
+	$(MAKE) $(MAKESILENT) -f src/mkdir/CMakeFiles/mkdir.dir/build.make src/mkdir/CMakeFiles/mkdir.dir/build
+.PHONY : mkdir/fast
+
+#=============================================================================
+# Target rules for targets named mknod
+
+# Build rule for target.
+mknod: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mknod
+.PHONY : mknod
+
+# fast build rule for target.
+mknod/fast:
+	$(MAKE) $(MAKESILENT) -f src/mknod/CMakeFiles/mknod.dir/build.make src/mknod/CMakeFiles/mknod.dir/build
+.PHONY : mknod/fast
+
+#=============================================================================
+# Target rules for targets named mktemp
+
+# Build rule for target.
+mktemp: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mktemp
+.PHONY : mktemp
+
+# fast build rule for target.
+mktemp/fast:
+	$(MAKE) $(MAKESILENT) -f src/mktemp/CMakeFiles/mktemp.dir/build.make src/mktemp/CMakeFiles/mktemp.dir/build
+.PHONY : mktemp/fast
+
+#=============================================================================
+# Target rules for targets named mv
+
+# Build rule for target.
+mv: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mv
+.PHONY : mv
+
+# fast build rule for target.
+mv/fast:
+	$(MAKE) $(MAKESILENT) -f src/mv/CMakeFiles/mv.dir/build.make src/mv/CMakeFiles/mv.dir/build
+.PHONY : mv/fast
+
+#=============================================================================
+# Target rules for targets named nice
+
+# Build rule for target.
+nice: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 nice
+.PHONY : nice
+
+# fast build rule for target.
+nice/fast:
+	$(MAKE) $(MAKESILENT) -f src/nice/CMakeFiles/nice.dir/build.make src/nice/CMakeFiles/nice.dir/build
+.PHONY : nice/fast
+
+#=============================================================================
+# Target rules for targets named nl
+
+# Build rule for target.
+nl: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 nl
+.PHONY : nl
+
+# fast build rule for target.
+nl/fast:
+	$(MAKE) $(MAKESILENT) -f src/nl/CMakeFiles/nl.dir/build.make src/nl/CMakeFiles/nl.dir/build
+.PHONY : nl/fast
+
+#=============================================================================
+# Target rules for targets named nohup
+
+# Build rule for target.
+nohup: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 nohup
+.PHONY : nohup
+
+# fast build rule for target.
+nohup/fast:
+	$(MAKE) $(MAKESILENT) -f src/nohup/CMakeFiles/nohup.dir/build.make src/nohup/CMakeFiles/nohup.dir/build
+.PHONY : nohup/fast
+
+#=============================================================================
+# Target rules for targets named paste
+
+# Build rule for target.
+paste: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 paste
+.PHONY : paste
+
+# fast build rule for target.
+paste/fast:
+	$(MAKE) $(MAKESILENT) -f src/paste/CMakeFiles/paste.dir/build.make src/paste/CMakeFiles/paste.dir/build
+.PHONY : paste/fast
+
+#=============================================================================
+# Target rules for targets named pathchk
+
+# Build rule for target.
+pathchk: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pathchk
+.PHONY : pathchk
+
+# fast build rule for target.
+pathchk/fast:
+	$(MAKE) $(MAKESILENT) -f src/pathchk/CMakeFiles/pathchk.dir/build.make src/pathchk/CMakeFiles/pathchk.dir/build
+.PHONY : pathchk/fast
+
+#=============================================================================
+# Target rules for targets named pr
+
+# Build rule for target.
+pr: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pr
+.PHONY : pr
+
+# fast build rule for target.
+pr/fast:
+	$(MAKE) $(MAKESILENT) -f src/pr/CMakeFiles/pr.dir/build.make src/pr/CMakeFiles/pr.dir/build
+.PHONY : pr/fast
+
+#=============================================================================
+# Target rules for targets named printenv
+
+# Build rule for target.
+printenv: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 printenv
+.PHONY : printenv
+
+# fast build rule for target.
+printenv/fast:
+	$(MAKE) $(MAKESILENT) -f src/printenv/CMakeFiles/printenv.dir/build.make src/printenv/CMakeFiles/printenv.dir/build
+.PHONY : printenv/fast
+
+#=============================================================================
+# Target rules for targets named printf
+
+# Build rule for target.
+printf: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 printf
+.PHONY : printf
+
+# fast build rule for target.
+printf/fast:
+	$(MAKE) $(MAKESILENT) -f src/printf/CMakeFiles/printf.dir/build.make src/printf/CMakeFiles/printf.dir/build
+.PHONY : printf/fast
+
+#=============================================================================
+# Target rules for targets named pwd
+
+# Build rule for target.
+pwd: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pwd
+.PHONY : pwd
+
+# fast build rule for target.
+pwd/fast:
+	$(MAKE) $(MAKESILENT) -f src/pwd/CMakeFiles/pwd.dir/build.make src/pwd/CMakeFiles/pwd.dir/build
+.PHONY : pwd/fast
+
+#=============================================================================
+# Target rules for targets named readlink
+
+# Build rule for target.
+readlink: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 readlink
+.PHONY : readlink
+
+# fast build rule for target.
+readlink/fast:
+	$(MAKE) $(MAKESILENT) -f src/readlink/CMakeFiles/readlink.dir/build.make src/readlink/CMakeFiles/readlink.dir/build
+.PHONY : readlink/fast
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -593,6 +775,20 @@ help:
 	@echo "... ln"
 	@echo "... logname"
 	@echo "... ls"
+	@echo "... mkdir"
+	@echo "... mknod"
+	@echo "... mktemp"
+	@echo "... mv"
+	@echo "... nice"
+	@echo "... nl"
+	@echo "... nohup"
+	@echo "... paste"
+	@echo "... pathchk"
+	@echo "... pr"
+	@echo "... printenv"
+	@echo "... printf"
+	@echo "... pwd"
+	@echo "... readlink"
 .PHONY : help
 
 

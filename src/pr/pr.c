@@ -50,7 +50,7 @@
 #include "pr.h"
 #include "extern.h"
 
-#include "src/compat.h"
+#include "compat.h"
 
 /*
  * pr:	a printing and pagination filter. If multiple input files

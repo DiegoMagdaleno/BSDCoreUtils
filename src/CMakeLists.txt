@@ -29,6 +29,20 @@ list(APPEND crossCompatibleBins
         ln
         logname
         ls
+        mkdir
+        mknod
+        mktemp
+        mv
+        nice
+        nl
+        nohup
+        paste
+        pathchk
+        pr
+        printenv
+        printf
+        pwd
+        readlink
         )
 
 # This tools are missing support for other platforms

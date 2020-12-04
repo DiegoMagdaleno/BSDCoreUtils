@@ -1,0 +1,1 @@
+/usr/bin/cc -g CMakeFiles/pathchk.dir/pathchk.c.o -o pathchk 

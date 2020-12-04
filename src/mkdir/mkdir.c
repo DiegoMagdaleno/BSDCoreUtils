@@ -40,7 +40,7 @@
 #include <string.h>
 #include <unistd.h>
 
-#include "src/compat.h"
+#include "compat.h"
 
 extern char *__progname;
 

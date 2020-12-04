@@ -1,0 +1,1 @@
+/usr/bin/cc  -D_GNU_SOURCE -g CMakeFiles/pr.dir/pr.c.o CMakeFiles/pr.dir/egetopt.c.o -o pr  ../../compat/libcompat.a 

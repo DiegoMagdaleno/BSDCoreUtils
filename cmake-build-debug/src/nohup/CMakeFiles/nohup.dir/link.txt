@@ -1,0 +1,1 @@
+/usr/bin/cc -g CMakeFiles/nohup.dir/nohup.c.o -o nohup  ../../compat/libcompat.a 
