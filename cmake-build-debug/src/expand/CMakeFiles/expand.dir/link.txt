@@ -1,1 +1,0 @@
-/usr/bin/cc -g CMakeFiles/expand.dir/expand.c.o -o expand 

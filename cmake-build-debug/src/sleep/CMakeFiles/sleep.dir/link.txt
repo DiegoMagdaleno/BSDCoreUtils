@@ -1,1 +1,0 @@
-/usr/bin/cc -g CMakeFiles/sleep.dir/sleep.c.o -o sleep 

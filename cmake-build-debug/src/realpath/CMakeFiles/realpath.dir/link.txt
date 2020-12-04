@@ -1,1 +1,0 @@
-/usr/bin/cc -g CMakeFiles/realpath.dir/realpath.c.o -o realpath 

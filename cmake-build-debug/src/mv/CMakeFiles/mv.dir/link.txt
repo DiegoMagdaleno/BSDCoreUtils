@@ -1,1 +1,0 @@
-/usr/bin/cc -g CMakeFiles/mv.dir/mv.c.o CMakeFiles/mv.dir/rm.c.o CMakeFiles/mv.dir/cp.c.o -o mv  ../../compat/libcompat.a 

@@ -1,1 +1,0 @@
-/usr/bin/cc  -D_GNU_SOURCE -g CMakeFiles/sort.dir/bwstring.c.o CMakeFiles/sort.dir/coll.c.o CMakeFiles/sort.dir/file.c.o CMakeFiles/sort.dir/mem.c.o CMakeFiles/sort.dir/radixsort.c.o CMakeFiles/sort.dir/sort.c.o CMakeFiles/sort.dir/vsort.c.o CMakeFiles/sort.dir/commoncrypto.c.o -o sort  ../../compat/libcompat.a /usr/lib/x86_64-linux-gnu/libcrypto.so -lncurses -lpthread 

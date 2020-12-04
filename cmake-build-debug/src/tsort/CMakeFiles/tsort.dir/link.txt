@@ -1,1 +1,0 @@
-/usr/bin/cc  -Wall -Wno-char-subscripts -Wstrict-prototypes -pedantic -D_GNU_SOURCE -g CMakeFiles/tsort.dir/tsort.c.o -o tsort  ../../compat/libcompat.a 

@@ -1,1 +1,0 @@
-/usr/bin/cc -g CMakeFiles/stat.dir/stat.c.o -o stat  ../../compat/libcompat.a 

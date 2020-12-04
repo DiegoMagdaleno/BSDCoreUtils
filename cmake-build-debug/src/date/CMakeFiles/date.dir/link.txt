@@ -1,1 +1,0 @@
-/usr/bin/cc  -D_DEFAULT_SOURCE -D_XOPEN_SOURCE -g CMakeFiles/date.dir/date.c.o -o date  ../../compat/libcompat.a -lutil 

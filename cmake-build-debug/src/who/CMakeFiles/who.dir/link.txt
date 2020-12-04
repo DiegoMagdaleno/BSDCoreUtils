@@ -1,1 +1,0 @@
-/usr/bin/cc  -DSUPPORT_UTMP -g CMakeFiles/who.dir/who.c.o CMakeFiles/who.dir/utmpentry.c.o -o who  ../../compat/libcompat.a 

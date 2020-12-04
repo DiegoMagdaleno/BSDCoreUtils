@@ -1,1 +1,0 @@
-/usr/bin/cc  -D_GNU_SOURCE -g CMakeFiles/join.dir/join.c.o -o join  ../../compat/libcompat.a 

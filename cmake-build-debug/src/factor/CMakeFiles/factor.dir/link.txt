@@ -1,1 +1,0 @@
-/usr/bin/cc -g CMakeFiles/factor.dir/factor.c.o CMakeFiles/factor.dir/pattern.c.o CMakeFiles/factor.dir/pr_tbl.c.o -o factor 

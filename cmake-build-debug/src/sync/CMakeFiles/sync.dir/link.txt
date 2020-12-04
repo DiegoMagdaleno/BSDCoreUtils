@@ -1,1 +1,0 @@
-/usr/bin/cc -g CMakeFiles/sync.dir/sync.c.o -o sync 

@@ -1,1 +1,0 @@
-/usr/bin/cc  -D_XOPEN_SOURCE -D_GNU_SOURCE -g CMakeFiles/fmt.dir/fmt.c.o -o fmt  ../../compat/libcompat.a 

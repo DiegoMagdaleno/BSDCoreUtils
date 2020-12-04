@@ -1,1 +1,0 @@
-/usr/bin/cc  -D_XOPEN_SOURCE -D_GNU_SOURCE -g CMakeFiles/ls.dir/ls.c.o CMakeFiles/ls.dir/main.c.o CMakeFiles/ls.dir/utf8.c.o CMakeFiles/ls.dir/util.c.o CMakeFiles/ls.dir/print.c.o CMakeFiles/ls.dir/cmp.c.o -o ls  ../../compat/libcompat.a -lncurses -lutil 

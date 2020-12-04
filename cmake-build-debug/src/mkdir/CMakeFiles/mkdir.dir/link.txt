@@ -1,1 +1,0 @@
-/usr/bin/cc -g CMakeFiles/mkdir.dir/mkdir.c.o -o mkdir  ../../compat/libcompat.a 

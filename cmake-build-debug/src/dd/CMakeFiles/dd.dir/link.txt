@@ -1,1 +1,0 @@
-/usr/bin/cc -g CMakeFiles/dd.dir/conv.c.o CMakeFiles/dd.dir/conv_tab.c.o CMakeFiles/dd.dir/dd.c.o CMakeFiles/dd.dir/misc.c.o CMakeFiles/dd.dir/position.c.o CMakeFiles/dd.dir/args.c.o -o dd  ../../compat/libcompat.a 
