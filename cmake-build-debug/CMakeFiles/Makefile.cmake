@@ -32,6 +32,10 @@ set(CMAKE_MAKEFILE_DEPENDS
   "../src/env/CMakeLists.txt"
   "../src/expand/CMakeLists.txt"
   "../src/expr/CMakeLists.txt"
+  "../src/factor/CMakeLists.txt"
+  "../src/false/CMakeLists.txt"
+  "../src/fmt/CMakeLists.txt"
+  "../src/fold/CMakeLists.txt"
   "/usr/share/cmake-3.18/Modules/CMakeCInformation.cmake"
   "/usr/share/cmake-3.18/Modules/CMakeCXXInformation.cmake"
   "/usr/share/cmake-3.18/Modules/CMakeCheckCompilerFlagCommonPatterns.cmake"
@@ -89,6 +93,10 @@ set(CMAKE_MAKEFILE_PRODUCTS
   "src/env/CMakeFiles/CMakeDirectoryInformation.cmake"
   "src/expand/CMakeFiles/CMakeDirectoryInformation.cmake"
   "src/expr/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "src/factor/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "src/false/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "src/fmt/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "src/fold/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
 # Dependency information for all targets:
@@ -112,4 +120,8 @@ set(CMAKE_DEPEND_INFO_FILES
   "src/env/CMakeFiles/env.dir/DependInfo.cmake"
   "src/expand/CMakeFiles/expand.dir/DependInfo.cmake"
   "src/expr/CMakeFiles/expr.dir/DependInfo.cmake"
+  "src/factor/CMakeFiles/factor.dir/DependInfo.cmake"
+  "src/false/CMakeFiles/false.dir/DependInfo.cmake"
+  "src/fmt/CMakeFiles/fmt.dir/DependInfo.cmake"
+  "src/fold/CMakeFiles/fold.dir/DependInfo.cmake"
   )

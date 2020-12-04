@@ -129,6 +129,10 @@ src/all: src/echo/all
 src/all: src/env/all
 src/all: src/expand/all
 src/all: src/expr/all
+src/all: src/factor/all
+src/all: src/false/all
+src/all: src/fmt/all
+src/all: src/fold/all
 
 .PHONY : src/all
 
@@ -151,6 +155,10 @@ src/preinstall: src/echo/preinstall
 src/preinstall: src/env/preinstall
 src/preinstall: src/expand/preinstall
 src/preinstall: src/expr/preinstall
+src/preinstall: src/factor/preinstall
+src/preinstall: src/false/preinstall
+src/preinstall: src/fmt/preinstall
+src/preinstall: src/fold/preinstall
 
 .PHONY : src/preinstall
 
@@ -173,6 +181,10 @@ src/clean: src/echo/clean
 src/clean: src/env/clean
 src/clean: src/expand/clean
 src/clean: src/expr/clean
+src/clean: src/factor/clean
+src/clean: src/false/clean
+src/clean: src/fmt/clean
+src/clean: src/fold/clean
 
 .PHONY : src/clean
 
@@ -499,6 +511,78 @@ src/expr/preinstall:
 src/expr/clean: src/expr/CMakeFiles/expr.dir/clean
 
 .PHONY : src/expr/clean
+
+#=============================================================================
+# Directory level rules for directory src/factor
+
+# Recursive "all" directory target.
+src/factor/all: src/factor/CMakeFiles/factor.dir/all
+
+.PHONY : src/factor/all
+
+# Recursive "preinstall" directory target.
+src/factor/preinstall:
+
+.PHONY : src/factor/preinstall
+
+# Recursive "clean" directory target.
+src/factor/clean: src/factor/CMakeFiles/factor.dir/clean
+
+.PHONY : src/factor/clean
+
+#=============================================================================
+# Directory level rules for directory src/false
+
+# Recursive "all" directory target.
+src/false/all: src/false/CMakeFiles/false.dir/all
+
+.PHONY : src/false/all
+
+# Recursive "preinstall" directory target.
+src/false/preinstall:
+
+.PHONY : src/false/preinstall
+
+# Recursive "clean" directory target.
+src/false/clean: src/false/CMakeFiles/false.dir/clean
+
+.PHONY : src/false/clean
+
+#=============================================================================
+# Directory level rules for directory src/fmt
+
+# Recursive "all" directory target.
+src/fmt/all: src/fmt/CMakeFiles/fmt.dir/all
+
+.PHONY : src/fmt/all
+
+# Recursive "preinstall" directory target.
+src/fmt/preinstall:
+
+.PHONY : src/fmt/preinstall
+
+# Recursive "clean" directory target.
+src/fmt/clean: src/fmt/CMakeFiles/fmt.dir/clean
+
+.PHONY : src/fmt/clean
+
+#=============================================================================
+# Directory level rules for directory src/fold
+
+# Recursive "all" directory target.
+src/fold/all: src/fold/CMakeFiles/fold.dir/all
+
+.PHONY : src/fold/all
+
+# Recursive "preinstall" directory target.
+src/fold/preinstall:
+
+.PHONY : src/fold/preinstall
+
+# Recursive "clean" directory target.
+src/fold/clean: src/fold/CMakeFiles/fold.dir/clean
+
+.PHONY : src/fold/clean
 
 #=============================================================================
 # Target rules for target compat/CMakeFiles/compat.dir
@@ -1012,6 +1096,114 @@ expr: src/expr/CMakeFiles/expr.dir/rule
 src/expr/CMakeFiles/expr.dir/clean:
 	$(MAKE) $(MAKESILENT) -f src/expr/CMakeFiles/expr.dir/build.make src/expr/CMakeFiles/expr.dir/clean
 .PHONY : src/expr/CMakeFiles/expr.dir/clean
+
+#=============================================================================
+# Target rules for target src/factor/CMakeFiles/factor.dir
+
+# All Build rule for target.
+src/factor/CMakeFiles/factor.dir/all:
+	$(MAKE) $(MAKESILENT) -f src/factor/CMakeFiles/factor.dir/build.make src/factor/CMakeFiles/factor.dir/depend
+	$(MAKE) $(MAKESILENT) -f src/factor/CMakeFiles/factor.dir/build.make src/factor/CMakeFiles/factor.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=57,58,59,60 "Built target factor"
+.PHONY : src/factor/CMakeFiles/factor.dir/all
+
+# Build rule for subdir invocation for target.
+src/factor/CMakeFiles/factor.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 4
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/factor/CMakeFiles/factor.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 0
+.PHONY : src/factor/CMakeFiles/factor.dir/rule
+
+# Convenience name for target.
+factor: src/factor/CMakeFiles/factor.dir/rule
+
+.PHONY : factor
+
+# clean rule for target.
+src/factor/CMakeFiles/factor.dir/clean:
+	$(MAKE) $(MAKESILENT) -f src/factor/CMakeFiles/factor.dir/build.make src/factor/CMakeFiles/factor.dir/clean
+.PHONY : src/factor/CMakeFiles/factor.dir/clean
+
+#=============================================================================
+# Target rules for target src/false/CMakeFiles/false.dir
+
+# All Build rule for target.
+src/false/CMakeFiles/false.dir/all:
+	$(MAKE) $(MAKESILENT) -f src/false/CMakeFiles/false.dir/build.make src/false/CMakeFiles/false.dir/depend
+	$(MAKE) $(MAKESILENT) -f src/false/CMakeFiles/false.dir/build.make src/false/CMakeFiles/false.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=61,62 "Built target false"
+.PHONY : src/false/CMakeFiles/false.dir/all
+
+# Build rule for subdir invocation for target.
+src/false/CMakeFiles/false.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 2
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/false/CMakeFiles/false.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 0
+.PHONY : src/false/CMakeFiles/false.dir/rule
+
+# Convenience name for target.
+false: src/false/CMakeFiles/false.dir/rule
+
+.PHONY : false
+
+# clean rule for target.
+src/false/CMakeFiles/false.dir/clean:
+	$(MAKE) $(MAKESILENT) -f src/false/CMakeFiles/false.dir/build.make src/false/CMakeFiles/false.dir/clean
+.PHONY : src/false/CMakeFiles/false.dir/clean
+
+#=============================================================================
+# Target rules for target src/fmt/CMakeFiles/fmt.dir
+
+# All Build rule for target.
+src/fmt/CMakeFiles/fmt.dir/all: compat/CMakeFiles/compat.dir/all
+	$(MAKE) $(MAKESILENT) -f src/fmt/CMakeFiles/fmt.dir/build.make src/fmt/CMakeFiles/fmt.dir/depend
+	$(MAKE) $(MAKESILENT) -f src/fmt/CMakeFiles/fmt.dir/build.make src/fmt/CMakeFiles/fmt.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=63,64 "Built target fmt"
+.PHONY : src/fmt/CMakeFiles/fmt.dir/all
+
+# Build rule for subdir invocation for target.
+src/fmt/CMakeFiles/fmt.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 16
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/fmt/CMakeFiles/fmt.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 0
+.PHONY : src/fmt/CMakeFiles/fmt.dir/rule
+
+# Convenience name for target.
+fmt: src/fmt/CMakeFiles/fmt.dir/rule
+
+.PHONY : fmt
+
+# clean rule for target.
+src/fmt/CMakeFiles/fmt.dir/clean:
+	$(MAKE) $(MAKESILENT) -f src/fmt/CMakeFiles/fmt.dir/build.make src/fmt/CMakeFiles/fmt.dir/clean
+.PHONY : src/fmt/CMakeFiles/fmt.dir/clean
+
+#=============================================================================
+# Target rules for target src/fold/CMakeFiles/fold.dir
+
+# All Build rule for target.
+src/fold/CMakeFiles/fold.dir/all: compat/CMakeFiles/compat.dir/all
+	$(MAKE) $(MAKESILENT) -f src/fold/CMakeFiles/fold.dir/build.make src/fold/CMakeFiles/fold.dir/depend
+	$(MAKE) $(MAKESILENT) -f src/fold/CMakeFiles/fold.dir/build.make src/fold/CMakeFiles/fold.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles --progress-num=65,66 "Built target fold"
+.PHONY : src/fold/CMakeFiles/fold.dir/all
+
+# Build rule for subdir invocation for target.
+src/fold/CMakeFiles/fold.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 16
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/fold/CMakeFiles/fold.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/DiegoMagdaleno/Documents/Projects/BSDCoreUtils/cmake-build-debug/CMakeFiles 0
+.PHONY : src/fold/CMakeFiles/fold.dir/rule
+
+# Convenience name for target.
+fold: src/fold/CMakeFiles/fold.dir/rule
+
+.PHONY : fold
+
+# clean rule for target.
+src/fold/CMakeFiles/fold.dir/clean:
+	$(MAKE) $(MAKESILENT) -f src/fold/CMakeFiles/fold.dir/build.make src/fold/CMakeFiles/fold.dir/clean
+.PHONY : src/fold/CMakeFiles/fold.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

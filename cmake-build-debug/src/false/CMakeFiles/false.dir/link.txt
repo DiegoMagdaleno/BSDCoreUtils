@@ -1,0 +1,1 @@
+/usr/bin/cc -g CMakeFiles/false.dir/false.c.o -o false 

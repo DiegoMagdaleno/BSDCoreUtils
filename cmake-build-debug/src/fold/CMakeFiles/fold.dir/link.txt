@@ -1,0 +1,1 @@
+/usr/bin/cc  -D_XOPEN_SOURCE -D_GNU_SOURCE -g CMakeFiles/fold.dir/fold.c.o -o fold  ../../compat/libcompat.a 

@@ -422,6 +422,58 @@ expr/fast:
 	$(MAKE) $(MAKESILENT) -f src/expr/CMakeFiles/expr.dir/build.make src/expr/CMakeFiles/expr.dir/build
 .PHONY : expr/fast
 
+#=============================================================================
+# Target rules for targets named factor
+
+# Build rule for target.
+factor: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 factor
+.PHONY : factor
+
+# fast build rule for target.
+factor/fast:
+	$(MAKE) $(MAKESILENT) -f src/factor/CMakeFiles/factor.dir/build.make src/factor/CMakeFiles/factor.dir/build
+.PHONY : factor/fast
+
+#=============================================================================
+# Target rules for targets named false
+
+# Build rule for target.
+false: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 false
+.PHONY : false
+
+# fast build rule for target.
+false/fast:
+	$(MAKE) $(MAKESILENT) -f src/false/CMakeFiles/false.dir/build.make src/false/CMakeFiles/false.dir/build
+.PHONY : false/fast
+
+#=============================================================================
+# Target rules for targets named fmt
+
+# Build rule for target.
+fmt: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 fmt
+.PHONY : fmt
+
+# fast build rule for target.
+fmt/fast:
+	$(MAKE) $(MAKESILENT) -f src/fmt/CMakeFiles/fmt.dir/build.make src/fmt/CMakeFiles/fmt.dir/build
+.PHONY : fmt/fast
+
+#=============================================================================
+# Target rules for targets named fold
+
+# Build rule for target.
+fold: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 fold
+.PHONY : fold
+
+# fast build rule for target.
+fold/fast:
+	$(MAKE) $(MAKESILENT) -f src/fold/CMakeFiles/fold.dir/build.make src/fold/CMakeFiles/fold.dir/build
+.PHONY : fold/fast
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -453,6 +505,10 @@ help:
 	@echo "... env"
 	@echo "... expand"
 	@echo "... expr"
+	@echo "... factor"
+	@echo "... false"
+	@echo "... fmt"
+	@echo "... fold"
 .PHONY : help
 
 
