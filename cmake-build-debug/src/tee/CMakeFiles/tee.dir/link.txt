@@ -1,0 +1,1 @@
+/usr/bin/cc -g CMakeFiles/tee.dir/tee.c.o -o tee 

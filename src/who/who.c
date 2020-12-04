@@ -58,7 +58,7 @@
 #endif /* __APPLE__ */
 
 #include "utmpentry.h"
-#include "src/compat.h"
+#include "compat.h"
 
 #if defined(__APPLE__) || defined(__linux__)
 #define __UNCONST(a)	((void *)(unsigned long)(const void *)(a))

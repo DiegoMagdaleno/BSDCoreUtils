@@ -799,6 +799,253 @@ sort/fast:
 	$(MAKE) $(MAKESILENT) -f src/sort/CMakeFiles/sort.dir/build.make src/sort/CMakeFiles/sort.dir/build
 .PHONY : sort/fast
 
+#=============================================================================
+# Target rules for targets named split
+
+# Build rule for target.
+split: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 split
+.PHONY : split
+
+# fast build rule for target.
+split/fast:
+	$(MAKE) $(MAKESILENT) -f src/split/CMakeFiles/split.dir/build.make src/split/CMakeFiles/split.dir/build
+.PHONY : split/fast
+
+#=============================================================================
+# Target rules for targets named stat
+
+# Build rule for target.
+stat: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 stat
+.PHONY : stat
+
+# fast build rule for target.
+stat/fast:
+	$(MAKE) $(MAKESILENT) -f src/stat/CMakeFiles/stat.dir/build.make src/stat/CMakeFiles/stat.dir/build
+.PHONY : stat/fast
+
+#=============================================================================
+# Target rules for targets named sync
+
+# Build rule for target.
+sync: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 sync
+.PHONY : sync
+
+# fast build rule for target.
+sync/fast:
+	$(MAKE) $(MAKESILENT) -f src/sync/CMakeFiles/sync.dir/build.make src/sync/CMakeFiles/sync.dir/build
+.PHONY : sync/fast
+
+#=============================================================================
+# Target rules for targets named tee
+
+# Build rule for target.
+tee: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tee
+.PHONY : tee
+
+# fast build rule for target.
+tee/fast:
+	$(MAKE) $(MAKESILENT) -f src/tee/CMakeFiles/tee.dir/build.make src/tee/CMakeFiles/tee.dir/build
+.PHONY : tee/fast
+
+#=============================================================================
+# Target rules for targets named test
+
+# Build rule for target.
+test: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test
+.PHONY : test
+
+# fast build rule for target.
+test/fast:
+	$(MAKE) $(MAKESILENT) -f src/test/CMakeFiles/test.dir/build.make src/test/CMakeFiles/test.dir/build
+.PHONY : test/fast
+
+#=============================================================================
+# Target rules for targets named touch
+
+# Build rule for target.
+touch: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 touch
+.PHONY : touch
+
+# fast build rule for target.
+touch/fast:
+	$(MAKE) $(MAKESILENT) -f src/touch/CMakeFiles/touch.dir/build.make src/touch/CMakeFiles/touch.dir/build
+.PHONY : touch/fast
+
+#=============================================================================
+# Target rules for targets named tr
+
+# Build rule for target.
+tr: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tr
+.PHONY : tr
+
+# fast build rule for target.
+tr/fast:
+	$(MAKE) $(MAKESILENT) -f src/tr/CMakeFiles/tr.dir/build.make src/tr/CMakeFiles/tr.dir/build
+.PHONY : tr/fast
+
+#=============================================================================
+# Target rules for targets named true
+
+# Build rule for target.
+true: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 true
+.PHONY : true
+
+# fast build rule for target.
+true/fast:
+	$(MAKE) $(MAKESILENT) -f src/true/CMakeFiles/true.dir/build.make src/true/CMakeFiles/true.dir/build
+.PHONY : true/fast
+
+#=============================================================================
+# Target rules for targets named tsort
+
+# Build rule for target.
+tsort: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tsort
+.PHONY : tsort
+
+# fast build rule for target.
+tsort/fast:
+	$(MAKE) $(MAKESILENT) -f src/tsort/CMakeFiles/tsort.dir/build.make src/tsort/CMakeFiles/tsort.dir/build
+.PHONY : tsort/fast
+
+#=============================================================================
+# Target rules for targets named tty
+
+# Build rule for target.
+tty: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tty
+.PHONY : tty
+
+# fast build rule for target.
+tty/fast:
+	$(MAKE) $(MAKESILENT) -f src/tty/CMakeFiles/tty.dir/build.make src/tty/CMakeFiles/tty.dir/build
+.PHONY : tty/fast
+
+#=============================================================================
+# Target rules for targets named uname
+
+# Build rule for target.
+uname: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 uname
+.PHONY : uname
+
+# fast build rule for target.
+uname/fast:
+	$(MAKE) $(MAKESILENT) -f src/uname/CMakeFiles/uname.dir/build.make src/uname/CMakeFiles/uname.dir/build
+.PHONY : uname/fast
+
+#=============================================================================
+# Target rules for targets named uniq
+
+# Build rule for target.
+uniq: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 uniq
+.PHONY : uniq
+
+# fast build rule for target.
+uniq/fast:
+	$(MAKE) $(MAKESILENT) -f src/uniq/CMakeFiles/uniq.dir/build.make src/uniq/CMakeFiles/uniq.dir/build
+.PHONY : uniq/fast
+
+#=============================================================================
+# Target rules for targets named users
+
+# Build rule for target.
+users: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 users
+.PHONY : users
+
+# fast build rule for target.
+users/fast:
+	$(MAKE) $(MAKESILENT) -f src/users/CMakeFiles/users.dir/build.make src/users/CMakeFiles/users.dir/build
+.PHONY : users/fast
+
+#=============================================================================
+# Target rules for targets named wc
+
+# Build rule for target.
+wc: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 wc
+.PHONY : wc
+
+# fast build rule for target.
+wc/fast:
+	$(MAKE) $(MAKESILENT) -f src/wc/CMakeFiles/wc.dir/build.make src/wc/CMakeFiles/wc.dir/build
+.PHONY : wc/fast
+
+#=============================================================================
+# Target rules for targets named who
+
+# Build rule for target.
+who: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 who
+.PHONY : who
+
+# fast build rule for target.
+who/fast:
+	$(MAKE) $(MAKESILENT) -f src/who/CMakeFiles/who.dir/build.make src/who/CMakeFiles/who.dir/build
+.PHONY : who/fast
+
+#=============================================================================
+# Target rules for targets named xargs
+
+# Build rule for target.
+xargs: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 xargs
+.PHONY : xargs
+
+# fast build rule for target.
+xargs/fast:
+	$(MAKE) $(MAKESILENT) -f src/xargs/CMakeFiles/xargs.dir/build.make src/xargs/CMakeFiles/xargs.dir/build
+.PHONY : xargs/fast
+
+#=============================================================================
+# Target rules for targets named yes
+
+# Build rule for target.
+yes: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 yes
+.PHONY : yes
+
+# fast build rule for target.
+yes/fast:
+	$(MAKE) $(MAKESILENT) -f src/yes/CMakeFiles/yes.dir/build.make src/yes/CMakeFiles/yes.dir/build
+.PHONY : yes/fast
+
+#=============================================================================
+# Target rules for targets named xinstall
+
+# Build rule for target.
+xinstall: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 xinstall
+.PHONY : xinstall
+
+# fast build rule for target.
+xinstall/fast:
+	$(MAKE) $(MAKESILENT) -f src/xinstall/CMakeFiles/xinstall.dir/build.make src/xinstall/CMakeFiles/xinstall.dir/build
+.PHONY : xinstall/fast
+
+#=============================================================================
+# Target rules for targets named stty
+
+# Build rule for target.
+stty: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 stty
+.PHONY : stty
+
+# fast build rule for target.
+stty/fast:
+	$(MAKE) $(MAKESILENT) -f src/stty/CMakeFiles/stty.dir/build.make src/stty/CMakeFiles/stty.dir/build
+.PHONY : stty/fast
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -859,6 +1106,25 @@ help:
 	@echo "... rmdir"
 	@echo "... sleep"
 	@echo "... sort"
+	@echo "... split"
+	@echo "... stat"
+	@echo "... stty"
+	@echo "... sync"
+	@echo "... tee"
+	@echo "... test"
+	@echo "... touch"
+	@echo "... tr"
+	@echo "... true"
+	@echo "... tsort"
+	@echo "... tty"
+	@echo "... uname"
+	@echo "... uniq"
+	@echo "... users"
+	@echo "... wc"
+	@echo "... who"
+	@echo "... xargs"
+	@echo "... xinstall"
+	@echo "... yes"
 .PHONY : help
 
 

@@ -22,7 +22,7 @@
 #include <string.h>
 #include <err.h>
 
-#include "src/compat.h"
+#include "compat.h"
 
 /* test(1) accepts the following grammar:
 	oexpr	::= aexpr | aexpr "-o" oexpr ;

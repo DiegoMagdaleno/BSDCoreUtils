@@ -43,7 +43,7 @@
 #include <unistd.h>
 #include <regex.h>
 
-#include "src/compat.h"
+#include "compat.h"
 
 #define DEFLINE	1000			/* Default num lines per file. */
 

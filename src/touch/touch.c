@@ -44,7 +44,7 @@
 #include <time.h>
 #include <unistd.h>
 
-#include "src/compat.h"
+#include "compat.h"
 
 #if defined(__APPLE__) || defined(__NetBSD__) 
 	#define st_atim st_atimespec

@@ -1,0 +1,1 @@
+/usr/bin/cc -g CMakeFiles/tty.dir/tty.c.o -o tty 

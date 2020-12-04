@@ -1,0 +1,1 @@
+/usr/bin/cc  -D_GNU_SOURCE -g CMakeFiles/touch.dir/touch.c.o -o touch  ../../compat/libcompat.a 

@@ -52,7 +52,7 @@
 
 #include "pathnames.h"
 
-#include "src/compat.h"
+#include "compat.h"
 
 #define MINIMUM(a, b)	(((a) < (b)) ? (a) : (b))
 

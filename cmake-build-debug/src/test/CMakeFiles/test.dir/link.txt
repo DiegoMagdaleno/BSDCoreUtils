@@ -1,0 +1,1 @@
+/usr/bin/cc -g CMakeFiles/test.dir/test.c.o -o test  ../../compat/libcompat.a 

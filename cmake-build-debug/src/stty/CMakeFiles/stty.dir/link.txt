@@ -1,0 +1,1 @@
+/usr/bin/cc -g CMakeFiles/stty.dir/cchar.c.o CMakeFiles/stty.dir/gfmt.c.o CMakeFiles/stty.dir/key.c.o CMakeFiles/stty.dir/modes.c.o CMakeFiles/stty.dir/print.c.o CMakeFiles/stty.dir/stty.c.o -o stty  ../../compat/libcompat.a 

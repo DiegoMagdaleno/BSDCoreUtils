@@ -1,0 +1,1 @@
+/usr/bin/cc -g CMakeFiles/wc.dir/wc.c.o -o wc  ../../compat/libcompat.a 

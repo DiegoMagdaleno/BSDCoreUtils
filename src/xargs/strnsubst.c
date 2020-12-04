@@ -15,7 +15,7 @@
 #include <string.h>
 #include <unistd.h>
 
-#include "src/compat.h"
+#include "compat.h"
 
 void	strnsubst(char **, const char *, const char *, size_t);
 

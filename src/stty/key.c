@@ -44,7 +44,7 @@
 #include "stty.h"
 #include "extern.h"
 
-#include "src/compat.h"
+#include "compat.h"
 
 __BEGIN_DECLS
 void	f_all(struct info *);

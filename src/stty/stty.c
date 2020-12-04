@@ -47,7 +47,7 @@
 #include "stty.h"
 #include "extern.h"
 
-#include "src/compat.h"
+#include "compat.h"
 
 int
 main(int argc, char *argv[])
