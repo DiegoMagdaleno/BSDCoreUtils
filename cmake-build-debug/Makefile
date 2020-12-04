@@ -474,6 +474,84 @@ fold/fast:
 	$(MAKE) $(MAKESILENT) -f src/fold/CMakeFiles/fold.dir/build.make src/fold/CMakeFiles/fold.dir/build
 .PHONY : fold/fast
 
+#=============================================================================
+# Target rules for targets named head
+
+# Build rule for target.
+head: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 head
+.PHONY : head
+
+# fast build rule for target.
+head/fast:
+	$(MAKE) $(MAKESILENT) -f src/head/CMakeFiles/head.dir/build.make src/head/CMakeFiles/head.dir/build
+.PHONY : head/fast
+
+#=============================================================================
+# Target rules for targets named id
+
+# Build rule for target.
+id: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 id
+.PHONY : id
+
+# fast build rule for target.
+id/fast:
+	$(MAKE) $(MAKESILENT) -f src/id/CMakeFiles/id.dir/build.make src/id/CMakeFiles/id.dir/build
+.PHONY : id/fast
+
+#=============================================================================
+# Target rules for targets named join
+
+# Build rule for target.
+join: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 join
+.PHONY : join
+
+# fast build rule for target.
+join/fast:
+	$(MAKE) $(MAKESILENT) -f src/join/CMakeFiles/join.dir/build.make src/join/CMakeFiles/join.dir/build
+.PHONY : join/fast
+
+#=============================================================================
+# Target rules for targets named ln
+
+# Build rule for target.
+ln: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ln
+.PHONY : ln
+
+# fast build rule for target.
+ln/fast:
+	$(MAKE) $(MAKESILENT) -f src/ln/CMakeFiles/ln.dir/build.make src/ln/CMakeFiles/ln.dir/build
+.PHONY : ln/fast
+
+#=============================================================================
+# Target rules for targets named logname
+
+# Build rule for target.
+logname: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 logname
+.PHONY : logname
+
+# fast build rule for target.
+logname/fast:
+	$(MAKE) $(MAKESILENT) -f src/logname/CMakeFiles/logname.dir/build.make src/logname/CMakeFiles/logname.dir/build
+.PHONY : logname/fast
+
+#=============================================================================
+# Target rules for targets named ls
+
+# Build rule for target.
+ls: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ls
+.PHONY : ls
+
+# fast build rule for target.
+ls/fast:
+	$(MAKE) $(MAKESILENT) -f src/ls/CMakeFiles/ls.dir/build.make src/ls/CMakeFiles/ls.dir/build
+.PHONY : ls/fast
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -509,6 +587,12 @@ help:
 	@echo "... false"
 	@echo "... fmt"
 	@echo "... fold"
+	@echo "... head"
+	@echo "... id"
+	@echo "... join"
+	@echo "... ln"
+	@echo "... logname"
+	@echo "... ls"
 .PHONY : help
 
 

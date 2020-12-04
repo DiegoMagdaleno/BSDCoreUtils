@@ -1,0 +1,1 @@
+/usr/bin/cc -g CMakeFiles/logname.dir/logname.c.o -o logname  ../../compat/libcompat.a 

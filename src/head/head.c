@@ -37,7 +37,7 @@
 #include <errno.h>
 #include <unistd.h>
 
-#include "src/compat.h"
+#include "compat.h"
 
 static void usage(void);
 

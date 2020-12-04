@@ -50,7 +50,7 @@
 #include <unistd.h>
 #include <limits.h>
 
-#include "src/compat.h"
+#include "compat.h"
 
 extern char *__progname;
 

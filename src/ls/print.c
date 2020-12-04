@@ -39,17 +39,8 @@
 #include <err.h>
 #include <errno.h>
 #include <fts.h>
-#if defined __APPLE__
-#define user_from_uid user_from_uid_orig
-#define group_from_gid group_from_gid_orig
 #include <grp.h>
 #include <pwd.h>
-#undef  user_from_uid
-#undef group_from_gid
-#else
-#include <grp.h>
-#include <pwd.h>
-#endif
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -57,7 +48,7 @@
 #include <unistd.h>
 #include <limits.h>
 #if defined __linux__
-#include "src/util.h"
+#include "util.h"
 #include <sys/param.h>
 #include <sys/sysmacros.h>
 #else
@@ -71,7 +62,7 @@
 
 #include "ls.h"
 #include "extern.h"
-#include "src/compat.h"
+#include "compat.h"
 
 static int	printaname(FTSENT *, int, int);
 static void	printlink(FTSENT *);

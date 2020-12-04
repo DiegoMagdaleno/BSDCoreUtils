@@ -1,0 +1,1 @@
+/usr/bin/cc -g CMakeFiles/id.dir/id.c.o -o id  ../../compat/libcompat.a 

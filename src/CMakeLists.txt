@@ -19,6 +19,16 @@ list(APPEND crossCompatibleBins
         env
         expand
         expr
+        factor
+        false
+        fmt
+        fold
+        head
+        id
+        join
+        ln
+        logname
+        ls
         )
 
 # This tools are missing support for other platforms
