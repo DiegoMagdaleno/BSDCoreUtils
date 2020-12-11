@@ -52,6 +52,7 @@
 #ifdef __linux__
 #include <bsd/wchar.h>
 #include "compat.h"
+#include <signal.h>
 #else
 #include <wchar.h>
 #endif 
@@ -66,7 +67,11 @@ unsigned long long available_free_memory = 1000000;
 
 bool use_mmap;
 
+#ifdef __linux__
+const char *tmpdir = "/tmp";
+#else
 const char *tmpdir = "/var/tmp";
+#endif
 const char *compress_program;
 
 size_t max_open_files = 16;
@@ -118,21 +123,25 @@ struct CLEANABLE_FILE
  * List header of "cleanable" files list.
  */
 static LIST_HEAD(CLEANABLE_FILES,CLEANABLE_FILE) tmp_files;
+static void mt_sort(struct sort_list *list,
+                    int (*sort_func)(void *, size_t, size_t,
+                                     int (*)(const void *, const void *)), const char* fn);
 
 /*
+ * On Apple platforms:
  * Semaphore to protect the tmp file list.
  * We use semaphore here because it is signal-safe, according to POSIX.
  * And semaphore does not require pthread library.
  */
-#ifndef __APPLE__
-static sem_t tmp_files_sem;
-#else
+#ifdef __APPLE__
 static semaphore_t tmp_files_sem;
 #endif
 
+#ifdef __APPLE__
 static void mt_sort(struct sort_list *list,
     int (*sort_func)(void *, size_t, size_t,
     int (*)(const void *, const void *)), const char* fn);
+#endif
 
 /*
  * Init tmp files list
@@ -142,9 +151,7 @@ init_tmp_files(void)
 {
 
 	LIST_INIT(&tmp_files);
-#ifndef __APPLE__
-	sem_init(&tmp_files_sem, 0, 1);
-#else
+#ifdef __APPLE__
 	{
 		mach_port_t self = mach_task_self();
 		kern_return_t ret = semaphore_create(self, &tmp_files_sem, SYNC_POLICY_FIFO, 1);
@@ -163,18 +170,23 @@ tmp_file_atexit(const char *tmp_file)
 {
 
 	if (tmp_file) {
-#ifndef __APPLE__
-		sem_wait(&tmp_files_sem);
-#else
+#ifdef __APPLE__
 		semaphore_wait(tmp_files_sem);
 #endif
 		struct CLEANABLE_FILE *item =
 		    sort_malloc(sizeof(struct CLEANABLE_FILE));
 		item->fn = sort_strdup(tmp_file);
+#ifndef __APPLE__
+		sigset_t mask, oldmask;
+        sigfillset(&mask);
+		sigprocmask(SIG_BLOCK, &mask, &oldmask);
+#endif /* ifndef APPLE */
 		LIST_INSERT_HEAD(&tmp_files, item, files);
 #ifndef __APPLE__
-		sem_post(&tmp_files_sem);
-#else
+		sigprocmask(SIG_SETMASK, &oldmask, NULL);
+#endif
+
+#ifdef __APPLE__
 		semaphore_signal(tmp_files_sem);
 #endif
 	}
@@ -188,18 +200,14 @@ clear_tmp_files(void)
 {
 	struct CLEANABLE_FILE *item;
 
-#ifndef __APPLE__
-	sem_wait(&tmp_files_sem);
-#else
+#ifdef __APPLE__
 	semaphore_wait(tmp_files_sem);
 #endif
 	LIST_FOREACH(item,&tmp_files,files) {
 		if ((item) && (item->fn))
 			unlink(item->fn);
 	}
-#ifndef __APPLE__
-	sem_post(&tmp_files_sem);
-#else
+#ifdef __APPLE__
 	semaphore_signal(tmp_files_sem);
 #endif
 }
@@ -214,10 +222,8 @@ file_is_tmp(const char* fn)
 	bool ret = false;
 
 	if (fn) {
-#ifndef __APPLE__
-		sem_wait(&tmp_files_sem);
-#else
-		semaphore_wait(tmp_files_sem);
+#ifdef __APPLE__
+semaphore_wait(tmp_files_sem);
 #endif
 		LIST_FOREACH(item,&tmp_files,files) {
 			if ((item) && (item->fn))
@@ -226,10 +232,8 @@ file_is_tmp(const char* fn)
 					break;
 				}
 		}
-#ifndef __APPLE__
-		sem_post(&tmp_files_sem);
-#else
-		semaphore_signal(tmp_files_sem);
+#ifdef __APPLE__
+    semaphore_signal(tmp_files_sem);
 #endif
 	}
 
@@ -466,9 +470,6 @@ check(const char *fn)
 
 	if (fr == NULL) {
 		err(2, NULL);
-#ifndef __APPLE__
-		goto end;
-#endif
 	}
 
 	s1 = file_reader_readline(fr);
@@ -1323,23 +1324,48 @@ sort_list_to_file(struct sort_list *list, const char *outfile)
 		    get_sort_method_name(sort_opts_vals.sort_method));
 
 	switch (sort_opts_vals.sort_method){
+	    /* This code isn't very clean and will be cleaned eventually
+	     * this is because Linux doesn't like Apple's MT_SORT code,
+	     * so we use direct calls to prevent any issues until we
+	     * fix MT_SORT */
 	case SORT_RADIXSORT:
 		rxsort(list->list, list->count);
+#ifdef __APPLE__
 		sort_list_dump(list, outfile);
+#endif
 		break;
 	case SORT_MERGESORT:
+#ifdef __APPLE__
 		mt_sort(list, mergesort, outfile);
+#else
+            mergesort(list->list, list->count, sizeof(struct sort_list_item *), list_coll);
+#endif
 		break;
 	case SORT_HEAPSORT:
+#ifdef __APPLE__
 		mt_sort(list, heapsort,	outfile);
+#else
+		heapsort(list->list, list->count, sizeof(struct sort_list_item *), list_coll);
+#endif
 		break;
 	case SORT_QSORT:
+#ifdef __APPLE__
 		mt_sort(list, sort_qsort, outfile);
+#else
+		qsort(list->list, list->count, sizeof(struct sort_list_item *), list_coll);
+#endif
 		break;
 	default:
+#ifdef __APPLE__
 		mt_sort(list, DEFAULT_SORT_FUNC, outfile);
+#else
+		DEFAULT_SORT_FUNC(list->list, list->count, sizeof(struct sort_list_item *), list_coll);
+#endif
 		break;
 	}
+#ifndef __APPLE__
+sort_list_dump(list, outfile);
+#endif
 }
 
 /******************* MT SORT ************************/
@@ -1659,9 +1685,7 @@ mt_sort(struct sort_list *list,
 
 		/* wait for threads completion */
 		for (i = 0; i < nthreads; ++i) {
-#ifndef __APPLE__
-			sem_wait(&mtsem);
-#else
+#ifdef __APPLE__
 		  semaphore_wait(mtsem);
 #endif
 		}

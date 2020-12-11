@@ -39,7 +39,6 @@
 #include <errno.h>
 #include <getopt.h>
 #include <limits.h>
-#include <locale.h>
 #if !defined(__APPLE__) && !defined (__linux__)
 #include <md5.h>
 #endif
@@ -338,56 +337,6 @@ conv_mbtowc(wchar_t *wc, const char *c, const wchar_t def)
 	}
 }
 
-/*
- * Set current locale symbols.
- */
-static void
-set_locale(void)
-{
-	struct lconv *lc;
-	const char *locale;
-
-	setlocale(LC_ALL, "");
-
-	lc = localeconv();
-
-	if (lc) {
-		/* obtain LC_NUMERIC info */
-		/* Convert to wide char form */
-		conv_mbtowc(&symbol_decimal_point, lc->decimal_point,
-		    symbol_decimal_point);
-		conv_mbtowc(&symbol_thousands_sep, lc->thousands_sep,
-		    symbol_thousands_sep);
-		conv_mbtowc(&symbol_positive_sign, lc->positive_sign,
-		    symbol_positive_sign);
-		conv_mbtowc(&symbol_negative_sign, lc->negative_sign,
-		    symbol_negative_sign);
-	}
-
-	if (getenv("GNUSORT_NUMERIC_COMPATIBILITY"))
-		gnusort_numeric_compatibility = true;
-
-	locale = setlocale(LC_COLLATE, NULL);
-
-	if (locale) {
-		char *tmpl;
-		const char *cclocale;
-
-		tmpl = sort_strdup(locale);
-		cclocale = setlocale(LC_COLLATE, "C");
-		if (cclocale && !strcmp(cclocale, tmpl))
-			byte_sort = true;
-		else {
-			const char *pclocale;
-
-			pclocale = setlocale(LC_COLLATE, "POSIX");
-			if (pclocale && !strcmp(pclocale, tmpl))
-				byte_sort = true;
-		}
-		setlocale(LC_COLLATE, tmpl);
-		sort_free(tmpl);
-	}
-}
 
 /*
  * Set directory temporary files.
@@ -1014,7 +963,6 @@ main(int argc, char **argv)
 	set_signal_handler();
 
 	set_hw_params();
-	set_locale();
 	set_tmpdir();
 	set_sort_opts();
 
@@ -1256,8 +1204,6 @@ main(int argc, char **argv)
 		printf("Number of CPUs: %d\n",(int)ncpu);
 		nthreads = 1;
 #endif
-		printf("Using collate rules of %s locale\n",
-		    setlocale(LC_COLLATE, NULL));
 		if (byte_sort)
 			printf("Byte sort is used\n");
 		if (print_symbols_on_debug) {
