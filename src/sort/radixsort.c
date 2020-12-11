@@ -51,6 +51,10 @@
 #include "coll.h"
 #include "radixsort.h"
 
+#ifdef __linux__
+#include <bsd/stdlib.h>
+#endif
+
 #define DEFAULT_SORT_FUNC_RADIXSORT mergesort
 
 #define TINY_NODE(sl) ((sl)->tosort_num < 65)

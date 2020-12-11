@@ -1,0 +1,5 @@
+add_executable(du du.c)
+
+target_link_libraries(du PRIVATE compat)
+
+INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/du.1 DESTINATION ${CMAKE_INSTALL_PREFIX}/man/man1)

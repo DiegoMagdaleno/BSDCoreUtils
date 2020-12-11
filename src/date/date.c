@@ -44,10 +44,12 @@
 #include <time.h>
 #include <unistd.h>
 #if defined __linux__
-#include "headers/util.h"
+#include "util.h"
+#include <time.h>
 #else
 #include <util.h>
 #endif
+
 #include <utmp.h>
 
 #include "compat.h"

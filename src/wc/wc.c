@@ -39,11 +39,12 @@
 #include <ctype.h>
 #include <err.h>
 #include <unistd.h>
-#include "headers/util.h"
 #include <wchar.h>
 #include <wctype.h>
 
 #include "compat.h"
+#include "util.h"
+
 
 int64_t	tlinect, twordct, tcharct;
 int	doline, doword, dochar, humanchar, multibyte;

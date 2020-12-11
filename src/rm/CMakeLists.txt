@@ -1,0 +1,5 @@
+add_executable(rm rm.c)
+
+target_link_libraries(rm PRIVATE compat)
+
+INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/rm.1 DESTINATION ${CMAKE_INSTALL_PREFIX}/man/man1)

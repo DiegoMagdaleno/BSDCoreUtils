@@ -50,7 +50,7 @@
 #include <limits.h>
 #include <locale.h>
 #if defined __linux__
-#include "headers/util.h"
+#include "util.h"
 #else
 #include <util.h>
 #endif

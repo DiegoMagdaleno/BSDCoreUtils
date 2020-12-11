@@ -27,7 +27,7 @@
 #include <string.h>
 #include <unistd.h>
 
-#include "headers/ohash.h"
+#include "ohash.h"
 
 #if defined __APPLE__
 #include "compat.h"
