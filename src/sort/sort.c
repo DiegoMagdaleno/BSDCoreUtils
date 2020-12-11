@@ -56,7 +56,7 @@
 #include <ctype.h>
 #else
 #include <wchar.h>
-#endif 
+#endif
 #include <wctype.h>
 
 #include "coll.h"
