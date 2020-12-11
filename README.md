@@ -6,7 +6,7 @@
 
 ## The \*BSD utils project
 
-This project is GNU coreutils-like collection of utilities from the OpenBSD and FreeBSD source code. The intent is to offer a BSD-licensed and lightweight replacement for the GNU coreutils project.
+This project is GNU coreutils-like collection of utilities from diverse BSD operating systems (FreeBSD, OpenBSD and NetBSD). The intent is to offer a BSD-licensed and lightweight replacement for the GNU coreutils project.
 
 ## Table of notes
 
@@ -28,18 +28,20 @@ In order to achieve this, just follow this instructions:
 3. Now run `brew install bsd-coreutils`
 
 _Note: This tools will be installed with the "b" prefix, for example "bcat" instead of "cat"._
+
 _Note 2: BSDCoreutils precompiled bins will be available for diverse Linux distributions eventually_
 
 **Option 2 - From source**:
 
 Building from source is a recommended option if you want to read and wish to take control over what you install on your computer.
 
-1. Make sure you have `openssl` installed, including development libraries (Header files, etc).
+1. Make sure you have `openssl` installed, including development libraries (Header files, etc)³
 2. Make sure you have GNU build tools installed (Ironic), like `autoconf`, `automake` etc.
 3. Open your terminal, and run `./autogen.sh`
 4. Now run `./configure --program-prefix=b`
 5. Run `make install` or `sudo make install`
 
+_3. This is only required on Linux based operating systems, on macOS the native implementation of the hashing algorithms will be used_
 _Note: --program-prefix is not required, however, it is recommended so it doesn't conflict with your distribution's coreutils, which can cause tons of problems_
 
 ## Contributing
