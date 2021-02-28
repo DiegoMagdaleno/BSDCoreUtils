@@ -13,15 +13,9 @@ jobs:
 
     steps:
     - name: required-deps
-      run: sudo apt-get install libbsd-dev
+      run: sudo apt-get install libbsd-dev cmake
     - uses: actions/checkout@v2
-    - name: autogen
-      run: ./autogen.sh
-    - name: configure
-      run: ./configure
-    - name: make
-      run: make
-    - name: make check
-      run: make check
-    - name: make distcheck
-      run: make distcheck
+    - name: Build CMake
+      uses: ashutoshvarma/action-cmake-build@v1
+      with:
+        build-dir: ${{ runner.workspace }}/build
