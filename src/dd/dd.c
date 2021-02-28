@@ -61,6 +61,11 @@
 #include "dd.h"
 #include "extern.h"
 
+/* This is for musl-c operating systems! thanks to Onodera punpun */
+#ifndef DEFFILEMODE
+# define DEFFILEMODE (S_IRUSR|S_IWUSR|S_IRGRP|S_IWGRP|S_IROTH|S_IWOTH)/* 0666*/
+#endif
+
 static void dd_close(void);
 static void dd_in(void);
 static void getfdtype(IO *);
