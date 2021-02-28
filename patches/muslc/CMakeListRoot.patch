@@ -1,0 +1,11 @@
+--- CMakeLists.txt.orig	2021-02-27 17:53:24.682842418 -0600
++++ CMakeLists.txt	2021-02-27 17:56:05.379512568 -0600
+@@ -11,6 +11,8 @@
+     find_package(OpenSSL REQUIRED)
+     message("Looking for required package libbsd")
+     pkg_check_modules(BSD_OVERLAY REQUIRED libbsd-overlay)
++    message("Looking for fts-dev since you are using muslc patches")
++    pkg_check_modules(MUSL_FTS REQUIRED musl-fts)
+ endif()
+ 
+ add_subdirectory(compat)

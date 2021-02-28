@@ -44,11 +44,10 @@ extern int fflag, iflag, pflag;
 extern mode_t myumask;
 extern char *__progname;
 
-__BEGIN_DECLS
 int	copy_fifo(struct stat *, int);
 int	copy_file(FTSENT *, int);
 int	copy_link(FTSENT *, int);
 int	copy_special(struct stat *, int);
 int	setfile(struct stat *, int);
 void	usage(void);
-__END_DECLS
+
