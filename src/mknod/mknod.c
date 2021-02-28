@@ -37,7 +37,7 @@
 
 /* For MUSL-C and other OSes that dont define this*/
 #ifndef DEFFILEMODE
-#define DEFFILEMODE (S_ISUSR|S_IWUSR|S_IRGRP|S_IROTH|S_IWOTH) /*0666*/
+#define DEFFILEMODE (S_IRUSR|S_IWUSR|S_IRGRP|S_IROTH|S_IWOTH) /*0666*/
 #endif
 
 #ifndef ACCESSPERMS
