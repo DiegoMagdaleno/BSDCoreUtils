@@ -35,6 +35,15 @@
 
 #include "compat.h"
 
+/* For MUSL-C and other OSes that dont define this*/
+#ifndef DEFFILEMODE
+#define DEFFILEMODE (S_ISUSR|S_IWUSR|S_IRGRP|S_IROTH|S_IWOTH) /*0666*/
+#endif
+
+#ifndef ACCESSPERMS
+#define ACCESSPERMS (S_IRWXU|S_IRWXG|S_IRWXO)
+#endif
+
 extern char *__progname;
 
 struct node {
