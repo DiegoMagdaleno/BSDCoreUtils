@@ -45,7 +45,10 @@
 
 #define MAXIMUM(a, b)	(((a) > (b)) ? (a) : (b))
 
-/* macOS doesn't know the deffiniton of u_long
+/* Musl-c definition for u_long */
+typedef unsigned long u_long;
+
+/* macOS doesn't know the definition of u_long
 (short for unsigned long) that was used on legacy BSD
 codebases, however, types.h allows us to define it */
 #ifdef __APPLE__
