@@ -62,6 +62,13 @@ void split1(void);
 void split2(void);
 void usage(void);
 
+/* This is a patch taken from Google
+ * is used in Android, allos us to use REG_STARTEND on MUSL
+*/
+#ifndef REG_STARTEND
+#define REG_STARTEND 0
+#endif
+
 int
 main(int argc, char *argv[])
 {
