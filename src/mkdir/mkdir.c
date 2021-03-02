@@ -30,8 +30,8 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/types.h>
 #include <sys/stat.h>
+#include <sys/types.h>
 
 #include <err.h>
 #include <errno.h>
@@ -44,74 +44,80 @@
 
 extern char *__progname;
 
-int	mkpath(char *, mode_t, mode_t);
-static void usage(void);
+int mkpath (char *, mode_t, mode_t);
+static void usage (void);
 
 int
-main(int argc, char *argv[])
+main (int argc, char *argv[])
 {
-	int ch, rv, exitval, pflag;
-	void *set;
-	mode_t mode, dir_mode;
+  int ch, rv, exitval, pflag;
+  void *set;
+  mode_t mode, dir_mode;
 
-	/*
-	 * The default file mode is a=rwx (0777) with selected permissions
-	 * removed in accordance with the file mode creation mask.  For
-	 * intermediate path name components, the mode is the default modified
-	 * by u+wx so that the subdirectories can always be created.
-	 */
-	mode = 0777 & ~umask(0);
-	dir_mode = mode | S_IWUSR | S_IXUSR;
+  /*
+   * The default file mode is a=rwx (0777) with selected permissions
+   * removed in accordance with the file mode creation mask.  For
+   * intermediate path name components, the mode is the default modified
+   * by u+wx so that the subdirectories can always be created.
+   */
+  mode = 0777 & ~umask (0);
+  dir_mode = mode | S_IWUSR | S_IXUSR;
 
-	pflag = 0;
-	while ((ch = getopt(argc, argv, "m:p")) != -1)
-		switch(ch) {
-		case 'p':
-			pflag = 1;
-			break;
-		case 'm':
-			if ((set = setmode(optarg)) == NULL)
-				errx(1, "invalid file mode: %s", optarg);
-			mode = getmode(set, S_IRWXU | S_IRWXG | S_IRWXO);
-			free(set);
-			break;
-		default:
-			usage();
-		}
-	argc -= optind;
-	argv += optind;
+  pflag = 0;
+  while ((ch = getopt (argc, argv, "m:p")) != -1)
+    switch (ch)
+      {
+      case 'p':
+        pflag = 1;
+        break;
+      case 'm':
+        if ((set = setmode (optarg)) == NULL)
+          errx (1, "invalid file mode: %s", optarg);
+        mode = getmode (set, S_IRWXU | S_IRWXG | S_IRWXO);
+        free (set);
+        break;
+      default:
+        usage ();
+      }
+  argc -= optind;
+  argv += optind;
 
-	if (*argv == NULL)
-		usage();
+  if (*argv == NULL)
+    usage ();
 
-	for (exitval = 0; *argv != NULL; ++argv) {
-		char *slash;
+  for (exitval = 0; *argv != NULL; ++argv)
+    {
+      char *slash;
 
-		/* Remove trailing slashes, per POSIX. */
-		slash = strrchr(*argv, '\0');
-		while (--slash > *argv && *slash == '/')
-			*slash = '\0';
+      /* Remove trailing slashes, per POSIX. */
+      slash = strrchr (*argv, '\0');
+      while (--slash > *argv && *slash == '/')
+        *slash = '\0';
 
-		if (pflag) {
-			rv = mkpath(*argv, mode, dir_mode);
-		} else {
-			rv = mkdir(*argv, mode);
-			/*
-			 * The mkdir() and umask() calls both honor only the
-			 * low nine bits, so if you try to set a mode including
-			 * the sticky, setuid, setgid bits you lose them. Don't
-			 * do this unless the user has specifically requested
-			 * a mode as chmod will (obviously) ignore the umask.
-			 */
-			if (rv == 0 && mode > 0777)
-				rv = chmod(*argv, mode);
-		}
-		if (rv == -1) {
-			warn("%s", *argv);
-			exitval = 1;
-		}
-	}
-	return exitval;
+      if (pflag)
+        {
+          rv = mkpath (*argv, mode, dir_mode);
+        }
+      else
+        {
+          rv = mkdir (*argv, mode);
+          /*
+           * The mkdir() and umask() calls both honor only the
+           * low nine bits, so if you try to set a mode including
+           * the sticky, setuid, setgid bits you lose them. Don't
+           * do this unless the user has specifically requested
+           * a mode as chmod will (obviously) ignore the umask.
+           */
+          if (rv == 0 && mode > 0777)
+            rv = chmod (*argv, mode);
+        }
+      if (rv == -1)
+        {
+          warn ("%s", *argv);
+          exitval = 1;
+        }
+    }
+  return exitval;
 }
 
 /*
@@ -121,52 +127,58 @@ main(int argc, char *argv[])
  *	dir_mode - file mode of intermediate directories
  */
 int
-mkpath(char *path, mode_t mode, mode_t dir_mode)
+mkpath (char *path, mode_t mode, mode_t dir_mode)
 {
-	struct stat sb;
-	char *slash;
-	int done;
+  struct stat sb;
+  char *slash;
+  int done;
 
-	slash = path;
+  slash = path;
 
-	for (;;) {
-		slash += strspn(slash, "/");
-		slash += strcspn(slash, "/");
+  for (;;)
+    {
+      slash += strspn (slash, "/");
+      slash += strcspn (slash, "/");
 
-		done = (*slash == '\0');
-		*slash = '\0';
+      done = (*slash == '\0');
+      *slash = '\0';
 
-		if (mkdir(path, done ? mode : dir_mode) == 0) {
-			if (mode > 0777 && chmod(path, mode) == -1)
-				return (-1);
-		} else {
-			int mkdir_errno = errno;
+      if (mkdir (path, done ? mode : dir_mode) == 0)
+        {
+          if (mode > 0777 && chmod (path, mode) == -1)
+            return (-1);
+        }
+      else
+        {
+          int mkdir_errno = errno;
 
-			if (stat(path, &sb) == -1) {
-				/* Not there; use mkdir()s errno */
-				errno = mkdir_errno;
-				return (-1);
-			}
-			if (!S_ISDIR(sb.st_mode)) {
-				/* Is there, but isn't a directory */
-				errno = ENOTDIR;
-				return (-1);
-			}
-		}
+          if (stat (path, &sb) == -1)
+            {
+              /* Not there; use mkdir()s errno */
+              errno = mkdir_errno;
+              return (-1);
+            }
+          if (!S_ISDIR (sb.st_mode))
+            {
+              /* Is there, but isn't a directory */
+              errno = ENOTDIR;
+              return (-1);
+            }
+        }
 
-		if (done)
-			break;
+      if (done)
+        break;
 
-		*slash = '/';
-	}
+      *slash = '/';
+    }
 
-	return (0);
+  return (0);
 }
 
 static void
-usage(void)
+usage (void)
 {
-	(void)fprintf(stderr, "usage: %s [-p] [-m mode] directory ...\n",
-	    __progname);
-	exit(1);
+  (void)fprintf (stderr, "usage: %s [-p] [-m mode] directory ...\n",
+                 __progname);
+  exit (1);
 }

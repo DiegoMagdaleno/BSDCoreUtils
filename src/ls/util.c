@@ -33,8 +33,8 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/types.h>
 #include <sys/stat.h>
+#include <sys/types.h>
 
 #include <ctype.h>
 #include <fts.h>
@@ -42,33 +42,33 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "ls.h"
 #include "extern.h"
+#include "ls.h"
 
 #ifdef SMALL
 int
-mbsprint(const char *name, int print)
+mbsprint (const char *name, int print)
 {
-	int len;
+  int len;
 
-	if (print == 0)
-		return strlen(name);
+  if (print == 0)
+    return strlen (name);
 
-	for (len = 0; *name; len++, name++)
-		putchar((!isprint((unsigned char)*name) && f_nonprint) ? '?' : *name);
-	return len;
+  for (len = 0; *name; len++, name++)
+    putchar ((!isprint ((unsigned char)*name) && f_nonprint) ? '?' : *name);
+  return len;
 }
 #endif
 
 void
-usage(void)
+usage (void)
 {
-	(void)fprintf(stderr,
+  (void)fprintf (stderr,
 #ifdef COLORLS
-	    "usage: %s [-1AaCcdFfGgHhikLlmnopqRrSsTtux] [file ...]\n",
+                 "usage: %s [-1AaCcdFfGgHhikLlmnopqRrSsTtux] [file ...]\n",
 #else
-	    "usage: %s [-1AaCcdFfgHhikLlmnopqRrSsTtux] [file ...]\n",
+                 "usage: %s [-1AaCcdFfgHhikLlmnopqRrSsTtux] [file ...]\n",
 #endif
-	    __progname);
-	exit(1);
+                 __progname);
+  exit (1);
 }

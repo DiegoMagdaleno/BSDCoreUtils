@@ -39,72 +39,78 @@
 
 extern char *__progname;
 
-int rm_path(char *);
-static void usage(void);
+int rm_path (char *);
+static void usage (void);
 
 int
-main(int argc, char *argv[])
+main (int argc, char *argv[])
 {
-	int ch, errors;
-	int pflag;
+  int ch, errors;
+  int pflag;
 
-	pflag = 0;
-	while ((ch = getopt(argc, argv, "p")) != -1)
-		switch(ch) {
-		case 'p':
-			pflag = 1;
-			break;
-		default:
-			usage();
-		}
-	argc -= optind;
-	argv += optind;
+  pflag = 0;
+  while ((ch = getopt (argc, argv, "p")) != -1)
+    switch (ch)
+      {
+      case 'p':
+        pflag = 1;
+        break;
+      default:
+        usage ();
+      }
+  argc -= optind;
+  argv += optind;
 
-	if (argc == 0)
-		usage();
+  if (argc == 0)
+    usage ();
 
-	for (errors = 0; *argv; argv++) {
-		char *p;
+  for (errors = 0; *argv; argv++)
+    {
+      char *p;
 
-		/* Delete trailing slashes, per POSIX. */
-		p = *argv + strlen(*argv);
-		while (--p > *argv && *p == '/')
-			continue;
-		*++p = '\0';
+      /* Delete trailing slashes, per POSIX. */
+      p = *argv + strlen (*argv);
+      while (--p > *argv && *p == '/')
+        continue;
+      *++p = '\0';
 
-		if (rmdir(*argv) == -1) {
-			warn("%s", *argv);
-			errors = 1;
-		} else if (pflag)
-			errors |= rm_path(*argv);
-	}
+      if (rmdir (*argv) == -1)
+        {
+          warn ("%s", *argv);
+          errors = 1;
+        }
+      else if (pflag)
+        errors |= rm_path (*argv);
+    }
 
-	return (errors);
+  return (errors);
 }
 
 int
-rm_path(char *path)
+rm_path (char *path)
 {
-	char *p;
+  char *p;
 
-	while ((p = strrchr(path, '/')) != NULL) {
-		/* Delete trailing slashes. */
-		while (--p > path && *p == '/')
-			continue;
-		*++p = '\0';
+  while ((p = strrchr (path, '/')) != NULL)
+    {
+      /* Delete trailing slashes. */
+      while (--p > path && *p == '/')
+        continue;
+      *++p = '\0';
 
-		if (rmdir(path) == -1) {
-			warn("%s", path);
-			return (1);
-		}
-	}
+      if (rmdir (path) == -1)
+        {
+          warn ("%s", path);
+          return (1);
+        }
+    }
 
-	return (0);
+  return (0);
 }
 
 static void
-usage(void)
+usage (void)
 {
-	fprintf(stderr, "usage: %s [-p] directory ...\n", __progname);
-	exit(1);
+  fprintf (stderr, "usage: %s [-p] directory ...\n", __progname);
+  exit (1);
 }

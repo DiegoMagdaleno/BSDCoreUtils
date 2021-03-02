@@ -1,4 +1,5 @@
-/*	$FreeBSD: head/usr.bin/sort/mem.h 264744 2014-04-21 22:52:18Z pfg $	*/
+/*	$FreeBSD: head/usr.bin/sort/mem.h 264744 2014-04-21 22:52:18Z pfg $
+ */
 
 /*-
  * Copyright (C) 2009 Gabor Kovesdan <gabor@FreeBSD.org>
@@ -28,7 +29,7 @@
  */
 
 #if !defined(__SORT_MEM_H__)
-#define	__SORT_MEM_H__
+#define __SORT_MEM_H__
 
 #include <errno.h>
 #include <stdbool.h>
@@ -37,9 +38,9 @@
 /*
  * mem.c
  */
-void *sort_malloc(size_t);
-void sort_free(const void *ptr);
-void *sort_realloc(void *, size_t);
-char *sort_strdup(const char *);
+void *sort_malloc (size_t);
+void sort_free (const void *ptr);
+void *sort_realloc (void *, size_t);
+char *sort_strdup (const char *);
 
 #endif /* __SORT_MEM_H__ */

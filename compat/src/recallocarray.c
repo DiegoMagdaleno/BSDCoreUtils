@@ -17,8 +17,8 @@
 #include "compat.h"
 
 #include <errno.h>
-#include <stdlib.h>
 #include <stdint.h>
+#include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
 
@@ -26,62 +26,68 @@
  * This is sqrt(SIZE_MAX+1), as s1*s2 <= SIZE_MAX
  * if both s1 < MUL_NO_OVERFLOW and s2 < MUL_NO_OVERFLOW
  */
-#define MUL_NO_OVERFLOW ((size_t)1 << (sizeof(size_t) * 4))
+#define MUL_NO_OVERFLOW ((size_t)1 << (sizeof (size_t) * 4))
 
-/*Declare explicit_bzero I dont remember having this issue in Catalina, maybe something changed
-in big sur? */
+/*Declare explicit_bzero I dont remember having this issue in Catalina, maybe
+something changed in big sur? */
 #if defined __APPLE__
-void explicit_bzero(void *s, size_t n);
+void explicit_bzero (void *s, size_t n);
 #endif
 
 void *
-recallocarray(void *ptr, size_t oldnmemb, size_t newnmemb, size_t size)
+recallocarray (void *ptr, size_t oldnmemb, size_t newnmemb, size_t size)
 {
-	size_t oldsize, newsize;
-	void *newptr;
+  size_t oldsize, newsize;
+  void *newptr;
 
-	if (ptr == NULL)
-		return calloc(newnmemb, size);
+  if (ptr == NULL)
+    return calloc (newnmemb, size);
 
-	if ((newnmemb >= MUL_NO_OVERFLOW || size >= MUL_NO_OVERFLOW) &&
-	    newnmemb > 0 && SIZE_MAX / newnmemb < size) {
-		errno = ENOMEM;
-		return NULL;
-	}
-	newsize = newnmemb * size;
+  if ((newnmemb >= MUL_NO_OVERFLOW || size >= MUL_NO_OVERFLOW) && newnmemb > 0
+      && SIZE_MAX / newnmemb < size)
+    {
+      errno = ENOMEM;
+      return NULL;
+    }
+  newsize = newnmemb * size;
 
-	if ((oldnmemb >= MUL_NO_OVERFLOW || size >= MUL_NO_OVERFLOW) &&
-	    oldnmemb > 0 && SIZE_MAX / oldnmemb < size) {
-		errno = EINVAL;
-		return NULL;
-	}
-	oldsize = oldnmemb * size;
-	
-	/*
-	 * Don't bother too much if we're shrinking just a bit,
-	 * we do not shrink for series of small steps, oh well.
-	 */
-	if (newsize <= oldsize) {
-		size_t d = oldsize - newsize;
+  if ((oldnmemb >= MUL_NO_OVERFLOW || size >= MUL_NO_OVERFLOW) && oldnmemb > 0
+      && SIZE_MAX / oldnmemb < size)
+    {
+      errno = EINVAL;
+      return NULL;
+    }
+  oldsize = oldnmemb * size;
 
-		if (d < oldsize / 2 && d < getpagesize()) {
-			memset((char *)ptr + newsize, 0, d);
-			return ptr;
-		}
-	}
+  /*
+   * Don't bother too much if we're shrinking just a bit,
+   * we do not shrink for series of small steps, oh well.
+   */
+  if (newsize <= oldsize)
+    {
+      size_t d = oldsize - newsize;
 
-	newptr = malloc(newsize);
-	if (newptr == NULL)
-		return NULL;
+      if (d < oldsize / 2 && d < getpagesize ())
+        {
+          memset ((char *)ptr + newsize, 0, d);
+          return ptr;
+        }
+    }
 
-	if (newsize > oldsize) {
-		memcpy(newptr, ptr, oldsize);
-		memset((char *)newptr + oldsize, 0, newsize - oldsize);
-	} else
-		memcpy(newptr, ptr, newsize);
+  newptr = malloc (newsize);
+  if (newptr == NULL)
+    return NULL;
 
-	explicit_bzero(ptr, oldsize);
-	free(ptr);
+  if (newsize > oldsize)
+    {
+      memcpy (newptr, ptr, oldsize);
+      memset ((char *)newptr + oldsize, 0, newsize - oldsize);
+    }
+  else
+    memcpy (newptr, ptr, newsize);
 
-	return newptr;
+  explicit_bzero (ptr, oldsize);
+  free (ptr);
+
+  return newptr;
 }

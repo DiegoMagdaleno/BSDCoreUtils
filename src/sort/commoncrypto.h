@@ -19,6 +19,5 @@
 #define SHA256Final SHA256_Final
 #endif
 
-
-char *SHA256End(SHA256_CTX *, char *);
-char *SHA256File(const char *, char *);
+char *SHA256End (SHA256_CTX *, char *);
+char *SHA256File (const char *, char *);

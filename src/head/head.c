@@ -29,17 +29,17 @@
  * SUCH DAMAGE.
  */
 
-#include <stdio.h>
-#include <stdlib.h>
 #include <ctype.h>
-#include <limits.h>
 #include <err.h>
 #include <errno.h>
+#include <limits.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include <unistd.h>
 
 #include "compat.h"
 
-static void usage(void);
+static void usage (void);
 
 /*
  * head - give the first few lines of a stream or of each of a set of files
@@ -48,73 +48,81 @@ static void usage(void);
  */
 
 int
-main(int argc, char *argv[])
+main (int argc, char *argv[])
 {
-	FILE	*fp;
-	long	cnt;
-	int	ch, firsttime;
-	long	linecnt = 10;
-	char	*p = NULL;
-	int	status = 0;
+  FILE *fp;
+  long cnt;
+  int ch, firsttime;
+  long linecnt = 10;
+  char *p = NULL;
+  int status = 0;
 
-	/* handle obsolete -number syntax */
-	if (argc > 1 && argv[1][0] == '-' &&
-	    isdigit((unsigned char)argv[1][1])) {
-		p = argv[1] + 1;
-		argc--;
-		argv++;
-	}
+  /* handle obsolete -number syntax */
+  if (argc > 1 && argv[1][0] == '-' && isdigit ((unsigned char)argv[1][1]))
+    {
+      p = argv[1] + 1;
+      argc--;
+      argv++;
+    }
 
-	while ((ch = getopt(argc, argv, "n:")) != -1) {
-		switch (ch) {
-		case 'n':
-			p = optarg;
-			break;
-		default:
-			usage();
-		}
-	}
-	argc -= optind, argv += optind;
+  while ((ch = getopt (argc, argv, "n:")) != -1)
+    {
+      switch (ch)
+        {
+        case 'n':
+          p = optarg;
+          break;
+        default:
+          usage ();
+        }
+    }
+  argc -= optind, argv += optind;
 
-	if (p) {
-		const char *errstr;
+  if (p)
+    {
+      const char *errstr;
 
-		linecnt = strtonum(p, 1, LONG_MAX, &errstr);
-		if (errstr)
-			errx(1, "line count %s: %s", errstr, p);
-	}
+      linecnt = strtonum (p, 1, LONG_MAX, &errstr);
+      if (errstr)
+        errx (1, "line count %s: %s", errstr, p);
+    }
 
-	for (firsttime = 1; ; firsttime = 0) {
-		if (!*argv) {
-			if (!firsttime)
-				exit(status);
-			fp = stdin;
-		} else {
-			if ((fp = fopen(*argv, "r")) == NULL) {
-				warn("%s", *argv++);
-				status = 1;
-				continue;
-			}
-			if (argc > 1) {
-				if (!firsttime)
-					putchar('\n');
-				printf("==> %s <==\n", *argv);
-			}
-			++argv;
-		}
-		for (cnt = linecnt; cnt && !feof(fp); --cnt)
-			while ((ch = getc(fp)) != EOF)
-				if (putchar(ch) == '\n')
-					break;
-		fclose(fp);
-	}
-	/*NOTREACHED*/
+  for (firsttime = 1;; firsttime = 0)
+    {
+      if (!*argv)
+        {
+          if (!firsttime)
+            exit (status);
+          fp = stdin;
+        }
+      else
+        {
+          if ((fp = fopen (*argv, "r")) == NULL)
+            {
+              warn ("%s", *argv++);
+              status = 1;
+              continue;
+            }
+          if (argc > 1)
+            {
+              if (!firsttime)
+                putchar ('\n');
+              printf ("==> %s <==\n", *argv);
+            }
+          ++argv;
+        }
+      for (cnt = linecnt; cnt && !feof (fp); --cnt)
+        while ((ch = getc (fp)) != EOF)
+          if (putchar (ch) == '\n')
+            break;
+      fclose (fp);
+    }
+  /*NOTREACHED*/
 }
 
-
 static void
-usage(void)
+usage (void)
 {
-	fputs("usage: head [-count | -n count] [file ...]\n", stderr);
-	exit(1);
+  fputs ("usage: head [-count | -n count] [file ...]\n", stderr);
+  exit (1);
 }

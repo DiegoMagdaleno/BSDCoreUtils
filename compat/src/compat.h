@@ -5,95 +5,91 @@
  * to be a placeholder.
  */
 
-/* 
- * Reference from Apple's archived OS X (now macOS documentation 
- * we need to import this else we are going to get a "declaration expected at line 
- * 29" 
- * 
+/*
+ * Reference from Apple's archived OS X (now macOS documentation
+ * we need to import this else we are going to get a "declaration expected at
+ * line 29"
+ *
  * including types.h allows us to fix erros in the mget declaration
- * 
+ *
  */
 
-
-
-/* Reference from Apple's archived OS X (now macOS documentation 
-we need to import this else we are going to get a "declaration expected at line 
+/* Reference from Apple's archived OS X (now macOS documentation
+we need to import this else we are going to get a "declaration expected at line
 42" */
 #if defined __APPLE__
 #include "headers/simpleq.h"
-#include <sys/stat.h>
 #include <grp.h>
 #include <pwd.h>
-#else
-#include <unistd.h>
-#include <string.h>
-#include <stddef.h>
-#include <sys/types.h>
 #include <sys/stat.h>
+#else
+#include <stddef.h>
+#include <string.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <unistd.h>
 #endif
 
-
 /* setmode.c */
-mode_t getmode(const void *, mode_t);
-void *setmode(const char *);
+mode_t getmode (const void *, mode_t);
+void *setmode (const char *);
 
 /* strtonum.c */
-long long strtonum(const char *, long long, long long, const char **);
+long long strtonum (const char *, long long, long long, const char **);
 
 /* strmode.c */
-void strmode(int, char *);
+void strmode (int, char *);
 
 /* pwcache.c */
 /* Darwin (OSX/macOS) requires the nouser and nogroup
 to be added */
 
 #ifndef __APPLE__
-const char *user_from_uid(uid_t, int);
-const char *group_from_gid(gid_t, int);
-#endif 
+const char *user_from_uid (uid_t, int);
+const char *group_from_gid (gid_t, int);
+#endif
 
-int uid_from_user(const char *, uid_t *);
-int gid_from_group(const char *, gid_t *);
+int uid_from_user (const char *, uid_t *);
+int gid_from_group (const char *, gid_t *);
 
 /* fmt_scaled.c */
-int scan_scaled(char *, long long *);
-int fmt_scaled(long long, char *);
+int scan_scaled (char *, long long *);
+int fmt_scaled (long long, char *);
 
 /* getbsize.c */
-char *getbsize(int *, long *);
+char *getbsize (int *, long *);
 
 /* devname.c */
-char *devname(dev_t, mode_t);
+char *devname (dev_t, mode_t);
 
 /* merge.c */
-int mergesort(void *, size_t, size_t, int (*)(const void *, const void *));
+int mergesort (void *, size_t, size_t, int (*) (const void *, const void *));
 
 /* heapsort.c */
-int heapsort(void *, size_t, size_t, int (*)(const void *, const void *));
+int heapsort (void *, size_t, size_t, int (*) (const void *, const void *));
 
 /* recallocarray.c */
-void *recallocarray(void *, size_t, size_t, size_t);
+void *recallocarray (void *, size_t, size_t, size_t);
 
 /* reallocarray.c */
 #if defined __APPLE__
-void *reallocarray(void *ptr, size_t nmemb, size_t size);
+void *reallocarray (void *ptr, size_t nmemb, size_t size);
 #endif
 
 /* strlcat.c */
 #if defined __linux__
-size_t strlcat(char *, const char *, size_t);
+size_t strlcat (char *, const char *, size_t);
 #endif
 
 /* strlcpy.c */
 #if defined __linux__
-size_t strlcpy(char *, const char *, size_t);
+size_t strlcpy (char *, const char *, size_t);
 #endif
-
 
 /*
  * MAXBSIZE does not exist on Linux  however, since Darwin is an OS
- * that derives from FreesBD this does exist on Darwin, so we dont 
- * need to get oursevels, an extra warning for redefining a macro, 
+ * that derives from FreesBD this does exist on Darwin, so we dont
+ * need to get oursevels, an extra warning for redefining a macro,
  * however this is the explainaition for Linux because filesystem block size
  * limits are per filesystem and not consistently enforced across
  * the different filesystems.  If you look at e2fsprogs and its
@@ -103,7 +99,7 @@ size_t strlcpy(char *, const char *, size_t);
  * 65536.  So we'll just define that here so as to avoid having
  * bsdutils depend on e2fsprogs to compile.
  */
-#if !defined __APPLE__ 
+#if !defined __APPLE__
 #define MAXBSIZE (64 * 1024)
 #endif
 
@@ -114,8 +110,8 @@ size_t strlcpy(char *, const char *, size_t);
 #define FMT_SCALED_STRSIZE 7 /* minus sign, 4 digits, suffix, null byte */
 
 /* Buffer sizes */
-#define _PW_BUF_LEN sysconf(_SC_GETPW_R_SIZE_MAX)
-#define _GR_BUF_LEN sysconf(_SC_GETGR_R_SIZE_MAX)
+#define _PW_BUF_LEN sysconf (_SC_GETPW_R_SIZE_MAX)
+#define _GR_BUF_LEN sysconf (_SC_GETGR_R_SIZE_MAX)
 
 /* Linux spelling differences */
 #if defined __linux__
@@ -123,5 +119,5 @@ size_t strlcpy(char *, const char *, size_t);
 #endif
 
 #if defined __linux__
-#define D_TAPE  1
+#define D_TAPE 1
 #endif

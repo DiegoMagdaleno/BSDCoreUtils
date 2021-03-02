@@ -29,11 +29,11 @@
  * SUCH DAMAGE.
  */
 
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <unistd.h>
 #include <err.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
 
 /*
  * printenv
@@ -42,25 +42,28 @@
  * February, 1979
  */
 int
-main(int argc, char *argv[])
+main (int argc, char *argv[])
 {
-	extern char **environ;
-	char *cp, **ep;
-	int len;
+  extern char **environ;
+  char *cp, **ep;
+  int len;
 
-	if (argc < 2) {
-		for (ep = environ; *ep; ep++)
-			puts(*ep);
-		exit(0);
-	}
-	len = strlen(*++argv);
-	for (ep = environ; *ep; ep++)
-		if (!strncmp(*ep, *argv, len)) {
-			cp = *ep + len;
-			if (!*cp || *cp == '=') {
-				puts(*cp ? cp + 1 : cp);
-				exit(0);
-			}
-		}
-	exit(1);
+  if (argc < 2)
+    {
+      for (ep = environ; *ep; ep++)
+        puts (*ep);
+      exit (0);
+    }
+  len = strlen (*++argv);
+  for (ep = environ; *ep; ep++)
+    if (!strncmp (*ep, *argv, len))
+      {
+        cp = *ep + len;
+        if (!*cp || *cp == '=')
+          {
+            puts (*cp ? cp + 1 : cp);
+            exit (0);
+          }
+      }
+  exit (1);
 }

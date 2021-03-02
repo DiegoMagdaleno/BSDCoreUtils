@@ -35,6 +35,7 @@
 
 #include <sys/types.h>
 
+#include "compat.h"
 #include <assert.h>
 #include <grp.h>
 #include <pwd.h>
@@ -42,36 +43,37 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#include "compat.h"
 /*
  * Constants and data structures used to implement group and password file
  * caches.  Name lengths have been chosen to be as large as those supported
  * by the passwd and group files as well as the standard archive formats.
  * CACHE SIZES MUST BE PRIME
  */
-#define UNMLEN		32	/* >= user name found in any protocol */
-#define GNMLEN		32	/* >= group name found in any protocol */
-#define UID_SZ		317	/* size of uid to user_name cache */
-#define UNM_SZ		317	/* size of user_name to uid cache */
-#define GID_SZ		251	/* size of gid to group_name cache */
-#define GNM_SZ		251	/* size of group_name to gid cache */
-#define VALID		1	/* entry and name are valid */
-#define INVALID		2	/* entry valid, name NOT valid */
+#define UNMLEN 32  /* >= user name found in any protocol */
+#define GNMLEN 32  /* >= group name found in any protocol */
+#define UID_SZ 317 /* size of uid to user_name cache */
+#define UNM_SZ 317 /* size of user_name to uid cache */
+#define GID_SZ 251 /* size of gid to group_name cache */
+#define GNM_SZ 251 /* size of group_name to gid cache */
+#define VALID 1    /* entry and name are valid */
+#define INVALID 2  /* entry valid, name NOT valid */
 
 /*
  * Node structures used in the user, group, uid, and gid caches.
  */
 
-typedef struct uidc {
-	int valid;		/* is this a valid or a miss entry */
-	char name[UNMLEN];	/* uid name */
-	uid_t uid;		/* cached uid */
+typedef struct uidc
+{
+  int valid;         /* is this a valid or a miss entry */
+  char name[UNMLEN]; /* uid name */
+  uid_t uid;         /* cached uid */
 } UIDC;
 
-typedef struct gidc {
-	int valid;		/* is this a valid or a miss entry */
-	char name[GNMLEN];	/* gid name */
-	gid_t gid;		/* cached gid */
+typedef struct gidc
+{
+  int valid;         /* is this a valid or a miss entry */
+  char name[GNMLEN]; /* gid name */
+  gid_t gid;         /* cached gid */
 } GIDC;
 
 /*
@@ -83,24 +85,25 @@ typedef struct gidc {
  * cache both hits and misses.
  */
 
-static UIDC **uidtb;	/* uid to name cache */
-static GIDC **gidtb;	/* gid to name cache */
-static UIDC **usrtb;	/* user name to uid cache */
-static GIDC **grptb;	/* group name to gid cache */
+static UIDC **uidtb; /* uid to name cache */
+static GIDC **gidtb; /* gid to name cache */
+static UIDC **usrtb; /* user name to uid cache */
+static GIDC **grptb; /* group name to gid cache */
 
 static u_int
-st_hash(const char *name, size_t len, int tabsz)
+st_hash (const char *name, size_t len, int tabsz)
 {
-	u_int key = 0;
+  u_int key = 0;
 
-	assert(name != NULL);
+  assert (name != NULL);
 
-	while (len--) {
-		key += *name++;
-		key = (key << 8) | (key >> 24);
-	}
+  while (len--)
+    {
+      key += *name++;
+      key = (key << 8) | (key >> 24);
+    }
 
-	return key % tabsz;
+  return key % tabsz;
 }
 
 /*
@@ -110,19 +113,20 @@ st_hash(const char *name, size_t len, int tabsz)
  *	0 if ok, -1 otherwise
  */
 static int
-uidtb_start(void)
+uidtb_start (void)
 {
-	static int fail = 0;
+  static int fail = 0;
 
-	if (uidtb != NULL)
-		return 0;
-	if (fail)
-		return -1;
-	if ((uidtb = calloc(UID_SZ, sizeof(UIDC *))) == NULL) {
-		++fail;
-		return -1;
-	}
-	return 0;
+  if (uidtb != NULL)
+    return 0;
+  if (fail)
+    return -1;
+  if ((uidtb = calloc (UID_SZ, sizeof (UIDC *))) == NULL)
+    {
+      ++fail;
+      return -1;
+    }
+  return 0;
 }
 
 /*
@@ -132,19 +136,20 @@ uidtb_start(void)
  *	0 if ok, -1 otherwise
  */
 static int
-gidtb_start(void)
+gidtb_start (void)
 {
-	static int fail = 0;
+  static int fail = 0;
 
-	if (gidtb != NULL)
-		return 0;
-	if (fail)
-		return -1;
-	if ((gidtb = calloc(GID_SZ, sizeof(GIDC *))) == NULL) {
-		++fail;
-		return -1;
-	}
-	return 0;
+  if (gidtb != NULL)
+    return 0;
+  if (fail)
+    return -1;
+  if ((gidtb = calloc (GID_SZ, sizeof (GIDC *))) == NULL)
+    {
+      ++fail;
+      return -1;
+    }
+  return 0;
 }
 
 /*
@@ -154,19 +159,20 @@ gidtb_start(void)
  *	0 if ok, -1 otherwise
  */
 static int
-usrtb_start(void)
+usrtb_start (void)
 {
-	static int fail = 0;
+  static int fail = 0;
 
-	if (usrtb != NULL)
-		return 0;
-	if (fail)
-		return -1;
-	if ((usrtb = calloc(UNM_SZ, sizeof(UIDC *))) == NULL) {
-		++fail;
-		return -1;
-	}
-	return 0;
+  if (usrtb != NULL)
+    return 0;
+  if (fail)
+    return -1;
+  if ((usrtb = calloc (UNM_SZ, sizeof (UIDC *))) == NULL)
+    {
+      ++fail;
+      return -1;
+    }
+  return 0;
 }
 
 /*
@@ -176,81 +182,87 @@ usrtb_start(void)
  *	0 if ok, -1 otherwise
  */
 static int
-grptb_start(void)
+grptb_start (void)
 {
-	static int fail = 0;
+  static int fail = 0;
 
-	if (grptb != NULL)
-		return 0;
-	if (fail)
-		return -1;
-	if ((grptb = calloc(GNM_SZ, sizeof(GIDC *))) == NULL) {
-		++fail;
-		return -1;
-	}
-	return 0;
+  if (grptb != NULL)
+    return 0;
+  if (fail)
+    return -1;
+  if ((grptb = calloc (GNM_SZ, sizeof (GIDC *))) == NULL)
+    {
+      ++fail;
+      return -1;
+    }
+  return 0;
 }
 
 #ifndef __APPLE__ /* Darwin already has this defenitions */
- /*
- * user_from_uid()
- *	caches the name (if any) for the uid. If noname clear, we always
- *	return the stored name (if valid or invalid match).
- *	We use a simple hash table.
- * Return:
- *	Pointer to stored name (or a empty string)
- */
+                  /*
+                   * user_from_uid()
+                   *	caches the name (if any) for the uid. If noname clear, we always
+                   *	return the stored name (if valid or invalid match).
+                   *	We use a simple hash table.
+                   * Return:
+                   *	Pointer to stored name (or a empty string)
+                   */
 const char *
-user_from_uid(uid_t uid, int noname)
+user_from_uid (uid_t uid, int noname)
 {
-	struct passwd pwstore, *pw = NULL;
-	char pwbuf[_PW_BUF_LEN];
-	UIDC **pptr, *ptr = NULL;
+  struct passwd pwstore, *pw = NULL;
+  char pwbuf[_PW_BUF_LEN];
+  UIDC **pptr, *ptr = NULL;
 
-	if ((uidtb != NULL) || (uidtb_start() == 0)) {
-		/*
-		 * see if we have this uid cached
-		 */
-		pptr = uidtb + (uid % UID_SZ);
-		ptr = *pptr;
+  if ((uidtb != NULL) || (uidtb_start () == 0))
+    {
+      /*
+       * see if we have this uid cached
+       */
+      pptr = uidtb + (uid % UID_SZ);
+      ptr = *pptr;
 
-		if ((ptr != NULL) && (ptr->valid > 0) && (ptr->uid == uid)) {
-			/*
-			 * have an entry for this uid
-			 */
-			if (!noname || (ptr->valid == VALID))
-				return ptr->name;
-			return NULL;
-		}
+      if ((ptr != NULL) && (ptr->valid > 0) && (ptr->uid == uid))
+        {
+          /*
+           * have an entry for this uid
+           */
+          if (!noname || (ptr->valid == VALID))
+            return ptr->name;
+          return NULL;
+        }
 
-		if (ptr == NULL)
-			*pptr = ptr = malloc(sizeof(UIDC));
-	}
+      if (ptr == NULL)
+        *pptr = ptr = malloc (sizeof (UIDC));
+    }
 
-	getpwuid_r(uid, &pwstore, pwbuf, sizeof(pwbuf), &pw);
-	if (pw == NULL) {
-		/*
-		 * no match for this uid in the local password file
-		 * a string that is the uid in numeric format
-		 */
-		if (ptr == NULL)
-			return NULL;
-		ptr->uid = uid;
-		(void)snprintf(ptr->name, UNMLEN, "%u", uid);
-		ptr->valid = INVALID;
-		if (noname)
-			return NULL;
-	} else {
-		/*
-		 * there is an entry for this uid in the password file
-		 */
-		if (ptr == NULL)
-			return pw->pw_name;
-		ptr->uid = uid;
-		(void)strlcpy(ptr->name, pw->pw_name, sizeof(ptr->name));
-		ptr->valid = VALID;
-	}
-	return ptr->name;
+  getpwuid_r (uid, &pwstore, pwbuf, sizeof (pwbuf), &pw);
+  if (pw == NULL)
+    {
+      /*
+       * no match for this uid in the local password file
+       * a string that is the uid in numeric format
+       */
+      if (ptr == NULL)
+        return NULL;
+      ptr->uid = uid;
+      (void)snprintf (ptr->name, UNMLEN, "%u", uid);
+      ptr->valid = INVALID;
+      if (noname)
+        return NULL;
+    }
+  else
+    {
+      /*
+       * there is an entry for this uid in the password file
+       */
+      if (ptr == NULL)
+        return pw->pw_name;
+      ptr->uid = uid;
+      (void)strlcpy (ptr->name, pw->pw_name, sizeof (ptr->name));
+      ptr->valid = VALID;
+    }
+  return ptr->name;
 }
 
 /*
@@ -262,56 +274,61 @@ user_from_uid(uid_t uid, int noname)
  *	Pointer to stored name (or a empty string)
  */
 const char *
-group_from_gid(gid_t gid, int noname)
+group_from_gid (gid_t gid, int noname)
 {
-	struct group grstore, *gr = NULL;
-	char grbuf[_GR_BUF_LEN];
-	GIDC **pptr, *ptr = NULL;
+  struct group grstore, *gr = NULL;
+  char grbuf[_GR_BUF_LEN];
+  GIDC **pptr, *ptr = NULL;
 
-	if ((gidtb != NULL) || (gidtb_start() == 0)) {
-		/*
-		 * see if we have this gid cached
-		 */
-		pptr = gidtb + (gid % GID_SZ);
-		ptr = *pptr;
+  if ((gidtb != NULL) || (gidtb_start () == 0))
+    {
+      /*
+       * see if we have this gid cached
+       */
+      pptr = gidtb + (gid % GID_SZ);
+      ptr = *pptr;
 
-		if ((ptr != NULL) && (ptr->valid > 0) && (ptr->gid == gid)) {
-			/*
-			 * have an entry for this gid
-			 */
-			if (!noname || (ptr->valid == VALID))
-				return ptr->name;
-			return NULL;
-		}
+      if ((ptr != NULL) && (ptr->valid > 0) && (ptr->gid == gid))
+        {
+          /*
+           * have an entry for this gid
+           */
+          if (!noname || (ptr->valid == VALID))
+            return ptr->name;
+          return NULL;
+        }
 
-		if (ptr == NULL)
-			*pptr = ptr = malloc(sizeof(GIDC));
-	}
+      if (ptr == NULL)
+        *pptr = ptr = malloc (sizeof (GIDC));
+    }
 
-	getgrgid_r(gid, &grstore, grbuf, sizeof(grbuf), &gr);
-	if (gr == NULL) {
-		/*
-		 * no match for this gid in the local group file, put in
-		 * a string that is the gid in numeric format
-		 */
-		if (ptr == NULL)
-			return NULL;
-		ptr->gid = gid;
-		(void)snprintf(ptr->name, GNMLEN, "%u", gid);
-		ptr->valid = INVALID;
-		if (noname)
-			return NULL;
-	} else {
-		/*
-		 * there is an entry for this group in the group file
-		 */
-		if (ptr == NULL)
-			return gr->gr_name;
-		ptr->gid = gid;
-		(void)strlcpy(ptr->name, gr->gr_name, sizeof(ptr->name));
-		ptr->valid = VALID;
-	}
-	return ptr->name;
+  getgrgid_r (gid, &grstore, grbuf, sizeof (grbuf), &gr);
+  if (gr == NULL)
+    {
+      /*
+       * no match for this gid in the local group file, put in
+       * a string that is the gid in numeric format
+       */
+      if (ptr == NULL)
+        return NULL;
+      ptr->gid = gid;
+      (void)snprintf (ptr->name, GNMLEN, "%u", gid);
+      ptr->valid = INVALID;
+      if (noname)
+        return NULL;
+    }
+  else
+    {
+      /*
+       * there is an entry for this group in the group file
+       */
+      if (ptr == NULL)
+        return gr->gr_name;
+      ptr->gid = gid;
+      (void)strlcpy (ptr->name, gr->gr_name, sizeof (ptr->name));
+      ptr->valid = VALID;
+    }
+  return ptr->name;
 }
 #endif
 
@@ -322,58 +339,61 @@ group_from_gid(gid_t gid, int noname)
  *	0 if the user name is found (filling in uid), -1 otherwise
  */
 int
-uid_from_user(const char *name, uid_t *uid)
+uid_from_user (const char *name, uid_t *uid)
 {
-	struct passwd pwstore, *pw = NULL;
-	char pwbuf[_PW_BUF_LEN];
-	UIDC **pptr, *ptr = NULL;
-	size_t namelen;
+  struct passwd pwstore, *pw = NULL;
+  char pwbuf[_PW_BUF_LEN];
+  UIDC **pptr, *ptr = NULL;
+  size_t namelen;
 
-	/*
-	 * return -1 for mangled names
-	 */
-	if (name == NULL || ((namelen = strlen(name)) == 0))
-		return -1;
+  /*
+   * return -1 for mangled names
+   */
+  if (name == NULL || ((namelen = strlen (name)) == 0))
+    return -1;
 
-	if ((usrtb != NULL) || (usrtb_start() == 0)) {
-		/*
-		 * look up in hash table, if found and valid return the uid,
-		 * if found and invalid, return a -1
-		 */
-		pptr = usrtb + st_hash(name, namelen, UNM_SZ);
-		ptr = *pptr;
+  if ((usrtb != NULL) || (usrtb_start () == 0))
+    {
+      /*
+       * look up in hash table, if found and valid return the uid,
+       * if found and invalid, return a -1
+       */
+      pptr = usrtb + st_hash (name, namelen, UNM_SZ);
+      ptr = *pptr;
 
-		if ((ptr != NULL) && (ptr->valid > 0) &&
-		    strcmp(name, ptr->name) == 0) {
-			if (ptr->valid == INVALID)
-				return -1;
-			*uid = ptr->uid;
-			return 0;
-		}
+      if ((ptr != NULL) && (ptr->valid > 0) && strcmp (name, ptr->name) == 0)
+        {
+          if (ptr->valid == INVALID)
+            return -1;
+          *uid = ptr->uid;
+          return 0;
+        }
 
-		if (ptr == NULL)
-			*pptr = ptr = malloc(sizeof(UIDC));
-	}
+      if (ptr == NULL)
+        *pptr = ptr = malloc (sizeof (UIDC));
+    }
 
-	/*
-	 * no match, look it up, if no match store it as an invalid entry,
-	 * or store the matching uid
-	 */
-	getpwnam_r(name, &pwstore, pwbuf, sizeof(pwbuf), &pw);
-	if (ptr == NULL) {
-		if (pw == NULL)
-			return -1;
-		*uid = pw->pw_uid;
-		return 0;
-	}
-	(void)strlcpy(ptr->name, name, sizeof(ptr->name));
-	if (pw == NULL) {
-		ptr->valid = INVALID;
-		return -1;
-	}
-	ptr->valid = VALID;
-	*uid = ptr->uid = pw->pw_uid;
-	return 0;
+  /*
+   * no match, look it up, if no match store it as an invalid entry,
+   * or store the matching uid
+   */
+  getpwnam_r (name, &pwstore, pwbuf, sizeof (pwbuf), &pw);
+  if (ptr == NULL)
+    {
+      if (pw == NULL)
+        return -1;
+      *uid = pw->pw_uid;
+      return 0;
+    }
+  (void)strlcpy (ptr->name, name, sizeof (ptr->name));
+  if (pw == NULL)
+    {
+      ptr->valid = INVALID;
+      return -1;
+    }
+  ptr->valid = VALID;
+  *uid = ptr->uid = pw->pw_uid;
+  return 0;
 }
 
 /*
@@ -383,57 +403,60 @@ uid_from_user(const char *name, uid_t *uid)
  *	0 if the group name is found (filling in gid), -1 otherwise
  */
 int
-gid_from_group(const char *name, gid_t *gid)
+gid_from_group (const char *name, gid_t *gid)
 {
-	struct group grstore, *gr = NULL;
-	char grbuf[_GR_BUF_LEN];
-	GIDC **pptr, *ptr = NULL;
-	size_t namelen;
+  struct group grstore, *gr = NULL;
+  char grbuf[_GR_BUF_LEN];
+  GIDC **pptr, *ptr = NULL;
+  size_t namelen;
 
-	/*
-	 * return -1 for mangled names
-	 */
-	if (name == NULL || ((namelen = strlen(name)) == 0))
-		return -1;
+  /*
+   * return -1 for mangled names
+   */
+  if (name == NULL || ((namelen = strlen (name)) == 0))
+    return -1;
 
-	if ((grptb != NULL) || (grptb_start() == 0)) {
-		/*
-		 * look up in hash table, if found and valid return the uid,
-		 * if found and invalid, return a -1
-		 */
-		pptr = grptb + st_hash(name, namelen, GID_SZ);
-		ptr = *pptr;
+  if ((grptb != NULL) || (grptb_start () == 0))
+    {
+      /*
+       * look up in hash table, if found and valid return the uid,
+       * if found and invalid, return a -1
+       */
+      pptr = grptb + st_hash (name, namelen, GID_SZ);
+      ptr = *pptr;
 
-		if ((ptr != NULL) && (ptr->valid > 0) &&
-		    strcmp(name, ptr->name) == 0) {
-			if (ptr->valid == INVALID)
-				return -1;
-			*gid = ptr->gid;
-			return 0;
-		}
+      if ((ptr != NULL) && (ptr->valid > 0) && strcmp (name, ptr->name) == 0)
+        {
+          if (ptr->valid == INVALID)
+            return -1;
+          *gid = ptr->gid;
+          return 0;
+        }
 
-		if (ptr == NULL)
-			*pptr = ptr = malloc(sizeof(GIDC));
-	}
+      if (ptr == NULL)
+        *pptr = ptr = malloc (sizeof (GIDC));
+    }
 
-	/*
-	 * no match, look it up, if no match store it as an invalid entry,
-	 * or store the matching gid
-	 */
-	getgrnam_r(name, &grstore, grbuf, sizeof(grbuf), &gr);
-	if (ptr == NULL) {
-		if (gr == NULL)
-			return -1;
-		*gid = gr->gr_gid;
-		return 0;
-	}
+  /*
+   * no match, look it up, if no match store it as an invalid entry,
+   * or store the matching gid
+   */
+  getgrnam_r (name, &grstore, grbuf, sizeof (grbuf), &gr);
+  if (ptr == NULL)
+    {
+      if (gr == NULL)
+        return -1;
+      *gid = gr->gr_gid;
+      return 0;
+    }
 
-	(void)strlcpy(ptr->name, name, sizeof(ptr->name));
-	if (gr == NULL) {
-		ptr->valid = INVALID;
-		return -1;
-	}
-	ptr->valid = VALID;
-	*gid = ptr->gid = gr->gr_gid;
-	return 0;
+  (void)strlcpy (ptr->name, name, sizeof (ptr->name));
+  if (gr == NULL)
+    {
+      ptr->valid = INVALID;
+      return -1;
+    }
+  ptr->valid = VALID;
+  *gid = ptr->gid = gr->gr_gid;
+  return 0;
 }

@@ -33,8 +33,8 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/types.h>
 #include <sys/stat.h>
+#include <sys/types.h>
 
 #include <ctype.h>
 #include <err.h>
@@ -45,7 +45,7 @@
 #include <string.h>
 #include <unistd.h>
 
-#define MAXIMUM(a, b)	(((a) > (b)) ? (a) : (b))
+#define MAXIMUM(a, b) (((a) > (b)) ? (a) : (b))
 
 extern char *__progname;
 
@@ -53,194 +53,221 @@ int bflag, eflag, nflag, sflag, tflag, vflag;
 int rval;
 char *filename;
 
-void cook_args(char *argv[]);
-void cook_buf(FILE *);
-void raw_args(char *argv[]);
-void raw_cat(int);
+void cook_args (char *argv[]);
+void cook_buf (FILE *);
+void raw_args (char *argv[]);
+void raw_cat (int);
 
 int
-main(int argc, char *argv[])
+main (int argc, char *argv[])
 {
-	int ch;
+  int ch;
 
-	while ((ch = getopt(argc, argv, "benstuv")) != -1)
-		switch (ch) {
-		case 'b':
-			bflag = nflag = 1;	/* -b implies -n */
-			break;
-		case 'e':
-			eflag = vflag = 1;	/* -e implies -v */
-			break;
-		case 'n':
-			nflag = 1;
-			break;
-		case 's':
-			sflag = 1;
-			break;
-		case 't':
-			tflag = vflag = 1;	/* -t implies -v */
-			break;
-		case 'u':
-			setvbuf(stdout, NULL, _IONBF, 0);
-			break;
-		case 'v':
-			vflag = 1;
-			break;
-		default:
-			(void)fprintf(stderr,
-			    "usage: %s [-benstuv] [file ...]\n", __progname);
-			return 1;
-		}
-	argv += optind;
+  while ((ch = getopt (argc, argv, "benstuv")) != -1)
+    switch (ch)
+      {
+      case 'b':
+        bflag = nflag = 1; /* -b implies -n */
+        break;
+      case 'e':
+        eflag = vflag = 1; /* -e implies -v */
+        break;
+      case 'n':
+        nflag = 1;
+        break;
+      case 's':
+        sflag = 1;
+        break;
+      case 't':
+        tflag = vflag = 1; /* -t implies -v */
+        break;
+      case 'u':
+        setvbuf (stdout, NULL, _IONBF, 0);
+        break;
+      case 'v':
+        vflag = 1;
+        break;
+      default:
+        (void)fprintf (stderr, "usage: %s [-benstuv] [file ...]\n",
+                       __progname);
+        return 1;
+      }
+  argv += optind;
 
-	if (bflag || eflag || nflag || sflag || tflag || vflag)
-		cook_args(argv);
-	else
-		raw_args(argv);
-	if (fclose(stdout))
-		err(1, "stdout");
-	return rval;
+  if (bflag || eflag || nflag || sflag || tflag || vflag)
+    cook_args (argv);
+  else
+    raw_args (argv);
+  if (fclose (stdout))
+    err (1, "stdout");
+  return rval;
 }
 
 void
-cook_args(char **argv)
+cook_args (char **argv)
 {
-	FILE *fp;
+  FILE *fp;
 
-	fp = stdin;
-	filename = "stdin";
-	do {
-		if (*argv) {
-			if (!strcmp(*argv, "-"))
-				fp = stdin;
-			else if ((fp = fopen(*argv, "r")) == NULL) {
-				warn("%s", *argv);
-				rval = 1;
-				++argv;
-				continue;
-			}
-			filename = *argv++;
-		}
-		cook_buf(fp);
-		if (fp == stdin)
-			clearerr(fp);
-		else
-			(void)fclose(fp);
-	} while (*argv);
+  fp = stdin;
+  filename = "stdin";
+  do
+    {
+      if (*argv)
+        {
+          if (!strcmp (*argv, "-"))
+            fp = stdin;
+          else if ((fp = fopen (*argv, "r")) == NULL)
+            {
+              warn ("%s", *argv);
+              rval = 1;
+              ++argv;
+              continue;
+            }
+          filename = *argv++;
+        }
+      cook_buf (fp);
+      if (fp == stdin)
+        clearerr (fp);
+      else
+        (void)fclose (fp);
+    }
+  while (*argv);
 }
 
 void
-cook_buf(FILE *fp)
+cook_buf (FILE *fp)
 {
-	int ch, gobble, line, prev;
+  int ch, gobble, line, prev;
 
-	line = gobble = 0;
-	for (prev = '\n'; (ch = getc(fp)) != EOF; prev = ch) {
-		if (prev == '\n') {
-			if (sflag) {
-				if (ch == '\n') {
-					if (gobble)
-						continue;
-					gobble = 1;
-				} else
-					gobble = 0;
-			}
-			if (nflag) {
-				if (!bflag || ch != '\n') {
-					(void)fprintf(stdout, "%6d\t", ++line);
-					if (ferror(stdout))
-						break;
-				} else if (eflag) {
-					(void)fprintf(stdout, "%6s\t", "");
-					if (ferror(stdout))
-						break;
-				}
-			}
-		}
-		if (ch == '\n') {
-			if (eflag && putchar('$') == EOF)
-				break;
-		} else if (ch == '\t') {
-			if (tflag) {
-				if (putchar('^') == EOF || putchar('I') == EOF)
-					break;
-				continue;
-			}
-		} else if (vflag) {
-			if (!isascii(ch)) {
-				if (putchar('M') == EOF || putchar('-') == EOF)
-					break;
-				ch = toascii(ch);
-			}
-			if (iscntrl(ch)) {
-				if (putchar('^') == EOF ||
-				    putchar(ch == '\177' ? '?' :
-				    ch | 0100) == EOF)
-					break;
-				continue;
-			}
-		}
-		if (putchar(ch) == EOF)
-			break;
-	}
-	if (ferror(fp)) {
-		warn("%s", filename);
-		rval = 1;
-		clearerr(fp);
-	}
-	if (ferror(stdout))
-		err(1, "stdout");
+  line = gobble = 0;
+  for (prev = '\n'; (ch = getc (fp)) != EOF; prev = ch)
+    {
+      if (prev == '\n')
+        {
+          if (sflag)
+            {
+              if (ch == '\n')
+                {
+                  if (gobble)
+                    continue;
+                  gobble = 1;
+                }
+              else
+                gobble = 0;
+            }
+          if (nflag)
+            {
+              if (!bflag || ch != '\n')
+                {
+                  (void)fprintf (stdout, "%6d\t", ++line);
+                  if (ferror (stdout))
+                    break;
+                }
+              else if (eflag)
+                {
+                  (void)fprintf (stdout, "%6s\t", "");
+                  if (ferror (stdout))
+                    break;
+                }
+            }
+        }
+      if (ch == '\n')
+        {
+          if (eflag && putchar ('$') == EOF)
+            break;
+        }
+      else if (ch == '\t')
+        {
+          if (tflag)
+            {
+              if (putchar ('^') == EOF || putchar ('I') == EOF)
+                break;
+              continue;
+            }
+        }
+      else if (vflag)
+        {
+          if (!isascii (ch))
+            {
+              if (putchar ('M') == EOF || putchar ('-') == EOF)
+                break;
+              ch = toascii (ch);
+            }
+          if (iscntrl (ch))
+            {
+              if (putchar ('^') == EOF
+                  || putchar (ch == '\177' ? '?' : ch | 0100) == EOF)
+                break;
+              continue;
+            }
+        }
+      if (putchar (ch) == EOF)
+        break;
+    }
+  if (ferror (fp))
+    {
+      warn ("%s", filename);
+      rval = 1;
+      clearerr (fp);
+    }
+  if (ferror (stdout))
+    err (1, "stdout");
 }
 
 void
-raw_args(char **argv)
+raw_args (char **argv)
 {
-	int fd;
+  int fd;
 
-	fd = fileno(stdin);
-	filename = "stdin";
-	do {
-		if (*argv) {
-			if (!strcmp(*argv, "-"))
-				fd = fileno(stdin);
-			else if ((fd = open(*argv, O_RDONLY, 0)) == -1) {
-				warn("%s", *argv);
-				rval = 1;
-				++argv;
-				continue;
-			}
-			filename = *argv++;
-		}
-		raw_cat(fd);
-		if (fd != fileno(stdin))
-			(void)close(fd);
-	} while (*argv);
+  fd = fileno (stdin);
+  filename = "stdin";
+  do
+    {
+      if (*argv)
+        {
+          if (!strcmp (*argv, "-"))
+            fd = fileno (stdin);
+          else if ((fd = open (*argv, O_RDONLY, 0)) == -1)
+            {
+              warn ("%s", *argv);
+              rval = 1;
+              ++argv;
+              continue;
+            }
+          filename = *argv++;
+        }
+      raw_cat (fd);
+      if (fd != fileno (stdin))
+        (void)close (fd);
+    }
+  while (*argv);
 }
 
 void
-raw_cat(int rfd)
+raw_cat (int rfd)
 {
-	int wfd;
-	ssize_t nr, nw, off;
-	static size_t bsize;
-	static char *buf = NULL;
-	struct stat sbuf;
+  int wfd;
+  ssize_t nr, nw, off;
+  static size_t bsize;
+  static char *buf = NULL;
+  struct stat sbuf;
 
-	wfd = fileno(stdout);
-	if (buf == NULL) {
-		if (fstat(wfd, &sbuf) == -1)
-			err(1, "stdout");
-		bsize = MAXIMUM(sbuf.st_blksize, BUFSIZ);
-		if ((buf = malloc(bsize)) == NULL)
-			err(1, "malloc");
-	}
-	while ((nr = read(rfd, buf, bsize)) != -1 && nr != 0)
-		for (off = 0; nr; nr -= nw, off += nw)
-			if ((nw = write(wfd, buf + off, (size_t)nr)) == 0 ||
-			     nw == -1)
-				err(1, "stdout");
-	if (nr == -1) {
-		warn("%s", filename);
-		rval = 1;
-	}
+  wfd = fileno (stdout);
+  if (buf == NULL)
+    {
+      if (fstat (wfd, &sbuf) == -1)
+        err (1, "stdout");
+      bsize = MAXIMUM (sbuf.st_blksize, BUFSIZ);
+      if ((buf = malloc (bsize)) == NULL)
+        err (1, "malloc");
+    }
+  while ((nr = read (rfd, buf, bsize)) != -1 && nr != 0)
+    for (off = 0; nr; nr -= nw, off += nw)
+      if ((nw = write (wfd, buf + off, (size_t)nr)) == 0 || nw == -1)
+        err (1, "stdout");
+  if (nr == -1)
+    {
+      warn ("%s", filename);
+      rval = 1;
+    }
 }

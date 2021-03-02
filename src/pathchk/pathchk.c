@@ -36,8 +36,8 @@
 
 #include <sys/cdefs.h>
 
-#include <sys/types.h>
 #include <sys/stat.h>
+#include <sys/types.h>
 
 #include <err.h>
 #include <errno.h>
@@ -47,159 +47,172 @@
 #include <string.h>
 #include <unistd.h>
 
-static int	 check(const char *);
-static int	 portable(const char *);
-static void	 usage(void);
+static int check (const char *);
+static int portable (const char *);
+static void usage (void);
 
-static int	 pflag;			/* Perform portability checks */
-static int	 Pflag;			/* Check for empty paths, leading '-' */
+static int pflag; /* Perform portability checks */
+static int Pflag; /* Check for empty paths, leading '-' */
 
 extern char *__progname;
 
 int
-main(int argc, char *argv[])
+main (int argc, char *argv[])
 {
-	int ch, rval;
-	const char *arg;
+  int ch, rval;
+  const char *arg;
 
-	while ((ch = getopt(argc, argv, "pP")) > 0) {
-		switch (ch) {
-		case 'p':
-			pflag = 1;
-			break;
-		case 'P':
-			Pflag = 1;
-			break;
-		default:
-			usage();
-			/*NOTREACHED*/
-		}
-	}
-	argc -= optind;
-	argv += optind;
+  while ((ch = getopt (argc, argv, "pP")) > 0)
+    {
+      switch (ch)
+        {
+        case 'p':
+          pflag = 1;
+          break;
+        case 'P':
+          Pflag = 1;
+          break;
+        default:
+          usage ();
+          /*NOTREACHED*/
+        }
+    }
+  argc -= optind;
+  argv += optind;
 
-	if (argc == 0)
-		usage();
+  if (argc == 0)
+    usage ();
 
-	rval = 0;
-	while ((arg = *argv++) != NULL)
-		rval |= check(arg);
+  rval = 0;
+  while ((arg = *argv++) != NULL)
+    rval |= check (arg);
 
-	exit(rval);
+  exit (rval);
 }
 
 static void
-usage(void)
+usage (void)
 {
 
-	fprintf(stderr, "usage: %s [-Pp] pathname ...\n", __progname);
-	exit(1);
+  fprintf (stderr, "usage: %s [-Pp] pathname ...\n", __progname);
+  exit (1);
 }
 
 static int
-check(const char *path)
+check (const char *path)
 {
-	struct stat sb;
-	long complen, namemax, pathmax, svnamemax;
-	int last;
-	char *end, *p, *pathd;
+  struct stat sb;
+  long complen, namemax, pathmax, svnamemax;
+  int last;
+  char *end, *p, *pathd;
 
-	if ((pathd = strdup(path)) == NULL)
-		err(1, "strdup");
+  if ((pathd = strdup (path)) == NULL)
+    err (1, "strdup");
 
-	p = pathd;
+  p = pathd;
 
-	if (Pflag && *p == '\0') {
-		warnx("%s: empty pathname", path);
-		goto bad;
-	}
-	if ((Pflag || pflag) && (*p == '-' || strstr(p, "/-") != NULL)) {
-		warnx("%s: contains a component starting with '-'", path);
-		goto bad;
-	}
+  if (Pflag && *p == '\0')
+    {
+      warnx ("%s: empty pathname", path);
+      goto bad;
+    }
+  if ((Pflag || pflag) && (*p == '-' || strstr (p, "/-") != NULL))
+    {
+      warnx ("%s: contains a component starting with '-'", path);
+      goto bad;
+    }
 
-	if (!pflag) {
-		errno = 0;
-		namemax = pathconf(*p == '/' ? "/" : ".", _PC_NAME_MAX);
-		if (namemax == -1 && errno != 0)
-			namemax = NAME_MAX;
-	} else
-		namemax = _POSIX_NAME_MAX;
+  if (!pflag)
+    {
+      errno = 0;
+      namemax = pathconf (*p == '/' ? "/" : ".", _PC_NAME_MAX);
+      if (namemax == -1 && errno != 0)
+        namemax = NAME_MAX;
+    }
+  else
+    namemax = _POSIX_NAME_MAX;
 
-	for (;;) {
-		p += strspn(p, "/");
-		complen = (long)strcspn(p, "/");
-		end = p + complen;
-		last = *end == '\0';
-		*end = '\0';
+  for (;;)
+    {
+      p += strspn (p, "/");
+      complen = (long)strcspn (p, "/");
+      end = p + complen;
+      last = *end == '\0';
+      *end = '\0';
 
-		if (namemax != -1 && complen > namemax) {
-			warnx("%s: %s: component too long (limit %ld)", path,
-			    p, namemax);
-			goto bad;
-		}
+      if (namemax != -1 && complen > namemax)
+        {
+          warnx ("%s: %s: component too long (limit %ld)", path, p, namemax);
+          goto bad;
+        }
 
-		if (!pflag && stat(pathd, &sb) == -1 && errno != ENOENT) {
-			warn("%s: %.*s", path, (int)(strlen(pathd) -
-			    complen - 1), pathd);
-			goto bad;
-		}
+      if (!pflag && stat (pathd, &sb) == -1 && errno != ENOENT)
+        {
+          warn ("%s: %.*s", path, (int)(strlen (pathd) - complen - 1), pathd);
+          goto bad;
+        }
 
-		if (pflag && !portable(p)) {
-			warnx("%s: %s: component contains non-portable "
-			    "character", path, p);
-			goto bad;
-		}
+      if (pflag && !portable (p))
+        {
+          warnx ("%s: %s: component contains non-portable "
+                 "character",
+                 path, p);
+          goto bad;
+        }
 
-		if (last)
-			break;
+      if (last)
+        break;
 
-		if (!pflag) {
-			errno = 0;
-			svnamemax = namemax;
-			namemax = pathconf(pathd, _PC_NAME_MAX);
-			if (namemax == -1 && errno != 0)
-				namemax = svnamemax;
-		}
+      if (!pflag)
+        {
+          errno = 0;
+          svnamemax = namemax;
+          namemax = pathconf (pathd, _PC_NAME_MAX);
+          if (namemax == -1 && errno != 0)
+            namemax = svnamemax;
+        }
 
-		*end = '/';
-		p = end + 1;
-	}
+      *end = '/';
+      p = end + 1;
+    }
 
-	if (!pflag) {
-		errno = 0;
-		pathmax = pathconf(path, _PC_PATH_MAX);
-		if (pathmax == -1 && errno != 0)
-			pathmax = PATH_MAX;
-	} else
-		pathmax = _POSIX_PATH_MAX;
-	if (pathmax != -1 && strlen(path) >= (size_t)pathmax) {
-		warnx("%s: path too long (limit %ld)", path, pathmax - 1);
-		goto bad;
-	}
+  if (!pflag)
+    {
+      errno = 0;
+      pathmax = pathconf (path, _PC_PATH_MAX);
+      if (pathmax == -1 && errno != 0)
+        pathmax = PATH_MAX;
+    }
+  else
+    pathmax = _POSIX_PATH_MAX;
+  if (pathmax != -1 && strlen (path) >= (size_t)pathmax)
+    {
+      warnx ("%s: path too long (limit %ld)", path, pathmax - 1);
+      goto bad;
+    }
 
-	free(pathd);
-	return (0);
+  free (pathd);
+  return (0);
 
-bad:	free(pathd);
-	return (1);
+bad:
+  free (pathd);
+  return (1);
 }
 
 /*
  * Check whether a path component contains only portable characters.
  */
 static int
-portable(const char *path)
+portable (const char *path)
 {
-	static const char charset[] =
-	    "abcdefghijklmnopqrstuvwxyz"
-	    "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-	    "0123456789._-";
-	long s;
+  static const char charset[] = "abcdefghijklmnopqrstuvwxyz"
+                                "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                                "0123456789._-";
+  long s;
 
-	s = strspn(path, charset);
-	if (path[s] != '\0')
-		return (0);
+  s = strspn (path, charset);
+  if (path[s] != '\0')
+    return (0);
 
-	return (1);
+  return (1);
 }

@@ -3,7 +3,7 @@
 /* Public domain - Theo de Raadt */
 
 int
-main(int argc, char *argv[])
+main (int argc, char *argv[])
 {
-	return (1);
+  return (1);
 }

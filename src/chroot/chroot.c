@@ -29,7 +29,6 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/types.h>
 #include <ctype.h>
 #include <err.h>
 #include <errno.h>
@@ -40,85 +39,94 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/types.h>
 #include <unistd.h>
 
-int		main(int, char **);
-void	usage(void);
+int main (int, char **);
+void usage (void);
 
 int
-main(int argc, char **argv)
+main (int argc, char **argv)
 {
-	struct group	*grp;
-	struct passwd	*pwd;
-	const char	*shell;
-	char		*group, *grouplist;
-	gid_t		gidlist[NGROUPS_MAX];
-	int		ch, ngids;
+  struct group *grp;
+  struct passwd *pwd;
+  const char *shell;
+  char *group, *grouplist;
+  gid_t gidlist[NGROUPS_MAX];
+  int ch, ngids;
 
-	ngids = 0;
-	pwd = NULL;
-	grouplist = NULL;
-	while ((ch = getopt(argc, argv, "g:")) != -1) {
-		switch(ch) {
-		case 'g':
-			grouplist = optarg;
-			if (*grouplist == '\0')
-				usage();
-			break;
-		default:
-			usage();
-		}
-	}
-	argc -= optind;
-	argv += optind;
+  ngids = 0;
+  pwd = NULL;
+  grouplist = NULL;
+  while ((ch = getopt (argc, argv, "g:")) != -1)
+    {
+      switch (ch)
+        {
+        case 'g':
+          grouplist = optarg;
+          if (*grouplist == '\0')
+            usage ();
+          break;
+        default:
+          usage ();
+        }
+    }
+  argc -= optind;
+  argv += optind;
 
-	if (argc < 1)
-		usage();
+  if (argc < 1)
+    usage ();
 
-	while ((group = strsep(&grouplist, ",")) != NULL) {
-		if (*group == '\0')
-			continue;
+  while ((group = strsep (&grouplist, ",")) != NULL)
+    {
+      if (*group == '\0')
+        continue;
 
-		if (ngids == NGROUPS_MAX)
-			errx(1, "too many supplementary groups provided");
-		if ((grp = getgrnam(group)) == NULL)
-			errx(1, "no such group `%s'", group);
-		gidlist[ngids++] = grp->gr_gid;
-	}
+      if (ngids == NGROUPS_MAX)
+        errx (1, "too many supplementary groups provided");
+      if ((grp = getgrnam (group)) == NULL)
+        errx (1, "no such group `%s'", group);
+      gidlist[ngids++] = grp->gr_gid;
+    }
 
-	if (ngids != 0) {
-		if (setgid(gidlist[0]) != 0)
-			err(1, "setgid");
-		if (setgroups(ngids, gidlist) != 0)
-			err(1, "setgroups");
-	}
+  if (ngids != 0)
+    {
+      if (setgid (gidlist[0]) != 0)
+        err (1, "setgid");
+      if (setgroups (ngids, gidlist) != 0)
+        err (1, "setgroups");
+    }
 
-	if (chroot(argv[0]) != 0 || chdir("/") != 0)
-		err(1, "%s", argv[0]);
+  if (chroot (argv[0]) != 0 || chdir ("/") != 0)
+    err (1, "%s", argv[0]);
 
-	if (pwd != NULL) {
-		if (setuid(pwd->pw_uid) != 0)
-			err(1, "setuid");
-	}
+  if (pwd != NULL)
+    {
+      if (setuid (pwd->pw_uid) != 0)
+        err (1, "setuid");
+    }
 
-	if (argv[1]) {
-		execvp(argv[1], &argv[1]);
-		err(1, "%s", argv[1]);
-	}
+  if (argv[1])
+    {
+      execvp (argv[1], &argv[1]);
+      err (1, "%s", argv[1]);
+    }
 
-	if ((shell = getenv("SHELL")) == NULL || *shell == '\0')
-		shell = _PATH_BSHELL;
-	execlp(shell, shell, "-i", (char *)NULL);
-	err(1, "%s", shell);
-	/* NOTREACHED */
+  if ((shell = getenv ("SHELL")) == NULL || *shell == '\0')
+    shell = _PATH_BSHELL;
+  execlp (shell, shell, "-i", (char *)NULL);
+  err (1, "%s", shell);
+  /* NOTREACHED */
 }
 
 void
-usage(void)
+usage (void)
 {
-	extern char *__progname;
+  extern char *__progname;
 
-	(void)fprintf(stderr, "usage: %s [-g group,group,...] "
-	    "newroot [command]\n", __progname);
-	exit(1);
+  (void)fprintf (stderr,
+                 "usage: %s [-g group,group,...] "
+                 "newroot [command]\n",
+                 __progname);
+  exit (1);
 }

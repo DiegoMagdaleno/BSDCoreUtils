@@ -34,27 +34,27 @@
 
 extern char *__progname;
 
-int	 acccmp(const FTSENT *, const FTSENT *);
-int	 revacccmp(const FTSENT *, const FTSENT *);
-int	 modcmp(const FTSENT *, const FTSENT *);
-int	 revmodcmp(const FTSENT *, const FTSENT *);
-int	 namecmp(const FTSENT *, const FTSENT *);
-int	 revnamecmp(const FTSENT *, const FTSENT *);
-int	 statcmp(const FTSENT *, const FTSENT *);
-int	 revstatcmp(const FTSENT *, const FTSENT *);
-int	 sizecmp(const FTSENT *, const FTSENT *);
-int	 revsizecmp(const FTSENT *, const FTSENT *);
+int acccmp (const FTSENT *, const FTSENT *);
+int revacccmp (const FTSENT *, const FTSENT *);
+int modcmp (const FTSENT *, const FTSENT *);
+int revmodcmp (const FTSENT *, const FTSENT *);
+int namecmp (const FTSENT *, const FTSENT *);
+int revnamecmp (const FTSENT *, const FTSENT *);
+int statcmp (const FTSENT *, const FTSENT *);
+int revstatcmp (const FTSENT *, const FTSENT *);
+int sizecmp (const FTSENT *, const FTSENT *);
+int revsizecmp (const FTSENT *, const FTSENT *);
 
-int	 mbsprint(const char *, int);
-void	 printcol(DISPLAY *);
-void	 printacol(DISPLAY *);
-void	 printlong(DISPLAY *);
-void	 printscol(DISPLAY *);
-void	 printstream(DISPLAY *);
-void	 usage(void);
+int mbsprint (const char *, int);
+void printcol (DISPLAY *);
+void printacol (DISPLAY *);
+void printlong (DISPLAY *);
+void printscol (DISPLAY *);
+void printstream (DISPLAY *);
+void usage (void);
 #ifdef COLORLS
-void	 parsecolors(const char *cs);
-void	 colorquit(int);
+void parsecolors (const char *cs);
+void colorquit (int);
 
 extern char *ansi_fgcol;
 extern char *ansi_bgcol;

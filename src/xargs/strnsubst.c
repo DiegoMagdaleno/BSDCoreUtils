@@ -17,7 +17,7 @@
 
 #include "compat.h"
 
-void	strnsubst(char **, const char *, const char *, size_t);
+void strnsubst (char **, const char *, const char *, size_t);
 
 /*
  * Replaces str with a string consisting of str with match replaced with
@@ -30,69 +30,71 @@ void	strnsubst(char **, const char *, const char *, size_t);
  * No value is returned.
  */
 void
-strnsubst(char **str, const char *match, const char *replstr, size_t maxsize)
+strnsubst (char **str, const char *match, const char *replstr, size_t maxsize)
 {
-	char *s1, *s2, *this;
-	size_t matchlen, s2len;
-	int n;
+  char *s1, *s2, *this;
+  size_t matchlen, s2len;
+  int n;
 
-	if ((s1 = *str) == NULL)
-		return;
-	if ((s2 = malloc(maxsize)) == NULL)
-		err(1, NULL);
+  if ((s1 = *str) == NULL)
+    return;
+  if ((s2 = malloc (maxsize)) == NULL)
+    err (1, NULL);
 
-	if (replstr == NULL)
-		replstr = "";
+  if (replstr == NULL)
+    replstr = "";
 
-	if (match == NULL || *match == '\0' || strlen(s1) >= maxsize) {
-		strlcpy(s2, s1, maxsize);
-		goto done;
-	}
+  if (match == NULL || *match == '\0' || strlen (s1) >= maxsize)
+    {
+      strlcpy (s2, s1, maxsize);
+      goto done;
+    }
 
-	*s2 = '\0';
-	s2len = 0;
-	matchlen = strlen(match);
-	for (;;) {
-		if ((this = strstr(s1, match)) == NULL)
-			break;
-		n = snprintf(s2 + s2len, maxsize - s2len, "%.*s%s",
-		    (int)(this - s1), s1, replstr);
-		if (n < 0 || n + s2len + strlen(this + matchlen) >= maxsize)
-			break;			/* out of room */
-		s2len += n;
-		s1 = this + matchlen;
-	}
-	strlcpy(s2 + s2len, s1, maxsize - s2len);
+  *s2 = '\0';
+  s2len = 0;
+  matchlen = strlen (match);
+  for (;;)
+    {
+      if ((this = strstr (s1, match)) == NULL)
+        break;
+      n = snprintf (s2 + s2len, maxsize - s2len, "%.*s%s", (int)(this - s1),
+                    s1, replstr);
+      if (n < 0 || n + s2len + strlen (this + matchlen) >= maxsize)
+        break; /* out of room */
+      s2len += n;
+      s1 = this + matchlen;
+    }
+  strlcpy (s2 + s2len, s1, maxsize - s2len);
 done:
-	*str = s2;
-	return;
+  *str = s2;
+  return;
 }
 
 #ifdef TEST
 #include <stdio.h>
 
 int
-main(void)
+main (void)
 {
-	char *x, *y, *z, *za;
+  char *x, *y, *z, *za;
 
-	x = "{}%$";
-	strnsubst(&x, "%$", "{} enpury!", 255);
-	y = x;
-	strnsubst(&y, "}{}", "ybir", 255);
-	z = y;
-	strnsubst(&z, "{", "v ", 255);
-	za = z;
-	strnsubst(&z, NULL, za, 255);
-	if (strcmp(z, "v ybir enpury!") == 0)
-		printf("strnsubst() seems to work!\n");
-	else
-		printf("strnsubst() is broken.\n");
-	printf("%s\n", z);
-	free(x);
-	free(y);
-	free(z);
-	free(za);
-	return 0;
+  x = "{}%$";
+  strnsubst (&x, "%$", "{} enpury!", 255);
+  y = x;
+  strnsubst (&y, "}{}", "ybir", 255);
+  z = y;
+  strnsubst (&z, "{", "v ", 255);
+  za = z;
+  strnsubst (&z, NULL, za, 255);
+  if (strcmp (z, "v ybir enpury!") == 0)
+    printf ("strnsubst() seems to work!\n");
+  else
+    printf ("strnsubst() is broken.\n");
+  printf ("%s\n", z);
+  free (x);
+  free (y);
+  free (z);
+  free (za);
+  return 0;
 }
 #endif

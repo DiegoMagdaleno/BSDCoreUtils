@@ -34,11 +34,11 @@
 
 #include <sys/stat.h>
 
-#include <time.h>
-#include <string.h>
 #include <err.h>
-#include <stdlib.h>
 #include <stdint.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
 
 #ifdef SUPPORT_UTMP
 #include <utmp.h>
@@ -50,28 +50,27 @@
 #include "utmpentry.h"
 
 #ifdef __APPLE__
-#define	timespecclear(tsp)	(tsp)->tv_sec = (time_t)((tsp)->tv_nsec = 0L)
-#define	timespeccmp(tsp, usp, cmp)					\
-	(((tsp)->tv_sec == (usp)->tv_sec) ?				\
-	    ((tsp)->tv_nsec cmp (usp)->tv_nsec) :			\
-	    ((tsp)->tv_sec cmp (usp)->tv_sec))
+#define timespecclear(tsp) (tsp)->tv_sec = (time_t) ((tsp)->tv_nsec = 0L)
+#define timespeccmp(tsp, usp, cmp)                                            \
+  (((tsp)->tv_sec == (usp)->tv_sec) ? ((tsp)->tv_nsec cmp (usp)->tv_nsec)     \
+                                    : ((tsp)->tv_sec cmp (usp)->tv_sec))
 #endif /* __APPLE__ */
 
 /* Fail the compile if x is not true, by constructing an illegal type. */
-#define COMPILE_ASSERT(x) ((void)sizeof(struct { unsigned : ((x) ? 1 : -1); }))
-
+#define COMPILE_ASSERT(x)                                                     \
+  ((void)sizeof (struct { unsigned : ((x) ? 1 : -1); }))
 
 #ifdef SUPPORT_UTMP
-static void getentry(struct utmpentry *, struct utmp *);
-static struct timespec utmptime = {0, 0};
+static void getentry (struct utmpentry *, struct utmp *);
+static struct timespec utmptime = { 0, 0 };
 #endif
 #ifdef SUPPORT_UTMPX
-static void getentryx(struct utmpentry *, struct utmpx *);
-static struct timespec utmpxtime = {0, 0};
+static void getentryx (struct utmpentry *, struct utmpx *);
+static struct timespec utmpxtime = { 0, 0 };
 #endif
 #if defined(SUPPORT_UTMPX) || defined(SUPPORT_UTMP)
-static int setup(const char *);
-static void adjust_size(struct utmpentry *e);
+static int setup (const char *);
+static void adjust_size (struct utmpentry *e);
 #endif
 
 int maxname = 8, maxline = 8, maxhost = 16;
@@ -81,269 +80,289 @@ static struct utmpentry *ehead;
 
 #if defined(SUPPORT_UTMPX) || defined(SUPPORT_UTMP)
 static void
-adjust_size(struct utmpentry *e)
+adjust_size (struct utmpentry *e)
 {
-	int max;
+  int max;
 
-	if ((max = strlen(e->name)) > maxname)
-		maxname = max;
-	if ((max = strlen(e->line)) > maxline)
-		maxline = max;
-	if ((max = strlen(e->host)) > maxhost)
-		maxhost = max;
+  if ((max = strlen (e->name)) > maxname)
+    maxname = max;
+  if ((max = strlen (e->line)) > maxline)
+    maxline = max;
+  if ((max = strlen (e->host)) > maxhost)
+    maxhost = max;
 }
 
 static int
-setup(const char *fname)
+setup (const char *fname)
 {
-	int what = 3;
-	struct stat st;
-	const char *sfname;
+  int what = 3;
+  struct stat st;
+  const char *sfname;
 
-	if (fname == NULL) {
+  if (fname == NULL)
+    {
 #ifdef SUPPORT_UTMPX
-		setutxent();
+      setutxent ();
 #endif
 #ifdef SUPPORT_UTMP
-		setutent();
+      setutent ();
 #endif
-	} else {
-		size_t len = strlen(fname);
-		if (len == 0)
-			errx(1, "Filename cannot be 0 length.");
+    }
+  else
+    {
+      size_t len = strlen (fname);
+      if (len == 0)
+        errx (1, "Filename cannot be 0 length.");
 #ifdef __APPLE__
-		what = 1;
-#else /* !__APPLE__ */
-		what = fname[len - 1] == 'x' ? 1 : 2;
+      what = 1;
+#else  /* !__APPLE__ */
+      what = fname[len - 1] == 'x' ? 1 : 2;
 #endif /* __APPLE__ */
-		if (what == 1) {
+      if (what == 1)
+        {
 #ifdef SUPPORT_UTMPX
-			if (utmpxname(fname) == 0)
-				warnx("Cannot set utmpx file to `%s'",
-				    fname);
+          if (utmpxname (fname) == 0)
+            warnx ("Cannot set utmpx file to `%s'", fname);
 #else
-			warnx("utmpx support not compiled in");
+          warnx ("utmpx support not compiled in");
 #endif
-		} else {
+        }
+      else
+        {
 #ifdef SUPPORT_UTMP
-			if (utmpname(fname) == 0)
-				warnx("Cannot set utmp file to `%s'",
-				    fname);
+          if (utmpname (fname) == 0)
+            warnx ("Cannot set utmp file to `%s'", fname);
 #else
-			warnx("utmp support not compiled in");
+          warnx ("utmp support not compiled in");
 #endif
-		}
-	}
+        }
+    }
 #ifdef SUPPORT_UTMPX
-	if (what & 1) {
-		sfname = fname ? fname : _PATH_UTMPX;
-		if (stat(sfname, &st) == -1) {
-			warn("Cannot stat `%s'", sfname);
-			what &= ~1;
-		} else {
-			if (timespeccmp(&st.st_mtimespec, &utmpxtime, >))
-			    utmpxtime = st.st_mtimespec;
-			else
-			    what &= ~1;
-		}
-	}
+  if (what & 1)
+    {
+      sfname = fname ? fname : _PATH_UTMPX;
+      if (stat (sfname, &st) == -1)
+        {
+          warn ("Cannot stat `%s'", sfname);
+          what &= ~1;
+        }
+      else
+        {
+          if (timespeccmp (&st.st_mtimespec, &utmpxtime, >))
+            utmpxtime = st.st_mtimespec;
+          else
+            what &= ~1;
+        }
+    }
 #endif
 #ifdef SUPPORT_UTMP
-	if (what & 2) {
-		sfname = fname ? fname : _PATH_UTMP;
-		if (stat(sfname, &st) == -1) {
-			warn("Cannot stat `%s'", sfname);
-			what &= ~2;
-		} else {
-            #ifdef __linux__
-            if (timespeccmp(&st.st_mtim, &utmptime, >))
-                utmptime = st.st_mtim;
-            #else
-			if (timespeccmp(&st.st_mtimespec, &utmptime, >))
-				utmptime = st.st_mtimespec;
-            #endif
-			else
-				what &= ~2;
-		}
-	}
+  if (what & 2)
+    {
+      sfname = fname ? fname : _PATH_UTMP;
+      if (stat (sfname, &st) == -1)
+        {
+          warn ("Cannot stat `%s'", sfname);
+          what &= ~2;
+        }
+      else
+        {
+#ifdef __linux__
+          if (timespeccmp (&st.st_mtim, &utmptime, >))
+            utmptime = st.st_mtim;
+#else
+          if (timespeccmp (&st.st_mtimespec, &utmptime, >))
+            utmptime = st.st_mtimespec;
 #endif
-	return what;
+          else
+            what &= ~2;
+        }
+    }
+#endif
+  return what;
 }
 #endif
 
 void
-endutentries(void)
+endutentries (void)
 {
-	struct utmpentry *ep;
+  struct utmpentry *ep;
 
 #ifdef SUPPORT_UTMP
-	timespecclear(&utmptime);
+  timespecclear (&utmptime);
 #endif
 #ifdef SUPPORT_UTMPX
-	timespecclear(&utmpxtime);
+  timespecclear (&utmpxtime);
 #endif
-	ep = ehead;
-	while (ep) {
-		struct utmpentry *sep = ep;
-		ep = ep->next;
-		free(sep);
-	}
-	ehead = NULL;
-	numutmp = 0;
+  ep = ehead;
+  while (ep)
+    {
+      struct utmpentry *sep = ep;
+      ep = ep->next;
+      free (sep);
+    }
+  ehead = NULL;
+  numutmp = 0;
 }
 
 int
-getutentries(const char *fname, struct utmpentry **epp)
+getutentries (const char *fname, struct utmpentry **epp)
 {
 #ifdef SUPPORT_UTMPX
-	struct utmpx *utx;
+  struct utmpx *utx;
 #endif
 #ifdef SUPPORT_UTMP
-	struct utmp *ut;
+  struct utmp *ut;
 #endif
 #if defined(SUPPORT_UTMP) || defined(SUPPORT_UTMPX)
-	struct utmpentry *ep;
-	int what = setup(fname);
-	struct utmpentry **nextp = &ehead;
-	switch (what) {
-	case 0:
-		/* No updates */
-		*epp = ehead;
-		return numutmp;
-	default:
-		/* Need to re-scan */
-		ehead = NULL;
-		numutmp = 0;
-	}
+  struct utmpentry *ep;
+  int what = setup (fname);
+  struct utmpentry **nextp = &ehead;
+  switch (what)
+    {
+    case 0:
+      /* No updates */
+      *epp = ehead;
+      return numutmp;
+    default:
+      /* Need to re-scan */
+      ehead = NULL;
+      numutmp = 0;
+    }
 #endif
 
 #ifdef SUPPORT_UTMPX
-	while ((what & 1) && (utx = getutxent()) != NULL) {
+  while ((what & 1) && (utx = getutxent ()) != NULL)
+    {
 #ifdef __APPLE__
-		if (((1 << utx->ut_type) & etype) == 0)
-#else /* !__APPLE__ */
-		if (fname == NULL && ((1 << utx->ut_type) & etype) == 0)
+      if (((1 << utx->ut_type) & etype) == 0)
+#else  /* !__APPLE__ */
+      if (fname == NULL && ((1 << utx->ut_type) & etype) == 0)
 #endif /* __APPLE__ */
-			continue;
-		if ((ep = calloc(1, sizeof(struct utmpentry))) == NULL) {
-			warn(NULL);
-			return 0;
-		}
-		getentryx(ep, utx);
-		*nextp = ep;
-		nextp = &(ep->next);
-	}
+        continue;
+      if ((ep = calloc (1, sizeof (struct utmpentry))) == NULL)
+        {
+          warn (NULL);
+          return 0;
+        }
+      getentryx (ep, utx);
+      *nextp = ep;
+      nextp = &(ep->next);
+    }
 #endif
 
 #ifdef SUPPORT_UTMP
-	if ((etype & (1 << USER_PROCESS)) != 0) {
-		while ((what & 2) && (ut = getutent()) != NULL) {
-			if (fname == NULL && (*ut->ut_name == '\0' ||
-			    *ut->ut_line == '\0'))
-				continue;
-			/* Don't process entries that we have utmpx for */
-			for (ep = ehead; ep != NULL; ep = ep->next) {
-				if (strncmp(ep->line, ut->ut_line,
-				    sizeof(ut->ut_line)) == 0)
-					break;
-			}
-			if (ep != NULL)
-				continue;
-			if ((ep = calloc(1, sizeof(*ep))) == NULL) {
-				warn(NULL);
-				return 0;
-			}
-			getentry(ep, ut);
-			*nextp = ep;
-			nextp = &(ep->next);
-		}
-	}
+  if ((etype & (1 << USER_PROCESS)) != 0)
+    {
+      while ((what & 2) && (ut = getutent ()) != NULL)
+        {
+          if (fname == NULL && (*ut->ut_name == '\0' || *ut->ut_line == '\0'))
+            continue;
+          /* Don't process entries that we have utmpx for */
+          for (ep = ehead; ep != NULL; ep = ep->next)
+            {
+              if (strncmp (ep->line, ut->ut_line, sizeof (ut->ut_line)) == 0)
+                break;
+            }
+          if (ep != NULL)
+            continue;
+          if ((ep = calloc (1, sizeof (*ep))) == NULL)
+            {
+              warn (NULL);
+              return 0;
+            }
+          getentry (ep, ut);
+          *nextp = ep;
+          nextp = &(ep->next);
+        }
+    }
 #endif
-	numutmp = 0;
+  numutmp = 0;
 #if defined(SUPPORT_UTMP) || defined(SUPPORT_UTMPX)
-	if (ehead != NULL) {
-		struct utmpentry *from = ehead, *save;
-		
-		ehead = NULL;
-		while (from != NULL) {
-			for (nextp = &ehead;
-			    (*nextp) && strcmp(from->line, (*nextp)->line) > 0;
-			    nextp = &(*nextp)->next)
-				continue;
-			save = from;
-			from = from->next;
-			save->next = *nextp;
-			*nextp = save;
-			numutmp++;
-		}
-	}
-	*epp = ehead;
-	return numutmp;
+  if (ehead != NULL)
+    {
+      struct utmpentry *from = ehead, *save;
+
+      ehead = NULL;
+      while (from != NULL)
+        {
+          for (nextp = &ehead;
+               (*nextp) && strcmp (from->line, (*nextp)->line) > 0;
+               nextp = &(*nextp)->next)
+            continue;
+          save = from;
+          from = from->next;
+          save->next = *nextp;
+          *nextp = save;
+          numutmp++;
+        }
+    }
+  *epp = ehead;
+  return numutmp;
 #else
-	*epp = NULL;
-	return 0;
+  *epp = NULL;
+  return 0;
 #endif
 }
 
 #ifdef SUPPORT_UTMP
 static void
-getentry(struct utmpentry *e, struct utmp *up)
+getentry (struct utmpentry *e, struct utmp *up)
 {
-	COMPILE_ASSERT(sizeof(e->name) > sizeof(up->ut_name));
-	COMPILE_ASSERT(sizeof(e->line) > sizeof(up->ut_line));
-	COMPILE_ASSERT(sizeof(e->host) > sizeof(up->ut_host));
+  COMPILE_ASSERT (sizeof (e->name) > sizeof (up->ut_name));
+  COMPILE_ASSERT (sizeof (e->line) > sizeof (up->ut_line));
+  COMPILE_ASSERT (sizeof (e->host) > sizeof (up->ut_host));
 
-	/*
-	 * e has just been calloc'd. We don't need to clear it or
-	 * append null-terminators, because its length is strictly
-	 * greater than the source string. Use strncpy to _read_
-	 * up->ut_* because they may not be terminated. For this
-	 * reason we use the size of the _source_ as the length
-	 * argument.
-	 */
-	(void)strncpy(e->name, up->ut_name, sizeof(up->ut_name));
-	(void)strncpy(e->line, up->ut_line, sizeof(up->ut_line));
-	(void)strncpy(e->host, up->ut_host, sizeof(up->ut_host));
+  /*
+   * e has just been calloc'd. We don't need to clear it or
+   * append null-terminators, because its length is strictly
+   * greater than the source string. Use strncpy to _read_
+   * up->ut_* because they may not be terminated. For this
+   * reason we use the size of the _source_ as the length
+   * argument.
+   */
+  (void)strncpy (e->name, up->ut_name, sizeof (up->ut_name));
+  (void)strncpy (e->line, up->ut_line, sizeof (up->ut_line));
+  (void)strncpy (e->host, up->ut_host, sizeof (up->ut_host));
 
-	e->tv.tv_sec = up->ut_time;
-	e->tv.tv_usec = 0;
-	e->pid = 0;
-	e->term = 0;
-	e->exit = 0;
-	e->sess = 0;
-	e->type = USER_PROCESS;
-	adjust_size(e);
+  e->tv.tv_sec = up->ut_time;
+  e->tv.tv_usec = 0;
+  e->pid = 0;
+  e->term = 0;
+  e->exit = 0;
+  e->sess = 0;
+  e->type = USER_PROCESS;
+  adjust_size (e);
 }
 #endif
 
 #ifdef SUPPORT_UTMPX
 static void
-getentryx(struct utmpentry *e, struct utmpx *up)
+getentryx (struct utmpentry *e, struct utmpx *up)
 {
-	COMPILE_ASSERT(sizeof(e->name) > sizeof(up->ut_name));
-	COMPILE_ASSERT(sizeof(e->line) > sizeof(up->ut_line));
-	COMPILE_ASSERT(sizeof(e->host) > sizeof(up->ut_host));
+  COMPILE_ASSERT (sizeof (e->name) > sizeof (up->ut_name));
+  COMPILE_ASSERT (sizeof (e->line) > sizeof (up->ut_line));
+  COMPILE_ASSERT (sizeof (e->host) > sizeof (up->ut_host));
 
-	/*
-	 * e has just been calloc'd. We don't need to clear it or
-	 * append null-terminators, because its length is strictly
-	 * greater than the source string. Use strncpy to _read_
-	 * up->ut_* because they may not be terminated. For this
-	 * reason we use the size of the _source_ as the length
-	 * argument.
-	 */
-	(void)strncpy(e->name, up->ut_name, sizeof(up->ut_name));
-	(void)strncpy(e->line, up->ut_line, sizeof(up->ut_line));
-	(void)strncpy(e->host, up->ut_host, sizeof(up->ut_host));
+  /*
+   * e has just been calloc'd. We don't need to clear it or
+   * append null-terminators, because its length is strictly
+   * greater than the source string. Use strncpy to _read_
+   * up->ut_* because they may not be terminated. For this
+   * reason we use the size of the _source_ as the length
+   * argument.
+   */
+  (void)strncpy (e->name, up->ut_name, sizeof (up->ut_name));
+  (void)strncpy (e->line, up->ut_line, sizeof (up->ut_line));
+  (void)strncpy (e->host, up->ut_host, sizeof (up->ut_host));
 
-	e->tv = up->ut_tv;
-	e->pid = up->ut_pid;
+  e->tv = up->ut_tv;
+  e->pid = up->ut_pid;
 #ifndef __APPLE__
-	e->term = up->ut_exit.e_termination;
-	e->exit = up->ut_exit.e_exit;
-	e->sess = up->ut_session;
+  e->term = up->ut_exit.e_termination;
+  e->exit = up->ut_exit.e_exit;
+  e->sess = up->ut_session;
 #endif /* !__APPLE__ */
-	e->type = up->ut_type;
-	adjust_size(e);
+  e->type = up->ut_type;
+  adjust_size (e);
 }
 #endif

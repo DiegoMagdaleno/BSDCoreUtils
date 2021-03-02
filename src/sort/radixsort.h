@@ -28,11 +28,11 @@
  */
 
 #if !defined(__SORT_RADIX_H__)
-#define	__SORT_RADIX_H__
+#define __SORT_RADIX_H__
 
 #include "coll.h"
 #include "sort.h"
 
-void rxsort(struct sort_list_item **base, size_t nmemb);
+void rxsort (struct sort_list_item **base, size_t nmemb);
 
 #endif /* __SORT_RADIX_H__ */

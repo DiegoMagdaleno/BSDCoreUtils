@@ -39,121 +39,131 @@
 #include <unistd.h>
 #include <utmp.h>
 #if defined __APPLE__
-#include <utmpx.h>
 #include "compat.h"
+#include <utmpx.h>
 #endif
 
 #ifdef __APPLE__
-typedef char	namebuf[_UTX_USERSIZE];
+typedef char namebuf[_UTX_USERSIZE];
 #else
-typedef char 	namebuf[UT_NAMESIZE];
+typedef char namebuf[UT_NAMESIZE];
 #endif
 
-int scmp(const void *, const void *);
+int scmp (const void *, const void *);
 
 int
-main(int argc, char *argv[])
+main (int argc, char *argv[])
 {
-	namebuf *names = NULL;
-	int ncnt = 0;
-	int nmax = 0;
-	int cnt;
-	#ifdef __APPLE__
-	struct utmpx *utmp;
-	#else
-	struct utmp utmp;
-	#endif
-	int ch;
+  namebuf *names = NULL;
+  int ncnt = 0;
+  int nmax = 0;
+  int cnt;
+#ifdef __APPLE__
+  struct utmpx *utmp;
+#else
+  struct utmp utmp;
+#endif
+  int ch;
 
-	while ((ch = getopt(argc, argv, "")) != -1)
-		switch(ch) {
-		case '?':
-		default:
-			(void)fprintf(stderr, "usage: users\n");
-			exit(1);
-		}
-	argc -= optind;
-	argv += optind;
+  while ((ch = getopt (argc, argv, "")) != -1)
+    switch (ch)
+      {
+      case '?':
+      default:
+        (void)fprintf (stderr, "usage: users\n");
+        exit (1);
+      }
+  argc -= optind;
+  argv += optind;
 
-	#ifdef __APPLE__
-	if (!freopen(_PATH_UTMPX, "r", stdin)){
-		err(1, "can't open %s", _PATH_UTMPX);
-		/* NOTREACHED */
-	}
-	#else
-	if (!freopen(_PATH_UTMP, "r", stdin)) {
-		err(1, "can't open %s", _PATH_UTMP);
-		/* NOTREACHED */
-	}
-	#endif
+#ifdef __APPLE__
+  if (!freopen (_PATH_UTMPX, "r", stdin))
+    {
+      err (1, "can't open %s", _PATH_UTMPX);
+      /* NOTREACHED */
+    }
+#else
+  if (!freopen (_PATH_UTMP, "r", stdin))
+    {
+      err (1, "can't open %s", _PATH_UTMP);
+      /* NOTREACHED */
+    }
+#endif
 
+#ifdef __APPLE__
+  setutxent ();
+  while ((utmp = getutxent ()) != NULL)
+    {
+      if (*utmp->ut_user && utmp->ut_type == USER_PROCESS)
+        {
+          if (ncnt >= nmax)
+            {
+              nmax += 32;
+              names = realloc (names, sizeof (*names) * nmax);
 
-	#ifdef __APPLE__
-	setutxent();
-	while((utmp=getutxent()) != NULL){
-		if (*utmp->ut_user && utmp->ut_type	== USER_PROCESS){
-			if (ncnt >= nmax) {
-				nmax += 32;
-				names = realloc(names, sizeof(*names) * nmax);
+              if (!names)
+                {
+                  err (1, "realloc");
+                  /* NOTREACHED */
+                }
+            }
+          (void)strncpy (names[ncnt], utmp->ut_user, _UTX_USERSIZE);
+          ++ncnt;
+        }
+    }
+#else
+  while (fread ((char *)&utmp, sizeof (utmp), 1, stdin) == 1)
+    {
+      if (*utmp.ut_name)
+        {
+          if (ncnt >= nmax)
+            {
+              size_t newmax = nmax + 32;
+              namebuf *newnames;
 
-				if (!names) {
-					err(1, "realloc");
-					/* NOTREACHED */
-				}
-			}
-			(void)strncpy(names[ncnt], utmp->ut_user, _UTX_USERSIZE);
-			++ncnt;
-		}
-	}
-	#else
-	while (fread((char *)&utmp, sizeof(utmp), 1, stdin) == 1) {
-		if (*utmp.ut_name) {
-			if (ncnt >= nmax) {
-				size_t newmax = nmax + 32;
-				namebuf *newnames;
+              newnames = reallocarray (names, newmax, sizeof (*names));
 
-				newnames = reallocarray(names, newmax,
-				    sizeof(*names));
+              if (newnames == NULL)
+                {
+                  err (1, NULL);
+                  /* NOTREACHED */
+                }
+              names = newnames;
+              nmax = newmax;
+            }
+          (void)strncpy (names[ncnt], utmp.ut_name, UT_NAMESIZE);
+          ++ncnt;
+        }
+    }
+#endif
 
-				if (newnames == NULL) {
-					err(1, NULL);
-					/* NOTREACHED */
-				}
-				names = newnames;
-				nmax = newmax;
-			}
-			(void)strncpy(names[ncnt], utmp.ut_name, UT_NAMESIZE);
-			++ncnt;
-		}
-	}
-	#endif
-
-	if (ncnt) {
-		#ifdef __APPLE__
-		qsort(names, ncnt, _UTX_USERSIZE, scmp);
-		(void)printf("%.*s", _UTX_USERSIZE, names[0]);
-		for (cnt = 1; cnt < ncnt; ++cnt)
-			if (strncmp(names[cnt], names[cnt -1], _UTX_USERSIZE))
-				(void)printf(" %.*s", _UTX_USERSIZE, names[cnt]);
-		(void)printf("\n");
-		#else
-		qsort(names, ncnt, UT_NAMESIZE, scmp);
-		(void)printf("%.*s", UT_NAMESIZE, names[0]);
-		for (cnt = 1; cnt < ncnt; ++cnt)
-			if (strncmp(names[cnt], names[cnt - 1], UT_NAMESIZE))
-				(void)printf(" %.*s", UT_NAMESIZE, names[cnt]);
-		(void)printf("\n");
-		#endif
-	}
-	exit(0);
+  if (ncnt)
+    {
+#ifdef __APPLE__
+      qsort (names, ncnt, _UTX_USERSIZE, scmp);
+      (void)printf ("%.*s", _UTX_USERSIZE, names[0]);
+      for (cnt = 1; cnt < ncnt; ++cnt)
+        if (strncmp (names[cnt], names[cnt - 1], _UTX_USERSIZE))
+          (void)printf (" %.*s", _UTX_USERSIZE, names[cnt]);
+      (void)printf ("\n");
+#else
+      qsort (names, ncnt, UT_NAMESIZE, scmp);
+      (void)printf ("%.*s", UT_NAMESIZE, names[0]);
+      for (cnt = 1; cnt < ncnt; ++cnt)
+        if (strncmp (names[cnt], names[cnt - 1], UT_NAMESIZE))
+          (void)printf (" %.*s", UT_NAMESIZE, names[cnt]);
+      (void)printf ("\n");
+#endif
+    }
+  exit (0);
 }
 
 int
-scmp(const void *p, const void *q)
+scmp (const void *p, const void *q)
 {
-	#ifdef __APPLE__
-	return(strncmp((char *) p, (char *) q, _UTX_USERSIZE));
-	#else
-	return(strncmp((char *) p, (char *) q, UT_NAMESIZE));
-	#endif
+#ifdef __APPLE__
+  return (strncmp ((char *)p, (char *)q, _UTX_USERSIZE));
+#else
+  return (strncmp ((char *)p, (char *)q, UT_NAMESIZE));
+#endif
 }

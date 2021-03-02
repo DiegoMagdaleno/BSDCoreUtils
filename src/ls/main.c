@@ -4,10 +4,10 @@
  * Public domain - no warranty.
  */
 
-int ls_main(int argc, char **argv);
+int ls_main (int argc, char **argv);
 
 int
-main(int argc, char *argv[])
+main (int argc, char *argv[])
 {
-	return ls_main(argc, argv);
+  return ls_main (argc, argv);
 }

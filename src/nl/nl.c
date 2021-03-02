@@ -45,38 +45,40 @@
 
 extern char *__progname;
 
-typedef enum {
-	number_all,		/* number all lines */
-	number_nonempty,	/* number non-empty lines */
-	number_none,		/* no line numbering */
-	number_regex		/* number lines matching regular expression */
+typedef enum
+{
+  number_all,      /* number all lines */
+  number_nonempty, /* number non-empty lines */
+  number_none,     /* no line numbering */
+  number_regex     /* number lines matching regular expression */
 } numbering_type;
 
-struct numbering_property {
-	const char * const	name;		/* for diagnostics */
-	numbering_type		type;		/* numbering type */
-	regex_t			expr;		/* for type == number_regex */
+struct numbering_property
+{
+  const char *const name; /* for diagnostics */
+  numbering_type type;    /* numbering type */
+  regex_t expr;           /* for type == number_regex */
 };
 
 /* line numbering formats */
-#define FORMAT_LN	"%-*d"	/* left justified, leading zeros suppressed */
-#define FORMAT_RN	"%*d"	/* right justified, leading zeros suppressed */
-#define FORMAT_RZ	"%0*d"	/* right justified, leading zeros kept */
+#define FORMAT_LN "%-*d" /* left justified, leading zeros suppressed */
+#define FORMAT_RN "%*d"  /* right justified, leading zeros suppressed */
+#define FORMAT_RZ "%0*d" /* right justified, leading zeros kept */
 
-#define FOOTER		0
-#define BODY		1
-#define HEADER		2
-#define NP_LAST		HEADER
+#define FOOTER 0
+#define BODY 1
+#define HEADER 2
+#define NP_LAST HEADER
 
 static struct numbering_property numbering_properties[NP_LAST + 1] = {
-	{ "footer",	number_none,	{ 0, 0, 0, 0 } },
-	{ "body",	number_nonempty, { 0, 0, 0, 0 } },
-	{ "header",	number_none,	{ 0, 0, 0, 0 } },
+  { "footer", number_none, { 0, 0, 0, 0 } },
+  { "body", number_nonempty, { 0, 0, 0, 0 } },
+  { "header", number_none, { 0, 0, 0, 0 } },
 };
 
-void		filter(void);
-void		parse_numbering(const char *, int);
-void	usage(void);
+void filter (void);
+void parse_numbering (const char *, int);
+void usage (void);
 
 /*
  * Delimiter characters that indicate the start of a logical page section.
@@ -110,209 +112,216 @@ static int startnum = 1;
 /* should be unsigned but required signed by `*' precision conversion */
 static int width = 6;
 
-
 int
-main(int argc, char *argv[])
+main (int argc, char *argv[])
 {
-	int c;
-	size_t clen;
-	char delim1[MB_LEN_MAX] = { '\\' }, delim2[MB_LEN_MAX] = { ':' };
-	size_t delim1len = 1, delim2len = 1;
-	const char *errstr;
+  int c;
+  size_t clen;
+  char delim1[MB_LEN_MAX] = { '\\' }, delim2[MB_LEN_MAX] = { ':' };
+  size_t delim1len = 1, delim2len = 1;
+  const char *errstr;
 
-	(void)setlocale(LC_ALL, "");
+  (void)setlocale (LC_ALL, "");
 
-	while ((c = getopt(argc, argv, "pb:d:f:h:i:l:n:s:v:w:")) != -1) {
-		switch (c) {
-		case 'p':
-			restart = 0;
-			break;
-		case 'b':
-			parse_numbering(optarg, BODY);
-			break;
-		case 'd':
-			clen = mbrlen(optarg, MB_CUR_MAX, NULL);
-			if (clen == (size_t)-1 || clen == (size_t)-2) {
-				errno = EILSEQ;
-				err(EXIT_FAILURE, NULL);
-			}
-			if (clen != 0) {
-				memcpy(delim1, optarg, delim1len = clen);
-				clen = mbrlen(optarg + delim1len,
-				    MB_CUR_MAX, NULL);
-				if (clen == (size_t)-1 || clen == (size_t)-2) {
-					errno = EILSEQ;
-					err(EXIT_FAILURE, NULL);
-				}
-				if (clen != 0) {
-					memcpy(delim2, optarg + delim1len,
-					    delim2len = clen);
-					if (optarg[delim1len + clen] != '\0') {
-						errx(EXIT_FAILURE,
-						    "invalid delimiter: %s",
-						    optarg);
-					}
-				}
-			}
-			break;
-		case 'f':
-			parse_numbering(optarg, FOOTER);
-			break;
-		case 'h':
-			parse_numbering(optarg, HEADER);
-			break;
-		case 'i':
-			incr = strtonum(optarg, INT_MIN, INT_MAX, &errstr);
-			if (errstr)
-				errx(EXIT_FAILURE, "increment value is %s: %s",
-				    errstr, optarg);
-			break;
-		case 'l':
-			nblank = strtonum(optarg, 0, UINT_MAX, &errstr);
-			if (errstr)
-				errx(EXIT_FAILURE,
-				    "blank line value is %s: %s",
-				    errstr, optarg);
-			break;
-		case 'n':
-			if (strcmp(optarg, "ln") == 0) {
-				format = FORMAT_LN;
-			} else if (strcmp(optarg, "rn") == 0) {
-				format = FORMAT_RN;
-			} else if (strcmp(optarg, "rz") == 0) {
-				format = FORMAT_RZ;
-			} else
-				errx(EXIT_FAILURE,
-				    "illegal format -- %s", optarg);
-			break;
-		case 's':
-			sep = optarg;
-			break;
-		case 'v':
-			startnum = strtonum(optarg, INT_MIN, INT_MAX, &errstr);
-			if (errstr)
-				errx(EXIT_FAILURE,
-				    "initial logical page value is %s: %s",
-				    errstr, optarg);
-			break;
-		case 'w':
-			width = strtonum(optarg, 1, INT_MAX, &errstr);
-			if (errstr)
-				errx(EXIT_FAILURE, "width is %s: %s", errstr,
-				    optarg);
-			break;
-		case '?':
-		default:
-			usage();
-			/* NOTREACHED */
-		}
-	}
-	argc -= optind;
-	argv += optind;
+  while ((c = getopt (argc, argv, "pb:d:f:h:i:l:n:s:v:w:")) != -1)
+    {
+      switch (c)
+        {
+        case 'p':
+          restart = 0;
+          break;
+        case 'b':
+          parse_numbering (optarg, BODY);
+          break;
+        case 'd':
+          clen = mbrlen (optarg, MB_CUR_MAX, NULL);
+          if (clen == (size_t)-1 || clen == (size_t)-2)
+            {
+              errno = EILSEQ;
+              err (EXIT_FAILURE, NULL);
+            }
+          if (clen != 0)
+            {
+              memcpy (delim1, optarg, delim1len = clen);
+              clen = mbrlen (optarg + delim1len, MB_CUR_MAX, NULL);
+              if (clen == (size_t)-1 || clen == (size_t)-2)
+                {
+                  errno = EILSEQ;
+                  err (EXIT_FAILURE, NULL);
+                }
+              if (clen != 0)
+                {
+                  memcpy (delim2, optarg + delim1len, delim2len = clen);
+                  if (optarg[delim1len + clen] != '\0')
+                    {
+                      errx (EXIT_FAILURE, "invalid delimiter: %s", optarg);
+                    }
+                }
+            }
+          break;
+        case 'f':
+          parse_numbering (optarg, FOOTER);
+          break;
+        case 'h':
+          parse_numbering (optarg, HEADER);
+          break;
+        case 'i':
+          incr = strtonum (optarg, INT_MIN, INT_MAX, &errstr);
+          if (errstr)
+            errx (EXIT_FAILURE, "increment value is %s: %s", errstr, optarg);
+          break;
+        case 'l':
+          nblank = strtonum (optarg, 0, UINT_MAX, &errstr);
+          if (errstr)
+            errx (EXIT_FAILURE, "blank line value is %s: %s", errstr, optarg);
+          break;
+        case 'n':
+          if (strcmp (optarg, "ln") == 0)
+            {
+              format = FORMAT_LN;
+            }
+          else if (strcmp (optarg, "rn") == 0)
+            {
+              format = FORMAT_RN;
+            }
+          else if (strcmp (optarg, "rz") == 0)
+            {
+              format = FORMAT_RZ;
+            }
+          else
+            errx (EXIT_FAILURE, "illegal format -- %s", optarg);
+          break;
+        case 's':
+          sep = optarg;
+          break;
+        case 'v':
+          startnum = strtonum (optarg, INT_MIN, INT_MAX, &errstr);
+          if (errstr)
+            errx (EXIT_FAILURE, "initial logical page value is %s: %s", errstr,
+                  optarg);
+          break;
+        case 'w':
+          width = strtonum (optarg, 1, INT_MAX, &errstr);
+          if (errstr)
+            errx (EXIT_FAILURE, "width is %s: %s", errstr, optarg);
+          break;
+        case '?':
+        default:
+          usage ();
+          /* NOTREACHED */
+        }
+    }
+  argc -= optind;
+  argv += optind;
 
-	switch (argc) {
-	case 0:
-		break;
-	case 1:
-		if (strcmp(argv[0], "-") != 0 &&
-		    freopen(argv[0], "r", stdin) == NULL)
-			err(EXIT_FAILURE, "%s", argv[0]);
-		break;
-	default:
-		usage();
-		/* NOTREACHED */
-	}
+  switch (argc)
+    {
+    case 0:
+      break;
+    case 1:
+      if (strcmp (argv[0], "-") != 0 && freopen (argv[0], "r", stdin) == NULL)
+        err (EXIT_FAILURE, "%s", argv[0]);
+      break;
+    default:
+      usage ();
+      /* NOTREACHED */
+    }
 
-	/* Generate the delimiter sequence */
-	memcpy(delim, delim1, delim1len);
-	memcpy(delim + delim1len, delim2, delim2len);
-	delimlen = delim1len + delim2len;
+  /* Generate the delimiter sequence */
+  memcpy (delim, delim1, delim1len);
+  memcpy (delim + delim1len, delim2, delim2len);
+  delimlen = delim1len + delim2len;
 
-	/* Do the work. */
-	filter();
+  /* Do the work. */
+  filter ();
 
-	exit(EXIT_SUCCESS);
+  exit (EXIT_SUCCESS);
 }
 
 void
-filter(void)
+filter (void)
 {
-	char *buffer;
-	size_t buffersize;
-	ssize_t linelen;
-	int line;		/* logical line number */
-	int section;		/* logical page section */
-	unsigned int adjblank;	/* adjacent blank lines */
-	int donumber = 0, idx;
+  char *buffer;
+  size_t buffersize;
+  ssize_t linelen;
+  int line;              /* logical line number */
+  int section;           /* logical page section */
+  unsigned int adjblank; /* adjacent blank lines */
+  int donumber = 0, idx;
 
-	adjblank = 0;
-	line = startnum;
-	section = BODY;
+  adjblank = 0;
+  line = startnum;
+  section = BODY;
 
-	buffer = NULL;
-	buffersize = 0;
-	while ((linelen = getline(&buffer, &buffersize, stdin)) > 0) {
-		for (idx = FOOTER; idx <= NP_LAST; idx++) {
-			/* Does it look like a delimiter? */
-			if (delimlen * (idx + 1) > linelen)
-				break;
-			if (memcmp(buffer + delimlen * idx, delim,
-			    delimlen) != 0)
-				break;
-			/* Was this the whole line? */
-			if (buffer[delimlen * (idx + 1)] == '\n') {
-				section = idx;
-				adjblank = 0;
-				if (restart)
-					line = startnum;
-				goto nextline;
-			}
-		}
+  buffer = NULL;
+  buffersize = 0;
+  while ((linelen = getline (&buffer, &buffersize, stdin)) > 0)
+    {
+      for (idx = FOOTER; idx <= NP_LAST; idx++)
+        {
+          /* Does it look like a delimiter? */
+          if (delimlen * (idx + 1) > linelen)
+            break;
+          if (memcmp (buffer + delimlen * idx, delim, delimlen) != 0)
+            break;
+          /* Was this the whole line? */
+          if (buffer[delimlen * (idx + 1)] == '\n')
+            {
+              section = idx;
+              adjblank = 0;
+              if (restart)
+                line = startnum;
+              goto nextline;
+            }
+        }
 
-		switch (numbering_properties[section].type) {
-		case number_all:
-			/*
-			 * Doing this for number_all only is disputable, but
-			 * the standard expresses an explicit dependency on
-			 * `-b a' etc.
-			 */
-			if (buffer[0] == '\n' && ++adjblank < nblank)
-				donumber = 0;
-			else
-				donumber = 1, adjblank = 0;
-			break;
-		case number_nonempty:
-			donumber = (buffer[0] != '\n');
-			break;
-		case number_none:
-			donumber = 0;
-			break;
-		case number_regex:
-			donumber =
-			    (regexec(&numbering_properties[section].expr,
-			    buffer, 0, NULL, 0) == 0);
-			break;
-		}
+      switch (numbering_properties[section].type)
+        {
+        case number_all:
+          /*
+           * Doing this for number_all only is disputable, but
+           * the standard expresses an explicit dependency on
+           * `-b a' etc.
+           */
+          if (buffer[0] == '\n' && ++adjblank < nblank)
+            donumber = 0;
+          else
+            donumber = 1, adjblank = 0;
+          break;
+        case number_nonempty:
+          donumber = (buffer[0] != '\n');
+          break;
+        case number_none:
+          donumber = 0;
+          break;
+        case number_regex:
+          donumber = (regexec (&numbering_properties[section].expr, buffer, 0,
+                               NULL, 0)
+                      == 0);
+          break;
+        }
 
-		if (donumber) {
-			(void)printf(format, width, line);
-			line += incr;
-			(void)fputs(sep, stdout);
-		} else {
-			(void)printf("%*s", width, "");
-		}
-		(void)fwrite(buffer, linelen, 1, stdout);
+      if (donumber)
+        {
+          (void)printf (format, width, line);
+          line += incr;
+          (void)fputs (sep, stdout);
+        }
+      else
+        {
+          (void)printf ("%*s", width, "");
+        }
+      (void)fwrite (buffer, linelen, 1, stdout);
 
-		if (ferror(stdout))
-			err(EXIT_FAILURE, "output error");
-nextline:
-		;
-	}
+      if (ferror (stdout))
+        err (EXIT_FAILURE, "output error");
+    nextline:;
+    }
 
-	if (ferror(stdin))
-		err(EXIT_FAILURE, "input error");
+  if (ferror (stdin))
+    err (EXIT_FAILURE, "input error");
 
-	free(buffer);
+  free (buffer);
 }
 
 /*
@@ -320,52 +329,53 @@ nextline:
  */
 
 void
-parse_numbering(const char *argstr, int section)
+parse_numbering (const char *argstr, int section)
 {
-	int error;
-	char errorbuf[NL_TEXTMAX];
+  int error;
+  char errorbuf[NL_TEXTMAX];
 
-	switch (argstr[0]) {
-	case 'a':
-		numbering_properties[section].type = number_all;
-		break;
-	case 'n':
-		numbering_properties[section].type = number_none;
-		break;
-	case 't':
-		numbering_properties[section].type = number_nonempty;
-		break;
-	case 'p':
-		/* If there was a previous expression, throw it away. */
-		if (numbering_properties[section].type == number_regex)
-			regfree(&numbering_properties[section].expr);
-		else
-			numbering_properties[section].type = number_regex;
+  switch (argstr[0])
+    {
+    case 'a':
+      numbering_properties[section].type = number_all;
+      break;
+    case 'n':
+      numbering_properties[section].type = number_none;
+      break;
+    case 't':
+      numbering_properties[section].type = number_nonempty;
+      break;
+    case 'p':
+      /* If there was a previous expression, throw it away. */
+      if (numbering_properties[section].type == number_regex)
+        regfree (&numbering_properties[section].expr);
+      else
+        numbering_properties[section].type = number_regex;
 
-		/* Compile/validate the supplied regular expression. */
-		if ((error = regcomp(&numbering_properties[section].expr,
-		    &argstr[1], REG_NEWLINE|REG_NOSUB)) != 0) {
-			(void)regerror(error,
-			    &numbering_properties[section].expr,
-			    errorbuf, sizeof(errorbuf));
-			errx(EXIT_FAILURE,
-			    "%s expr: %s -- %s",
-			    numbering_properties[section].name, errorbuf,
-			    &argstr[1]);
-		}
-		break;
-	default:
-		errx(EXIT_FAILURE,
-		    "illegal %s line numbering type -- %s",
-		    numbering_properties[section].name, argstr);
-	}
+      /* Compile/validate the supplied regular expression. */
+      if ((error = regcomp (&numbering_properties[section].expr, &argstr[1],
+                            REG_NEWLINE | REG_NOSUB))
+          != 0)
+        {
+          (void)regerror (error, &numbering_properties[section].expr, errorbuf,
+                          sizeof (errorbuf));
+          errx (EXIT_FAILURE, "%s expr: %s -- %s",
+                numbering_properties[section].name, errorbuf, &argstr[1]);
+        }
+      break;
+    default:
+      errx (EXIT_FAILURE, "illegal %s line numbering type -- %s",
+            numbering_properties[section].name, argstr);
+    }
 }
 
 void
-usage(void)
+usage (void)
 {
-	(void)fprintf(stderr, "usage: %s [-p] [-b type] [-d delim] [-f type] "
-	    "[-h type] [-i incr] [-l num]\n\t[-n format] [-s sep] "
-	    "[-v startnum] [-w width] [file]\n", __progname);
-	exit(EXIT_FAILURE);
+  (void)fprintf (stderr,
+                 "usage: %s [-p] [-b type] [-d delim] [-f type] "
+                 "[-h type] [-i incr] [-l num]\n\t[-n format] [-s sep] "
+                 "[-v startnum] [-w width] [file]\n",
+                 __progname);
+  exit (EXIT_FAILURE);
 }

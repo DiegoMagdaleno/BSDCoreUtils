@@ -32,9 +32,9 @@
  */
 #include "compat.h"
 
-#include <sys/types.h>
 #include <errno.h>
 #include <stdlib.h>
+#include <sys/types.h>
 
 /*
  * Swap two areas of size number of bytes.  Although qsort(3) permits random
@@ -43,24 +43,30 @@
  * isn't worth optimizing; the SWAP's get sped up by the cache, and pointer
  * arithmetic gets lost in the time required for comparison function calls.
  */
-#define	SWAP(a, b, count, size, tmp) { \
-	count = size; \
-	do { \
-		tmp = *a; \
-		*a++ = *b; \
-		*b++ = tmp; \
-	} while (--count); \
-}
+#define SWAP(a, b, count, size, tmp)                                          \
+  {                                                                           \
+    count = size;                                                             \
+    do                                                                        \
+      {                                                                       \
+        tmp = *a;                                                             \
+        *a++ = *b;                                                            \
+        *b++ = tmp;                                                           \
+      }                                                                       \
+    while (--count);                                                          \
+  }
 
 /* Copy one block of size size to another. */
-#define COPY(a, b, count, size, tmp1, tmp2) { \
-	count = size; \
-	tmp1 = a; \
-	tmp2 = b; \
-	do { \
-		*tmp1++ = *tmp2++; \
-	} while (--count); \
-}
+#define COPY(a, b, count, size, tmp1, tmp2)                                   \
+  {                                                                           \
+    count = size;                                                             \
+    tmp1 = a;                                                                 \
+    tmp2 = b;                                                                 \
+    do                                                                        \
+      {                                                                       \
+        *tmp1++ = *tmp2++;                                                    \
+      }                                                                       \
+    while (--count);                                                          \
+  }
 
 /*
  * Build the list into a heap, where a heap is defined such that for
@@ -69,20 +75,22 @@
  * There are two cases.  If j == nmemb, select largest of Ki and Kj.  If
  * j < nmemb, select largest of Ki, Kj and Kj+1.
  */
-#define CREATE(initval, nmemb, par_i, child_i, par, child, size, count, tmp) { \
-	for (par_i = initval; (child_i = par_i * 2) <= nmemb; \
-	    par_i = child_i) { \
-		child = base + child_i * size; \
-		if (child_i < nmemb && compar(child, child + size) < 0) { \
-			child += size; \
-			++child_i; \
-		} \
-		par = base + par_i * size; \
-		if (compar(child, par) <= 0) \
-			break; \
-		SWAP(par, child, count, size, tmp); \
-	} \
-}
+#define CREATE(initval, nmemb, par_i, child_i, par, child, size, count, tmp)  \
+  {                                                                           \
+    for (par_i = initval; (child_i = par_i * 2) <= nmemb; par_i = child_i)    \
+      {                                                                       \
+        child = base + child_i * size;                                        \
+        if (child_i < nmemb && compar (child, child + size) < 0)              \
+          {                                                                   \
+            child += size;                                                    \
+            ++child_i;                                                        \
+          }                                                                   \
+        par = base + par_i * size;                                            \
+        if (compar (child, par) <= 0)                                         \
+          break;                                                              \
+        SWAP (par, child, count, size, tmp);                                  \
+      }                                                                       \
+  }
 
 /*
  * Select the top of the heap and 'heapify'.  Since by far the most expensive
@@ -101,28 +109,33 @@
  *
  * XXX Don't break the #define SELECT line, below.  Reiser cpp gets upset.
  */
-#define SELECT(par_i, child_i, nmemb, par, child, size, k, count, tmp1, tmp2) { \
-	for (par_i = 1; (child_i = par_i * 2) <= nmemb; par_i = child_i) { \
-		child = base + child_i * size; \
-		if (child_i < nmemb && compar(child, child + size) < 0) { \
-			child += size; \
-			++child_i; \
-		} \
-		par = base + par_i * size; \
-		COPY(par, child, count, size, tmp1, tmp2); \
-	} \
-	for (;;) { \
-		child_i = par_i; \
-		par_i = child_i / 2; \
-		child = base + child_i * size; \
-		par = base + par_i * size; \
-		if (child_i == 1 || compar(k, par) < 0) { \
-			COPY(child, k, count, size, tmp1, tmp2); \
-			break; \
-		} \
-		COPY(child, par, count, size, tmp1, tmp2); \
-	} \
-}
+#define SELECT(par_i, child_i, nmemb, par, child, size, k, count, tmp1, tmp2) \
+  {                                                                           \
+    for (par_i = 1; (child_i = par_i * 2) <= nmemb; par_i = child_i)          \
+      {                                                                       \
+        child = base + child_i * size;                                        \
+        if (child_i < nmemb && compar (child, child + size) < 0)              \
+          {                                                                   \
+            child += size;                                                    \
+            ++child_i;                                                        \
+          }                                                                   \
+        par = base + par_i * size;                                            \
+        COPY (par, child, count, size, tmp1, tmp2);                           \
+      }                                                                       \
+    for (;;)                                                                  \
+      {                                                                       \
+        child_i = par_i;                                                      \
+        par_i = child_i / 2;                                                  \
+        child = base + child_i * size;                                        \
+        par = base + par_i * size;                                            \
+        if (child_i == 1 || compar (k, par) < 0)                              \
+          {                                                                   \
+            COPY (child, k, count, size, tmp1, tmp2);                         \
+            break;                                                            \
+          }                                                                   \
+        COPY (child, par, count, size, tmp1, tmp2);                           \
+      }                                                                       \
+  }
 
 /*
  * Heapsort -- Knuth, Vol. 3, page 145.  Runs in O (N lg N), both average
@@ -132,44 +145,46 @@
  * only advantage over quicksort is that it requires little additional memory.
  */
 int
-heapsort(void *vbase, size_t nmemb, size_t size,
-    int (*compar)(const void *, const void *))
+heapsort (void *vbase, size_t nmemb, size_t size,
+          int (*compar) (const void *, const void *))
 {
-	size_t cnt, i, j, l;
-	char tmp, *tmp1, *tmp2;
-	char *base, *k, *p, *t;
+  size_t cnt, i, j, l;
+  char tmp, *tmp1, *tmp2;
+  char *base, *k, *p, *t;
 
-	if (nmemb <= 1)
-		return (0);
+  if (nmemb <= 1)
+    return (0);
 
-	if (!size) {
-		errno = EINVAL;
-		return (-1);
-	}
+  if (!size)
+    {
+      errno = EINVAL;
+      return (-1);
+    }
 
-	if ((k = malloc(size)) == NULL)
-		return (-1);
+  if ((k = malloc (size)) == NULL)
+    return (-1);
 
-	/*
-	 * Items are numbered from 1 to nmemb, so offset from size bytes
-	 * below the starting address.
-	 */
-	base = (char *)vbase - size;
+  /*
+   * Items are numbered from 1 to nmemb, so offset from size bytes
+   * below the starting address.
+   */
+  base = (char *)vbase - size;
 
-	for (l = nmemb / 2 + 1; --l;)
-		CREATE(l, nmemb, i, j, t, p, size, cnt, tmp);
+  for (l = nmemb / 2 + 1; --l;)
+    CREATE (l, nmemb, i, j, t, p, size, cnt, tmp);
 
-	/*
-	 * For each element of the heap, save the largest element into its
-	 * final slot, save the displaced element (k), then recreate the
-	 * heap.
-	 */
-	while (nmemb > 1) {
-		COPY(k, base + nmemb * size, cnt, size, tmp1, tmp2);
-		COPY(base + nmemb * size, base + size, cnt, size, tmp1, tmp2);
-		--nmemb;
-		SELECT(i, j, nmemb, t, p, size, k, cnt, tmp1, tmp2);
-	}
-	free(k);
-	return (0);
+  /*
+   * For each element of the heap, save the largest element into its
+   * final slot, save the displaced element (k), then recreate the
+   * heap.
+   */
+  while (nmemb > 1)
+    {
+      COPY (k, base + nmemb * size, cnt, size, tmp1, tmp2);
+      COPY (base + nmemb * size, base + size, cnt, size, tmp1, tmp2);
+      --nmemb;
+      SELECT (i, j, nmemb, t, p, size, k, cnt, tmp1, tmp2);
+    }
+  free (k);
+  return (0);
 }

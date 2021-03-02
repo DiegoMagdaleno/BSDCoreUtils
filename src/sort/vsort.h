@@ -1,4 +1,5 @@
-/*	$FreeBSD: head/usr.bin/sort/vsort.h 264744 2014-04-21 22:52:18Z pfg $	*/
+/*	$FreeBSD: head/usr.bin/sort/vsort.h 264744 2014-04-21 22:52:18Z pfg $
+ */
 
 /*-
  * Copyright (C) 2012 Oleg Moskalenko <mom040267@gmail.com>
@@ -28,10 +29,10 @@
  */
 
 #ifndef _VSORT_H_
-#define	_VSORT_H_
+#define _VSORT_H_
 
 #include "bwstring.h"
 
-int vcmp(struct bwstring *s1, struct bwstring *s2);
+int vcmp (struct bwstring *s1, struct bwstring *s2);
 
 #endif

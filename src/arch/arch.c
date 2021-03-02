@@ -31,59 +31,64 @@
 #include <sys/utsname.h>
 #include <unistd.h>
 
-static void usage(void);
+static void usage (void);
 
 static int machine;
 
 int
-main(int argc, char *argv[])
+main (int argc, char *argv[])
 {
-	char *progname = basename(argv[0]);
-	int short_form = 0, c;
-	char *arch, *opts;
-	struct utsname utsbuf;
+  char *progname = basename (argv[0]);
+  int short_form = 0, c;
+  char *arch, *opts;
+  struct utsname utsbuf;
 
-	machine = strcmp(progname, "machine") == 0;
+  machine = strcmp (progname, "machine") == 0;
 
-	if (uname(&utsbuf) == -1)
-		err(1, "uname(2)");
+  if (uname (&utsbuf) == -1)
+    err (1, "uname(2)");
 
-	if (machine) {
-		arch = utsbuf.machine;
-		opts = "a";
-		short_form = 1;
-	} else {
-		arch = utsbuf.machine;
-		opts = "ks";
-	}
-	while ((c = getopt(argc, argv, opts)) != -1) {
-		switch (c) {
-		case 'a':
-			arch = utsbuf.machine;
-			break;
-		case 'k':
-			arch = utsbuf.machine;
-			break;
-		case 's':
-			short_form = 1;
-			break;
-		default:
-			usage();
-		}
-	}
-	if (optind != argc)
-		usage();
+  if (machine)
+    {
+      arch = utsbuf.machine;
+      opts = "a";
+      short_form = 1;
+    }
+  else
+    {
+      arch = utsbuf.machine;
+      opts = "ks";
+    }
+  while ((c = getopt (argc, argv, opts)) != -1)
+    {
+      switch (c)
+        {
+        case 'a':
+          arch = utsbuf.machine;
+          break;
+        case 'k':
+          arch = utsbuf.machine;
+          break;
+        case 's':
+          short_form = 1;
+          break;
+        default:
+          usage ();
+        }
+    }
+  if (optind != argc)
+    usage ();
 
-	printf("%s%s\n", short_form ? "" : utsbuf.sysname, arch);
-	return (0);
+  printf ("%s%s\n", short_form ? "" : utsbuf.sysname, arch);
+  return (0);
 }
 
 static void
-usage(void)
+usage (void)
 {
-	if (machine)
-		fprintf(stderr, "usage: machine [-a]\n");
-	else
-		fprintf(stderr, "usage: arch [-ks]\n");
-	exit(1);
+  if (machine)
+    fprintf (stderr, "usage: machine [-a]\n");
+  else
+    fprintf (stderr, "usage: arch [-ks]\n");
+  exit (1);
 }

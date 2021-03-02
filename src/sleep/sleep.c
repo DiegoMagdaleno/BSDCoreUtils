@@ -37,77 +37,83 @@
 #include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <time.h>
 #include <unistd.h>
-#include <string.h>
 
 extern char *__progname;
 
-void alarmh(int);
-void usage(void);
+void alarmh (int);
+void usage (void);
 
 int
-main(int argc, char *argv[])
+main (int argc, char *argv[])
 {
-	struct timespec rqtp;
-	time_t t;
-	char *cp;
-	int ch, i;
+  struct timespec rqtp;
+  time_t t;
+  char *cp;
+  int ch, i;
 
-	signal(SIGALRM, alarmh);
+  signal (SIGALRM, alarmh);
 
-	while ((ch = getopt(argc, argv, "")) != -1) {
-		switch(ch) {
-		default:
-			usage();
-		}
-	}
-	argc -= optind;
-	argv += optind;
+  while ((ch = getopt (argc, argv, "")) != -1)
+    {
+      switch (ch)
+        {
+        default:
+          usage ();
+        }
+    }
+  argc -= optind;
+  argv += optind;
 
-	if (argc != 1)
-		usage();
+  if (argc != 1)
+    usage ();
 
-	memset(&rqtp, 0, sizeof(rqtp));
+  memset (&rqtp, 0, sizeof (rqtp));
 
-	/* Handle whole seconds. */
-	for (cp = argv[0]; *cp != '\0' && *cp != '.'; cp++) {
-		if (!isdigit((unsigned char)*cp))
-			errx(1, "seconds is invalid: %s", argv[0]);
-		t = (rqtp.tv_sec * 10) + (*cp - '0');
-		if (t / 10 != rqtp.tv_sec)	/* overflow */
-			errx(1, "seconds is too large: %s", argv[0]);
-		rqtp.tv_sec = t;
-	}
+  /* Handle whole seconds. */
+  for (cp = argv[0]; *cp != '\0' && *cp != '.'; cp++)
+    {
+      if (!isdigit ((unsigned char)*cp))
+        errx (1, "seconds is invalid: %s", argv[0]);
+      t = (rqtp.tv_sec * 10) + (*cp - '0');
+      if (t / 10 != rqtp.tv_sec) /* overflow */
+        errx (1, "seconds is too large: %s", argv[0]);
+      rqtp.tv_sec = t;
+    }
 
-	/*
-	 * Handle fractions of a second.  The multiplier divides to zero
-	 * after nine digits so anything more precise than a nanosecond is
-	 * validated but not used.
-	 */
-	if (*cp == '.') {
-		i = 100000000;
-		for (cp++; *cp != '\0'; cp++) {
-			if (!isdigit((unsigned char)*cp))
-				errx(1, "seconds is invalid: %s", argv[0]);
-			rqtp.tv_nsec += (*cp - '0') * i;
-			i /= 10;
-		}
-	}
+  /*
+   * Handle fractions of a second.  The multiplier divides to zero
+   * after nine digits so anything more precise than a nanosecond is
+   * validated but not used.
+   */
+  if (*cp == '.')
+    {
+      i = 100000000;
+      for (cp++; *cp != '\0'; cp++)
+        {
+          if (!isdigit ((unsigned char)*cp))
+            errx (1, "seconds is invalid: %s", argv[0]);
+          rqtp.tv_nsec += (*cp - '0') * i;
+          i /= 10;
+        }
+    }
 
-	if (rqtp.tv_sec || rqtp.tv_nsec) {
-		if (nanosleep(&rqtp, NULL) == -1)
-			err(1, "nanosleep");
-	}
+  if (rqtp.tv_sec || rqtp.tv_nsec)
+    {
+      if (nanosleep (&rqtp, NULL) == -1)
+        err (1, "nanosleep");
+    }
 
-	return 0;
+  return 0;
 }
 
 void
-usage(void)
+usage (void)
 {
-	fprintf(stderr, "usage: %s seconds\n", __progname);
-	exit(1);
+  fprintf (stderr, "usage: %s seconds\n", __progname);
+  exit (1);
 }
 
 /*
@@ -115,11 +121,11 @@ usage(void)
  * of SIGALRM.
  */
 void
-alarmh(int signo)
+alarmh (int signo)
 {
-	/*
-	 * Always _exit(2) from signal handlers: exit(3) is not
-	 * generally signal-safe.
-	 */
-	_exit(0);
+  /*
+   * Always _exit(2) from signal handlers: exit(3) is not
+   * generally signal-safe.
+   */
+  _exit (0);
 }

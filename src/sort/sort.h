@@ -28,7 +28,7 @@
  */
 
 #if !defined(__BSD_SORT_H__)
-#define	__BSD_SORT_H__
+#define __BSD_SORT_H__
 
 #include <errno.h>
 #include <stdbool.h>
@@ -45,21 +45,21 @@
 #include <md5.h>
 #endif
 
-#define	VERSION	"2.3-FreeBSD"
+#define VERSION "2.3-FreeBSD"
 
 #ifdef WITHOUT_NLS
-#define	getstr(n)	 nlsstr[n]
+#define getstr(n) nlsstr[n]
 #else
 #include <nl_types.h>
 
 extern nl_catd catalog;
-#define	getstr(n)	 catgets(catalog, 1, n, nlsstr[n])
+#define getstr(n) catgets (catalog, 1, n, nlsstr[n])
 #endif
 
 extern const char *nlsstr[];
 
 #if defined(SORT_THREADS)
-#define	MT_SORT_THRESHOLD (10000)
+#define MT_SORT_THRESHOLD (10000)
 extern unsigned int ncpu;
 extern size_t nthreads;
 #endif
@@ -79,21 +79,22 @@ extern SHA256_CTX sha256_ctx;
  */
 
 /*
- * This structure holds main sort options which are NOT affecting the sort ordering.
+ * This structure holds main sort options which are NOT affecting the sort
+ * ordering.
  */
 struct sort_opts
 {
-	wint_t		field_sep;
-	int		sort_method;
-	bool		cflag;
-	bool		csilentflag;
-	bool		kflag;
-	bool		mflag;
-	bool		sflag;
-	bool		uflag;
-	bool		zflag;
-	bool		tflag;
-	bool		complex_sort;
+  wint_t field_sep;
+  int sort_method;
+  bool cflag;
+  bool csilentflag;
+  bool kflag;
+  bool mflag;
+  bool sflag;
+  bool uflag;
+  bool zflag;
+  bool tflag;
+  bool complex_sort;
 };
 
 /*
@@ -104,34 +105,36 @@ struct key_value;
 /*
  * Cmp function
  */
-typedef int (*cmpcoll_t)(struct key_value *kv1, struct key_value *kv2, size_t offset);
+typedef int (*cmpcoll_t) (struct key_value *kv1, struct key_value *kv2,
+                          size_t offset);
 
 /*
- * This structure holds "sort modifiers" - options which are affecting the sort ordering.
+ * This structure holds "sort modifiers" - options which are affecting the sort
+ * ordering.
  */
 struct sort_mods
 {
-	cmpcoll_t	func;
-	bool		bflag;
-	bool		dflag;
-	bool		fflag;
-	bool		gflag;
-	bool		iflag;
-	bool		Mflag;
-	bool		nflag;
-	bool		rflag;
-	bool		Rflag;
-	bool		Vflag;
-	bool		hflag;
+  cmpcoll_t func;
+  bool bflag;
+  bool dflag;
+  bool fflag;
+  bool gflag;
+  bool iflag;
+  bool Mflag;
+  bool nflag;
+  bool rflag;
+  bool Rflag;
+  bool Vflag;
+  bool hflag;
 };
 
 extern bool need_hint;
 
 extern struct sort_opts sort_opts_vals;
 
-extern struct sort_mods * const default_sort_mods;
+extern struct sort_mods *const default_sort_mods;
 
-extern int (*isblank_f)(int c);
-extern int (*iswblank_f)(wint_t c);
+extern int (*isblank_f) (int c);
+extern int (*iswblank_f) (wint_t c);
 
 #endif /* __BSD_SORT_H__ */

@@ -28,7 +28,7 @@
  */
 
 #if !defined(__COLL_H__)
-#define	__COLL_H__
+#define __COLL_H__
 
 #include "bwstring.h"
 #include "sort.h"
@@ -38,10 +38,10 @@
  */
 struct n_hint
 {
-	unsigned long long	 n1;
-	unsigned char		 si;
-	bool			 empty;
-	bool			 neg;
+  unsigned long long n1;
+  unsigned char si;
+  bool empty;
+  bool neg;
 };
 
 /*
@@ -49,9 +49,9 @@ struct n_hint
  */
 struct g_hint
 {
-	double			 d;
-	bool			 nan;
-	bool			 notnum;
+  double d;
+  bool nan;
+  bool notnum;
 };
 
 /*
@@ -59,7 +59,7 @@ struct g_hint
  */
 struct M_hint
 {
-	int			 m;
+  int m;
 };
 
 /*
@@ -67,7 +67,9 @@ struct M_hint
  */
 typedef enum
 {
-	HS_ERROR = -1, HS_UNINITIALIZED = 0, HS_INITIALIZED = 1
+  HS_ERROR = -1,
+  HS_UNINITIALIZED = 0,
+  HS_INITIALIZED = 1
 } hint_status;
 
 /*
@@ -75,13 +77,13 @@ typedef enum
  */
 struct key_hint
 {
-	hint_status		status;
-	union
-	{
-		struct n_hint		nh;
-		struct g_hint		gh;
-		struct M_hint		Mh;
-	}			v;
+  hint_status status;
+  union
+  {
+    struct n_hint nh;
+    struct g_hint gh;
+    struct M_hint Mh;
+  } v;
 };
 
 /*
@@ -89,8 +91,8 @@ struct key_hint
  */
 struct key_value
 {
-	struct bwstring		*k; /* key string */
-	struct key_hint		 hint[0]; /* key sort hint */
+  struct bwstring *k;      /* key string */
+  struct key_hint hint[0]; /* key sort hint */
 } __packed;
 
 /*
@@ -98,7 +100,7 @@ struct key_value
  */
 struct keys_array
 {
-	struct key_value	 key[0];
+  struct key_value key[0];
 };
 
 /*
@@ -106,13 +108,13 @@ struct keys_array
  */
 struct key_specs
 {
-	struct sort_mods	 sm;
-	size_t			 c1;
-	size_t			 c2;
-	size_t			 f1;
-	size_t			 f2;
-	bool			 pos1b;
-	bool			 pos2b;
+  struct sort_mods sm;
+  size_t c1;
+  size_t c2;
+  size_t f1;
+  size_t f2;
+  bool pos1b;
+  bool pos2b;
 };
 
 /*
@@ -120,14 +122,15 @@ struct key_specs
  */
 struct sort_list_item
 {
-	struct bwstring		*str;
-	struct keys_array	 ka;
+  struct bwstring *str;
+  struct keys_array ka;
 };
 
 /*
  * Function type, used to compare two list objects
  */
-typedef int (*listcoll_t)(struct sort_list_item **ss1, struct sort_list_item **ss2);
+typedef int (*listcoll_t) (struct sort_list_item **ss1,
+                           struct sort_list_item **ss2);
 
 extern struct key_specs *keys;
 extern size_t keys_num;
@@ -142,27 +145,30 @@ extern wint_t symbol_positive_sign;
 
 /* funcs */
 
-cmpcoll_t get_sort_func(struct sort_mods *sm);
+cmpcoll_t get_sort_func (struct sort_mods *sm);
 
-struct keys_array *keys_array_alloc(void);
-size_t keys_array_size(void);
-struct key_value *get_key_from_keys_array(struct keys_array *ka, size_t ind);
-void set_key_on_keys_array(struct keys_array *ka, struct bwstring *s, size_t ind);
-void clean_keys_array(const struct bwstring *s, struct keys_array *ka);
+struct keys_array *keys_array_alloc (void);
+size_t keys_array_size (void);
+struct key_value *get_key_from_keys_array (struct keys_array *ka, size_t ind);
+void set_key_on_keys_array (struct keys_array *ka, struct bwstring *s,
+                            size_t ind);
+void clean_keys_array (const struct bwstring *s, struct keys_array *ka);
 
-struct sort_list_item *sort_list_item_alloc(void);
-void sort_list_item_set(struct sort_list_item *si, struct bwstring *str);
-void sort_list_item_clean(struct sort_list_item *si);
-size_t sort_list_item_size(struct sort_list_item *si);
+struct sort_list_item *sort_list_item_alloc (void);
+void sort_list_item_set (struct sort_list_item *si, struct bwstring *str);
+void sort_list_item_clean (struct sort_list_item *si);
+size_t sort_list_item_size (struct sort_list_item *si);
 
-int preproc(struct bwstring *s, struct keys_array *ka);
-int top_level_str_coll(const struct bwstring *, const struct bwstring *);
-int key_coll(struct keys_array *ks1, struct keys_array *ks2, size_t offset);
-int str_list_coll(struct bwstring *str1, struct sort_list_item **ss2);
-int list_coll_by_str_only(struct sort_list_item **ss1, struct sort_list_item **ss2);
-int list_coll(struct sort_list_item **ss1, struct sort_list_item **ss2);
-int list_coll_offset(struct sort_list_item **ss1, struct sort_list_item **ss2, size_t offset);
+int preproc (struct bwstring *s, struct keys_array *ka);
+int top_level_str_coll (const struct bwstring *, const struct bwstring *);
+int key_coll (struct keys_array *ks1, struct keys_array *ks2, size_t offset);
+int str_list_coll (struct bwstring *str1, struct sort_list_item **ss2);
+int list_coll_by_str_only (struct sort_list_item **ss1,
+                           struct sort_list_item **ss2);
+int list_coll (struct sort_list_item **ss1, struct sort_list_item **ss2);
+int list_coll_offset (struct sort_list_item **ss1, struct sort_list_item **ss2,
+                      size_t offset);
 
-listcoll_t get_list_call_func(size_t offset);
+listcoll_t get_list_call_func (size_t offset);
 
 #endif /* __COLL_H__ */

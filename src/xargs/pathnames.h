@@ -32,4 +32,4 @@
  *	@(#)pathnames.h	8.1 (Berkeley) 6/6/93
  */
 
-#define	_PATH_ECHO	"/bin/echo"
+#define _PATH_ECHO "/bin/echo"

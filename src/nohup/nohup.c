@@ -30,21 +30,21 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/stat.h>
+#include <err.h>
+#include <errno.h>
 #include <fcntl.h>
-#include <unistd.h>
+#include <limits.h>
 #include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <errno.h>
-#include <limits.h>
-#include <err.h>
+#include <sys/stat.h>
+#include <unistd.h>
 
 #include "compat.h"
 
-static void dofile(void);
-static void usage(void);
+static void dofile (void);
+static void usage (void);
 
 /*
  * nohup shall exit with one of the following values:
@@ -52,9 +52,9 @@ static void usage(void);
  * 127 - An error occurred in the nohup utility, or the utility could
  *       not be found.
  */
-#define EXIT_NOEXEC	126
-#define EXIT_NOTFOUND	127
-#define EXIT_MISC	127
+#define EXIT_NOEXEC 126
+#define EXIT_NOTFOUND 127
+#define EXIT_MISC 127
 
 /*
  * If the standard output is a terminal, all output written to
@@ -67,69 +67,73 @@ static void usage(void);
  * If a file is created, the file's permission bits shall be
  * set to S_IRUSR | S_IWUSR.
  */
-#define	FILENAME	"nohup.out"
+#define FILENAME "nohup.out"
 
 int
-main(int argc, char *argv[])
+main (int argc, char *argv[])
 {
-	int exit_status;
+  int exit_status;
 
-	if (argc < 2)
-		usage();
+  if (argc < 2)
+    usage ();
 
-	if (isatty(STDOUT_FILENO) || errno == EBADF)
-		dofile();
+  if (isatty (STDOUT_FILENO) || errno == EBADF)
+    dofile ();
 
-	if ((isatty(STDERR_FILENO) || errno == EBADF) &&
-	    dup2(STDOUT_FILENO, STDERR_FILENO) == -1) {
-		/* may have just closed stderr */
-		(void)fprintf(stdin, "nohup: %s\n", strerror(errno));
-		exit(EXIT_MISC);
-	}
+  if ((isatty (STDERR_FILENO) || errno == EBADF)
+      && dup2 (STDOUT_FILENO, STDERR_FILENO) == -1)
+    {
+      /* may have just closed stderr */
+      (void)fprintf (stdin, "nohup: %s\n", strerror (errno));
+      exit (EXIT_MISC);
+    }
 
-	/*
-	 * The nohup utility shall take the standard action for all signals
-	 * except that SIGHUP shall be ignored.
-	 */
-	(void)signal(SIGHUP, SIG_IGN);
+  /*
+   * The nohup utility shall take the standard action for all signals
+   * except that SIGHUP shall be ignored.
+   */
+  (void)signal (SIGHUP, SIG_IGN);
 
-	execvp(argv[1], &argv[1]);
-	exit_status = (errno == ENOENT) ? EXIT_NOTFOUND : EXIT_NOEXEC;
-	err(exit_status, "%s", argv[1]);
+  execvp (argv[1], &argv[1]);
+  exit_status = (errno == ENOENT) ? EXIT_NOTFOUND : EXIT_NOEXEC;
+  err (exit_status, "%s", argv[1]);
 }
 
 static void
-dofile(void)
+dofile (void)
 {
-	int fd;
-	const char *p;
-	char path[PATH_MAX];
+  int fd;
+  const char *p;
+  char path[PATH_MAX];
 
-	p = FILENAME;
-	if ((fd = open(p, O_RDWR|O_CREAT|O_APPEND, S_IRUSR|S_IWUSR)) >= 0)
-		goto dupit;
-	if ((p = getenv("HOME")) != NULL && *p != '\0' &&
-	    (strlen(p) + strlen(FILENAME) + 1) < sizeof(path)) {
-		(void)strlcpy(path, p, sizeof(path));
-		(void)strlcat(path, "/", sizeof(path));
-		(void)strlcat(path, FILENAME, sizeof(path));
-		if ((fd = open(p = path, O_RDWR|O_CREAT|O_APPEND, S_IRUSR|S_IWUSR)) >= 0)
-			goto dupit;
-	}
-	errx(EXIT_MISC, "can't open a nohup.out file");
+  p = FILENAME;
+  if ((fd = open (p, O_RDWR | O_CREAT | O_APPEND, S_IRUSR | S_IWUSR)) >= 0)
+    goto dupit;
+  if ((p = getenv ("HOME")) != NULL && *p != '\0'
+      && (strlen (p) + strlen (FILENAME) + 1) < sizeof (path))
+    {
+      (void)strlcpy (path, p, sizeof (path));
+      (void)strlcat (path, "/", sizeof (path));
+      (void)strlcat (path, FILENAME, sizeof (path));
+      if ((fd
+           = open (p = path, O_RDWR | O_CREAT | O_APPEND, S_IRUSR | S_IWUSR))
+          >= 0)
+        goto dupit;
+    }
+  errx (EXIT_MISC, "can't open a nohup.out file");
 
 dupit:
-	(void)lseek(fd, (off_t)0, SEEK_END);
-	if (dup2(fd, STDOUT_FILENO) == -1)
-		err(EXIT_MISC, NULL);
-	if (fd > STDERR_FILENO)
-		(void)close(fd);
-	(void)fprintf(stderr, "sending output to %s\n", p);
+  (void)lseek (fd, (off_t)0, SEEK_END);
+  if (dup2 (fd, STDOUT_FILENO) == -1)
+    err (EXIT_MISC, NULL);
+  if (fd > STDERR_FILENO)
+    (void)close (fd);
+  (void)fprintf (stderr, "sending output to %s\n", p);
 }
 
 static void
-usage(void)
+usage (void)
 {
-	(void)fprintf(stderr, "usage: nohup utility [arg ...]\n");
-	exit(EXIT_MISC);
+  (void)fprintf (stderr, "usage: nohup utility [arg ...]\n");
+  exit (EXIT_MISC);
 }
