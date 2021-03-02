@@ -43,6 +43,11 @@
 #include <string.h>
 #include <unistd.h>
 
+/* This is for musl-c operating systems! thanks to Onodera punpun */
+#ifndef DEFFILEMODE
+# define DEFFILEMODE (S_IRUSR|S_IWUSR|S_IRGRP|S_IWGRP|S_IROTH|S_IWOTH)/* 0666*/
+#endif
+
 struct list {
 	SLIST_ENTRY(list) next;
 	int fd;
