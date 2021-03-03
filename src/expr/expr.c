@@ -573,7 +573,7 @@ main (int argc, char *argv[])
     error ();
 
   if (vp->type == integer)
-    printf ("%lld\n", vp->u.i);
+    printf ("%ld\n", vp->u.i);
   else
     printf ("%s\n", vp->u.s);
 

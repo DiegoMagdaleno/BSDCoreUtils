@@ -33,35 +33,10 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/ioctl.h>
-#include <sys/stat.h>
-#include <sys/types.h>
-
-#include <dirent.h>
-#include <err.h>
-#include <errno.h>
-#include <fts.h>
-#include <grp.h>
-#include <limits.h>
-#include <locale.h>
-#include <pwd.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-#if defined __linux__
-#include "util.h"
-#else
-#include <util.h>
-#endif
-#ifdef COLORLS
-#include <signal.h>
-#include <termcap.h>
-#endif
-
 #include "compat.h"
-#include "extern.h"
 #include "ls.h"
+#include "extern.h"
+
 
 static void display (FTSENT *, FTSENT *);
 static int mastercmp (const FTSENT **, const FTSENT **);

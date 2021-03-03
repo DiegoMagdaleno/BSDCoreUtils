@@ -41,8 +41,8 @@
 #include <termios.h>
 #include <unistd.h>
 
-#include "extern.h"
 #include "stty.h"
+#include "extern.h"
 
 /*
  * Special control characters.
@@ -107,7 +107,7 @@ csearch (char ***argvp, struct info *ip)
   arg = *++*argvp;
   if (!arg)
     {
-      warnx ("option requires an argument -- %s", name);
+      warnx ("option  requires an argument -- %s", name);
       usage ();
     }
 

@@ -38,8 +38,8 @@
 #include <termios.h>
 #include <unistd.h>
 
-#include "extern.h"
 #include "stty.h"
+#include "extern.h"
 
 static void binit (char *);
 static void bput (const char *, unsigned int);

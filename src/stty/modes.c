@@ -36,8 +36,9 @@
 #include <string.h>
 #include <termios.h>
 
-#include "extern.h"
+
 #include "stty.h"
+#include "extern.h"
 
 struct modes
 {

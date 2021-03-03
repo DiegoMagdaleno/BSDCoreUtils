@@ -35,6 +35,32 @@
  *	@(#)ls.h	8.1 (Berkeley) 5/31/93
  */
 
+#include <sys/ioctl.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+
+#include <dirent.h>
+#include <err.h>
+#include <errno.h>
+#include <fts.h>
+#include <grp.h>
+#include <limits.h>
+#include <locale.h>
+#include <pwd.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#if defined __linux__
+#include "util.h"
+#else
+#include <util.h>
+#endif
+#ifdef COLORLS
+#include <signal.h>
+#include <termcap.h>
+#endif
+
 #define NO_PRINT 1
 
 extern long blocksize; /* block size units */

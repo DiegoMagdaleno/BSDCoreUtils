@@ -413,6 +413,7 @@ binop (void)
     }
 
   syntax (op->op_text, "not a binary operator");
+  return 0;
 }
 
 static enum token

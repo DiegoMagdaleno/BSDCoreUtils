@@ -39,8 +39,9 @@
 #include <fts.h>
 #include <string.h>
 
-#include "extern.h"
 #include "ls.h"
+#include "extern.h"
+
 
 #if defined(__APPLE__) || defined(__NetBSD__)
 #define st_atim st_atimespec

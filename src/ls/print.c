@@ -61,8 +61,9 @@
 #endif
 
 #include "compat.h"
-#include "extern.h"
 #include "ls.h"
+#include "extern.h"
+
 
 static int printaname (FTSENT *, int, int);
 static void printlink (FTSENT *);
@@ -150,7 +151,7 @@ printlong (DISPLAY *dp)
                       howmany ((long long)sp->st_blocks, blocksize));
       (void)strmode (sp->st_mode, buf);
       np = p->fts_pointer;
-      (void)printf ("%s %*u ", buf, dp->s_nlink, sp->st_nlink);
+      (void)printf ("%s %*lu ", buf, dp->s_nlink, sp->st_nlink);
       if (!f_grouponly)
         (void)printf ("%-*s  ", dp->s_user, np->user);
       (void)printf ("%-*s  ", dp->s_group, np->group);

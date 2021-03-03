@@ -42,8 +42,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "extern.h"
 #include "ls.h"
+#include "extern.h"
 
 #ifdef SMALL
 int

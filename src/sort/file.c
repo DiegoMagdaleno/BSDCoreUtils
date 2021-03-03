@@ -49,17 +49,13 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#ifdef __linux__
 #include "compat.h"
-#include <bsd/wchar.h>
-#else
 #include <wchar.h>
-#endif
 #include <wctype.h>
 
+#include "radixsort.h"
 #include "coll.h"
 #include "file.h"
-#include "radixsort.h"
 
 unsigned long long free_memory = 1000000;
 unsigned long long available_free_memory = 1000000;

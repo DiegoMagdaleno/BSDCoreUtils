@@ -313,7 +313,7 @@ format_and_print (int64_t v)
     }
   else
     {
-      printf (" %7lld", v);
+      printf (" %7ld", v);
     }
 }
 

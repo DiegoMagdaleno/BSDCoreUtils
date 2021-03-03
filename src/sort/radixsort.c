@@ -50,10 +50,7 @@
 
 #include "coll.h"
 #include "radixsort.h"
-
-#ifdef __linux__
-#include <bsd/stdlib.h>
-#endif
+#include "compat.h"
 
 #define DEFAULT_SORT_FUNC_RADIXSORT mergesort
 

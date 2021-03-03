@@ -176,7 +176,7 @@ pr_fact (uint64_t val) /* Factor this value. */
     }
 
   /* Factor value. */
-  (void)printf ("%llu:", val);
+  (void)printf ("%lu:", val);
   fflush (stdout);
   for (fact = &prime[0]; val > 1; ++fact)
     {
@@ -194,7 +194,7 @@ pr_fact (uint64_t val) /* Factor this value. */
           if (val > BIG)
             pr_bigfact (val);
           else
-            (void)printf (" %llu", val);
+            (void)printf (" %lu", val);
           break;
         }
 
@@ -296,7 +296,7 @@ pr_bigfact (uint64_t val) /* Factor this value. */
                 {
                   do
                     {
-                      printf (" %llu", start);
+                      printf (" %lu", start);
                       val /= start;
                     }
                   while ((val % start) == 0);
@@ -309,7 +309,7 @@ pr_bigfact (uint64_t val) /* Factor this value. */
         }
     }
   if (val > 1)
-    printf (" %llu", val);
+    printf (" %lu", val);
 }
 
 /* Code taken from ping.c */
