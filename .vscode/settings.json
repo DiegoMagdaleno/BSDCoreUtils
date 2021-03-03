@@ -8,6 +8,7 @@
         "coll.h": "c",
         "wctype.h": "c",
         "commoncrypto.h": "c",
-        "compat.h": "c"
+        "compat.h": "c",
+        "sha.h": "c"
     }
 }

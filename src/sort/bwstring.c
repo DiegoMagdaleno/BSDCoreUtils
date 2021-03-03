@@ -35,8 +35,6 @@
 #include <stdlib.h>
 #include <string.h>
 #ifdef __linux__
-//#include <bsd/stdio.h>
-//#include <bsd/wchar.h>
 #include <openssl/sha.h>
 #else
 #include <wchar.h>

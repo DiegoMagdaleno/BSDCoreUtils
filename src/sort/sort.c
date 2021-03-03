@@ -51,7 +51,6 @@
 #include <unistd.h>
 #ifdef __linux__
 #include "compat.h"
-#include <bsd/wchar.h>
 #include <ctype.h>
 #include <openssl/sha.h>
 #else
