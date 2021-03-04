@@ -1,4 +1,3 @@
-include(${CMAKE_CURRENT_SOURCE_DIR}/../../cmake/manpage.cmake)
 
 add_executable(unexpand unexpand.c)
 
