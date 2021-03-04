@@ -121,3 +121,16 @@ size_t strlcpy (char *, const char *, size_t);
 #if defined __linux__
 #define D_TAPE 1
 #endif
+
+/* This are extracted from libbsd, define missing symbols
+ * and operations necessary on timespec structs */
+#ifndef timespeccmp
+#define	timespeccmp(tsp, usp, cmp)					\
+	(((tsp)->tv_sec == (usp)->tv_sec) ?				\
+	    ((tsp)->tv_nsec cmp (usp)->tv_nsec) :			\
+	    ((tsp)->tv_sec cmp (usp)->tv_sec))
+#endif
+
+#ifndef timespecclear
+#define	timespecclear(tsp)		(tsp)->tv_sec = (tsp)->tv_nsec = 0
+#endif
