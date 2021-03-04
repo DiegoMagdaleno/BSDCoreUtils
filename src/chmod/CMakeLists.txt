@@ -2,7 +2,11 @@ include(${CMAKE_CURRENT_SOURCE_DIR}/../../cmake/symlink.cmake)
 add_executable(chmod chmod.c)
 
 target_link_libraries(chmod PRIVATE compat)
-#target_link_libraries(chmod PRIVATE fts)
+
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/chmod.1 DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/chgrp.1 DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/chown.8 DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+
 
 install_symlink(${CMAKE_INSTALL_PREFIX}/bin/chmod ${CMAKE_INSTALL_PREFIX}/bin/chgrp)
 install_symlink(${CMAKE_INSTALL_PREFIX}/bin/chmod ${CMAKE_INSTALL_PREFIX}/sbin/chown)
