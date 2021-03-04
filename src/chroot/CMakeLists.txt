@@ -1,3 +1,5 @@
+include(${CMAKE_CURRENT_SOURCE_DIR}/../../cmake/manpage.cmake)
+
 add_executable(chroot chroot.c)
 
 INSTALL(TARGETS chroot DESTINATION ${CMAKE_INSTALL_SBINDIR})

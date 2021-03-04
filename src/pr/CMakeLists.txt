@@ -1,3 +1,5 @@
+include(${CMAKE_CURRENT_SOURCE_DIR}/../../cmake/manpage.cmake)
+
 add_executable(pr pr.c egetopt.c)
 
 target_link_libraries(pr PRIVATE compat)

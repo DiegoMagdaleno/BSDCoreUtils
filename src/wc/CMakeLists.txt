@@ -1,3 +1,5 @@
+include(${CMAKE_CURRENT_SOURCE_DIR}/../../cmake/manpage.cmake)
+
 add_executable(wc wc.c)
 
 target_link_libraries(wc PRIVATE compat)

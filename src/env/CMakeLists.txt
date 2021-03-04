@@ -1,3 +1,6 @@
+include(${CMAKE_CURRENT_SOURCE_DIR}/../../cmake/manpage.cmake)
+
+
 add_executable(env env.c)
 
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/env.1 DESTINATION ${CMAKE_CURRENT_BINARY_DIR})

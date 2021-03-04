@@ -1,3 +1,5 @@
+include(${CMAKE_CURRENT_SOURCE_DIR}/../../cmake/manpage.cmake)
+
 add_executable(csplit csplit.c)
 
 target_link_libraries(csplit PRIVATE compat)

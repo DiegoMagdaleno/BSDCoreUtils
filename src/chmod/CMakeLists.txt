@@ -1,4 +1,6 @@
 include(${CMAKE_CURRENT_SOURCE_DIR}/../../cmake/symlink.cmake)
+include(${CMAKE_CURRENT_SOURCE_DIR}/../../cmake/manpage.cmake)
+
 add_executable(chmod chmod.c)
 
 target_link_libraries(chmod PRIVATE compat)

@@ -1,3 +1,5 @@
+include(${CMAKE_CURRENT_SOURCE_DIR}/../../cmake/manpage.cmake)
+
 add_executable(printenv printenv.c)
 
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/printenv.1 DESTINATION ${CMAKE_CURRENT_BINARY_DIR})

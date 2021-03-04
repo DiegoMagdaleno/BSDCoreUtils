@@ -1,3 +1,5 @@
+include(${CMAKE_CURRENT_SOURCE_DIR}/../../cmake/manpage.cmake)
+
 add_executable(dd conv.c conv_tab.c dd.c misc.c position.c args.c)
 
 target_link_libraries(dd PRIVATE compat)

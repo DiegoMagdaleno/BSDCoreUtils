@@ -1,3 +1,5 @@
+include(${CMAKE_CURRENT_SOURCE_DIR}/../../cmake/manpage.cmake)
+
 add_executable(who who.c utmpentry.c)
 
 target_link_libraries(who PRIVATE compat)

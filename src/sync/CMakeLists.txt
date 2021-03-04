@@ -1,3 +1,5 @@
+include(${CMAKE_CURRENT_SOURCE_DIR}/../../cmake/manpage.cmake)
+
 add_executable(sync sync.c)
 
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/sync.8 DESTINATION ${CMAKE_CURRENT_BINARY_DIR})

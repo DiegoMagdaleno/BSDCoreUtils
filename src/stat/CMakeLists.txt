@@ -1,3 +1,5 @@
+include(${CMAKE_CURRENT_SOURCE_DIR}/../../cmake/manpage.cmake)
+
 add_executable(stat stat.c)
 
 target_link_libraries(stat PRIVATE compat)

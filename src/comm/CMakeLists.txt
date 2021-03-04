@@ -1,3 +1,5 @@
+include(${CMAKE_CURRENT_SOURCE_DIR}/../../cmake/manpage.cmake)
+
 add_executable(comm comm.c)
 
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")

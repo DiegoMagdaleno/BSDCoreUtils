@@ -1,3 +1,5 @@
+include(${CMAKE_CURRENT_SOURCE_DIR}/../../cmake/manpage.cmake)
+
 add_executable(cp cp.c utils.c)
 
 target_link_libraries(cp PRIVATE compat)

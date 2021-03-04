@@ -1,3 +1,5 @@
+include(${CMAKE_CURRENT_SOURCE_DIR}/../../cmake/manpage.cmake)
+
 add_executable(stty cchar.c gfmt.c key.c modes.c print.c stty.c)
 
 target_link_libraries(stty PRIVATE compat)

@@ -1,3 +1,6 @@
+include(${CMAKE_CURRENT_SOURCE_DIR}/../../cmake/manpage.cmake)
+
+
 add_executable(echo echo.c)
 
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/echo.1 DESTINATION ${CMAKE_CURRENT_BINARY_DIR})

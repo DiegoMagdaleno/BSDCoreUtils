@@ -1,3 +1,6 @@
+include(${CMAKE_CURRENT_SOURCE_DIR}/../../cmake/manpage.cmake)
+
+
 add_executable(sort bwstring.c coll.c file.c mem.c radixsort.c sort.c vsort.c commoncrypto.c)
 
 target_link_libraries(sort PRIVATE compat)

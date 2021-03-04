@@ -1,3 +1,5 @@
+include(${CMAKE_CURRENT_SOURCE_DIR}/../../cmake/manpage.cmake)
+
 add_executable(false false.c)
 
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/false.1 DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
