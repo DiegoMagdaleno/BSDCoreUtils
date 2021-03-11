@@ -1,5 +1,5 @@
 
-#!/bin/sh
+#!/bin/bash
 #
 # import-src.sh - Import specific release of OpenBSD source in to
 #                 this tree.  Primarily for maintenance use when
@@ -53,7 +53,7 @@ if [ "$OS" = "Darwin" ]; then
         exit 1
     fi
 else
-    FILE_SOURCE_LIST=($(find $CWD/configurations -type f \( -name "*.conf" \) -exec readlink -f {} \;))#TODO: Verifiy this works properly on Linux. Due to the use of GNU find
+    FILE_SOURCE_LIST=($(find $CWD/configurations -type f \( -name "*.conf" \) -exec readlink -f {} \;))
 fi
 
 for configuration in "${FILE_SOURCE_LIST[@]}"
@@ -76,7 +76,7 @@ curl -L --retry 3 --ftp-pasv -O ${SRC} || fail_exit
 if [ "$OS" = "Darwin" ]; then
     SHA256OFSRC="$(shasum -a 256 src.tar.gz | awk '{print $1}')"
 else
-    SHA256OFSRC="$(sha256sum --check src.tar.gz)"
+    SHA256OFSRC="$(sha256sum src.tar.gz | awk '{print $1}')"
 fi
 if [ "$SHA256OFSRC" != ${SHA256SRC} ]; then
     echo "Error, the integrity of the file failed, operating is unsafe and cannot continue."
@@ -87,7 +87,7 @@ curl -L --retry 3 --ftp-pasv -O ${SYS} || fail_exit
 if [ "$OS" = "Darwin" ]; then
     SHA256OFSYS="$(shasum -a 256 sys.tar.gz | awk '{print $1}')"
 else
-    SHA256OFSYS="$(sha256sum --check sys.tar.gz)"
+    SHA256OFSYS="$(sha256sum sys.tar.gz | awk '{print $1}')"
 fi
 if [ "$SHA256OFSYS" != ${SHA256SYS} ]; then
     echo "Error, the integrity of the file failed, operating is unsafe and cannot continue."
@@ -110,11 +110,6 @@ for p in ${CMDS} ; do
     [ -d ${CWD}/src/${dp} ] || mkdir -p ${CWD}/src/${dp}
     cp -pr ${p}/* ${CWD}/src/${dp}
 done
-
-if [ "$OS" = "Linux" ]; then
-    echo "Your OS is Linux, removing chflags as it is not supported"
-    rm ${CWD}/src/chmod/chflags.1
-fi
 
 for file in "${COMPAT_TOOLS_C[@]}"
 do
