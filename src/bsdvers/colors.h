@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2017 David Cantrell <david.l.cantrell@gmail.com>
  *                    Jim Bair <james.d.bair@gmail.com>
- *                    Diego Magdaleno <diegomagdaleno@protonmail.com>
+ *                    Diego Magdaleno <diegomagdaleno@protonmail.com>                   
  *
  * Permission to use, copy, modify, and distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -16,11 +16,11 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-#define RED "\x1B[31m"
-#define GRN "\x1B[32m"
-#define YEL "\x1B[33m"
-#define BLU "\x1B[34m"
-#define MAG "\x1B[35m"
-#define CYN "\x1B[36m"
-#define WHT "\x1B[37m"
+#define RED   "\x1B[31m"
+#define GRN   "\x1B[32m"
+#define YEL   "\x1B[33m"
+#define BLU   "\x1B[34m"
+#define MAG   "\x1B[35m"
+#define CYN   "\x1B[36m"
+#define WHT   "\x1B[37m"
 #define RESET "\x1B[0m"

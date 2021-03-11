@@ -36,31 +36,30 @@
 #include <unistd.h>
 
 static void
-usage (void)
+usage(void)
 {
-  (void)fprintf (stderr, "usage: logname\n");
-  exit (1);
+	(void)fprintf(stderr, "usage: logname\n");
+	exit(1);
 }
 
 int
-main (int argc, char *argv[])
+main(int argc, char *argv[])
 {
-  int ch;
-  char *p;
+	int ch;
+	char *p;
 
-  while ((ch = getopt (argc, argv, "")) != -1)
-    switch (ch)
-      {
-      default:
-        usage ();
-      }
+	while ((ch = getopt(argc, argv, "")) != -1)
+		switch (ch) {
+		default:
+			usage();
+		}
 
-  if (argc != optind)
-    usage ();
+	if (argc != optind)
+		usage();
 
-  if ((p = getlogin ()) == NULL)
-    err (1, NULL);
+	if ((p = getlogin()) == NULL)
+		err(1, NULL);
 
-  (void)printf ("%s\n", p);
-  return 0;
+	(void)printf("%s\n", p);
+	return 0;
 }

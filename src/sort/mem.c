@@ -37,44 +37,44 @@
  * malloc() wrapper.
  */
 void *
-sort_malloc (size_t size)
+sort_malloc(size_t size)
 {
-  void *ptr;
+	void *ptr;
 
-  if ((ptr = malloc (size)) == NULL)
-    err (2, NULL);
-  return (ptr);
+	if ((ptr = malloc(size)) == NULL)
+		err(2, NULL);
+	return (ptr);
 }
 
 /*
  * free() wrapper.
  */
 void
-sort_free (const void *ptr)
+sort_free(const void *ptr)
 {
 
-  if (ptr)
-    free ((void *)ptr);
+	if (ptr)
+		free((void *) ptr);
 }
 
 /*
  * realloc() wrapper.
  */
 void *
-sort_realloc (void *ptr, size_t size)
+sort_realloc(void *ptr, size_t size)
 {
 
-  if ((ptr = realloc (ptr, size)) == NULL)
-    err (2, NULL);
-  return (ptr);
+	if ((ptr = realloc(ptr, size)) == NULL)
+		err(2, NULL);
+	return (ptr);
 }
 
 char *
-sort_strdup (const char *str)
+sort_strdup(const char *str)
 {
-  char *dup;
+	char *dup;
 
-  if ((dup = strdup (str)) == NULL)
-    err (2, NULL);
-  return (dup);
+	if ((dup = strdup(str)) == NULL)
+		err(2, NULL);
+	return (dup);
 }

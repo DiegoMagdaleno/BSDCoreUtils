@@ -32,11 +32,10 @@
  *	@(#)extern.h	8.2 (Berkeley) 4/1/94
  */
 
-typedef struct
-{
-  char *p_end;           /* pointer to NULL at end of path */
-  char *target_end;      /* pointer to end of target base */
-  char p_path[PATH_MAX]; /* pointer to the start of a path */
+typedef struct {
+	char *p_end;			/* pointer to NULL at end of path */
+	char *target_end;		/* pointer to end of target base */
+	char p_path[PATH_MAX];		/* pointer to the start of a path */
 } PATH_T;
 
 extern PATH_T to;
@@ -45,9 +44,10 @@ extern int fflag, iflag, pflag;
 extern mode_t myumask;
 extern char *__progname;
 
-int copy_fifo (struct stat *, int);
-int copy_file (FTSENT *, int);
-int copy_link (FTSENT *, int);
-int copy_special (struct stat *, int);
-int setfile (struct stat *, int);
-void usage (void);
+int	copy_fifo(struct stat *, int);
+int	copy_file(FTSENT *, int);
+int	copy_link(FTSENT *, int);
+int	copy_special(struct stat *, int);
+int	setfile(struct stat *, int);
+void	usage(void);
+

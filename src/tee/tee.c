@@ -30,9 +30,9 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/queue.h>
-#include <sys/stat.h>
 #include <sys/types.h>
+#include <sys/stat.h>
+#include <sys/queue.h>
 
 #include <err.h>
 #include <errno.h>
@@ -45,112 +45,95 @@
 
 /* This is for musl-c operating systems! thanks to Onodera punpun */
 #ifndef DEFFILEMODE
-#define DEFFILEMODE                                                           \
-  (S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH) /* 0666*/
+# define DEFFILEMODE (S_IRUSR|S_IWUSR|S_IRGRP|S_IWGRP|S_IROTH|S_IWOTH)/* 0666*/
 #endif
 
-struct list
-{
-  SLIST_ENTRY (list) next;
-  int fd;
-  char *name;
+struct list {
+	SLIST_ENTRY(list) next;
+	int fd;
+	char *name;
 };
-SLIST_HEAD (, list) head;
+SLIST_HEAD(, list) head;
 
 static void
-add (int fd, char *name)
+add(int fd, char *name)
 {
-  struct list *p;
+	struct list *p;
 
-  if ((p = malloc (sizeof (*p))) == NULL)
-    err (1, NULL);
-  p->fd = fd;
-  p->name = name;
-  SLIST_INSERT_HEAD (&head, p, next);
+	if ((p = malloc(sizeof(*p))) == NULL)
+		err(1, NULL);
+	p->fd = fd;
+	p->name = name;
+	SLIST_INSERT_HEAD(&head, p, next);
 }
 
 int
-main (int argc, char *argv[])
+main(int argc, char *argv[])
 {
-  struct list *p;
-  int fd;
-  ssize_t n, rval, wval;
-  char *bp;
-  int append, ch, exitval;
-  char buf[8192];
+	struct list *p;
+	int fd;
+	ssize_t n, rval, wval;
+	char *bp;
+	int append, ch, exitval;
+	char buf[8192];
 
-  SLIST_INIT (&head);
+	SLIST_INIT(&head);
 
-  append = 0;
-  while ((ch = getopt (argc, argv, "ai")) != -1)
-    {
-      switch (ch)
-        {
-        case 'a':
-          append = 1;
-          break;
-        case 'i':
-          (void)signal (SIGINT, SIG_IGN);
-          break;
-        default:
-          (void)fprintf (stderr, "usage: tee [-ai] [file ...]\n");
-          return 1;
-        }
-    }
-  argv += optind;
-  argc -= optind;
+	append = 0;
+	while ((ch = getopt(argc, argv, "ai")) != -1) {
+		switch(ch) {
+		case 'a':
+			append = 1;
+			break;
+		case 'i':
+			(void)signal(SIGINT, SIG_IGN);
+			break;
+		default:
+			(void)fprintf(stderr, "usage: tee [-ai] [file ...]\n");
+			return 1;
+		}
+	}
+	argv += optind;
+	argc -= optind;
 
-  add (STDOUT_FILENO, "stdout");
+	add(STDOUT_FILENO, "stdout");
 
-  exitval = 0;
-  while (*argv)
-    {
-      if ((fd
-           = open (*argv, O_WRONLY | O_CREAT | (append ? O_APPEND : O_TRUNC),
-                   DEFFILEMODE))
-          == -1)
-        {
-          warn ("%s", *argv);
-          exitval = 1;
-        }
-      else
-        add (fd, *argv);
-      argv++;
-    }
+	exitval = 0;
+	while (*argv) {
+		if ((fd = open(*argv, O_WRONLY | O_CREAT |
+		    (append ? O_APPEND : O_TRUNC), DEFFILEMODE)) == -1) {
+			warn("%s", *argv);
+			exitval = 1;
+		} else
+			add(fd, *argv);
+		argv++;
+	}
 
-  while ((rval = read (STDIN_FILENO, buf, sizeof (buf))) > 0)
-    {
-      SLIST_FOREACH (p, &head, next)
-      {
-        n = rval;
-        bp = buf;
-        do
-          {
-            if ((wval = write (p->fd, bp, n)) == -1)
-              {
-                warn ("%s", p->name);
-                exitval = 1;
-                break;
-              }
-            bp += wval;
-          }
-        while (n -= wval);
-      }
-    }
-  if (rval == -1)
-    {
-      warn ("read");
-      exitval = 1;
-    }
+	while ((rval = read(STDIN_FILENO, buf, sizeof(buf))) > 0) {
+		SLIST_FOREACH(p, &head, next) {
+			n = rval;
+			bp = buf;
+			do {
+				if ((wval = write(p->fd, bp, n)) == -1) {
+					warn("%s", p->name);
+					exitval = 1;
+					break;
+				}
+				bp += wval;
+			} while (n -= wval);
+		}
+	}
+	if (rval == -1) {
+		warn("read");
+		exitval = 1;
+	}
 
-  SLIST_FOREACH (p, &head, next)
-  {
-    if (close (p->fd) == -1)
-      {
-        warn ("%s", p->name);
-        exitval = 1;
-      }
-  }
+	SLIST_FOREACH(p, &head, next) {
+		if (close(p->fd) == -1) {
+			warn("%s", p->name);
+			exitval = 1;
+		}
+	}
 
-  return exitval;
+	return exitval;
 }

@@ -30,8 +30,8 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/ioctl.h>
 #include <sys/types.h>
+#include <sys/ioctl.h>
 
 #include <ctype.h>
 #include <err.h>
@@ -50,116 +50,110 @@
 #include "compat.h"
 
 int
-main (int argc, char *argv[])
+main(int argc, char *argv[])
 {
-  struct info i;
-  enum FMT fmt;
-  int ch;
+	struct info i;
+	enum FMT fmt;
+	int ch;
 
-  fmt = NOTSET;
-  i.fd = STDIN_FILENO;
+	fmt = NOTSET;
+	i.fd = STDIN_FILENO;
 
-  opterr = 0;
-  while (optind < argc
-         && strspn (argv[optind], "-aefg") == strlen (argv[optind])
-         && (ch = getopt (argc, argv, "aef:g")) != -1)
-    switch (ch)
-      {
-      case 'a':
-        fmt = POSIX;
-        break;
-      case 'e':
-        fmt = BSD;
-        break;
-      case 'f':
-        if ((i.fd = open (optarg, O_RDONLY | O_NONBLOCK)) == -1)
-          err (1, "%s", optarg);
-        break;
-      case 'g':
-        fmt = GFLAG;
-        break;
-      default:
-        goto args;
-      }
+	opterr = 0;
+	while (optind < argc &&
+	    strspn(argv[optind], "-aefg") == strlen(argv[optind]) &&
+	    (ch = getopt(argc, argv, "aef:g")) != -1)
+		switch(ch) {
+		case 'a':
+			fmt = POSIX;
+			break;
+		case 'e':
+			fmt = BSD;
+			break;
+		case 'f':
+			if ((i.fd = open(optarg, O_RDONLY | O_NONBLOCK)) == -1)
+				err(1, "%s", optarg);
+			break;
+		case 'g':
+			fmt = GFLAG;
+			break;
+		default:
+			goto args;
+		}
 
-args:
-  argc -= optind;
-  argv += optind;
+args:	argc -= optind;
+	argv += optind;
 
-  if (ioctl (i.fd, TIOCGETD, &i.ldisc) == -1)
-    err (1, "TIOCGETD");
+	if (ioctl(i.fd, TIOCGETD, &i.ldisc) == -1)
+		err(1, "TIOCGETD");
 
-  if (tcgetattr (i.fd, &i.t) == -1)
-    errx (1, "not a terminal");
-  if (ioctl (i.fd, TIOCGWINSZ, &i.win) == -1)
-    warn ("TIOCGWINSZ");
+	if (tcgetattr(i.fd, &i.t) == -1)
+		errx(1, "not a terminal");
+	if (ioctl(i.fd, TIOCGWINSZ, &i.win) == -1)
+		warn("TIOCGWINSZ");
 
-  switch (fmt)
-    {
-    case NOTSET:
-      if (*argv)
-        break;
-      /* FALLTHROUGH */
-    case BSD:
-    case POSIX:
-      if (*argv)
-        errx (1, "either display or modify");
-      print (&i.t, &i.win, i.ldisc, fmt);
-      break;
-    case GFLAG:
-      if (*argv)
-        errx (1, "either display or modify");
-      gprint (&i.t, &i.win, i.ldisc);
-      break;
-    }
+	switch(fmt) {
+	case NOTSET:
+		if (*argv)
+			break;
+		/* FALLTHROUGH */
+	case BSD:
+	case POSIX:
+		if (*argv)
+			errx(1, "either display or modify");
+		print(&i.t, &i.win, i.ldisc, fmt);
+		break;
+	case GFLAG:
+		if (*argv)
+			errx(1, "either display or modify");
+		gprint(&i.t, &i.win, i.ldisc);
+		break;
+	}
 
-  for (i.set = i.wset = 0; *argv; ++argv)
-    {
-      if (ksearch (&argv, &i))
-        continue;
+	for (i.set = i.wset = 0; *argv; ++argv) {
+		if (ksearch(&argv, &i))
+			continue;
 
-      if (csearch (&argv, &i))
-        continue;
+		if (csearch(&argv, &i))
+			continue;
 
-      if (msearch (&argv, &i))
-        continue;
+		if (msearch(&argv, &i))
+			continue;
 
-      if (isdigit ((unsigned char)**argv))
-        {
-          const char *error;
-          int speed;
+		if (isdigit((unsigned char)**argv)) {
+			const char *error;
+			int speed;
 
-          speed = strtonum (*argv, 0, INT_MAX, &error);
-          if (error)
-            err (1, "%s", *argv);
-          cfsetospeed (&i.t, speed);
-          cfsetispeed (&i.t, speed);
-          i.set = 1;
-          continue;
-        }
+			speed = strtonum(*argv, 0, INT_MAX, &error);
+			if (error)
+				err(1, "%s", *argv);
+			cfsetospeed(&i.t, speed);
+			cfsetispeed(&i.t, speed);
+			i.set = 1;
+			continue;
+		}
 
-      if (!strncmp (*argv, "gfmt1", sizeof ("gfmt1") - 1))
-        {
-          gread (&i.t, *argv + sizeof ("gfmt1") - 1);
-          i.set = 1;
-          continue;
-        }
+		if (!strncmp(*argv, "gfmt1", sizeof("gfmt1") - 1)) {
+			gread(&i.t, *argv + sizeof("gfmt1") - 1);
+			i.set = 1;
+			continue;
+		}
 
-      warnx ("illegal option -- %s", *argv);
-      usage ();
-    }
+		warnx("illegal option -- %s", *argv);
+		usage();
+	}
 
-  if (i.set && tcsetattr (i.fd, 0, &i.t) == -1)
-    err (1, "tcsetattr");
-  if (i.wset && ioctl (i.fd, TIOCSWINSZ, &i.win) == -1)
-    warn ("TIOCSWINSZ");
-  return (0);
+	if (i.set && tcsetattr(i.fd, 0, &i.t) == -1)
+		err(1, "tcsetattr");
+	if (i.wset && ioctl(i.fd, TIOCSWINSZ, &i.win) == -1)
+		warn("TIOCSWINSZ");
+	return (0);
 }
 
 void
-usage (void)
+usage(void)
 {
-  fprintf (stderr, "usage: %s [-a | -e | -g] [-f file] [operands]\n",
-           __progname);
-  exit (1);
+	fprintf(stderr, "usage: %s [-a | -e | -g] [-f file] [operands]\n",
+	    __progname);
+	exit (1);
 }

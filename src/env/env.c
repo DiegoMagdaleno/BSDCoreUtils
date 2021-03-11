@@ -36,65 +36,59 @@
 #include <string.h>
 #include <unistd.h>
 
-static void usage (void);
+static void usage(void);
 
 int
-main (int argc, char *argv[])
+main(int argc, char *argv[])
 {
-  extern char **environ;
-  extern int optind;
-  char **ep, *p;
-  int ch;
+	extern char **environ;
+	extern int optind;
+	char **ep, *p;
+	int ch;
 
-  while ((ch = getopt (argc, argv, "i-")) != -1)
-    switch (ch)
-      {
-      case '-': /* obsolete */
-      case 'i':
-        if ((environ = calloc (1, sizeof (char *))) == NULL)
-          err (126, "calloc");
-        break;
-      default:
-        usage ();
-      }
-  argc -= optind;
-  argv += optind;
+	while ((ch = getopt(argc, argv, "i-")) != -1)
+		switch(ch) {
+		case '-':			/* obsolete */
+		case 'i':
+			if ((environ = calloc(1, sizeof(char *))) == NULL)
+				err(126, "calloc");
+			break;
+		default:
+			usage();
+		}
+	argc -= optind;
+	argv += optind;
 
-  for (; *argv && (p = strchr (*argv, '=')); ++argv)
-    {
-      *p++ = '\0';
-      if (setenv (*argv, p, 1) == -1)
-        {
-          /* reuse 126, it matches the problem most */
-          err (126, "setenv");
-        }
-    }
+	for (; *argv && (p = strchr(*argv, '=')); ++argv) {
+		*p++ = '\0';
+		if (setenv(*argv, p, 1) == -1) {
+			/* reuse 126, it matches the problem most */
+			err(126, "setenv");
+		}
+	}
 
-  if (*argv)
-    {
-      /*
-       * return 127 if the command to be run could not be
-       * found; 126 if the command was found but could
-       * not be invoked
-       */
-      execvp (*argv, argv);
-      err ((errno == ENOENT) ? 127 : 126, "%s", *argv);
-    }
+	if (*argv) {
+		/*
+		 * return 127 if the command to be run could not be
+		 * found; 126 if the command was found but could
+		 * not be invoked
+		 */
+		execvp(*argv, argv);
+		err((errno == ENOENT) ? 127 : 126, "%s", *argv);
+	}
 
-  for (ep = environ; *ep; ep++)
-    (void)printf ("%s\n", *ep);
+	for (ep = environ; *ep; ep++)
+		(void)printf("%s\n", *ep);
 
-  return 0;
+	return 0;
 }
 
 static void
-usage (void)
+usage(void)
 {
-  extern char *__progname;
+	extern char *__progname;
 
-  (void)fprintf (stderr,
-                 "usage: %s [-i] [name=value ...] "
-                 "[utility [argument ...]]\n",
-                 __progname);
-  exit (1);
+	(void)fprintf(stderr, "usage: %s [-i] [name=value ...] "
+	    "[utility [argument ...]]\n", __progname);
+	exit(1);
 }

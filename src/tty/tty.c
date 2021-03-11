@@ -30,44 +30,42 @@
  * SUCH DAMAGE.
  */
 
-#include <err.h>
-#include <paths.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <paths.h>
+#include <err.h>
 
-static void usage (void);
+static void usage(void);
 
 int
-main (int argc, char *argv[])
+main(int argc, char *argv[])
 {
-  int ch, sflag;
-  char *t;
+	int ch, sflag;
+	char *t;
 
-  sflag = 0;
-  while ((ch = getopt (argc, argv, "s")) != -1)
-    {
-      switch (ch)
-        {
-        case 's':
-          sflag = 1;
-          break;
-        case '?':
-        default:
-          usage ();
-          /* NOTREACHED */
-        }
-    }
+	sflag = 0;
+	while ((ch = getopt(argc, argv, "s")) != -1) {
+		switch(ch) {
+		case 's':
+			sflag = 1;
+			break;
+		case '?':
+		default:
+			usage();
+			/* NOTREACHED */
+		}
+	}
 
-  t = ttyname (STDIN_FILENO);
-  if (!sflag)
-    puts (t ? t : "not a tty");
-  exit (t ? 0 : 1);
+	t = ttyname(STDIN_FILENO);
+	if (!sflag)
+		puts(t ? t : "not a tty");
+	exit(t ? 0 : 1);
 }
 
 static void
-usage (void)
+usage(void)
 {
-  fprintf (stderr, "usage: tty [-s]\n");
-  exit (2);
+	fprintf(stderr, "usage: tty [-s]\n");
+	exit(2);
 }

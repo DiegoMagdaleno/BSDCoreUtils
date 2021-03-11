@@ -38,31 +38,23 @@
 #include <pty.h>
 #endif
 
-struct info
-{
-  int fd;             /* file descriptor */
-  int ldisc;          /* line discipline */
-  int off;            /* turn off */
-  int set;            /* need set */
-  int wset;           /* need window set */
-  char *arg;          /* argument */
-  struct termios t;   /* terminal info */
-  struct winsize win; /* window info */
+struct info {
+	int fd;					/* file descriptor */
+	int ldisc;				/* line discipline */
+	int off;				/* turn off */
+	int set;				/* need set */
+	int wset;				/* need window set */
+	char *arg;				/* argument */
+	struct termios t;			/* terminal info */
+	struct winsize win;			/* window info */
 };
 
-struct cchar
-{
-  const char *name;
-  int sub;
-  u_char def;
+struct cchar {
+	const char *name;
+	int sub;
+	u_char def;
 };
 
-enum FMT
-{
-  NOTSET,
-  GFLAG,
-  BSD,
-  POSIX
-};
+enum FMT { NOTSET, GFLAG, BSD, POSIX };
 
-#define LINELENGTH 72
+#define	LINELENGTH	72

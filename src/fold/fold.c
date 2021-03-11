@@ -45,91 +45,78 @@
 
 #include "compat.h"
 
-#define DEFLINEWIDTH 80
+#define	DEFLINEWIDTH	80
 
-static void fold (unsigned int);
-static int isu8cont (unsigned char);
-static void usage (void);
+static void fold(unsigned int);
+static int isu8cont(unsigned char);
+static void usage(void);
 
 int count_bytes = 0;
 int split_words = 0;
 
 int
-main (int argc, char *argv[])
+main(int argc, char *argv[])
 {
-  int ch, lastch, newarg, prevoptind;
-  unsigned int width;
-  const char *errstr;
+	int ch, lastch, newarg, prevoptind;
+	unsigned int width;
+	const char *errstr;
 
-  setlocale (LC_CTYPE, "");
+	setlocale(LC_CTYPE, "");
 
-  width = 0;
-  lastch = '\0';
-  prevoptind = 1;
-  newarg = 1;
-  while ((ch = getopt (argc, argv, "0123456789bsw:")) != -1)
-    {
-      switch (ch)
-        {
-        case 'b':
-          count_bytes = 1;
-          break;
-        case 's':
-          split_words = 1;
-          break;
-        case 'w':
-          width = strtonum (optarg, 1, UINT_MAX, &errstr);
-          if (errstr != NULL)
-            errx (1, "illegal width value, %s: %s", errstr, optarg);
-          break;
-        case '0':
-        case '1':
-        case '2':
-        case '3':
-        case '4':
-        case '5':
-        case '6':
-        case '7':
-        case '8':
-        case '9':
-          if (newarg)
-            width = 0;
-          else if (!isdigit (lastch))
-            usage ();
-          if (width > UINT_MAX / 10 - 1)
-            errx (1, "illegal width value, too large");
-          width = (width * 10) + (ch - '0');
-          if (width < 1)
-            errx (1, "illegal width value, too small");
-          break;
-        default:
-          usage ();
-        }
-      lastch = ch;
-      newarg = optind != prevoptind;
-      prevoptind = optind;
-    }
-  argv += optind;
-  argc -= optind;
+	width = 0;
+	lastch = '\0';
+	prevoptind = 1;
+	newarg = 1;
+	while ((ch = getopt(argc, argv, "0123456789bsw:")) != -1) {
+		switch (ch) {
+		case 'b':
+			count_bytes = 1;
+			break;
+		case 's':
+			split_words = 1;
+			break;
+		case 'w':
+			width = strtonum(optarg, 1, UINT_MAX, &errstr);
+			if (errstr != NULL)
+				errx(1, "illegal width value, %s: %s", errstr, 
+					optarg);
+			break;
+		case '0': case '1': case '2': case '3': case '4':
+		case '5': case '6': case '7': case '8': case '9':
+			if (newarg)
+				width = 0;
+			else if (!isdigit(lastch))
+				usage();
+			if (width > UINT_MAX / 10 - 1)
+				errx(1, "illegal width value, too large");
+			width = (width * 10) + (ch - '0');
+			if (width < 1)
+				errx(1, "illegal width value, too small");
+			break;
+		default:
+			usage();
+		}
+		lastch = ch;
+		newarg = optind != prevoptind;
+		prevoptind = optind;
+	}
+	argv += optind;
+	argc -= optind;
 
-  if (width == 0)
-    width = DEFLINEWIDTH;
+	if (width == 0)
+		width = DEFLINEWIDTH;
 
-  if (!*argv)
-    {
-      fold (width);
-    }
-  else
-    {
-      for (; *argv; ++argv)
-        {
-          if (!freopen (*argv, "r", stdin))
-            err (1, "%s", *argv);
-          else
-            fold (width);
-        }
-    }
-  return 0;
+	if (!*argv) {
+		fold(width);
+	} else {
+		for (; *argv; ++argv) {
+			if (!freopen(*argv, "r", stdin))
+				err(1, "%s", *argv);
+			else
+				fold(width);
+		}
+	}
+	return 0;
 }
 
 /*
@@ -144,153 +131,140 @@ main (int argc, char *argv[])
  * returns embedded in the input stream.
  */
 static void
-fold (unsigned int max_width)
+fold(unsigned int max_width)
 {
-  static char *buf = NULL;
-  static size_t bufsz = 2048;
-  char *cp;         /* Current mb character. */
-  char *np;         /* Next mb character. */
-  char *sp;         /* To search for the last space. */
-  char *nbuf;       /* For buffer reallocation. */
-  wchar_t wc;       /* Current wide character. */
-  int ch;           /* Last byte read. */
-  int len;          /* Bytes in the current mb character. */
-  unsigned int col; /* Current display position. */
-  int width;        /* Display width of wc. */
+	static char	*buf = NULL;
+	static size_t	 bufsz = 2048;
+	char		*cp;	/* Current mb character. */
+	char		*np;	/* Next mb character. */
+	char		*sp;	/* To search for the last space. */
+	char		*nbuf;	/* For buffer reallocation. */
+	wchar_t		 wc;	/* Current wide character. */
+	int		 ch;	/* Last byte read. */
+	int		 len;	/* Bytes in the current mb character. */
+	unsigned int	 col;	/* Current display position. */
+	int		 width; /* Display width of wc. */
 
-  if (buf == NULL && (buf = malloc (bufsz)) == NULL)
-    err (1, NULL);
+	if (buf == NULL && (buf = malloc(bufsz)) == NULL)
+		err(1, NULL);
 
-  np = cp = buf;
-  ch = 0;
-  col = 0;
+	np = cp = buf;
+	ch = 0;
+	col = 0;
 
-  while (ch != EOF)
-    { /* Loop on input characters. */
-      while ((ch = getchar ()) != EOF)
-        { /* Loop on input bytes. */
-          if (np + 1 == buf + bufsz)
-            {
-              nbuf = reallocarray (buf, 2, bufsz);
-              if (nbuf == NULL)
-                err (1, NULL);
-              bufsz *= 2;
-              cp = nbuf + (cp - buf);
-              np = nbuf + (np - buf);
-              buf = nbuf;
-            }
-          *np++ = ch;
+	while (ch != EOF) {  /* Loop on input characters. */
+		while ((ch = getchar()) != EOF) {  /* Loop on input bytes. */
+			if (np + 1 == buf + bufsz) {
+				nbuf = reallocarray(buf, 2, bufsz);
+				if (nbuf == NULL)
+					err(1, NULL);
+				bufsz *= 2;
+				cp = nbuf + (cp - buf);
+				np = nbuf + (np - buf);
+				buf = nbuf;
+			}
+			*np++ = ch;
 
-          /*
-           * Read up to and including the first byte of
-           * the next character, such that we are sure
-           * to have a complete character in the buffer.
-           * There is no need to read more than five bytes
-           * ahead, since UTF-8 characters are four bytes
-           * long at most.
-           */
+			/*
+			 * Read up to and including the first byte of
+			 * the next character, such that we are sure
+			 * to have a complete character in the buffer.
+			 * There is no need to read more than five bytes
+			 * ahead, since UTF-8 characters are four bytes
+			 * long at most.
+			 */
 
-          if (np - cp > 4 || (np - cp > 1 && !isu8cont (ch)))
-            break;
-        }
+			if (np - cp > 4 || (np - cp > 1 && !isu8cont(ch)))
+				break;
+		}
 
-      while (cp < np)
-        { /* Loop on output characters. */
+		while (cp < np) {  /* Loop on output characters. */
 
-          /* Handle end of line and backspace. */
+			/* Handle end of line and backspace. */
 
-          if (*cp == '\n' || (*cp == '\r' && !count_bytes))
-            {
-              fwrite (buf, 1, ++cp - buf, stdout);
-              memmove (buf, cp, np - cp);
-              np = buf + (np - cp);
-              cp = buf;
-              col = 0;
-              continue;
-            }
-          if (*cp == '\b' && !count_bytes)
-            {
-              if (col)
-                col--;
-              cp++;
-              continue;
-            }
+			if (*cp == '\n' || (*cp == '\r' && !count_bytes)) {
+				fwrite(buf, 1, ++cp - buf, stdout);
+				memmove(buf, cp, np - cp);
+				np = buf + (np - cp);
+				cp = buf;
+				col = 0;
+				continue;
+			}
+			if (*cp == '\b' && !count_bytes) {
+				if (col)
+					col--;
+				cp++;
+				continue;
+			}
 
-          /*
-           * Measure display width.
-           * Process the last byte only if
-           * end of file was reached.
-           */
+			/*
+			 * Measure display width.
+			 * Process the last byte only if
+			 * end of file was reached.
+			 */
 
-          if (np - cp > (ch != EOF))
-            {
-              len = 1;
-              width = 1;
+			if (np - cp > (ch != EOF)) {
+				len = 1;
+				width = 1;
 
-              if (*cp == '\t')
-                {
-                  if (count_bytes == 0)
-                    width = 8 - (col & 7);
-                }
-              else if ((len = mbtowc (&wc, cp, np - cp)) < 1)
-                len = 1;
-              else if (count_bytes)
-                width = len;
-              else if ((width = wcwidth (wc)) < 0)
-                width = 1;
+				if (*cp == '\t') {
+					if (count_bytes == 0)
+						width = 8 - (col & 7);
+				} else if ((len = mbtowc(&wc, cp,
+				    np - cp)) < 1)
+					len = 1;
+				else if (count_bytes)
+					width = len;
+				else if ((width = wcwidth(wc)) < 0)
+					width = 1;
 
-              col += width;
-              if (col <= max_width || cp == buf)
-                {
-                  cp += len;
-                  continue;
-                }
-            }
+				col += width;
+				if (col <= max_width || cp == buf) {
+					cp += len;
+					continue;
+				}
+			}
 
-          /* Line break required. */
+			/* Line break required. */
 
-          if (col > max_width)
-            {
-              if (split_words)
-                {
-                  for (sp = cp; sp > buf; sp--)
-                    {
-                      if (sp[-1] == ' ')
-                        {
-                          cp = sp;
-                          break;
-                        }
-                    }
-                }
-              fwrite (buf, 1, cp - buf, stdout);
-              putchar ('\n');
-              memmove (buf, cp, np - cp);
-              np = buf + (np - cp);
-              cp = buf;
-              col = 0;
-              continue;
-            }
+			if (col > max_width) {
+				if (split_words) {
+					for (sp = cp; sp > buf; sp--) {
+						if (sp[-1] == ' ') {
+							cp = sp;
+							break;
+						}
+					}
+				}
+				fwrite(buf, 1, cp - buf, stdout);
+				putchar('\n');
+				memmove(buf, cp, np - cp);
+				np = buf + (np - cp);
+				cp = buf;
+				col = 0;
+				continue;
+			}
 
-          /* Need more input. */
+			/* Need more input. */
 
-          break;
-        }
-    }
-  fwrite (buf, 1, np - buf, stdout);
+			break;
+		}
+	}
+	fwrite(buf, 1, np - buf, stdout);
 
-  if (ferror (stdin))
-    err (1, NULL);
+	if (ferror(stdin))
+		err(1, NULL);
 }
 
 static int
-isu8cont (unsigned char c)
+isu8cont(unsigned char c)
 {
-  return MB_CUR_MAX > 1 && (c & (0x80 | 0x40)) == 0x80;
+	return MB_CUR_MAX > 1 && (c & (0x80 | 0x40)) == 0x80;
 }
 
 static void
-usage (void)
+usage(void)
 {
-  (void)fprintf (stderr, "usage: fold [-bs] [-w width] [file ...]\n");
-  exit (1);
+	(void)fprintf(stderr, "usage: fold [-bs] [-w width] [file ...]\n");
+	exit(1);
 }

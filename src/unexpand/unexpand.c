@@ -41,113 +41,99 @@
 
 #include "src/compat.h"
 
-char genbuf[BUFSIZ];
-char linebuf[BUFSIZ];
+char	genbuf[BUFSIZ];
+char	linebuf[BUFSIZ];
 
-void tabify (bool);
+void tabify(bool);
 
 int
-main (int argc, char *argv[])
+main(int argc, char *argv[])
 {
-  bool all = false;
-  char *cp;
+	bool all = false;
+	char *cp;
 
-  argc--, argv++;
-  if (argc > 0 && argv[0][0] == '-')
-    {
-      if (strcmp (argv[0], "-a") != 0)
-        {
-          fprintf (stderr, "usage: unexpand [-a] [file ...]\n");
-          exit (1);
-        }
-      all = true;
-      argc--, argv++;
-    }
-  do
-    {
-      if (argc > 0)
-        {
-          if (freopen (argv[0], "r", stdin) == NULL)
-            {
-              perror (argv[0]);
-              exit (1);
-            }
-          argc--, argv++;
-        }
-      while (fgets (genbuf, BUFSIZ, stdin) != NULL)
-        {
-          for (cp = linebuf; *cp; cp++)
-            continue;
-          if (cp > linebuf)
-            cp[-1] = 0;
-          tabify (all);
-          printf ("%s", linebuf);
-        }
-    }
-  while (argc > 0);
-  exit (0);
+	argc--, argv++;
+	if (argc > 0 && argv[0][0] == '-') {
+		if (strcmp(argv[0], "-a") != 0) {
+			fprintf(stderr, "usage: unexpand [-a] [file ...]\n");
+			exit(1);
+		}
+		all = true;
+		argc--, argv++;
+	}
+	do {
+		if (argc > 0) {
+			if (freopen(argv[0], "r", stdin) == NULL) {
+				perror(argv[0]);
+				exit(1);
+			}
+			argc--, argv++;
+		}
+		while (fgets(genbuf, BUFSIZ, stdin) != NULL) {
+			for (cp = linebuf; *cp; cp++)
+				continue;
+			if (cp > linebuf)
+				cp[-1] = 0;
+			tabify(all);
+			printf("%s", linebuf);
+		}
+	} while (argc > 0);
+	exit(0);
 }
 
 void
-tabify (bool all)
+tabify(bool all)
 {
-  char *cp, *dp;
-  int dcol;
-  int ocol;
-  size_t len;
+	char *cp, *dp;
+	int dcol;
+	int ocol;
+	size_t len;
 
-  ocol = 0;
-  dcol = 0;
-  cp = genbuf;
-  dp = linebuf;
-  len = sizeof linebuf;
+	ocol = 0;
+	dcol = 0;
+	cp = genbuf;
+	dp = linebuf;
+	len = sizeof linebuf;
 
-  for (;;)
-    {
-      switch (*cp)
-        {
+	for (;;) {
+		switch (*cp) {
 
-        case ' ':
-          dcol++;
-          break;
+		case ' ':
+			dcol++;
+			break;
 
-        case '\t':
-          dcol += 8;
-          dcol &= ~07;
-          break;
+		case '\t':
+			dcol += 8;
+			dcol &= ~07;
+			break;
 
-        default:
-          while (((ocol + 8) & ~07) <= dcol)
-            {
-              if (ocol + 1 == dcol)
-                break;
-              if (len > 1)
-                {
-                  *dp++ = '\t';
-                  len--;
-                }
-              ocol += 8;
-              ocol &= ~07;
-            }
-          while (ocol < dcol)
-            {
-              if (len > 1)
-                {
-                  *dp++ = ' ';
-                  len--;
-                }
-              ocol++;
-            }
-          if (*cp == '\0' || !all)
-            {
-              strlcpy (dp, cp, len);
-              return;
-            }
-          *dp++ = *cp;
-          len--;
-          ocol++;
-          dcol++;
-        }
-      cp++;
-    }
+		default:
+			while (((ocol + 8) &~ 07) <= dcol) {
+				if (ocol + 1 == dcol)
+					break;
+				if (len > 1) {
+					*dp++ = '\t';
+					len--;
+				}
+				ocol += 8;
+				ocol &= ~07;
+			}
+			while (ocol < dcol) {
+				if (len > 1) {
+					*dp++ = ' ';
+					len--;
+				}
+				ocol++;
+			}
+			if (*cp == '\0' || !all) {
+				strlcpy(dp, cp, len);
+				return;
+			}
+			*dp++ = *cp;
+			len--;
+			ocol++;
+			dcol++;
+		}
+		cp++;
+	}
 }

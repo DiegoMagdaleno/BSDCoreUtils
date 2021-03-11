@@ -31,7 +31,7 @@
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <sys/param.h> /* MACHINE_ARCH */
+#include <sys/param.h>	/* MACHINE_ARCH */
 #include <sys/utsname.h>
 
 #include <err.h>
@@ -39,111 +39,103 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-static void usage (void);
+static void usage(void);
 
-#define PRINT_SYSNAME 0x01
-#define PRINT_NODENAME 0x02
-#define PRINT_RELEASE 0x04
-#define PRINT_VERSION 0x08
-#define PRINT_MACHINE 0x10
-#define PRINT_ALL 0x1f
-#define PRINT_MACHINE_ARCH 0x20
+#define	PRINT_SYSNAME		0x01
+#define	PRINT_NODENAME		0x02
+#define	PRINT_RELEASE		0x04
+#define	PRINT_VERSION		0x08
+#define	PRINT_MACHINE		0x10
+#define	PRINT_ALL		0x1f
+#define PRINT_MACHINE_ARCH	0x20
 
 int
-main (int argc, char *argv[])
+main(int argc, char *argv[])
 {
-  struct utsname u;
-  int c;
-  int space = 0;
-  int print_mask = 0;
+	struct utsname u;
+	int c;
+	int space = 0;
+	int print_mask = 0;
 
-  while ((c = getopt (argc, argv, "amnrsvp")) != -1)
-    {
-      switch (c)
-        {
-        case 'a':
-          print_mask |= PRINT_ALL;
-          break;
-        case 'm':
-          print_mask |= PRINT_MACHINE;
-          break;
-        case 'n':
-          print_mask |= PRINT_NODENAME;
-          break;
-        case 'p':
-          print_mask |= PRINT_MACHINE_ARCH;
-          break;
-        case 'r':
-          print_mask |= PRINT_RELEASE;
-          break;
-        case 's':
-          print_mask |= PRINT_SYSNAME;
-          break;
-        case 'v':
-          print_mask |= PRINT_VERSION;
-          break;
-        default:
-          usage ();
-        }
-    }
+	while ((c = getopt(argc, argv, "amnrsvp")) != -1 ) {
+		switch (c) {
+		case 'a':
+			print_mask |= PRINT_ALL;
+			break;
+		case 'm':
+			print_mask |= PRINT_MACHINE;
+			break;
+		case 'n':
+			print_mask |= PRINT_NODENAME;
+			break;
+		case 'p':
+			print_mask |= PRINT_MACHINE_ARCH;
+			break;
+		case 'r':
+			print_mask |= PRINT_RELEASE;
+			break;
+		case 's':
+			print_mask |= PRINT_SYSNAME;
+			break;
+		case 'v':
+			print_mask |= PRINT_VERSION;
+			break;
+		default:
+			usage();
+		}
+	}
 
-  if (optind != argc)
-    usage ();
+	if (optind != argc)
+		usage();
 
-  if (!print_mask)
-    print_mask = PRINT_SYSNAME;
+	if (!print_mask)
+		print_mask = PRINT_SYSNAME;
 
-  if (uname (&u) == -1)
-    err (1, NULL);
+	if (uname(&u) == -1)
+		err(1, NULL);
 
-  if (print_mask & PRINT_SYSNAME)
-    {
-      space++;
-      fputs (u.sysname, stdout);
-    }
-  if (print_mask & PRINT_NODENAME)
-    {
-      if (space++)
-        putchar (' ');
+	if (print_mask & PRINT_SYSNAME) {
+		space++;
+		fputs(u.sysname, stdout);
+	}
+	if (print_mask & PRINT_NODENAME) {
+		if (space++)
+			putchar(' ');
 
-      fputs (u.nodename, stdout);
-    }
-  if (print_mask & PRINT_RELEASE)
-    {
-      if (space++)
-        putchar (' ');
+		fputs(u.nodename, stdout);
+	}
+	if (print_mask & PRINT_RELEASE) {
+		if (space++)
+			putchar(' ');
 
-      fputs (u.release, stdout);
-    }
-  if (print_mask & PRINT_VERSION)
-    {
-      if (space++)
-        putchar (' ');
+		fputs(u.release, stdout);
+	}
+	if (print_mask & PRINT_VERSION) {
+		if (space++)
+			putchar(' ');
 
-      fputs (u.version, stdout);
-    }
-  if (print_mask & PRINT_MACHINE)
-    {
-      if (space++)
-        putchar (' ');
+		fputs(u.version, stdout);
+	}
+	if (print_mask & PRINT_MACHINE) {
+		if (space++)
+			putchar(' ');
 
-      fputs (u.machine, stdout);
-    }
-  if (print_mask & PRINT_MACHINE_ARCH)
-    {
-      if (space++)
-        putchar (' ');
+		fputs(u.machine, stdout);
+	}
+	if (print_mask & PRINT_MACHINE_ARCH) {
+		if (space++)
+			putchar(' ');
 
-      fputs (u.machine, stdout);
-    }
-  putchar ('\n');
+		fputs(u.machine, stdout);
+	}
+	putchar('\n');
 
-  return 0;
+	return 0;
 }
 
 static void
-usage (void)
+usage(void)
 {
-  fprintf (stderr, "usage: uname [-amnprsv]\n");
-  exit (1);
+	fprintf(stderr, "usage: uname [-amnprsv]\n");
+	exit(1);
 }

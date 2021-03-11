@@ -35,62 +35,58 @@
 #include <string.h>
 #include <unistd.h>
 
-static void usage (void);
+static void	usage(void);
 
 int
-main (int argc, char *argv[])
+main(int argc, char *argv[])
 {
-  char buf[PATH_MAX];
-  int n, ch, nflag = 0, fflag = 0;
-  extern int optind;
+	char buf[PATH_MAX];
+	int n, ch, nflag = 0, fflag = 0;
+	extern int optind;
 
-  while ((ch = getopt (argc, argv, "fn")) != -1)
-    switch (ch)
-      {
-      case 'f':
-        fflag = 1;
-        break;
-      case 'n':
-        nflag = 1;
-        break;
-      default:
-        usage ();
-      }
-  argc -= optind;
-  argv += optind;
+	while ((ch = getopt(argc, argv, "fn")) != -1)
+		switch (ch) {
+		case 'f':
+			fflag = 1;
+			break;
+		case 'n':
+			nflag = 1;
+			break;
+		default:
+			usage();
+		}
+	argc -= optind;
+	argv += optind;
 
-  if (argc != 1)
-    usage ();
+	if (argc != 1)
+		usage();
 
-  n = strlen (argv[0]);
-  if (n > PATH_MAX - 1)
-    {
-      fprintf (stderr, "readlink: filename longer than PATH_MAX-1 (%d)\n",
-               PATH_MAX - 1);
-      exit (1);
-    }
+	n = strlen(argv[0]);
+	if (n > PATH_MAX - 1) {
+		fprintf(stderr,
+		    "readlink: filename longer than PATH_MAX-1 (%d)\n",
+		    PATH_MAX - 1);
+		exit(1);
+	}
 
-  if (fflag)
-    {
-      if (realpath (argv[0], buf) == NULL)
-        err (1, "%s", argv[0]);
-    }
-  else
-    {
-      if ((n = readlink (argv[0], buf, sizeof buf - 1)) == -1)
-        exit (1);
-      buf[n] = '\0';
-    }
+	if (fflag) {
+		if (realpath(argv[0], buf) == NULL)
+			err(1, "%s", argv[0]);
+	} else {
+		if ((n = readlink(argv[0], buf, sizeof buf-1)) == -1)
+			exit(1);
+		buf[n] = '\0';
+	}
 
-  printf ("%s", buf);
-  if (!nflag)
-    putchar ('\n');
-  exit (0);
+	printf("%s", buf);
+	if (!nflag)
+		putchar('\n');
+	exit(0);
 }
 
 static void
-usage (void)
+usage(void)
 {
-  (void)fprintf (stderr, "usage: readlink [-fn] file\n");
-  exit (1);
+	(void)fprintf(stderr, "usage: readlink [-fn] file\n");
+	exit(1);
 }
