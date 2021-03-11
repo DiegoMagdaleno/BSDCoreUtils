@@ -1,21 +1,40 @@
-name: C/C++ CI
+name: Build CMAKE
 
-on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+on: [push, pull_request]
+
+env:
+  CMAKE_VERSION: 3.18.1
+  BUILD_TYPE: Release
+
 
 jobs:
   build:
+    name: ${{matrix.config.name}}
+    runs-on: ${{matrix.config-os}}
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+        - {
+          name: "Ubuntu Latest GCC", artifact: "Linux.7z",
+          os: ubuntu-latest,
+          cc: "gcc", cxx: "g++"
+        }
+  
+  steps:
+  - uses: actions/checkout@v1
 
-    runs-on: ubuntu-latest
+  - name: Download and bootstrap CMake
+    shell: bash
+    run: |
+      if [ "$RUNNER_OS" == "Linux" ]; then
+        cmake_suffix="linux-x86_64.tar.gz"
+        cmake_dir="cmake-${cmake-version}-Linux-x86_64/bin"
+      fi
 
-    steps:
-    - name: required-deps
-      run: sudo apt-get install libbsd-dev cmake
-    - uses: actions/checkout@v2
-    - name: Build CMake
-      uses: ashutoshvarma/action-cmake-build@v1
-      with:
-        build-dir: ${{ runner.workspace }}/build
+      curl -o ${cmake_suffix} https://github.com/Kitware/CMake/releases/download/v${cmake_version}/cmake-${cmake_version}-${cmake_suffix}
+      tar -xvf ${cmake_suffix}
+
+      echo "${cmake_dir}" >> $GITHUB_PATH
+
+      
