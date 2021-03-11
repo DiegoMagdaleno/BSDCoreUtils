@@ -113,15 +113,15 @@ done
 
 for file in "${COMPAT_TOOLS_C[@]}"
 do
-    cp -p $file ${CWD}/compat
+    cp -p $file ${CWD}/compat/src
 done
 
 for header in "${COMPAT_TOOLS_HEADERS[@]}"
 do
-    if [ ! -d ${CWD}/compat/headers ]; then
-        mkdir -p ${CWD}/compat/headers
+    if [ ! -d ${CWD}/compat/src ]; then
+        mkdir -p ${CWD}/compat/src/
     fi
-    cp -p $header ${CWD}/compat/headers/
+    cp -p $header ${CWD}/compat/src/
 done
 
 for filef in "${FACTOR_C[@]}"
@@ -139,7 +139,7 @@ done
 ################
 
 # Perform some common compatibility edits on the imported source
-for cfile in ${CWD}/compat/*.c ; do
+for cfile in ${CWD}/compat/src/*.c ; do
     # This macro does not exist and we don't want it #TODO: Does this exist on Darwin?
     if [ "$OS" = "Darwin" ]; then
         gsed -i -e '/DEF_WEAK/d' ${cfile}
@@ -168,13 +168,13 @@ done
 
 # Remove unnecessary declarations in compat/util.h
 if [ "$OS" = "Darwin" ]; then
-    strtline=$(ggrep -n "^__BEGIN_DECLS" ${CWD}/compat/headers/util.h | gcut -d ':' -f 1)
-    lastline=$(ggrep -n "^__END_DECLS" ${CWD}/compat/headers/util.h | gcut -d ':' -f 1)
-    sed -i -e "${strtline},${lastline}d" ${CWD}/compat/headers/util.h
+    strtline=$(ggrep -n "^__BEGIN_DECLS" ${CWD}/compat/src/util.h | gcut -d ':' -f 1)
+    lastline=$(ggrep -n "^__END_DECLS" ${CWD}/compat/src/util.h | gcut -d ':' -f 1)
+    sed -i -e "${strtline},${lastline}d" ${CWD}/compat/src/util.h
 else
-    strtline=$(grep -n "^__BEGIN_DECLS" ${CWD}/compat/headers/util.h | cut -d ':' -f 1)
-    lastline=$(grep -n "^__END_DECLS" ${CWD}/compat/headersutil.h | cut -d ':' -f 1)
-    sed -i -e "${strtline},${lastline}d" ${CWD}/compat/headers/util.h
+    strtline=$(grep -n "^__BEGIN_DECLS" ${CWD}/compat/src/util.h | cut -d ':' -f 1)
+    lastline=$(grep -n "^__END_DECLS" ${CWD}/compat/src/util.h | cut -d ':' -f 1)
+    sed -i -e "${strtline},${lastline}d" ${CWD}/compat/src/util.h
 fi
 
 # Common edits needed for src/ files
@@ -193,29 +193,5 @@ for cfile in $(find ${CWD}/src -type f -name '*.c' -print) ; do
     fi
 done
 
-#####################
-# APPLY ANY PATCHES #
-#####################
-
-if [ -d ${CWD}/patches/compat ]; then
-    for patchfile in ${CWD}/patches/compat/*.patch ; do
-        destfile="$(basename ${patchfile} .patch)"
-        [ -f "${CWD}/compat/${destfile}.orig" ] && rm -f "${CWD}/compat/${destfile}.orig"
-        patch -d ${CWD}/compat -p0 -b -z .orig < ${patchfile}
-    done
-fi
-
-if [ -d ${CWD}/patches/src ]; then
-    cd ${CWD}/patches/src
-    for subdir in * ; do
-        [ -d ${subdir} ] || continue
-        for patchfile in ${CWD}/patches/src/${subdir}/*.patch ; do
-            destfile="$(basename ${patchfile} .patch)"
-            [ -f "${CWD}/src/${subdir}/${destfile}.orig" ] && rm -f "${CWD}/src/${subdir}/${destfile}.orig"
-            patch -d ${CWD}/src/${subdir} -p0 -b -z .orig < ${patchfile}
-        done
-    done
-fi
-
-# Clean up
-#rm -rf ${TMPDIR}
+#Clean up
+rm -rf ${TMPDIR}
