@@ -48,10 +48,6 @@ typedef struct {
 #define	ISPIPE		0x02		/* pipe (not truncatable) */
 #define	ISTAPE		0x04		/* tape (not seekable) */
 #define	NOREAD		0x08		/* not readable */
-#ifdef __APPLE__
-#define ISSEEK 		0x08
-#define ISTRUNC		0x20
-#endif
 	u_int	flags;
 
 	char	*name;			/* name */

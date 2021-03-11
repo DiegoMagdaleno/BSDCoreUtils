@@ -49,12 +49,6 @@
 
 #include "extern.h"
 
-#if defined(__APPLE__) || defined(__NetBSD__) 
-	#define st_atim st_atimespec
-	#define st_ctim st_ctimespec
-	#define st_mtim st_mtimespec
-#endif
-
 int copy_overwrite(void);
 
 int

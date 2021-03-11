@@ -33,23 +33,15 @@
  * SUCH DAMAGE.
  */
 
-#ifdef __linux__
-#include "posixver.h"
-#endif
 #include <err.h>
 #include <limits.h>
 #include <locale.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <strings.h>
 #include <unistd.h>
 
-#ifdef __linux__ 
-#define MAXLINELEN (_POSIX2_LINE_MAX + 1)
-#else
 #define	MAXLINELEN	(LINE_MAX + 1)
-#endif
 
 char *tabs[] = { "", "\t", "\t\t" };
 

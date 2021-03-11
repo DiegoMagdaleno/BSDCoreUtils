@@ -32,14 +32,14 @@
 
 #include <sys/types.h>
 #include <sys/stat.h>
-#if !defined __APPLE__
 #include <sys/sysmacros.h>
-#endif
 
 #include <ctype.h>
 #include <err.h>
 #include <errno.h>
+#include <grp.h>
 #include <limits.h>
+#include <pwd.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -47,15 +47,6 @@
 #include <unistd.h>
 
 #include "compat.h"
-
-#include <grp.h>
-#include <pwd.h>
-
-#if defined(__APPLE__) || defined(__NetBSD__) 
-	#define st_atim st_atimespec
-	#define st_ctim st_ctimespec
-	#define st_mtim st_mtimespec
-#endif
 
 #define DEF_FORMAT \
 	"%d %i %Sp %l %Su %Sg %r %z \"%Sa\" \"%Sm\" \"%Sc\" " \

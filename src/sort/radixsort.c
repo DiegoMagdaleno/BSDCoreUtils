@@ -55,6 +55,8 @@
 #include <bsd/stdlib.h>
 #endif
 
+#include "compat.h"
+
 #define DEFAULT_SORT_FUNC_RADIXSORT mergesort
 
 #define TINY_NODE(sl) ((sl)->tosort_num < 65)

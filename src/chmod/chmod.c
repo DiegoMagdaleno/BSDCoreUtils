@@ -38,10 +38,8 @@
 #include <fcntl.h>
 #include <fts.h>
 #include <grp.h>
-#include <pwd.h>
-#include <grp.h>
-#include <pwd.h>
 #include <limits.h>
+#include <pwd.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

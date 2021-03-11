@@ -46,17 +46,6 @@
 
 #include "compat.h"
 
-/* This is for musl-c operating systems! thanks to Onodera punpun */
-#ifndef DEFFILEMODE
-# define DEFFILEMODE (S_IRUSR|S_IWUSR|S_IRGRP|S_IWGRP|S_IROTH|S_IWOTH)/* 0666*/
-#endif
-
-#if defined(__APPLE__) || defined(__NetBSD__) 
-	#define st_atim st_atimespec
-	#define st_ctim st_ctimespec
-	#define st_mtim st_mtimespec
-#endif
-
 void		stime_arg1(char *, struct timespec *);
 void		stime_arg2(char *, int, struct timespec *);
 void		stime_argd(char *, struct timespec *);

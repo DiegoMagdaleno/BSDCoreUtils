@@ -52,13 +52,3 @@ void	 printlong(DISPLAY *);
 void	 printscol(DISPLAY *);
 void	 printstream(DISPLAY *);
 void	 usage(void);
-#ifdef COLORLS
-void	 parsecolors(const char *cs);
-void	 colorquit(int);
-
-extern char *ansi_fgcol;
-extern char *ansi_bgcol;
-extern char *ansi_coloff;
-extern char *attrs_off;
-extern char *enter_bold;
-#endif

@@ -1,12 +1,9 @@
-/*	$OpenBSD: ls.h,v 1.9 2013/05/30 16:34:32 guenther Exp $	*/
-/*	$NetBSD: ls.h,v 1.7 1995/03/21 09:06:33 cgd Exp $	*/
+/*	$OpenBSD: extern.h,v 1.13 2019/01/04 15:04:28 martijn Exp $	*/
+/*	$NetBSD: extern.h,v 1.3 1994/11/23 07:42:00 jtc Exp $	*/
 
-/*
- * Copyright (c) 1989, 1993
+/*-
+ * Copyright (c) 1991, 1993
  *	The Regents of the University of California.  All rights reserved.
- *
- * This code is derived from software contributed to Berkeley by
- * Michael Fischbein.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -32,46 +29,29 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  *
- *	@(#)ls.h	8.1 (Berkeley) 5/31/93
+ *	@(#)extern.h	8.1 (Berkeley) 6/6/93
  */
 
-#define NO_PRINT	1
+#define	WR(p, size) \
+	if (write(STDOUT_FILENO, p, size) != size) \
+		oerr();
 
-extern long blocksize;		/* block size units */
+struct tailfile {
+	char		*fname;
+	FILE		*fp;
+	struct stat	 sb;
+};
 
-extern int f_accesstime;	/* use time of last access */
-extern int f_flags;		/* show flags associated with a file */
-extern int f_grouponly;		/* long listing format without owner */
-extern int f_humanval;		/* show human-readable file sizes */
-extern int f_inode;		/* print inode */
-extern int f_longform;		/* long listing format */
-extern int f_nonprint;		/* show unprintables as ? */
-extern int f_sectime;		/* print the real time for all files */
-extern int f_size;		/* list size in short listing */
-extern int f_statustime;	/* use time of last mode change */
-extern int f_type;		/* add type character for non-regular files */
-extern int f_typedir;		/* add type character for directories */
+enum STYLE { NOTSET = 0, FBYTES, FLINES, RBYTES, RLINES, REVERSE };
 
-typedef struct {
-	FTSENT *list;
-	unsigned long long btotal;
-	int bcfile;
-	int entries;
-	int maxlen;
-	int s_block;
-	int s_flags;
-	int s_group;
-	int s_inode;
-	int s_nlink;
-	int s_size;
-	int s_user;
-} DISPLAY;
+void forward(struct tailfile *, int, enum STYLE, off_t);
+void reverse(struct tailfile *, int, enum STYLE, off_t);
 
-typedef struct {
-	char *user;
-	char *group;
-	char *flags;
-	char data[1];
-} NAMES;
+int bytes(struct tailfile *, off_t);
+int lines(struct tailfile *, off_t);
 
-int	ls_main(int, char *[]);
+void ierr(const char *);
+void oerr(void);
+void printfname(const char *);
+
+extern int fflag, rflag, rval;

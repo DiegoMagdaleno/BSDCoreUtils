@@ -9,7 +9,7 @@
 # Author: Diego Magdaleno <diegomagdaleno@protonmail.com>
 #
 
-# Set our fail exist function, this is useful for Downdalos
+# Segitt our fail exist function, this is useful for Downdalos
 function fail_exit() {
     cd ${CWD}
     rm -rf ${TMPDIR}

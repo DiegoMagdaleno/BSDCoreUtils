@@ -475,7 +475,7 @@ bwsfwrite(struct bwstring *bws, FILE *f, bool zero_ended)
  * The strings are nl-ended or zero-ended, depending on the sort setting.
  */
 struct bwstring *
-bwsfgetln(FILE *f, size_t *len, bool zero_ended, struct reader_buffer *rb)
+bwsfgetln(FILE *f, ssize_t *len, bool zero_ended, struct reader_buffer *rb)
 {
 	wint_t eols;
 

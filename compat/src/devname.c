@@ -37,31 +37,30 @@
 #include <limits.h>
 #include <paths.h>
 #include <stdbool.h>
-#include <stdlib.h>
 #include <string.h>
+#include <stdlib.h>
 
 char *
-devname (dev_t dev, mode_t type)
+devname(dev_t dev, mode_t type)
 {
-  static char buf[NAME_MAX + 1];
-  char *name = NULL;
-  struct dirent *dp;
-  struct stat sb;
-  DIR *dirp;
+	static char buf[NAME_MAX + 1];
+	char *name = NULL;
+	struct dirent *dp;
+	struct stat sb;
+	DIR *dirp;
 
-  if ((dirp = opendir (_PATH_DEV)) == NULL)
-    return (NULL);
-  while ((dp = readdir (dirp)) != NULL)
-    {
-      if (dp->d_type != DT_UNKNOWN && DTTOIF (dp->d_type) != type)
-        continue;
-      if (fstatat (dirfd (dirp), dp->d_name, &sb, AT_SYMLINK_NOFOLLOW)
-          || sb.st_rdev != dev || (sb.st_mode & S_IFMT) != type)
-        continue;
-      strlcpy (buf, dp->d_name, sizeof (buf));
-      name = buf;
-      break;
-    }
-  closedir (dirp);
-  return (name);
+	if ((dirp = opendir(_PATH_DEV)) == NULL)
+		return (NULL);
+	while ((dp = readdir(dirp)) != NULL) {
+		if (dp->d_type != DT_UNKNOWN && DTTOIF(dp->d_type) != type)
+			continue;
+		if (fstatat(dirfd(dirp), dp->d_name, &sb, AT_SYMLINK_NOFOLLOW)
+		    || sb.st_rdev != dev || (sb.st_mode & S_IFMT) != type)
+			continue;
+		strlcpy(buf, dp->d_name, sizeof(buf));
+		name = buf;
+		break;
+	}
+	closedir(dirp);
+	return (name);
 }

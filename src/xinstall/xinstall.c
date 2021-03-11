@@ -61,11 +61,6 @@
 #define NOCHANGEBITS	(UF_IMMUTABLE | UF_APPEND | SF_IMMUTABLE | SF_APPEND)
 #define BACKUP_SUFFIX	".old"
 
-/* If its not defined we asume the size if 512 */
-#ifndef S_BLKSIZE
-# define S_BLKSIZE 512
-#endif
-
 int dobackup, docompare, dodest, dodir, dopreserve, dostrip;
 int mode = S_IRWXU|S_IRGRP|S_IXGRP|S_IROTH|S_IXOTH;
 char pathbuf[PATH_MAX], tempfile[PATH_MAX];

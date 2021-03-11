@@ -1,8 +1,6 @@
-/*	$OpenBSD: users.c,v 1.14 2018/08/03 16:02:53 deraadt Exp $	*/
-/*	$NetBSD: users.c,v 1.5 1994/12/20 15:58:19 jtc Exp $	*/
-
+/*	$OpenBSD: logwtmp.c,v 1.11 2019/06/28 13:32:43 deraadt Exp $	*/
 /*
- * Copyright (c) 1980, 1987, 1993
+ * Copyright (c) 1988, 1993
  *	The Regents of the University of California.  All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -29,80 +27,36 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  */
+#include "compat.h"
 
 #include <sys/types.h>
+#include <sys/time.h>
+#include <sys/stat.h>
 
-#include <err.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include <fcntl.h>
 #include <string.h>
 #include <unistd.h>
 #include <utmp.h>
 
-typedef char	namebuf[UT_NAMESIZE];
+#include "util.h"
 
-int scmp(const void *, const void *);
-
-int
-main(int argc, char *argv[])
+void
+logwtmp(const char *line, const char *name, const char *host)
 {
-	namebuf *names = NULL;
-	int ncnt = 0;
-	int nmax = 0;
-	int cnt;
-	struct utmp utmp;
-	int ch;
+	struct stat buf;
+	struct utmp ut;
+	int fd;
 
-	while ((ch = getopt(argc, argv, "")) != -1)
-		switch(ch) {
-		case '?':
-		default:
-			(void)fprintf(stderr, "usage: users\n");
-			exit(1);
-		}
-	argc -= optind;
-	argv += optind;
-
-	if (!freopen(_PATH_UTMP, "r", stdin)) {
-		err(1, "can't open %s", _PATH_UTMP);
-		/* NOTREACHED */
+	if ((fd = open(_PATH_WTMP, O_WRONLY|O_APPEND|O_CLOEXEC)) == -1)
+		return;
+	if (fstat(fd, &buf) == 0) {
+		(void) strncpy(ut.ut_line, line, sizeof(ut.ut_line));
+		(void) strncpy(ut.ut_name, name, sizeof(ut.ut_name));
+		(void) strncpy(ut.ut_host, host, sizeof(ut.ut_host));
+		(void) time(&ut.ut_time);
+		if (write(fd, &ut, sizeof(struct utmp)) !=
+		    sizeof(struct utmp))
+			(void) ftruncate(fd, buf.st_size);
 	}
-
-	while (fread((char *)&utmp, sizeof(utmp), 1, stdin) == 1) {
-		if (*utmp.ut_name) {
-			if (ncnt >= nmax) {
-				size_t newmax = nmax + 32;
-				namebuf *newnames;
-
-				newnames = reallocarray(names, newmax,
-				    sizeof(*names));
-
-				if (newnames == NULL) {
-					err(1, NULL);
-					/* NOTREACHED */
-				}
-				names = newnames;
-				nmax = newmax;
-			}
-
-			(void)strncpy(names[ncnt], utmp.ut_name, UT_NAMESIZE);
-			++ncnt;
-		}
-	}
-
-	if (ncnt) {
-		qsort(names, ncnt, UT_NAMESIZE, scmp);
-		(void)printf("%.*s", UT_NAMESIZE, names[0]);
-		for (cnt = 1; cnt < ncnt; ++cnt)
-			if (strncmp(names[cnt], names[cnt - 1], UT_NAMESIZE))
-				(void)printf(" %.*s", UT_NAMESIZE, names[cnt]);
-		(void)printf("\n");
-	}
-	exit(0);
-}
-
-int
-scmp(const void *p, const void *q)
-{
-	return(strncmp((char *) p, (char *) q, UT_NAMESIZE));
+	(void) close(fd);
 }

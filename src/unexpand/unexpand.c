@@ -39,7 +39,7 @@
 #include <string.h>
 #include <unistd.h>
 
-#include "src/compat.h"
+#include "compat.h"
 
 char	genbuf[BUFSIZ];
 char	linebuf[BUFSIZ];

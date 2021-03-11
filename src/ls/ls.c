@@ -1,4 +1,4 @@
-/*	$OpenBSD: ls.c,v 1.51 2018/09/13 15:23:32 millert Exp $	*/
+/*	$OpenBSD: ls.c,v 1.53 2020/07/06 00:55:05 millert Exp $	*/
 /*	$NetBSD: ls.c,v 1.18 1996/07/09 09:16:29 mycroft Exp $	*/
 
 /*
@@ -49,18 +49,11 @@
 #include <unistd.h>
 #include <limits.h>
 #include <locale.h>
-#if defined __linux__
-#include "util.h"
-#else
 #include <util.h>
-#endif
-#ifdef COLORLS
-#include <termcap.h>
-#include <signal.h>
-#endif
 
 #include "ls.h"
 #include "extern.h"
+
 #include "compat.h"
 
 static void	 display(FTSENT *, FTSENT *);
@@ -101,32 +94,17 @@ int f_statustime;		/* use time of last mode change */
 int f_stream;			/* stream format */
 int f_type;			/* add type character for non-regular files */
 int f_typedir;			/* add type character for directories */
-#ifdef COLORLS
-int f_color;			/* add type in color for non-regular files */
- 
-char *ansi_bgcol;		/* ANSI sequence to set background color */
-char *ansi_fgcol;		/* ANSI sequence to set foreground color */
-char *ansi_coloff;		/* ANSI sequence to reset colors */
-char *attrs_off;		/* ANSI sequence to turn off attributes */
-char *enter_bold;		/* ANSI sequence to set color to bold mode */
-#endif
 
 int rval;
 
 int
 ls_main(int argc, char *argv[])
 {
-
 	static char dot[] = ".", *dotav[] = { dot, NULL };
 	struct winsize win;
 	int ch, fts_options, notused;
 	int kflag = 0;
 	char *p;
-#ifdef COLORLS
-	char termcapbuf[1024];	/* termcap definition buffer */
-	char tcapbuf[512];	/* capability buffer */
-	char *bp = tcapbuf;
-#endif
 
 #ifndef SMALL
 	setlocale(LC_CTYPE, "");
@@ -153,7 +131,7 @@ ls_main(int argc, char *argv[])
 		f_listdot = 1;
 
 	fts_options = FTS_PHYSICAL;
-	while ((ch = getopt(argc, argv, "1ACFGHLRSTacdfghiklmnpqrstux")) != -1) {
+	while ((ch = getopt(argc, argv, "1ACFHLRSTacdfghiklmnpqrstux")) != -1) {
 		switch (ch) {
 		/*
 		 * The -1, -C and -l, -m, -n and -x options all override each
@@ -206,9 +184,6 @@ ls_main(int argc, char *argv[])
 			break;
 		case 'F':
 			f_type = 1;
-			break;
-		case 'G':
-			setenv("CLICOLOR", "", 1);
 			break;
 		case 'H':
 			fts_options |= FTS_COMFOLLOW;
@@ -279,59 +254,19 @@ ls_main(int argc, char *argv[])
 	if (f_grouponly == -1)
 		f_grouponly = 0;
 
-	/* Enabling of colours is conditional on the environment. */
-	if (getenv("CLICOLOR") &&
-	    (isatty(STDOUT_FILENO) || getenv("CLICOLOR_FORCE")))
-#ifdef COLORLS
-		if (tgetent(termcapbuf, getenv("TERM")) == 1) {
-			ansi_fgcol = tgetstr("AF", &bp);
-			ansi_bgcol = tgetstr("AB", &bp);
-			attrs_off = tgetstr("me", &bp);
-			enter_bold = tgetstr("md", &bp);
-
-			/* To switch colours off use 'op' if
-			 * available, otherwise use 'oc', or
-			 * don't do colours at all. */
-			ansi_coloff = tgetstr("op", &bp);
-			if (!ansi_coloff)
-				ansi_coloff = tgetstr("oc", &bp);
-			if (ansi_fgcol && ansi_bgcol && ansi_coloff)
-				f_color = 1;
-		}
-#else
-		warnx("color support not compiled in");
-#endif /*COLORLS*/
- 
-#ifdef COLORLS
-	if (f_color) {
-		(void)signal(SIGINT, colorquit);
-		(void)signal(SIGQUIT, colorquit);
-		parsecolors(getenv("LSCOLORS"));
-	}
-#endif
-
 	/*
 	 * If not -F, -i, -l, -p, -S, -s or -t options, don't require stat
-	 * information, unless in color mode in which case we do
-	 * need this to determine which colors to display.
+	 * information.
 	 */
 	if (!f_longform && !f_inode && !f_size && !f_type && !f_typedir &&
-#ifdef COLORLS
-	    !f_color &&
-#endif
 	    sortkey == BY_NAME)
 		fts_options |= FTS_NOSTAT;
 
 	/*
 	 * If not -F, -d or -l options, follow any symbolic links listed on
-	 * the command line, unless in color mode in which case we need to
-	 * distinguish file type for a symbolic link itself and its target.
+	 * the command line.
 	 */
-	if (!f_longform && !f_listdir && !f_type
-#ifdef COLORLS
-	    && !f_color
-#endif
-	    )
+	if (!f_longform && !f_listdir && !f_type)
 		fts_options |= FTS_COMFOLLOW;
 
 	/* If -l or -s, figure out block size. */
@@ -433,7 +368,7 @@ traverse(int argc, char *argv[], int options)
 			    p->fts_level != FTS_ROOTLEVEL && !f_listdot) {
 				(void)fts_set(ftsp, p, FTS_SKIP);
 				break;
-			    }
+			}
 
 			/*
 			 * If already output something, put out a newline as
@@ -569,7 +504,7 @@ display(FTSENT *p, FTSENT *list)
 					maxuser = ulen;
 				if ((glen = strlen(group)) > maxgroup)
 					maxgroup = glen;
-					flen = 0;
+				flen = 0;
 
 				if ((np = malloc(sizeof(NAMES) +
 				    ulen + 1 + glen + 1 + flen + 1)) == NULL)

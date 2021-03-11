@@ -184,10 +184,6 @@
 #include <wchar.h>
 #include <wctype.h>
 
-#if defined __APPLE__
-#include "compat.h"
-#endif
-
 /* Something that, we hope, will never be a genuine line length,
  * indentation etc.
  */
