@@ -110,14 +110,14 @@ for p in ${CMDS} ; do
     [ -d ${CWD}/src/${p} ] || mkdir -p ${CWD}/src/${sp}
     for source_f in ${p}/*; do
         ssource_f="$(basename ${source_f})"
-        cp -p $source_f "${CWD}/src/${sp}/${ssource_f}.orig"
+        cp -p $source_f "${CWD}/src/${sp}/${ssource_f}"
     done
 done
 
 for file in "${COMPAT_TOOLS_C[@]}"
 do
     file_base="$(basename ${file})"
-    cp -p $file ${CWD}/compat/src/${file_base}.orig
+    cp -p $file ${CWD}/compat/src/${file_base}
 done
 
 for header in "${COMPAT_TOOLS_HEADERS[@]}"
@@ -126,19 +126,19 @@ do
         mkdir -p ${CWD}/compat/src/
     fi
     header_base="$(basename ${header})"
-    cp -p $header ${CWD}/compat/src/${header_base}.orig
+    cp -p $header ${CWD}/compat/src/${header_base}
 done
 
 for filef in "${FACTOR_C[@]}"
 do
     filef_base=file_base="$(basename ${file})"
-    cp -p $filef ${CWD}/src/factor/${file_base}.orig
+    cp -p $filef ${CWD}/src/factor/${file_base}
 done
 
 for headerf in "${FACTOR_HEADER[@]}"
 do
     headerf_base=file_base="$(basename ${headerf})"
-    cp -p $filef ${CWD}/src/factor/${filef}.orig
+    cp -p $filef ${CWD}/src/factor/${filef}
 done
 
 ################
@@ -146,7 +146,7 @@ done
 ################
 
 # Perform some common compatibility edits on the imported source
-for cfile in ${CWD}/compat/src/*.c.orig ; do
+for cfile in ${CWD}/compat/src/*.c ; do
     # This macro does not exist and we don't want it #TODO: Does this exist on Darwin?
     if [ "$OS" = "Darwin" ]; then
         gsed -i -e '/DEF_WEAK/d' ${cfile}
@@ -185,7 +185,7 @@ else
 fi
 
 # Common edits needed for src/ files
-for cfile in $(find ${CWD}/src -type f -name '*.c.orig' -print) ; do
+for cfile in $(find ${CWD}/src -type f -name '*.c' -print) ; do
     # remove __dead
     if [ "$OS" = "Darwin" ]; then
         gsed -i -r 's|\s+__dead\s+| |g' ${cfile}
