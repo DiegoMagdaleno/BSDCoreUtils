@@ -36,22 +36,22 @@
  *	@(#)extern.h	8.3 (Berkeley) 4/2/94
  */
 
-void block (void);
-void block_close (void);
-void dd_out (int);
-void def (void);
-void def_close (void);
-void jcl (char **);
-void pos_in (void);
-void pos_out (void);
-void summary (void);
-void terminate (int);
-void unblock (void);
-void unblock_close (void);
+void block(void);
+void block_close(void);
+void dd_out(int);
+void def(void);
+void def_close(void);
+void jcl(char **);
+void pos_in(void);
+void pos_out(void);
+void summary(void);
+void terminate(int);
+void unblock(void);
+void unblock_close(void);
 
 extern IO in, out;
 extern STAT st;
-extern void (*cfunc) (void);
+extern void (*cfunc)(void);
 extern size_t cpy_cnt;
 extern size_t cbsz;
 extern u_int ddflags;

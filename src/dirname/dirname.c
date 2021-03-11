@@ -22,39 +22,37 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-static void usage (void);
+static void usage(void);
 
 int
-main (int argc, char *argv[])
+main(int argc, char *argv[])
 {
-  int ch;
-  char *dir;
+	int ch;
+	char *dir;
 
-  while ((ch = getopt (argc, argv, "")) != -1)
-    {
-      switch (ch)
-        {
-        default:
-          usage ();
-        }
-    }
-  argc -= optind;
-  argv += optind;
+	while ((ch = getopt(argc, argv, "")) != -1) {
+		switch (ch) {
+		default:
+			usage();
+		}
+	}
+	argc -= optind;
+	argv += optind;
 
-  if (argc != 1)
-    usage ();
+	if (argc != 1)
+		usage();
 
-  if ((dir = dirname (argv[0])) == NULL)
-    err (1, "%s", argv[0]);
-  puts (dir);
-  return 0;
+	if ((dir = dirname(argv[0])) == NULL)
+		err(1, "%s", argv[0]);
+	puts(dir);
+	return 0;
 }
 
 extern char *__progname;
 
 static void
-usage (void)
+usage(void)
 {
-  (void)fprintf (stderr, "usage: %s pathname\n", __progname);
-  exit (1);
+	(void)fprintf(stderr, "usage: %s pathname\n", __progname);
+	exit(1);
 }

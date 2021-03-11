@@ -30,156 +30,139 @@
  * SUCH DAMAGE.
  */
 
-#include <ctype.h>
-#include <err.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
 #include <unistd.h>
+#include <err.h>
 
 /*
  * expand - expand tabs to equivalent spaces
  */
-int nstops;
-int tabstops[100];
+int	nstops;
+int	tabstops[100];
 
-static void getstops (char *);
-static void usage (void);
+static void getstops(char *);
+static void usage(void);
 
 int
-main (int argc, char *argv[])
+main(int argc, char *argv[])
 {
-  int c, column;
-  int n;
+	int c, column;
+	int n;
 
-  /* handle obsolete syntax */
-  while (argc > 1 && argv[1][0] == '-' && isdigit ((unsigned char)argv[1][1]))
-    {
-      getstops (&argv[1][1]);
-      argc--;
-      argv++;
-    }
+	/* handle obsolete syntax */
+	while (argc > 1 && argv[1][0] == '-' &&
+	    isdigit((unsigned char)argv[1][1])) {
+		getstops(&argv[1][1]);
+		argc--; argv++;
+	}
 
-  while ((c = getopt (argc, argv, "t:")) != -1)
-    {
-      switch (c)
-        {
-        case 't':
-          getstops (optarg);
-          break;
-        case '?':
-        default:
-          usage ();
-          /* NOTREACHED */
-        }
-    }
-  argc -= optind;
-  argv += optind;
+	while ((c = getopt (argc, argv, "t:")) != -1) {
+		switch (c) {
+		case 't':
+			getstops(optarg);
+			break;
+		case '?':
+		default:
+			usage();
+			/* NOTREACHED */
+		}
+	}
+	argc -= optind;
+	argv += optind;
 
-  do
-    {
-      if (argc > 0)
-        {
-          if (freopen (argv[0], "r", stdin) == NULL)
-            err (1, "%s", argv[0]);
-          argc--, argv++;
-        }
-      column = 0;
-      while ((c = getchar ()) != EOF)
-        {
-          switch (c)
-            {
-            case '\t':
-              if (nstops == 0)
-                {
-                  do
-                    {
-                      putchar (' ');
-                      column++;
-                    }
-                  while (column & 07);
-                  continue;
-                }
-              if (nstops == 1)
-                {
-                  do
-                    {
-                      putchar (' ');
-                      column++;
-                    }
-                  while (((column - 1) % tabstops[0]) != (tabstops[0] - 1));
-                  continue;
-                }
-              for (n = 0; n < nstops; n++)
-                if (tabstops[n] > column)
-                  break;
-              if (n == nstops)
-                {
-                  putchar (' ');
-                  column++;
-                  continue;
-                }
-              while (column < tabstops[n])
-                {
-                  putchar (' ');
-                  column++;
-                }
-              continue;
+	do {
+		if (argc > 0) {
+			if (freopen(argv[0], "r", stdin) == NULL)
+				err(1, "%s", argv[0]);
+			argc--, argv++;
+		}
+		column = 0;
+		while ((c = getchar()) != EOF) {
+			switch (c) {
+			case '\t':
+				if (nstops == 0) {
+					do {
+						putchar(' ');
+						column++;
+					} while (column & 07);
+					continue;
+				}
+				if (nstops == 1) {
+					do {
+						putchar(' ');
+						column++;
+					} while (((column - 1) %
+					    tabstops[0]) != (tabstops[0] - 1));
+					continue;
+				}
+				for (n = 0; n < nstops; n++)
+					if (tabstops[n] > column)
+						break;
+				if (n == nstops) {
+					putchar(' ');
+					column++;
+					continue;
+				}
+				while (column < tabstops[n]) {
+					putchar(' ');
+					column++;
+				}
+				continue;
 
-            case '\b':
-              if (column)
-                column--;
-              putchar ('\b');
-              continue;
+			case '\b':
+				if (column)
+					column--;
+				putchar('\b');
+				continue;
 
-            default:
-              putchar (c);
-              column++;
-              continue;
+			default:
+				putchar(c);
+				column++;
+				continue;
 
-            case '\n':
-              putchar (c);
-              column = 0;
-              continue;
-            }
-        }
-    }
-  while (argc > 0);
-  exit (0);
+			case '\n':
+				putchar(c);
+				column = 0;
+				continue;
+			}
+		}
+	} while (argc > 0);
+	exit(0);
 }
 
 static void
-getstops (char *cp)
+getstops(char *cp)
 {
-  int i;
+	int i;
 
-  nstops = 0;
-  for (;;)
-    {
-      i = 0;
-      while (*cp >= '0' && *cp <= '9')
-        i = i * 10 + *cp++ - '0';
-      if (i <= 0 || i > 256)
-        {
-        bad:
-          errx (1, "Bad tab stop spec");
-        }
-      if (nstops > 0 && i <= tabstops[nstops - 1])
-        goto bad;
-      if (nstops >= sizeof (tabstops) / sizeof (tabstops[0]))
-        errx (1, "Too many tab stops");
-      tabstops[nstops++] = i;
-      if (*cp == 0)
-        break;
-      if (*cp != ',' && *cp != ' ')
-        goto bad;
-      cp++;
-    }
+	nstops = 0;
+	for (;;) {
+		i = 0;
+		while (*cp >= '0' && *cp <= '9')
+			i = i * 10 + *cp++ - '0';
+		if (i <= 0 || i > 256) {
+bad:
+			errx(1, "Bad tab stop spec");
+		}
+		if (nstops > 0 && i <= tabstops[nstops-1])
+			goto bad;
+		if (nstops >= sizeof(tabstops) / sizeof(tabstops[0]))
+			errx(1, "Too many tab stops");
+		tabstops[nstops++] = i;
+		if (*cp == 0)
+			break;
+		if (*cp != ',' && *cp != ' ')
+			goto bad;
+		cp++;
+	}
 }
 
 static void
-usage (void)
+usage(void)
 {
-  extern char *__progname;
-  fprintf (stderr, "usage: %s [-t tablist] [file ...]\n", __progname);
-  exit (1);
+	extern char *__progname;
+	fprintf (stderr, "usage: %s [-t tablist] [file ...]\n", __progname);
+	exit(1);
 }

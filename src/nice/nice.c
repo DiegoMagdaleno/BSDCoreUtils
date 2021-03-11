@@ -41,62 +41,60 @@
 
 #include "compat.h"
 
-#define DEFNICE 10
+#define	DEFNICE	10
 
-static void usage (void);
+static void usage(void);
 
 int
-main (int argc, char *argv[])
+main(int argc, char *argv[])
 {
-  const char *errstr;
-  int prio = DEFNICE;
-  int c;
+	const char *errstr;
+	int prio = DEFNICE;
+	int c;
 
-  /* handle obsolete -number syntax */
-  if (argc > 1 && argv[1][0] == '-' && isdigit ((unsigned char)argv[1][1]))
-    {
-      prio = strtonum (argv[1] + 1, PRIO_MIN, PRIO_MAX, &errstr);
-      if (errstr)
-        errx (1, "increment is %s", errstr);
-      argc--;
-      argv++;
-    }
+	/* handle obsolete -number syntax */
+	if (argc > 1 && argv[1][0] == '-' &&
+	    isdigit((unsigned char)argv[1][1])) {
+		prio = strtonum(argv[1] + 1, PRIO_MIN, PRIO_MAX, &errstr);
+		if (errstr)
+			errx(1, "increment is %s", errstr);
+		argc--;
+		argv++;
+	}
 
-  while ((c = getopt (argc, argv, "n:")) != -1)
-    {
-      switch (c)
-        {
-        case 'n':
-          prio = strtonum (optarg, PRIO_MIN, PRIO_MAX, &errstr);
-          if (errstr)
-            errx (1, "increment is %s", errstr);
-          break;
-        default:
-          usage ();
-        }
-    }
-  argc -= optind;
-  argv += optind;
+	while ((c = getopt (argc, argv, "n:")) != -1) {
+		switch (c) {
+		case 'n':
+			prio = strtonum(optarg, PRIO_MIN, PRIO_MAX, &errstr);
+			if (errstr)
+				errx(1, "increment is %s", errstr);
+			break;
+		default:
+			usage();
+		}
+	}
+	argc -= optind;
+	argv += optind;
 
-  if (argc == 0)
-    usage ();
+	if (argc == 0)
+		usage();
 
-  errno = 0;
-  prio += getpriority (PRIO_PROCESS, 0);
-  if (errno)
-    err (1, "getpriority");
-  if (setpriority (PRIO_PROCESS, 0, prio))
-    warn ("setpriority");
+	errno = 0;
+	prio += getpriority(PRIO_PROCESS, 0);
+	if (errno)
+		err(1, "getpriority");
+	if (setpriority(PRIO_PROCESS, 0, prio))
+		warn("setpriority");
 
-  execvp (argv[0], &argv[0]);
-  err ((errno == ENOENT) ? 127 : 126, "%s", argv[0]);
+	execvp(argv[0], &argv[0]);
+	err((errno == ENOENT) ? 127 : 126, "%s", argv[0]);
 }
 
 static void
-usage (void)
+usage(void)
 {
-  extern char *__progname;
-  fprintf (stderr, "usage: %s [-n increment] utility [argument ...]\n",
-           __progname);
-  exit (1);
+	extern char *__progname;
+	fprintf(stderr, "usage: %s [-n increment] utility [argument ...]\n",
+	    __progname);
+	exit(1);
 }

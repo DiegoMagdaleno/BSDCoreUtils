@@ -43,77 +43,76 @@
 
 static int eval;
 
-static void checkdot (char **);
-static void rm_tree (char **);
+static void	checkdot(char **);
+static void	rm_tree(char **);
 
 int
-rmmain (int argc, char *argv[])
+rmmain(int argc, char *argv[])
 {
 
-  checkdot (argv);
+	checkdot(argv);
 
-  if (*argv)
-    rm_tree (argv);
+	if (*argv)
+		rm_tree(argv);
 
-  return (eval);
+	return (eval);
 }
 
 static void
-rm_tree (char **argv)
+rm_tree(char **argv)
 {
-  FTS *fts;
-  FTSENT *p;
-  int flags;
+	FTS *fts;
+	FTSENT *p;
+	int flags;
 
-  flags = FTS_PHYSICAL;
-  flags |= FTS_NOSTAT;
-  if (!(fts = fts_open (argv, flags, NULL)))
-    err (1, NULL);
-  while ((p = fts_read (fts)) != NULL)
-    {
-      switch (p->fts_info)
-        {
-        case FTS_DNR:
-          if (p->fts_errno != ENOENT)
-            {
-              warnx ("%s: %s", p->fts_path, strerror (p->fts_errno));
-              eval = 1;
-            }
-          continue;
-        case FTS_ERR:
-          errno = p->fts_errno;
-          err (1, "%s", p->fts_path);
-        case FTS_D:
-          continue;
-        default:
-          break;
-        }
+	flags = FTS_PHYSICAL;
+	flags |= FTS_NOSTAT;
+	if (!(fts = fts_open(argv, flags, NULL)))
+		err(1, NULL);
+	while ((p = fts_read(fts)) != NULL) {
+		switch (p->fts_info) {
+		case FTS_DNR:
+			if (p->fts_errno != ENOENT) {
+				warnx("%s: %s",
+				    p->fts_path, strerror(p->fts_errno));
+				eval = 1;
+			}
+			continue;
+		case FTS_ERR:
+			errno = p->fts_errno;
+			err(1, "%s", p->fts_path);
+		case FTS_D:
+			continue;
+		default:
+			break;
+		}
 
-      /*
-       * If we can't read or search the directory, may still be
-       * able to remove it.  Don't print out the un{read,search}able
-       * message unless the remove fails.
-       */
-      switch (p->fts_info)
-        {
-        case FTS_DP:
-        case FTS_DNR:
-          if (!rmdir (p->fts_accpath) || (errno == ENOENT))
-            continue;
-          break;
+		/*
+		 * If we can't read or search the directory, may still be
+		 * able to remove it.  Don't print out the un{read,search}able
+		 * message unless the remove fails.
+		 */
+		switch (p->fts_info) {
+		case FTS_DP:
+		case FTS_DNR:
+			if (!rmdir(p->fts_accpath) ||
+			    (errno == ENOENT))
+				continue;
+			break;
 
-        case FTS_F:
-        case FTS_NSOK:
-        default:
-          if (!unlink (p->fts_accpath) || (errno == ENOENT))
-            continue;
-        }
-      warn ("%s", p->fts_path);
-      eval = 1;
-    }
-  if (errno)
-    err (1, "fts_read");
-  fts_close (fts);
+		case FTS_F:
+		case FTS_NSOK:
+		default:
+			if (!unlink(p->fts_accpath) ||
+			    (errno == ENOENT))
+				continue;
+		}
+		warn("%s", p->fts_path);
+		eval = 1;
+	}
+	if (errno)
+		err(1, "fts_read");
+	fts_close(fts);
 }
 
 /*
@@ -124,37 +123,34 @@ rm_tree (char **argv)
  * Since POSIX.2 defines basename as the final portion of a path after
  * trailing slashes have been removed, we'll remove them here.
  */
-#define ISDOT(a) ((a)[0] == '.' && (!(a)[1] || ((a)[1] == '.' && !(a)[2])))
+#define ISDOT(a)	((a)[0] == '.' && (!(a)[1] || ((a)[1] == '.' && !(a)[2])))
 static void
-checkdot (char **argv)
+checkdot(char **argv)
 {
-  char *p, **save, **t;
-  int complained;
+	char *p, **save, **t;
+	int complained;
 
-  complained = 0;
-  for (t = argv; *t;)
-    {
-      /* strip trailing slashes */
-      p = strrchr (*t, '\0');
-      while (--p > *t && *p == '/')
-        *p = '\0';
+	complained = 0;
+	for (t = argv; *t;) {
+		/* strip trailing slashes */
+		p = strrchr (*t, '\0');
+		while (--p > *t && *p == '/')
+			*p = '\0';
 
-      /* extract basename */
-      if ((p = strrchr (*t, '/')) != NULL)
-        ++p;
-      else
-        p = *t;
+		/* extract basename */
+		if ((p = strrchr(*t, '/')) != NULL)
+			++p;
+		else
+			p = *t;
 
-      if (ISDOT (p))
-        {
-          if (!complained++)
-            warnx ("\".\" and \"..\" may not be removed");
-          eval = 1;
-          for (save = t; (t[0] = t[1]) != NULL; ++t)
-            continue;
-          t = save;
-        }
-      else
-        ++t;
-    }
+		if (ISDOT(p)) {
+			if (!complained++)
+				warnx("\".\" and \"..\" may not be removed");
+			eval = 1;
+			for (save = t; (t[0] = t[1]) != NULL; ++t)
+				continue;
+			t = save;
+		} else
+			++t;
+	}
 }

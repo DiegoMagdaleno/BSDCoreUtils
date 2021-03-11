@@ -32,31 +32,18 @@
  *	@(#)extern.h	8.1 (Berkeley) 6/6/93
  */
 
-typedef struct
-{
-  enum
-  {
-    STRING1,
-    STRING2
-  } which;
-  enum
-  {
-    EOS,
-    INFINITE,
-    NORMAL,
-    RANGE,
-    SEQUENCE,
-    SET
-  } state;
-  int cnt;            /* character count */
-  int lastch;         /* last character */
-  int equiv[2];       /* equivalence set */
-  int *set;           /* set of characters */
-  unsigned char *str; /* user's string */
+typedef struct {
+	enum { STRING1, STRING2 } which;
+	enum { EOS, INFINITE, NORMAL, RANGE, SEQUENCE, SET } state;
+	int	 cnt;			/* character count */
+	int	 lastch;		/* last character */
+	int	equiv[2];		/* equivalence set */
+	int	*set;			/* set of characters */
+	unsigned char	*str;		/* user's string */
 } STR;
 
 #include <limits.h>
-#define NCHARS (UCHAR_MAX + 1) /* Number of possible characters. */
-#define OOBCH (UCHAR_MAX + 1)  /* Out of band character value. */
+#define	NCHARS	(UCHAR_MAX + 1)		/* Number of possible characters. */
+#define	OOBCH	(UCHAR_MAX + 1)		/* Out of band character value. */
 
-int next (STR *);
+int	 next(STR *);

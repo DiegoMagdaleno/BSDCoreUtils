@@ -34,8 +34,8 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/time.h>
 #include <sys/types.h>
+#include <sys/time.h>
 
 #include <errno.h>
 #include <stdio.h>
@@ -49,62 +49,55 @@
  * From <sys/time.h> on OpenBSD.  Not used in any other bsdutils commands
  * so just putting it in this file.
  */
-#define timespecsub(tsp, usp, vsp)                                            \
-  do                                                                          \
-    {                                                                         \
-      (vsp)->tv_sec = (tsp)->tv_sec - (usp)->tv_sec;                          \
-      (vsp)->tv_nsec = (tsp)->tv_nsec - (usp)->tv_nsec;                       \
-      if ((vsp)->tv_nsec < 0)                                                 \
-        {                                                                     \
-          (vsp)->tv_sec--;                                                    \
-          (vsp)->tv_nsec += 1000000000L;                                      \
-        }                                                                     \
-    }                                                                         \
-  while (0)
+#define timespecsub(tsp, usp, vsp)                                \
+        do {                                                      \
+                (vsp)->tv_sec = (tsp)->tv_sec - (usp)->tv_sec;    \
+                (vsp)->tv_nsec = (tsp)->tv_nsec - (usp)->tv_nsec; \
+                if ((vsp)->tv_nsec < 0) {                         \
+                        (vsp)->tv_sec--;                          \
+                        (vsp)->tv_nsec += 1000000000L;            \
+                }                                                 \
+        } while (0)
 
 void
-summary (void)
+summary(void)
 {
-  struct timespec elapsed, now;
-  double nanosecs;
+	struct timespec elapsed, now;
+	double nanosecs;
 
-  if (ddflags & C_NOINFO)
-    return;
+	if (ddflags & C_NOINFO)
+		return;
 
-  clock_gettime (CLOCK_MONOTONIC, &now);
-  timespecsub (&now, &st.start, &elapsed);
-  nanosecs = ((double)elapsed.tv_sec * 1000000000) + elapsed.tv_nsec;
-  if (nanosecs == 0)
-    nanosecs = 1;
+	clock_gettime(CLOCK_MONOTONIC, &now);
+	timespecsub(&now, &st.start, &elapsed);
+	nanosecs = ((double)elapsed.tv_sec * 1000000000) + elapsed.tv_nsec;
+	if (nanosecs == 0)
+		nanosecs = 1;
 
-  /* Be async safe: use dprintf(3). */
-  dprintf (STDERR_FILENO, "%zu+%zu records in\n%zu+%zu records out\n",
-           st.in_full, st.in_part, st.out_full, st.out_part);
+	/* Be async safe: use dprintf(3). */
+	dprintf(STDERR_FILENO, "%zu+%zu records in\n%zu+%zu records out\n",
+	    st.in_full, st.in_part, st.out_full, st.out_part);
 
-  if (st.swab)
-    {
-      dprintf (STDERR_FILENO, "%zu odd length swab %s\n", st.swab,
-               (st.swab == 1) ? "block" : "blocks");
-    }
-  if (st.trunc)
-    {
-      dprintf (STDERR_FILENO, "%zu truncated %s\n", st.trunc,
-               (st.trunc == 1) ? "block" : "blocks");
-    }
-  if (!(ddflags & C_NOXFER))
-    {
-      dprintf (STDERR_FILENO,
-               "%lld bytes transferred in %lld.%03ld secs "
-               "(%0.0f bytes/sec)\n",
-               (long long)st.bytes, (long long)elapsed.tv_sec,
-               elapsed.tv_nsec / 1000000,
-               ((double)st.bytes * 1000000000) / nanosecs);
-    }
+	if (st.swab) {
+		dprintf(STDERR_FILENO, "%zu odd length swab %s\n",
+		    st.swab, (st.swab == 1) ? "block" : "blocks");
+	}
+	if (st.trunc) {
+		dprintf(STDERR_FILENO, "%zu truncated %s\n",
+		    st.trunc, (st.trunc == 1) ? "block" : "blocks");
+	}
+	if (!(ddflags & C_NOXFER)) {
+		dprintf(STDERR_FILENO,
+		    "%lld bytes transferred in %lld.%03ld secs "
+		    "(%0.0f bytes/sec)\n", (long long)st.bytes,
+		    (long long)elapsed.tv_sec, elapsed.tv_nsec / 1000000,
+		    ((double)st.bytes * 1000000000) / nanosecs);
+	}
 }
 
 void
-terminate (int signo)
+terminate(int signo)
 {
-  summary ();
-  _exit (128 + signo);
+	summary();
+	_exit(128 + signo);
 }
