@@ -107,8 +107,8 @@ for p in ${CMDS} ; do
     fi
     
     # Copy in the upstream files
-    [ -d ${CWD}/src/${dp} ] || mkdir -p ${CWD}/src/${dp}
-    cp -pr ${p}/* ${CWD}/src/${dp}
+    [ -d ${CWD}/src/${p} ] || mkdir -p ${CWD}/src/${p}
+    cp -pr ${p}/* ${CWD}/src/${p}
 done
 
 for file in "${COMPAT_TOOLS_C[@]}"
@@ -192,6 +192,30 @@ for cfile in $(find ${CWD}/src -type f -name '*.c' -print) ; do
         sed -i -r 's|\s+__dead;|;|g' ${cfile}
     fi
 done
+
+#####################
+# APPLY ANY PATCHES #
+#####################
+
+if [ -d ${CWD}/patches/compat ]; then
+    for patchfile in ${CWD}/patches/compat/*.patch ; do
+        destfile="$(basename ${patchfile} .patch)"
+        [ -f "${CWD}/compat/src/${destfile}.orig" ] && rm -f "${CWD}/compat/src/${destfile}.orig"
+        patch -d ${CWD}/compat/src -p0 -b -z .orig < ${patchfile}
+    done
+fi
+
+if [ -d ${CWD}/patches/src ]; then
+    cd ${CWD}/patches/src
+    for subdir in * ; do
+        [ -d ${subdir} ] || continue
+        for patchfile in ${CWD}/patches/src/${subdir}/*.patch ; do
+            destfile="$(basename ${patchfile} .patch)"
+            [ -f "${CWD}/src/${subdir}/${destfile}.orig" ] && rm -f "${CWD}/src/${subdir}/${destfile}.orig"
+            patch -d ${CWD}/src/${subdir} -p0 -b -z .orig < ${patchfile}
+        done
+    done
+fi
 
 #Clean up
 rm -rf ${TMPDIR}
