@@ -18,7 +18,7 @@
 we need to import this else we are going to get a "declaration expected at line
 42" */
 #if defined __APPLE__
-#include "headers/simpleq.h"
+#include "simpleq.h"
 #include <grp.h>
 #include <pwd.h>
 #include <sys/stat.h>
@@ -134,3 +134,5 @@ size_t strlcpy (char *, const char *, size_t);
 #ifndef timespecclear
 #define	timespecclear(tsp)		(tsp)->tv_sec = (tsp)->tv_nsec = 0
 #endif
+
+void explicit_bzero(void *, size_t );

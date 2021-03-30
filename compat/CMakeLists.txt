@@ -19,7 +19,8 @@ if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
 endif()
 
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Darwin")
-    list(APPEND BasicCompat src/reallocarray.c)
+    list(APPEND BasicCompat src/reallocarray.c
+                        src/explicit_bzero.c)
 endif()
 
 add_library(
