@@ -4,6 +4,9 @@ add_executable(ls ls.c main.c utf8.c util.c print.c cmp.c)
 target_link_libraries(ls PRIVATE compat)
 target_link_libraries(ls PRIVATE ncurses)
 target_link_libraries(ls PRIVATE util)
+if ( FTS_FOUND )
+target_link_libraries(ls PRIVATE ${OPTLIBS})
+endif()
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D_XOPEN_SOURCE")
 

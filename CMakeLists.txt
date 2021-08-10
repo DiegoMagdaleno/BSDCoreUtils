@@ -20,6 +20,7 @@ if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
         include_directories(BEFORE ${FTS_INCLUDE_DIR})
     endif()
     add_definitions("-DDEFFILEMODE=(S_IRUSR|S_IWUSR|S_IRGRP|S_IWGRP|S_IROTH|S_IWOTH)")
+    add_definitions("-DACCESSPERMS=(S_IRWXU|S_IRWXG|S_IRWXO)")
 endif()
 
 add_subdirectory(compat)
