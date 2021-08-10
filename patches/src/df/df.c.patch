@@ -244,7 +244,7 @@
 -prtstat(struct statfs *sfsp, int maxwidth, int headerlen, int blocksize)
 +prtstat(struct mntinfo *sfsp, int maxwidth, int headerlen, int blocksize)
  {
- 	u_int64_t used, inodes;
+ 	uint64_t used, inodes;
  	int64_t availblks;
 @@ -339,7 +375,7 @@
   * Print in traditional BSD format.

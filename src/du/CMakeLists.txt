@@ -2,6 +2,9 @@
 add_executable(du du.c)
 
 target_link_libraries(du PRIVATE compat)
+if ( FTS_FOUND )
+target_link_libraries(du PRIVATE ${OPTLIBS})
+endif()
 
 INSTALL(TARGETS du DESTINATION ${CMAKE_INSTALL_BINDIR})
 

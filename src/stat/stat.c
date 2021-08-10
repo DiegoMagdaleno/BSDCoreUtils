@@ -483,7 +483,7 @@ format1(const struct stat *st,
     int flags, int size, int prec, int ofmt,
     int hilo, int what)
 {
-	u_int64_t data;
+	uint64_t data;
 	char lfmt[24], tmp[20];
 	char smode[12], sid[12], path[PATH_MAX + 4];
 	const char *sdata;

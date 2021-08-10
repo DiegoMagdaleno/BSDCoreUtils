@@ -9,7 +9,7 @@
  #include "primes.h"
  
 @@ -78,15 +79,15 @@
- static u_int64_t	usqrt(u_int64_t);
+ static uint64_t	usqrt(uint64_t);
  static void usage(void);
  
 +static char *__progname = NULL;
@@ -17,7 +17,7 @@
  int
  main(int argc, char *argv[])
  {
- 	u_int64_t val;
+ 	uint64_t val;
  	int ch;
  	char *p, buf[100];		/* > max number of digits. */
 -
