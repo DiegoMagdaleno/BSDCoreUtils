@@ -33,6 +33,7 @@
  * SUCH DAMAGE.
  */
 
+#include <sys/types.h>
 #include <err.h>
 #include <errno.h>
 #include <limits.h>
