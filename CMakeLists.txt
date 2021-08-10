@@ -22,6 +22,8 @@ if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
     add_definitions("-DDEFFILEMODE=(S_IRUSR|S_IWUSR|S_IRGRP|S_IWGRP|S_IROTH|S_IWOTH)")
     add_definitions("-DACCESSPERMS=(S_IRWXU|S_IRWXG|S_IRWXO)")
     add_definitions(-DREG_STARTEND=0)
+    # Should we really define it as 512?
+    add_definitions(-DS_BLKSIZE=512)
 endif()
 
 add_subdirectory(compat)
