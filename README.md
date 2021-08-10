@@ -36,13 +36,13 @@ _Note 2: BSDCoreutils precompiled bins will be available for diverse Linux distr
 Building from source is a recommended option if you want to read and wish to take control over what you install on your computer.
 
 1. Make sure you have `openssl` installed, including development libraries (Header files, etc)³
-2. Make sure you have GNU build tools installed (Ironic), like `autoconf`, `automake` etc.
-3. Open your terminal, and run `./autogen.sh`
-4. Now run `./configure --program-prefix=b`
-5. Run `make install` or `sudo make install`
+2. Make sure you have the CMake toolchain installed (Google how to install it for your operating system)
+3. Open your terminal, and `cd` in to the directory where you cloned/downloaded.
+4. Run `mkdir build && cd build`
+5. Run `cmake ..`
+6. Run `make`
 
 _3. This is only required on Linux based operating systems, on macOS the native implementation of the hashing algorithms will be used_
-_Note: --program-prefix is not required, however, it is recommended so it doesn't conflict with your distribution's coreutils, which can cause tons of problems_
 
 ## Contributing
 
