@@ -21,6 +21,7 @@ if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
     endif()
     add_definitions("-DDEFFILEMODE=(S_IRUSR|S_IWUSR|S_IRGRP|S_IWGRP|S_IROTH|S_IWOTH)")
     add_definitions("-DACCESSPERMS=(S_IRWXU|S_IRWXG|S_IRWXO)")
+    add_definitions(-DREG_STARTEND=0)
 endif()
 
 add_subdirectory(compat)
