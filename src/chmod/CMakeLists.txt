@@ -3,6 +3,7 @@ include(${CMAKE_CURRENT_SOURCE_DIR}/../../cmake/symlink.cmake)
 add_executable(chmod chmod.c)
 
 target_link_libraries(chmod PRIVATE compat)
+target_link_libraries(chmod PRIVATE ${OPTLIBS})
 
 INSTALL(TARGETS chmod DESTINATION ${CMAKE_INSTALL_BINDIR})
 
