@@ -57,8 +57,6 @@ jobs:
           ninja --version
           cmake --version
           gcc --version
-      - name: Install dependencies on ubuntu9
-        if: startsWith(matrix.config.name, 'Ubuntu_GCC_9')
       - name: Install dependencies on macos
         if: startsWith(matrix.config.os, 'macos')
         run: |
