@@ -50,7 +50,7 @@ jobs:
           echo github.event_name: ${{ github.event_name }}
 
       - name: Install dependencies on Ubuntu
-        if: startsWith(matrix.config.name, 'Ubuntu_Latest_GCC')
+        if: startsWith(matrix.config.name, 'Ubuntu')
         run: |
           sudo apt-get update
           sudo apt-get install ninja-build cmake
@@ -71,6 +71,7 @@ jobs:
           mkdir instdir
           cmake \
             -S . \
+            -D . 
             -B . \
             -DCMAKE_BUILD_TYPE=${{ matrix.config.build_type }} \
             -G "${{ matrix.config.generators }}" \
