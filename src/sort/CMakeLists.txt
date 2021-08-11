@@ -7,6 +7,7 @@ target_link_libraries(sort PRIVATE OpenSSL::Crypto)
 endif()
 if (APPLE)
 target_link_libraries(sort PRIVATE "-framework Security")
+endif()
 target_link_libraries(sort PRIVATE ncurses)
 
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
