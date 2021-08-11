@@ -94,7 +94,7 @@ jobs:
             -DCMAKE_BUILD_TYPE=${{ matrix.config.build_type }} \
             -G "${{ matrix.config.generators }}" \
             -DCMAKE_INSTALL_PREFIX:PATH=instdir \
-            -DCMAKE_INSTALL_MANDIR:PATH=instdir/share/man
+            -DCMAKE_INSTALL_MANDIR:PATH=/share/man
       - name: Build
         shell: bash
         run: cmake --build . --config ${{ matrix.config.build_type }}
