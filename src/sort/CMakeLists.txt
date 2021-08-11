@@ -2,7 +2,11 @@
 add_executable(sort bwstring.c coll.c file.c mem.c radixsort.c sort.c vsort.c commoncrypto.c)
 
 target_link_libraries(sort PRIVATE compat)
+if(NOT APPLE)
 target_link_libraries(sort PRIVATE OpenSSL::Crypto)
+endif()
+if (APPLE)
+target_link_libraries(sort PRIVATE "-framework Security")
 target_link_libraries(sort PRIVATE ncurses)
 
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")

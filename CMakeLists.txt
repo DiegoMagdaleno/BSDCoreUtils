@@ -26,13 +26,7 @@ if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
     add_definitions(-DS_BLKSIZE=512)
 endif()
 
-if(APPLE)
-    set(CRYPTO_LIBRARY "-framework Security")
-endif()
-
 set(PROGRAM_PREFIX "" CACHE STRING "Sets the command prefix to avoid conflicts")
-
-
 
 add_subdirectory(compat)
 add_subdirectory(src) 
