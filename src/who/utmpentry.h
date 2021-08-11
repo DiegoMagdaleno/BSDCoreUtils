@@ -32,7 +32,7 @@
 /* Fix the declarations of uint16_t */
 #ifdef __linux__
 #include <stdint.h>
-#include <bsd/sys/time.h>
+#include "compat.h"
 #endif 
 
 #if defined(SUPPORT_UTMPX)

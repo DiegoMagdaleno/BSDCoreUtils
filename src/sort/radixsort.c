@@ -25,8 +25,6 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
-
 #include <errno.h>
 #include <err.h>
 #include <langinfo.h>
@@ -50,10 +48,6 @@
 
 #include "coll.h"
 #include "radixsort.h"
-
-#ifdef __linux__
-#include <bsd/stdlib.h>
-#endif
 
 #include "compat.h"
 

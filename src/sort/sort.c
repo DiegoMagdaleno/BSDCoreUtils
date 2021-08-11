@@ -25,7 +25,6 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
 
 #include <sys/stat.h>
 #ifdef __linux__
@@ -50,7 +49,6 @@
 #include <string.h>
 #include <unistd.h>
 #ifdef __linux__
-#include <bsd/wchar.h>
 #include <openssl/sha.h>
 #include "compat.h"
 #include <ctype.h>

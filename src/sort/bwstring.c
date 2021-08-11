@@ -24,9 +24,6 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  */
-
-#include <sys/cdefs.h>
-
 #include <ctype.h>
 #include <errno.h>
 #include <err.h>
@@ -35,9 +32,7 @@
 #include <stdlib.h>
 #include <string.h>
 #ifdef __linux__
-#include <bsd/wchar.h>
 #include <openssl/sha.h>
-#include <bsd/stdio.h>
 #else
 #include <wchar.h>
 #endif 

@@ -15,6 +15,7 @@
 #include <unistd.h>
 #include <regex.h>
 #include <err.h>
+#include <inttypes.h>
 
 #include "compat.h"
 
@@ -509,7 +510,7 @@ main(int argc, char *argv[])
 		error();
 
 	if (vp->type == integer)
-		printf("%lld\n", vp->u.i);
+		printf("%" PRId64 "\n", vp->u.i);
 	else
 		printf("%s\n", vp->u.s);
 
