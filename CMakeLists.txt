@@ -18,6 +18,8 @@ if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
         message("Using FTS implementation")
         list(APPEND OPTLIBS ${FTS_LIBRARY})
         include_directories(BEFORE ${FTS_INCLUDE_DIR})
+    else()
+        message("Your OS doens't have a separate FTS implementation, assuming one is provided by the LIBC")
     endif()
     add_definitions("-DDEFFILEMODE=(S_IRUSR|S_IWUSR|S_IRGRP|S_IWGRP|S_IROTH|S_IWOTH)")
     add_definitions("-DACCESSPERMS=(S_IRWXU|S_IRWXG|S_IRWXO)")
@@ -25,6 +27,8 @@ if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
     # Should we really define it as 512?
     add_definitions(-DS_BLKSIZE=512)
 endif()
+
+set(PROGRAM_PREFIX "" CACHE STRING "Sets the command prefix to avoid conflicts")
 
 add_subdirectory(compat)
 add_subdirectory(src) 
