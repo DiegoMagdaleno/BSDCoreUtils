@@ -46,6 +46,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <util.h>
+#include <inttypes.h>
 
 #include <sys/param.h>
 #include "compat.h"
@@ -304,14 +305,14 @@ void
 prtout(int64_t size, char *path, int hflag)
 {
 	if (!hflag)
-		(void)printf("%lld\t%s\n", size, path);
+		(void)printf("%" PRId64 "\t%s\n", size, path);
 	else {
 		char buf[FMT_SCALED_STRSIZE];
 
 		if (fmt_scaled(size * 512, buf) == 0)
 			(void)printf("%s\t%s\n", buf, path);
 		else
-			(void)printf("%lld\t%s\n", size, path);
+			(void)printf("%" PRId64 "\t%s\n", size, path);
 	}
 }
 
