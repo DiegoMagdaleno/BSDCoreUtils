@@ -35,10 +35,16 @@
 #include <dirent.h>
 #include <fcntl.h>
 #include <limits.h>
+#ifndef __MINGW32__
 #include <paths.h>
+#endif
 #include <stdbool.h>
 #include <string.h>
 #include <stdlib.h>
+
+#ifdef __MINGW32__
+#include "mingw_paths.h"
+#endif
 
 char *
 devname(dev_t dev, mode_t type)

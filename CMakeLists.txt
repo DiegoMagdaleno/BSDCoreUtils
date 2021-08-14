@@ -26,6 +26,11 @@ if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
     add_definitions(-DS_BLKSIZE=512)
 endif()
 
+if (WIN32)
+    message("Looking for Win32 OpenSSL")
+    find_package(OpenSSL REQUIRED)
+endif()
+
 set(PROGRAM_PREFIX "" CACHE STRING "Sets the command prefix to avoid conflicts")
 
 add_subdirectory(compat)

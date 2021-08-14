@@ -37,8 +37,10 @@
 #include <sys/types.h>
 
 #include <assert.h>
+#ifndef __MINGW32__
 #include <grp.h>
 #include <pwd.h>
+#endif
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

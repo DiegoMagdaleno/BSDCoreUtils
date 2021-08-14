@@ -29,7 +29,6 @@
  */
 #include "compat.h"
 
-#include <err.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -74,18 +73,18 @@ getbsize(int *headerlenp, long *blocksizep)
 			mul = 1;
 			break;
 		default:
-fmterr:			warnx("%s: unknown blocksize", p);
+fmterr:			fprintf(stderr, "%s: unknown blocksize", p);
 			n = 512;
 			max = MAXB;
 			mul = 1;
 			break;
 		}
 		if (n > max) {
-			warnx("maximum blocksize is %dG", MAXB / GB);
+			fprintf(stderr, "maximum blocksize is %dG", MAXB / GB);
 			n = max;
 		}
 		if ((blocksize = n * mul) < 512) {
-underflow:		warnx("%s: minimum blocksize is 512", p);
+underflow:		fprintf(stderr, "%s: minimum blocksize is 512", p);
 			form = "";
 			blocksize = n = 512;
 		}

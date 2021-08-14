@@ -14,6 +14,17 @@
  *
  */
 
+/* Windows compatibility */
+#ifdef __MINGW32__
+#include <inttypes.h>
+#include <stdint.h>
+#include <stddef.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <pthread.h>
+#endif
+
+
 /* Reference from Apple's archived OS X (now macOS documentation
 we need to import this else we are going to get a "declaration expected at line
 42" */
@@ -22,7 +33,9 @@ we need to import this else we are going to get a "declaration expected at line
 #include <grp.h>
 #include <pwd.h>
 #include <sys/stat.h>
-#else
+#endif
+
+#ifdef __linux__
 #include <stddef.h>
 #include <string.h>
 #include <sys/stat.h>
@@ -30,9 +43,73 @@ we need to import this else we are going to get a "declaration expected at line
 #include <unistd.h>
 #endif
 
+/* sys/types.h */
+#ifdef __MINGW32__ 
+typedef int gid_t;
+typedef int uid_t;
+typedef unsigned char      u_char;
+
+typedef unsigned int u_int;
+#pragma push_macro("u_long")
+#undef u_long
+typedef unsigned long u_long;
+#pragma pop_macro("u_long")
+#endif
+
+/* sys/stat.h */
+#ifdef __MINGW32__
+#define S_ISUID 04000
+#define S_ISGID 02000
+#define S_ISVTX 01000
+
+#define S_IFSOCK 0140000
+#define S_IFLNK    0120000 /* Symbolic link */
+#endif
+
+#ifdef __MINGW32__
+struct passwd {
+	char *pw_name;
+	char *pw_passwd;
+	char *pw_gecos;
+	char *pw_dir;
+	char *pw_shell;
+	uid_t pw_uid;
+	gid_t pw_gid;
+};
+
+int		 getpwuid_r (uid_t, struct passwd *, char *,
+			size_t, struct passwd **);
+int 		 getpwnam_r (const char *, struct passwd *,
+			char *, size_t , struct passwd **);
+#endif
+
+#ifdef __MINGW32__
+long sysconf(int name);
+#endif
+
+#ifdef __MINGW32__
+#define NAME_MAX 255
+#endif
+
+#ifdef __MINGW32__
+struct group {
+	char *gr_name;
+	char *gr_passwd;
+	gid_t gr_gid;
+	char **gr_mem;
+};
+#endif
+
+#ifdef __MINGW32__
+#define AT_SYMLINK_NOFOLLOW 0x100
+#endif
+
 /* setmode.c */
+#ifndef __MINGW32__
 mode_t getmode (const void *, mode_t);
 void *setmode (const char *);
+#endif
+
 
 /* strtonum.c */
 long long strtonum (const char *, long long, long long, const char **);
@@ -60,7 +137,14 @@ int fmt_scaled (long long, char *);
 char *getbsize (int *, long *);
 
 /* devname.c */
+#ifndef __MINGW32__
 char *devname (dev_t, mode_t);
+#endif 
+
+#ifdef __MINGW32__
+char *devname_mingw(dev_t, mode_t);
+#define devname devname_mingw;
+#endif
 
 /* merge.c */
 int mergesort (void *, size_t, size_t, int (*) (const void *, const void *));
@@ -77,12 +161,12 @@ void *reallocarray (void *ptr, size_t nmemb, size_t size);
 #endif
 
 /* strlcat.c */
-#if defined __linux__
+#if defined (__linux__)
 size_t strlcat (char *, const char *, size_t);
 #endif
 
 /* strlcpy.c */
-#if defined __linux__
+#if defined __linux__|| defined __MINGW32__
 size_t strlcpy (char *, const char *, size_t);
 #endif
 
@@ -110,11 +194,21 @@ size_t strlcpy (char *, const char *, size_t);
 #define FMT_SCALED_STRSIZE 7 /* minus sign, 4 digits, suffix, null byte */
 
 /* Buffer sizes */
+#if defined (__linux__) || defined (__APPLE__)
 #define _PW_BUF_LEN sysconf (_SC_GETPW_R_SIZE_MAX)
 #define _GR_BUF_LEN sysconf (_SC_GETGR_R_SIZE_MAX)
+#endif
 
-/* Linux spelling differences */
-#if defined __linux__
+#if defined __MINGW32__
+#define _SC_GETPW_R_SIZE_MAX				0x0048
+#define _PW_BUF_LEN _SC_GETPW_R_SIZE_MAX
+#define _GR_BUF_LEN _SC_GETPW_R_SIZE_MAX
+#endif
+
+/* Linux spelling differences 
+ * And Windows too :p
+*/
+#if defined (__linux__) || defined (__MINGW32__)
 #define S_ISTXT S_ISVTX
 #endif
 
