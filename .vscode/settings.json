@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "types.h": "c",
-        "stdbool.h": "c"
+        "stdbool.h": "c",
+        "libgen.h": "c"
     }
 }

@@ -3,6 +3,10 @@ add_executable(basename basename.c)
 
 INSTALL(TARGETS basename DESTINATION ${CMAKE_INSTALL_BINDIR})
 
+if(WIN32)
+target_link_libraries(basename PRIVATE compat)
+endif()
+
 FILE(GLOB MAN1_FILES *.1)
 IF(MAN1_FILES)
     INSTALL(FILES ${MAN1_FILES} DESTINATION ${CMAKE_INSTALL_MANDIR}/man1 COMPONENT ManPages)

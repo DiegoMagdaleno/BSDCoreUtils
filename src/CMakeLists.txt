@@ -1,7 +1,6 @@
 
 
 list(APPEND crossCompatibleBins
-        arch
         basename
         bsdvers
         cat
@@ -69,7 +68,12 @@ list(APPEND crossCompatibleBins
 
 # This tools are missing support for other platforms
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
-    list(APPEND crossCompatibleBins xinstall stty)
+    list(APPEND crossCompatibleBins xinstall stty arch)
+endif()
+
+# This tools are missing support for other platforms
+if(${CMAKE_SYSTEM_NAME} STREQUAL "Darwin")
+    list(APPEND crossCompatibleBins arch)
 endif()
 
 foreach(binary ${crossCompatibleBins})

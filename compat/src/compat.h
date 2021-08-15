@@ -104,6 +104,7 @@ struct group {
 #define AT_SYMLINK_NOFOLLOW 0x100
 #endif
 
+
 /* setmode.c */
 #ifndef __MINGW32__
 mode_t getmode (const void *, mode_t);
