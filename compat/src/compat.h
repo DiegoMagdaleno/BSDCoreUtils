@@ -5,8 +5,23 @@
  * to be a placeholder.
  */
 
+
+/* Windows compatibility */
+/* This is experimental
+ * Windows compatbility headers
+ */
+#if defined __MINGW32__ || defined _MSC_VER
+#include <inttypes.h>
+#include <stdint.h>
+#include <stddef.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <pthread.h>
+#include <windows.h>
+#endif
+
 /*
- * Reference from Apple's archived OS X (now macOS documentation
+ * Reference from Apple's archived OS X (now macOS documentation)
  * we need to import this else we are going to get a "declaration expected at
  * line 29"
  *
@@ -14,20 +29,6 @@
  *
  */
 
-/* Windows compatibility */
-#ifdef __MINGW32__
-#include <inttypes.h>
-#include <stdint.h>
-#include <stddef.h>
-#include <sys/stat.h>
-#include <sys/types.h>
-#include <pthread.h>
-#endif
-
-
-/* Reference from Apple's archived OS X (now macOS documentation
-we need to import this else we are going to get a "declaration expected at line
-42" */
 #if defined __APPLE__
 #include "simpleq.h"
 #include <grp.h>
@@ -44,7 +45,7 @@ we need to import this else we are going to get a "declaration expected at line
 #endif
 
 /* sys/types.h */
-#ifdef __MINGW32__ 
+#if defined __MINGW32__ || defined _MSC_VER
 typedef int gid_t;
 typedef int uid_t;
 typedef unsigned char      u_char;
@@ -57,7 +58,7 @@ typedef unsigned long u_long;
 #endif
 
 /* sys/stat.h */
-#ifdef __MINGW32__
+#if defined __MINGW32__|| defined _MSC_VER
 #define S_ISUID 04000
 #define S_ISGID 02000
 #define S_ISVTX 01000
@@ -66,7 +67,7 @@ typedef unsigned long u_long;
 #define S_IFLNK    0120000 /* Symbolic link */
 #endif
 
-#ifdef __MINGW32__
+#if defined __MINGW32__ || defined _MSC_VER
 struct passwd {
 	char *pw_name;
 	char *pw_passwd;
@@ -87,8 +88,8 @@ int 		 getpwnam_r (const char *, struct passwd *,
 long sysconf(int name);
 #endif
 
-#ifdef __MINGW32__
-#define NAME_MAX 255
+#if defined __MINGW32__ || defined _MSC_VER
+#define NAME_MAX _MAX_FNAME
 #endif
 
 #ifdef __MINGW32__
@@ -100,8 +101,12 @@ struct group {
 };
 #endif
 
-#ifdef __MINGW32__
+#if defined __MINGW32__ || defined _MSC_VER
 #define AT_SYMLINK_NOFOLLOW 0x100
+#endif
+
+#ifdef _MSC_VER
+#define mode_t int
 #endif
 
 

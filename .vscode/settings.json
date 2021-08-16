@@ -2,6 +2,8 @@
     "files.associations": {
         "types.h": "c",
         "stdbool.h": "c",
-        "libgen.h": "c"
+        "libgen.h": "c",
+        "stdio.h": "c",
+        "errno.h": "c"
     }
 }

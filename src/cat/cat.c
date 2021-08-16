@@ -37,7 +37,9 @@
 #include <sys/stat.h>
 
 #include <ctype.h>
+#ifndef __MINGW32__
 #include <err.h>
+#endif
 #include <errno.h>
 #include <fcntl.h>
 #include <stdio.h>
