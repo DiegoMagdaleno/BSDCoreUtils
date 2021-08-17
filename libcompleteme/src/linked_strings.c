@@ -90,6 +90,24 @@ append (struct list *our_list, const char *component)
   return new_node;
 }
 
+struct lnode *
+getatindx (struct list *our_list, int index)
+{
+  struct lnode *current = our_list->head;
+  int count = 0;
+  while (current != NULL)
+    {
+      if (count == index)
+        {
+          return (current);
+        }
+      count++;
+      current = current->next;
+    }
+
+  return NULL;
+}
+
 void
 free_list (struct list *our_list)
 {
