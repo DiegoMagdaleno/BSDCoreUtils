@@ -10,6 +10,7 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 
+#include "sys/stat_mingw.h"
 #include <pthread.h>
 
 /* sys/types.h */
@@ -19,14 +20,15 @@ typedef unsigned char  u_char;
 typedef unsigned int u_int;
 typedef unsigned long u_long;
 
-/* sys/stat.h */
-#define S_ISUID 0400
-#define S_ISGID 0200
-#define S_ISVTX 0100
+/* Missing Windows Types */
+typedef int nlink_t;
+typedef int blksize_t;
+typedef off_t blkcnt_t;
 
-#define S_IFSOCK 0140000 /* Is a socket */
-#define S_IFLNK 0120000 /* Is a symbolic link */
-
+/* Similar behaviour to macOS */
+#define st_atime st_atim.tv_sec
+#define st_mtime st_mtim.tv_sec
+#define st_ctime st_ctim.tv_sec
 
 /* Translate WinAPI errors to POSIX errors */
 int err_translate(void);

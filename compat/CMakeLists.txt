@@ -28,18 +28,9 @@ if (WIN32)
         list(APPEND BasicCompat src/strlcpy.c)
 endif()
 
-# Build win32 compat dir
-if (WIN32)
-        list(APPEND BasicCompat win32/dirent.c win32/err_translate.c)
-endif()
-
 add_library(
         compat
         ${BasicCompat}
 )
 
 target_include_directories(compat PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/src")
-
-if (WIN32)
-target_include_directories(compat PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/win32")
-endif()

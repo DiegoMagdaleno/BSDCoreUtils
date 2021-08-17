@@ -34,4 +34,9 @@ endif()
 set(PROGRAM_PREFIX "" CACHE STRING "Sets the command prefix to avoid conflicts")
 
 add_subdirectory(compat)
-add_subdirectory(src) 
+add_subdirectory(libcompleteme)
+
+if (WIN32)
+add_subdirectory(win2posix)
+endif()
+add_subdirectory(src)

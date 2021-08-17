@@ -4,6 +4,13 @@
         "stdbool.h": "c",
         "libgen.h": "c",
         "stdio.h": "c",
-        "errno.h": "c"
+        "errno.h": "c",
+        "fcntl.h": "c",
+        "err.h": "c",
+        "compat_mingw.h": "c",
+        "array": "c",
+        "string": "c",
+        "string_view": "c",
+        "ranges": "c"
     }
 }

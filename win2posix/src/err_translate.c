@@ -1,5 +1,6 @@
 #include <errno.h>
-#include <winerror.h>S
+#include <winerror.h>
+#include <windows.h>
 
 /* Translate from win32 -> POSIX */
 int
