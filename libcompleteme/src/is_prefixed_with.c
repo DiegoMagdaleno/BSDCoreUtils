@@ -19,5 +19,5 @@ is_prefixed_with (const char *path, const char *prefix)
       return NULL;
     }
 
-  return (bool)strcmp (prefix, nd->component);
+  return (bool)(strcmp (prefix, nd->component)==0);
 }
