@@ -37,4 +37,6 @@ int err_translate(void);
 #define DEFAULT_UID 4095
 #define DEFAULT_GID DEFAULT_UID
 
+char* realpath(const char*, char*);
+
 #endif /* COMPAT_MINGW */

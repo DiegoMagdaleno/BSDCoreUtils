@@ -1,5 +1,6 @@
 #include "stat_mingw.h"
 #include "dev_opera.h"
+#include "is_symlink.h"
 
 static int
 get_attributes_of_file (const char *filename,
@@ -70,6 +71,7 @@ meta_stat (int follow, const char *filename, struct stat_mingw* buf)
   WIN32_FIND_DATAA find_buffer;
   DWORD low, high;
   off64_t size;
+  char pathbuf[_MAX_PATH];
 
   while (filename && !(err = get_attributes_of_file(filename, &file_data))) {
     buf->st_ino = 0;
@@ -77,5 +79,20 @@ meta_stat (int follow, const char *filename, struct stat_mingw* buf)
     buf->st_gid = DEFAULT_GID;
     buf->st_dev = buf->st_dev = 0;
 
+    if (is_symlink(file_data.dwFileAttributes, filename, &find_buffer)) {
+      char *name = realpath(filename, pathbuf);
+
+      if (follow) {
+        err = errno;
+        filename = name;
+        continue;
+      }
+
+      buf->st_mode = S_IFLNK|S_IRWXU|S_IRWXG|S_IRWXO;
+      buf->st_attr = file_data.dwFileAttributes;
+      
+    }
   }
+
+
 }
