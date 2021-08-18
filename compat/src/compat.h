@@ -116,6 +116,9 @@ mode_t getmode (const void *, mode_t);
 void *setmode (const char *);
 #endif
 
+#ifdef __MINGW32__
+unsigned long stroul(const char*, char **, int);
+#endif
 
 /* strtonum.c */
 long long strtonum (const char *, long long, long long, const char **);

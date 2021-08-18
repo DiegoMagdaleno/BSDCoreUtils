@@ -9,7 +9,8 @@
             "includePath": [
                 "${default}",
                 "${workspaceFolder}/compat/src",
-                "${workspaceFolder}/win2posix/src"
+                "${workspaceFolder}/win2posix/src",
+                "${workspaceFolder}/libcompleteme/src"
             ]
         }
     ],

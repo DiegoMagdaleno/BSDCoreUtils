@@ -1,5 +1,8 @@
-#include <windows.h>
 #include "compat_mingw.h"
+#include <windows.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <ntdef.h>
 
 /* sys/stat.h */
 #define S_ISUID 0400
@@ -29,4 +32,4 @@ struct stat_mingw
 
 int stat_mingw(const char*, struct stat_mingw *);
 int lstat_mingw(const char*, struct stat_mingw *);
-int fstat_mingw(int fd, struct stat_mingw *);
+int fstat_mingw(int, struct stat_mingw *);

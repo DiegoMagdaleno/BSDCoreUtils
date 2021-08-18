@@ -25,7 +25,7 @@ if(${CMAKE_SYSTEM_NAME} STREQUAL "Darwin")
 endif()
 
 if (WIN32) 
-        list(APPEND BasicCompat src/strlcpy.c)
+        list(APPEND BasicCompat src/strlcpy.c src/strtoul.c)
 endif()
 
 add_library(

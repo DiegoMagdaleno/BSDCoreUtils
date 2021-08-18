@@ -1,0 +1,9 @@
+enum {
+    DEV_NULL,
+    DEV_ZERO,
+    DEV_URANDOM,
+    NOT_DEVICE = -1
+};
+
+#define DEFAULT_UID 4095
+#define DEFAULT_GID DEFAULT_UID

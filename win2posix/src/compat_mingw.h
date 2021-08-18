@@ -1,4 +1,4 @@
-#ifndef COMPAT_MINGW 
+#ifndef COMPAT_MINGW
 #define COMPAT_MINGW
 
 #ifdef __MINGW32__
@@ -10,7 +10,6 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 
-#include "sys/stat_mingw.h"
 #include <pthread.h>
 
 /* sys/types.h */
@@ -34,5 +33,8 @@ typedef off_t blkcnt_t;
 int err_translate(void);
 
 #endif /* ifdef __MINGW32__ */
+
+#define DEFAULT_UID 4095
+#define DEFAULT_GID DEFAULT_UID
 
 #endif /* COMPAT_MINGW */
