@@ -26,6 +26,11 @@ if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
     add_definitions(-DS_BLKSIZE=512)
 endif()
 
+# CMAKE Doesn't really have a Macro to detect Linux, Why?
+if (${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
+set(LINUX TRUE)
+endif()
+
 if (WIN32)
     message("Looking for Win32 OpenSSL")
     find_package(OpenSSL REQUIRED)
