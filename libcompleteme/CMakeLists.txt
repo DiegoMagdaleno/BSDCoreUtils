@@ -3,7 +3,9 @@ list(APPEND youcompleteme
     src/first_component.c
     src/is_prefixed_with.c
     src/dev_opera.c
-    src/starts_with.c)
+    src/starts_with.c
+    src/timeoperations.c
+    src/convert.c)
 
 add_library(youcompleteme
     ${youcompleteme})

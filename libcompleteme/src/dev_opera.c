@@ -2,6 +2,7 @@
 #include "first_component.h"
 #include "starts_with.h"
 #include "compat.h"
+#include "symstruct.h"
 
 static t_symstruct devices_table[] = { { "null", DEV_NULL },
                                        { "urandom", DEV_URANDOM },

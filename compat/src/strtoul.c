@@ -58,7 +58,7 @@ strtoul(const char * __restrict nptr, char ** __restrict endptr, int base)
 	s = nptr;
 	do {
 		c = *s++;
-	} while (isspace_l((unsigned char)c));
+	} while (isspace((unsigned char)c));
 	if (c == '-') {
 		neg = 1;
 		c = *s++;

@@ -108,6 +108,15 @@ getatindx (struct list *our_list, int index)
   return NULL;
 }
 
+struct lnode*
+getlst(struct list *our_list) {
+  struct lnode *current = our_list->head;
+  while(current->next != NULL) {
+    current = current->next;
+  }
+  return (current);
+}
+
 void
 free_list (struct list *our_list)
 {

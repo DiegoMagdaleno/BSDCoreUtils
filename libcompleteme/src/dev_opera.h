@@ -9,7 +9,5 @@ enum {
 
 #define DEV_FD_PREFIX "/dev/fd"
 
-typedef struct { char *key; int val; } t_symstruct;
-
 int get_device_type(const char*);
 int get_device_fd(const char*);

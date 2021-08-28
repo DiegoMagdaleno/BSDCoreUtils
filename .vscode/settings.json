@@ -13,6 +13,9 @@
         "string_view": "c",
         "ranges": "c",
         "linked_strings.h": "c",
-        "minwinbase.h": "c"
+        "minwinbase.h": "c",
+        "first_component.h": "c",
+        "tsymstruct.h": "c",
+        "dev_opera.h": "c"
     }
 }

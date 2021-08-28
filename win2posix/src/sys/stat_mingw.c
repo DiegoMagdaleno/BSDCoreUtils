@@ -1,6 +1,9 @@
 #include "stat_mingw.h"
 #include "dev_opera.h"
 #include "is_symlink.h"
+#include "timeoperations.h"
+#include "convert.h"
+#include "istests.h"
 
 static int
 get_attributes_of_file (const char *filename,
@@ -90,7 +93,16 @@ meta_stat (int follow, const char *filename, struct stat_mingw* buf)
 
       buf->st_mode = S_IFLNK|S_IRWXU|S_IRWXG|S_IRWXO;
       buf->st_attr = file_data.dwFileAttributes;
-      
+      buf->st_size = name ? strlen(name) : 0;
+      buf->st_atim = filetime_to_timespec(&(find_buffer.ftLastAccessTime));
+      buf->st_mtim = filetime_to_timespec(&(find_buffer.ftLastWriteTime));
+      buf->st_ctim = filetime_to_timespec(&(find_buffer.ftCreationTime));
+    }
+    else {
+    buf->st_mode = file_attr_to_st_mode(file_data.dwFileAttributes);
+    buf->st_attr = file_data.dwFileAttributes;
+    if (S_ISREG(buf->st_mode) && !(buf->st_attr & FILE_ATTRIBUTE_DEVICE) && has_exe_suffix(filename))
+
     }
   }
 

@@ -22,4 +22,5 @@ struct lnode *push(struct list *, const char *);
 struct lnode *append(struct list*, const char*);
 struct lnode *getatindx(struct list*, int);
 struct lnode *insert_front (struct list *, const char *);
+struct lnode *getlst(struct list *);
 void free_list (struct list *);
