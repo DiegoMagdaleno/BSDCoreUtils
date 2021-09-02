@@ -8,141 +8,60 @@ on:
     # tags:
     # - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
-jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
-    name: ${{ matrix.config.name }}
-    runs-on: ${{ matrix.config.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        config: 
-        - {
-            name: "Ubuntu_Latest_GCC",
-            os: ubuntu-latest,
-            artifact: "ubuntu_gcc.7z",
-            build_type: "Release",
-            cc: "gcc",
-            cxx: "g++",
-            archiver: "7z a",
-            generators: "Ninja"
-          }
-        - {
-          name: "Ubuntu_Latest_CLANG",
-          os: ubuntu-latest,
-          artifact: "ubuntu_clang.7z",
-          build_type: "Release", 
-          cc: "clang",
-          cxx: "clang++",
-          archiver: "7z a",
-          generators: "Ninja"
-        }
-        - {
-            name: "macOS Latest Clang",
-            os: macos-latest,
-            artifact: "macos_clang.7z",
-            build_type: "Release",
-            cc: "clang",
-            cxx: "clang++",
-            archiver: "7za a",
-            generators: "Ninja"
 
-          }
-        - {
-          name: "Alpine_Latest_GCC",
-          os: "alpine:latest",
-          artifact: "alpine_musl_gcc.7z",
-          build_type: "Release",
-          cc: "gcc",
-          cxx: "g++",
-          archiver: "7z a",
-          generators: "Ninja"
-        }
+jobs:
+  ubuntu_gcc:
+    runs-on: ubuntu-latest
 
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: dependencies
+        run: |
+              sudo env DEBIAN_FRONTEND=noninteractive apt-get update && sudo env DEBIAN_FRONTEND=noninteractive apt-get -y cmake ninja-build
+      
       - uses: actions/checkout@v2
 
-      - name: Print environment
+      - name: configure
         run: |
-          echo github.event.action: ${{ github.event.action }}
-          echo github.event_name: ${{ github.event_name }}
-
-      - name: Install dependencies on Ubuntu GCC
-        if: startsWith(matrix.config.name, 'Ubuntu_Latest_GCC')
-        run: |
-          sudo apt-get update
-          sudo apt-get install ninja-build cmake
-          ninja --version
-          cmake --version
-          gcc --version
-      - name: Install dependencies on Ubuntu Clang
-        if: contains(matrix.config.name, 'Ubuntu_Latest_CLANG')
-        run: |
-          sudo apt-get update
-          sudo apt-get install ninja-build cmake clang
-          ninja --version
-          cmake --version
-          clang --version
+              mkdir build
+              mkdir installdir
+              cmake \
+              -S . \
+              -B . \
+              -DCMAKE_BUILD_TYPE=Release \
+              -G Ninja \
+              -DCMAKE_C_COMPILER=gcc \
+              -DCMAKE_CXX_COMPILER=g++ \
+              -DCMAKE_INSTALL_PREFIX:PATH=installdir \
+              -DCMAKE_INSTALL_MANDIR:PATH=instdir/share/man
       
-      - name: Install dependencies on Alpine GCC
-        if: contains(matrix.config.name, 'Alpine_Latest_GCC')
-        run: |
-          apk add cmake patch gcc musl-dev linux-headers g++ meson flex bison libedit-dev openssl-dev fts-dev acl-dev ninja
-          ninja --version
-          cmake --version
-          gcc --version
+      - name: build
+        shell: bash
+        run: cmake --build . --config Release
       
-      - name: Install dependencies on macOS
-        if: startsWith(matrix.config.os, 'macos')
-        run: |
-          brew install p7zip cmake ninja
-          ninja --version
-          cmake --version
-          
-      - name: Configure
-        shell: bash
-        run: |
-          mkdir build
-          mkdir instdir
-          cmake \
-            -S . \
-            -B . \
-            -DCMAKE_BUILD_TYPE=${{ matrix.config.build_type }} \
-            -G "${{ matrix.config.generators }}" \
-            -DCMAKE_C_COMPILER=${{matrix.config.cc}} \
-            -DCMAKE_CXX_COMPILER=${{matrix.config.cxx}} \
-            -DCMAKE_INSTALL_PREFIX:PATH=instdir \
-            -DCMAKE_INSTALL_MANDIR:PATH=instdir/share/man
-      - name: Build
-        shell: bash
-        run: cmake --build . --config ${{ matrix.config.build_type }}
-
-      - name: Install Strip
+      - name: Install strip
         shell: bash
         run: cmake --install . --strip
 
       - name: Pack
         shell: bash
-        working-directory: instdir
+        working-directory: installdir
         run: |
           ls -laR
-          ${{ matrix.config.archiver }} ../${{ matrix.config.artifact }} .
+          7z a ../Ubuntu_latest_gcc.7z
+
       - name: Upload
         uses: actions/upload-artifact@v1
         with:
-          path: ./${{ matrix.config.artifact }}
-          name: ${{ matrix.config.artifact }}
+          path: ./Ubuntu_latest_gcc.7z
+          name: Ubuntu_latest_gcc.7z
 
-      - name: Upload release asset
+      - name: Upload release
         if: github.event_name == 'release' && (github.event.action == 'published' || github.event.action == 'created')
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ github.event.release.upload_url }}
-          asset_path: ./${{ matrix.config.artifact }}
-          asset_name: ${{ matrix.config.artifact }}.zip
+          upload_url:  ${{ github.event.release.upload_url }}
+          asset_path: Ubuntu_latest_gcc.7z
+          asset_name: Ubuntu_latest_gcc.7z.zip
           asset_content_type: application/zip
