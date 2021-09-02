@@ -16,6 +16,7 @@
         "minwinbase.h": "c",
         "first_component.h": "c",
         "tsymstruct.h": "c",
-        "dev_opera.h": "c"
+        "dev_opera.h": "c",
+        "queue.h": "c"
     }
 }
