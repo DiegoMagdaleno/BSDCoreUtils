@@ -16,7 +16,7 @@ jobs:
     steps:
       - name: dependencies
         run: |
-              sudo env DEBIAN_FRONTEND=noninteractive apt-get update && sudo env DEBIAN_FRONTEND=noninteractive apt-get -y cmake ninja-build
+              sudo env DEBIAN_FRONTEND=noninteractive apt-get update && sudo env DEBIAN_FRONTEND=noninteractive apt-get install -y cmake ninja-build
       
       - uses: actions/checkout@v2
 
