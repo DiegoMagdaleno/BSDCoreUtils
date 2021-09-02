@@ -65,3 +65,60 @@ jobs:
           asset_path: Ubuntu_latest_gcc.7z
           asset_name: Ubuntu_latest_gcc.7z.zip
           asset_content_type: application/zip
+
+  ubuntu_clang:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: dependencies
+        run: |
+              sudo env DEBIAN_FRONTEND=noninteractive apt-get update && sudo env DEBIAN_FRONTEND=noninteractive apt-get install -y cmake ninja-build clang
+      
+      - uses: actions/checkout@v2
+
+      - name: configure
+        run: |
+              mkdir build
+              mkdir installdir
+              cmake \
+              -S . \
+              -B . \
+              -DCMAKE_BUILD_TYPE=Release \
+              -G Ninja \
+              -DCMAKE_C_COMPILER=clang \
+              -DCMAKE_CXX_COMPILER=clang++ \
+              -DCMAKE_INSTALL_PREFIX:PATH=installdir \
+              -DCMAKE_INSTALL_MANDIR:PATH=instdir/share/man
+      
+      - name: build
+        shell: bash
+        run: cmake --build . --config Release
+      
+      - name: Install strip
+        shell: bash
+        run: cmake --install . --strip
+
+      - name: Pack
+        shell: bash
+        working-directory: installdir
+        run: |
+          ls -laR
+          7z a ../Ubuntu_latest_gcc.7z
+
+      - name: Upload
+        uses: actions/upload-artifact@v1
+        with:
+          path: ./Ubuntu_latest_gcc.7z
+          name: Ubuntu_latest_gcc.7z
+
+      - name: Upload release
+        if: github.event_name == 'release' && (github.event.action == 'published' || github.event.action == 'created')
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url:  ${{ github.event.release.upload_url }}
+          asset_path: Ubuntu_latest_gcc.7z
+          asset_name: Ubuntu_latest_gcc.7z.zip
+          asset_content_type: application/zip
+
