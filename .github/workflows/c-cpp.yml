@@ -103,13 +103,13 @@ jobs:
         working-directory: installdir
         run: |
           ls -laR
-          7z a ../Ubuntu_latest_gcc.7z
+          7z a ../Ubuntu_latest_clang.7z
 
       - name: Upload
         uses: actions/upload-artifact@v1
         with:
-          path: ./Ubuntu_latest_gcc.7z
-          name: Ubuntu_latest_gcc.7z
+          path: ./Ubuntu_latest_clang.7z
+          name: Ubuntu_latest_clang.7z
 
       - name: Upload release
         if: github.event_name == 'release' && (github.event.action == 'published' || github.event.action == 'created')
@@ -118,7 +118,66 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url:  ${{ github.event.release.upload_url }}
-          asset_path: Ubuntu_latest_gcc.7z
-          asset_name: Ubuntu_latest_gcc.7z.zip
+          asset_path: Ubuntu_latest_clang.7z
+          asset_name: Ubuntu_latest_clang.7z.zip
           asset_content_type: application/zip
+  
+  alpine_gcc:
+    runs-on: ubuntu-latest
 
+    container:
+      image: "alpine:latest"
+    
+    steps:
+      - name: dependencies
+        run: |
+            apk add git libtool ninja linux-headers gcc g++ musl-dev patch cmake flex bison fts-dev p7zip
+      
+      - uses: actions/checkout@v2
+
+      - name: configure
+        run: |
+            mkdir build 
+            mkdir installdir
+            cmake \
+            -S . \
+            -B . \
+            -DCMAKE_BUILD_TYPE=Release \
+            -G Ninja \
+            -DCMAKE_C_COMPILER=gcc \
+            -DCMAKE_CXX_COMPILER=g++ \
+            -DCMAKE_INSTALL_PREFIX:PATH=installdir \
+            -DCMAKE_INSTALL_MANDIR:PATH=installdir/share/man
+
+      - name: build
+        shell: bash
+        run: cmake --build . --config Release
+
+      - name: Install strip
+        shell: bash
+        run: cmake --install . --strip
+      
+      - name: Pack
+        shell: bash
+        working-directory: installdir
+        run: |
+          ls -laR 
+          7z a ../Alpine_latest_gcc.7z
+
+      - name: Upload
+        uses: actions/upload-artifact@v1
+        with:
+          path: ./Alpine_latest_gcc.7z
+          name: Alpine_latest_gcc.7z
+      
+      - name: Upload release
+      if: github.event_name == 'release' && (github.event.action == 'published' || github.event.action == 'created')
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url:  ${{ github.event.release.upload_url }}
+        asset_path: Alpine_latest_gcc.7z
+        asset_name: Alpine_latest_gcc.7z.zip
+        asset_content_type: application/zip
+  
