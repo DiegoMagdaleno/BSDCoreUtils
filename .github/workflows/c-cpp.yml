@@ -50,6 +50,16 @@ jobs:
             generators: "Ninja"
 
           }
+        - {
+          name: "Alpine_Latest_GCC",
+          os: "alpine:latest",
+          artifact: "alpine_musl_gcc.7z",
+          build_type: "Release",
+          cc: "gcc",
+          cxx: "g++",
+          archiver: "7z a",
+          generators: "Ninja"
+        }
 
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -76,6 +86,14 @@ jobs:
           ninja --version
           cmake --version
           clang --version
+      
+      - name: Install dependencies on Alpine GCC
+        if: contains(matrix.config.name, 'Alpine_Latest_GCC')
+        run: |
+          apk add cmake patch gcc musl-dev linux-headers g++ meson flex bison libedit-dev openssl-dev fts-dev acl-dev ninja
+          ninja --version
+          cmake --version
+          gcc --version
       
       - name: Install dependencies on macOS
         if: startsWith(matrix.config.os, 'macos')
