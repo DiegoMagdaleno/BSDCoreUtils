@@ -6,7 +6,7 @@
 
 ## The \*BSD utils project
 
-This project is GNU coreutils-like collection of utilities from diverse BSD operating systems (FreeBSD, OpenBSD and NetBSD). The intent is to offer a BSD-licensed and lightweight replacement for the GNU coreutils project.
+This project is a GNU coreutils-like collection of utilities from diverse BSD operating systems (FreeBSD, OpenBSD and NetBSD). The intent is to offer a BSD-licensed and lightweight replacement for the GNU coreutils project.
 
 ## Table of notes
 
@@ -19,15 +19,15 @@ Here are some instructions to get this collection of tools running on your compu
 
 **Option 1 - Precompiled bin**:
 
-If you don't wish to compile, there is a precompiled bin options, for the macOS operating system.
+If you don't wish to compile, there is a precompiled bin option, for the macOS operating system.
 
-In order to achieve this, just follow this instructions:
+In order to achieve this, just follow these instructions:
 
 1. Install [Homebrew](https://brew.sh/) for macOS.
 2. Go to your terminal, and execute the following command `brew tap diegomagdaleno/homebrew-diegoutils`
 3. Now run `brew install bsd-coreutils`
 
-_Note: This tools will be installed with the "b" prefix, for example "bcat" instead of "cat"._
+_Note: These tools will be installed with the "b" prefix, for example "bcat" instead of "cat"._
 
 _Note 2: BSDCoreutils precompiled bins will be available for diverse Linux distributions eventually_
 
@@ -52,12 +52,12 @@ If you would like to contribute please do the following:
 
   - **Contributing code**:
  
-    If you decide to contribute to this project here are the instructions to get you started ^_^
+    If you decide to contribute to this project, here are the instructions to get you started ^_^
     
     It is recommened that you contribute fixes to tools, or other tools from other BSD Systems, make sure they are under the BSD license.
 
       1. Fork this repository
-      2. Git clone this repository into your computer
+      2. Git clone your fork into your computer
       3. Hack it and have fun.
       4. Push and submit a pull request!
       
@@ -69,7 +69,7 @@ If you would like to contribute please do the following:
       2. Submit with a good explanation what your feature should do
       3. Be patient, I do this in my free time
       
-      Some notes: Please don't ask for features that break our BSD mindset like the inclution of `--long-flags`
+      Some notes: Please don't ask for features that break our BSD mindset like the inclusion of `--long-flags`
       
   - **Contributing love and fun**:
  
