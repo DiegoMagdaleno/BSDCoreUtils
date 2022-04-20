@@ -39,6 +39,8 @@ endif()
 set(PROGRAM_PREFIX "" CACHE STRING "Sets the command prefix to avoid conflicts")
 
 add_subdirectory(libwhereami)
+# TODO: This is wrong
+include_directories("${CMAKE_SOURCE_DIR}/libwhereami/src")
 add_subdirectory(compat)
 if (WIN32)
 add_subdirectory(libcompleteme)

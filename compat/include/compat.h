@@ -44,6 +44,14 @@
 #include <unistd.h>
 #endif
 
+// Use whereami library
+#ifdef __linux__
+#include "whereami.h"
+#define IS_USING_WHEREAMI_LIBRARY
+void setprogname(const char *progname);
+const char *getprogname(void);
+#endif
+
 /* sys/types.h */
 #if defined __MINGW32__ || defined _MSC_VER
 typedef int gid_t;
