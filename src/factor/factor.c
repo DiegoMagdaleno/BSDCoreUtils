@@ -62,6 +62,7 @@
 #include <libgen.h>
 
 #include "primes.h"
+#include "compat.h"
 
 /*
  * prime[i] is the (i+1)th prime.
@@ -85,9 +86,6 @@ main(int argc, char *argv[])
 	u_int64_t val;
 	int ch;
 	char *p, buf[100];		/* > max number of digits. */
-
-	if (pledge("stdio", NULL) == -1)
-		err(1, "pledge");
 
 	while ((ch = getopt(argc, argv, "h")) != -1) {
 		switch (ch) {
@@ -306,6 +304,6 @@ usqrt(u_int64_t n)
 static void
 usage(void)
 {
-	(void)fprintf(stderr, "usage: %s [number ...]\n", __progname);
+	(void)fprintf(stderr, "usage: %s [number ...]\n", getprogname());
 	exit (1);
 }
