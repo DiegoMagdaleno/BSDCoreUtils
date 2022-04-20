@@ -89,8 +89,9 @@ gread(struct termios *tp, char *s)
 			continue;
 		}
 		if (CHK("ispeed")) {
+			/* Thanks Microsoft: https://github.com/Microsoft/node-pty/issues/40 */
 			(void)sscanf(ep, "%ld", &tmp);
-			tp->c_ispeed = tmp;
+			cfsetispeed(tp, tmp);
 			continue;
 		}
 		if (CHK("lflag")) {
@@ -103,7 +104,7 @@ gread(struct termios *tp, char *s)
 		}
 		if (CHK("ospeed")) {
 			(void)sscanf(ep, "%ld", &tmp);
-			tp->c_ospeed = tmp;
+			cfsetospeed(tp, tmp);
 			continue;
 		}
 		for (cp = cchars1; cp->name != NULL; ++cp)

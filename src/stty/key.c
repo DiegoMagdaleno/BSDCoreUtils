@@ -31,6 +31,7 @@
  */
 
 #include <sys/types.h>
+#include <sys/ttydefaults.h>
 #include <sys/ioctl.h>
 
 #include <err.h>
@@ -40,6 +41,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <termios.h>
+#include 
 
 #include "stty.h"
 #include "extern.h"
