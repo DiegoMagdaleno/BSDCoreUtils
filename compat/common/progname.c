@@ -98,6 +98,8 @@ done:
             free(mbname);
         }
         #endif
+
+        return __progname;
 }
 
 void
