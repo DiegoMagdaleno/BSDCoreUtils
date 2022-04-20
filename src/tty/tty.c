@@ -57,11 +57,6 @@ main(int argc, char *argv[])
 		}
 	}
 
-	if (unveil(_PATH_DEVDB, "r") == -1)
-		err(1, "unveil %s", _PATH_DEVDB);
-	if (pledge("stdio rpath", NULL) == -1)
-		err(1, "pledge");
-
 	t = ttyname(STDIN_FILENO);
 	if (!sflag)
 		puts(t ? t : "not a tty");
