@@ -67,10 +67,11 @@ main(int argc, char *argv[])
 		return 0;
 	}
 	p = basename(*argv);
-	if (!p)
+	if (!p) {
 		fprintf(stderr, "%s", *argv);
 		return EXIT_FAILURE;
-	
+	}
+
 	/*
 	 * If the suffix operand is present, is not identical to the
 	 * characters remaining in string, and is identical to a suffix
