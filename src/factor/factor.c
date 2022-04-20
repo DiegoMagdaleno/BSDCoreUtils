@@ -74,20 +74,20 @@ extern const ubig *pr_limit;		/* largest prime in the prime array */
 extern const char pattern[];
 extern const int pattern_size;
 
-static void		pr_fact(uint64_t);	/* print factors of a value */
-static void		pr_bigfact(uint64_t);
-static uint64_t	usqrt(uint64_t);
+static void		pr_fact(u_int64_t);	/* print factors of a value */
+static void		pr_bigfact(u_int64_t);
+static u_int64_t	usqrt(u_int64_t);
 static void usage(void);
-
-static char *__progname = NULL;
 
 int
 main(int argc, char *argv[])
 {
-	uint64_t val;
+	u_int64_t val;
 	int ch;
 	char *p, buf[100];		/* > max number of digits. */
-	__progname = basename(argv[0]);
+
+	if (pledge("stdio", NULL) == -1)
+		err(1, "pledge");
 
 	while ((ch = getopt(argc, argv, "h")) != -1) {
 		switch (ch) {
@@ -154,7 +154,7 @@ main(int argc, char *argv[])
  * Prime factors are printed with leading spaces.
  */
 static void
-pr_fact(uint64_t val)		/* Factor this value. */
+pr_fact(u_int64_t val)		/* Factor this value. */
 {
 	const ubig *fact;	/* The factor found. */
 
@@ -203,9 +203,9 @@ pr_fact(uint64_t val)		/* Factor this value. */
  * sufficient to factor a 64-bit quad.
  */
 static void
-pr_bigfact(uint64_t val)	/* Factor this value. */
+pr_bigfact(u_int64_t val)	/* Factor this value. */
 {
-	uint64_t start, stop;
+	u_int64_t start, stop;
 	ubig factor;
 	char *q;
 	const ubig *p;
@@ -285,10 +285,10 @@ pr_bigfact(uint64_t val)	/* Factor this value. */
 }
 
 /* Code taken from ping.c */
-static uint64_t
-usqrt(uint64_t n)
+static u_int64_t
+usqrt(u_int64_t n)
 {
-	uint64_t y, x = 1;
+	u_int64_t y, x = 1;
 
 	if (n == 0 || n == 1)
 		return n;

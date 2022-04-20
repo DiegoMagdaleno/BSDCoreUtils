@@ -32,7 +32,6 @@
 
 #include <sys/types.h>
 #include <sys/ioctl.h>
-#include <sys/ttydefaults.h>
 
 #include <err.h>
 #include <errno.h>
@@ -47,9 +46,7 @@
 
 #include "compat.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+__BEGIN_DECLS
 void	f_all(struct info *);
 void	f_cbreak(struct info *);
 void	f_columns(struct info *);
@@ -67,9 +64,7 @@ void	f_sane(struct info *);
 void	f_size(struct info *);
 void	f_speed(struct info *);
 void	f_tty(struct info *);
-#ifdef __cplusplus
-}
-#endif
+__END_DECLS
 
 static struct key {
 	char *name;				/* name */

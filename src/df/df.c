@@ -346,7 +346,7 @@ prthuman(struct mntinfo *sfsp, unsigned long long used)
 static void
 prtstat(struct mntinfo *sfsp, int maxwidth, int headerlen, int blocksize)
 {
-	uint64_t used, inodes;
+	u_int64_t used, inodes;
 	int64_t availblks;
 
 	(void)printf("%-*.*s", maxwidth, maxwidth, sfsp->f_mntfromname);

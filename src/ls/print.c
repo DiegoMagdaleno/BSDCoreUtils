@@ -1,4 +1,4 @@
-/*	$OpenBSD: print.c,v 1.38 2019/02/05 02:17:32 deraadt Exp $	*/
+/*	$OpenBSD: print.c,v 1.39 2020/10/07 21:03:09 millert Exp $	*/
 /*	$NetBSD: print.c,v 1.15 1996/12/11 03:25:39 thorpej Exp $	*/
 
 /*
@@ -91,7 +91,8 @@ printlong(DISPLAY *dp)
 	NAMES *np;
 	char buf[20];
 
-	if (dp->list->fts_level != FTS_ROOTLEVEL && (f_longform || f_size))
+	if ((dp->list == NULL || dp->list->fts_level != FTS_ROOTLEVEL) &&
+	    (f_longform || f_size))
 		(void)printf("total %llu\n", howmany(dp->btotal, blocksize));
 
 	for (p = dp->list; p; p = p->fts_link) {
@@ -202,7 +203,8 @@ printcol(DISPLAY *dp)
 	if (num % numcols)
 		++numrows;
 
-	if (dp->list->fts_level != FTS_ROOTLEVEL && (f_longform || f_size))
+	if ((dp->list == NULL || dp->list->fts_level != FTS_ROOTLEVEL) &&
+	    (f_longform || f_size))
 		(void)printf("total %llu\n", howmany(dp->btotal, blocksize));
 	for (row = 0; row < numrows; ++row) {
 		for (base = row, col = 0;;) {
@@ -275,7 +277,8 @@ printacol(DISPLAY *dp)
 	if ( (colwidth = compute_columns(dp, &numcols)) == 0)
 		return;
 
-	if (dp->list->fts_level != FTS_ROOTLEVEL && (f_longform || f_size))
+	if ((dp->list == NULL || dp->list->fts_level != FTS_ROOTLEVEL) &&
+	    (f_longform || f_size))
 		(void)printf("total %llu\n", howmany(dp->btotal, blocksize));
 	col = 0;
 	for (p = dp->list; p; p = p->fts_link) {
