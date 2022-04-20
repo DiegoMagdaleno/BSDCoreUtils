@@ -43,6 +43,10 @@
 #include <unistd.h>
 #include <wchar.h>
 
+#ifndef u_long
+#include "compat.h"
+#endif
+
 /*
  * There's a structure per input file which encapsulates the state of the
  * file.  We repeatedly read lines from each file until we've read in all
