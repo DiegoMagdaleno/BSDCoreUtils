@@ -48,7 +48,7 @@
 #include "compat.h"
 
 int ischown, ischgrp, ischmod;
-extern char *__progname;
+extern const char *__progname;
 
 gid_t a_gid(const char *);
 uid_t a_uid(const char *, int);
