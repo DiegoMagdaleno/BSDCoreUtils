@@ -76,11 +76,11 @@ typedef unsigned long u_long;
 
 /* Primarly musl... */
 #ifndef u_long
-typedef unsigned long u_long
+typedef unsigned long u_long;
 #endif
 
 #ifndef u_int
-typedef unsigned int u_int
+typedef unsigned int u_int;
 #endif
 
 /* sys/stat.h */
