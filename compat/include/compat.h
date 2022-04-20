@@ -20,6 +20,7 @@
 #include <windows.h>
 #endif
 
+
 /*
  * Reference from Apple's archived OS X (now macOS documentation)
  * we need to import this else we are going to get a "declaration expected at
@@ -42,6 +43,14 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <unistd.h>
+#endif
+
+
+//! Fix a warning that complains about extern declarations
+#ifdef HAVE___PROGNAME
+extern const char *__progname;
+#else
+extern const char *__progname;
 #endif
 
 // Use whereami library

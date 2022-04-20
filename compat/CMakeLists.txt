@@ -33,7 +33,6 @@ add_library(
         ${CompatBase}
 )
 
-message("${CMAKE_SOURCE_DIR}/libwhereami/src")
 target_link_libraries(compat PRIVATE whereami)
 target_include_directories(compat PRIVATE "${CMAKE_SOURCE_DIR}/libwhereami/src")
 target_include_directories(compat PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include")

@@ -8,10 +8,8 @@
 #define LIBCOMPAT_IS_PATHNAME_SEPARATOR(c) ((c) == '/')
 #endif
 
-#ifdef HAVE___PROGNAME
-extern const char *__progname;
-#else
-extern const char *__progname = NULL;
+#ifndef HAVE___PROGNAME
+const char *__progname = NULL;
 #endif
 
 const char*
