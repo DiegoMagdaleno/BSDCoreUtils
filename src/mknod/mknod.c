@@ -33,7 +33,7 @@
 
 #include "compat.h"
 
-extern char *__progname;
+extern const char *__progname;
 
 struct node {
 	const char *name;

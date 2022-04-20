@@ -51,7 +51,7 @@
 
 #include "compat.h"
 
-extern char *__progname;
+extern const char *__progname;
 
 /* combining data from getmntent() and statvfs() on Linux */
 struct mntinfo {

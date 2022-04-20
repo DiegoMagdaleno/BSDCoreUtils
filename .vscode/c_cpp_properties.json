@@ -10,7 +10,9 @@
                 "${default}",
                 "${workspaceFolder}/compat/src",
                 "${workspaceFolder}/win2posix/src",
-                "${workspaceFolder}/libcompleteme/src"
+                "${workspaceFolder}/libcompleteme/src",
+                "${workspaceFolder}/compat/include",
+                "${workspaceFolder}/libwhereami/src"
             ]
         }
     ],

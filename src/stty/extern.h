@@ -32,7 +32,7 @@
  *	@(#)extern.h	8.1 (Berkeley) 5/31/93
  */
 
-extern char *__progname;
+extern const char *__progname;
 
 int	c_cchars(const void *, const void *);
 int	c_modes(const void *, const void *);

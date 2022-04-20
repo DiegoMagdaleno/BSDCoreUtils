@@ -53,11 +53,6 @@ main(int argc, char *argv[])
 	struct utmp utmp;
 	int ch;
 
-	if (unveil(_PATH_UTMP, "r") == -1)
-		err(1, "unveil %s", _PATH_UTMP);
-	if (pledge("stdio rpath", NULL) == -1)
-		err(1, "pledge");
-
 	while ((ch = getopt(argc, argv, "")) != -1)
 		switch(ch) {
 		case '?':

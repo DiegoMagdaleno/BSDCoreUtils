@@ -162,7 +162,7 @@ bad:
 static void
 usage(void)
 {
-	extern char *__progname;
+	extern const char *__progname;
 	fprintf (stderr, "usage: %s [-t tablist] [file ...]\n", __progname);
 	exit(1);
 }

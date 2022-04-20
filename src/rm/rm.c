@@ -52,7 +52,7 @@
 
 #define MAXIMUM(a, b)	(((a) > (b)) ? (a) : (b))
 
-extern char *__progname;
+extern const char *__progname;
 
 int dflag, eval, fflag, iflag, Pflag, vflag, stdin_ok;
 

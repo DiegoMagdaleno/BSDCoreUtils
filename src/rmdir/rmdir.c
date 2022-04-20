@@ -37,7 +37,7 @@
 #include <string.h>
 #include <unistd.h>
 
-extern char *__progname;
+extern const char *__progname;
 
 int rm_path(char *);
 static void usage(void);

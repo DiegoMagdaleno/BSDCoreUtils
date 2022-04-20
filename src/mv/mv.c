@@ -52,7 +52,7 @@
 
 #include "compat.h"
 
-extern char *__progname;
+extern const char *__progname;
 
 int fflg, iflg, vflg;
 int stdin_ok;

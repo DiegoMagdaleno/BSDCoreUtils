@@ -308,7 +308,7 @@ newfile(void)
 void
 usage(void)
 {
-	extern char *__progname;
+	extern const char *__progname;
 
 	(void)fprintf(stderr, "usage: %s [-a suffix_length]\n"
 	    "             [-b byte_count[k|m] | -l line_count | -p pattern] "

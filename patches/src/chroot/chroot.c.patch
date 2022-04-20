@@ -73,7 +73,7 @@
  	}
 @@ -142,7 +118,7 @@
  {
- 	extern char *__progname;
+ 	extern const char *__progname;
  
 -	(void)fprintf(stderr, "usage: %s [-g group,group,...] [-u user] "
 +	(void)fprintf(stderr, "usage: %s [-g group,group,...] "

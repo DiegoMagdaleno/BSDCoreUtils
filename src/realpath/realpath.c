@@ -37,7 +37,7 @@
 #include <unistd.h>
 
 static void usage(void);
-extern char *__progname;
+extern const char *__progname;
 
 int
 main(int argc, char *argv[])

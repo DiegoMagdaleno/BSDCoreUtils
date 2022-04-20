@@ -6,7 +6,7 @@
  
 +#include "compat.h"
 +
- extern char *__progname;
+ extern const char *__progname;
  
  int	mkpath(char *, mode_t, mode_t);
 @@ -79,11 +81,6 @@

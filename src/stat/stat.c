@@ -148,7 +148,7 @@ char *timefmt;
 		(*nl) = ((c) == '\n'); \
 	} while (0/*CONSTCOND*/)
 
-extern char *__progname;
+extern const char *__progname;
 
 int
 main(int argc, char *argv[])

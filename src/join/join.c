@@ -618,7 +618,7 @@ void
 usage(void)
 {
 	int len;
-	extern char *__progname;
+	extern const char *__progname;
 
 	len = strlen(__progname) + sizeof("usage: ");
 	(void)fprintf(stderr, "usage: %s [-1 field] [-2 field] "

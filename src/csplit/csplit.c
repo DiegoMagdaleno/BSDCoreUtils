@@ -208,7 +208,7 @@ main(int argc, char *argv[])
 static void
 usage(void)
 {
-	extern char *__progname;
+	extern const char *__progname;
 
 	fprintf(stderr,
 	    "usage: %s [-ks] [-f prefix] [-n number] file args ...\n",

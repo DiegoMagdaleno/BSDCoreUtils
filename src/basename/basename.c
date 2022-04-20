@@ -86,7 +86,7 @@ main(int argc, char *argv[])
 	return 0;
 }
 
-extern char *__progname;
+extern const char *__progname;
 
 static void
 usage(void)
