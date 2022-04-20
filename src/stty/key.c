@@ -46,7 +46,9 @@
 
 #include "compat.h"
 
-__BEGIN_DECLS
+#ifdef __cplusplus
+extern "C" {
+#endif
 void	f_all(struct info *);
 void	f_cbreak(struct info *);
 void	f_columns(struct info *);
@@ -64,7 +66,9 @@ void	f_sane(struct info *);
 void	f_size(struct info *);
 void	f_speed(struct info *);
 void	f_tty(struct info *);
-__END_DECLS
+#ifdef __cplusplus
+}
+#endif
 
 static struct key {
 	char *name;				/* name */
