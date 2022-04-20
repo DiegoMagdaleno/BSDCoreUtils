@@ -74,6 +74,15 @@ typedef unsigned long u_long;
 #pragma pop_macro("u_long")
 #endif
 
+/* Primarly musl... */
+#ifndef u_long
+typedef unsigned long u_long
+#endif
+
+#ifndef u_int
+typedef unsigned int u_int
+#endif
+
 /* sys/stat.h */
 #if defined __MINGW32__|| defined _MSC_VER
 #define S_ISUID 04000
