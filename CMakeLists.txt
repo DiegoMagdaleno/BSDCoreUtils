@@ -38,6 +38,7 @@ endif()
 
 set(PROGRAM_PREFIX "" CACHE STRING "Sets the command prefix to avoid conflicts")
 
+add_subdirectory(libwhereami)
 add_subdirectory(compat)
 if (WIN32)
 add_subdirectory(libcompleteme)
