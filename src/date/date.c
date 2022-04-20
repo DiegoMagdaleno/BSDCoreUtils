@@ -235,16 +235,10 @@ setthetime(char *p, const char *pformat)
 		if (adjtime(&tv, NULL) == -1)
 			err(1, "adjtime");
 	} else {
-#ifndef SMALL
-		logwtmp("|", "date", "");
-#endif
 		tv.tv_sec = tval;
 		tv.tv_usec = 0;
 		if (settimeofday(&tv, NULL))
 			err(1, "settimeofday");
-#ifndef SMALL
-		logwtmp("{", "date", "");
-#endif
 	}
 
 	if ((p = getlogin()) == NULL)
