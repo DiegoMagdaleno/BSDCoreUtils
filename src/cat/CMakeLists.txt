@@ -1,6 +1,8 @@
 
 add_executable(cat cat.c)
 
+target_link_libraries(cat PRIVATE compat)
+
 INSTALL(TARGETS cat DESTINATION ${CMAKE_INSTALL_BINDIR})
 
 if (WIN32)
