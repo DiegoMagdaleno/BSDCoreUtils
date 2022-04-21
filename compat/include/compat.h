@@ -54,7 +54,7 @@ extern const char *__progname;
 #endif
 
 // Use whereami library
-#ifdef __linux__
+#ifdef USE_LIBWHEREAMI
 #include "whereami.h"
 #define IS_USING_WHEREAMI_LIBRARY
 void setprogname(const char *progname);
