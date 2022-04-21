@@ -37,10 +37,15 @@ if (WIN32)
 endif()
 
 set(PROGRAM_PREFIX "" CACHE STRING "Sets the command prefix to avoid conflicts")
+OPTION(USE_LIBWHEREAMI "Use libwhereami in order to reimplement some BSD functions, only recommended on Linux" OFF)
 
-add_subdirectory(libwhereami)
-# TODO: This is wrong
-include_directories("${CMAKE_SOURCE_DIR}/libwhereami/src")
+
+if(USE_LIBWHEREAMI)
+    add_subdirectory(libwhereami)
+    # TODO: This is wrong
+    include_directories("${CMAKE_SOURCE_DIR}/libwhereami/src")
+    add_compile_definitions(USE_LIBWHEREAMI)
+endif()
 add_subdirectory(compat)
 if (WIN32)
 add_subdirectory(libcompleteme)
