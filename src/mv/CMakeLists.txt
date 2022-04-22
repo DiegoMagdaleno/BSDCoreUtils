@@ -3,9 +3,8 @@ add_executable(mv mv.c rm.c cp.c)
 
 target_link_libraries(mv PRIVATE compat)
 
-# TODO: Make this target local only
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Darwin")
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D_DARWIN_SOURCE")
+    target_compile_definitions(mv PRIVATE -D_DARWIN_SOURCE)
 endif()
 
 if ( FTS_FOUND )

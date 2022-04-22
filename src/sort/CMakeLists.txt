@@ -15,8 +15,7 @@ if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
     target_link_libraries(sort PRIVATE pthread)
 endif()
 
-# TODO: Make this target local only
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D_GNU_SOURCE")
+target_compile_definitions(sort PRIVATE -D_GNU_SOURCE)
 
 INSTALL(TARGETS sort DESTINATION ${CMAKE_INSTALL_BINDIR})
 if(PROGRAM_PREFIX)

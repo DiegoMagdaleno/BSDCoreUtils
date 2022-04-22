@@ -3,8 +3,7 @@ add_executable(expr expr.c)
 
 target_link_libraries(expr PRIVATE compat)
 
-# TODO: Make this target only
-SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D_GNU_SOURCE")
+target_compile_definitions(expr PRIVATE -D_GNU_SOURCE)
 
 INSTALL(TARGETS expr DESTINATION ${CMAKE_INSTALL_BINDIR})
 

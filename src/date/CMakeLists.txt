@@ -4,8 +4,8 @@ add_executable(date date.c)
 target_link_libraries(date PRIVATE compat)
 target_link_libraries(date PRIVATE util)
 
-# TODO: Only do it for this target
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D_DEFAULT_SOURCE -D_XOPEN_SOURCE")
+target_compile_definitions(date PRIVATE -D_DEFAULT_SOURCE)
+target_compile_definitions(date PRIVATE -D_XOPEN_SOURCE)
 
 INSTALL(TARGETS date DESTINATION ${CMAKE_INSTALL_BINDIR})
 if(PROGRAM_PREFIX)

@@ -3,8 +3,7 @@ add_executable(nl nl.c)
 
 target_link_libraries(nl PRIVATE compat)
 
-# TODO: Make this target local only
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D_GNU_SOURCE")
+target_compile_definitions(nl PRIVATE -D_GNU_SOURCE)
 
 INSTALL(TARGETS nl DESTINATION ${CMAKE_INSTALL_BINDIR})
 

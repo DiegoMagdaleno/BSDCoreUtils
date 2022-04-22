@@ -3,13 +3,12 @@ add_executable(fold fold.c)
 
 target_link_libraries(fold PRIVATE compat)
 
-# TODO: Make this target local only
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D_XOPEN_SOURCE")
+target_compile_definitions(fold PRIVATE -D_XOPEN_SOURCE)
 
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D_GNU_SOURCE")
+    target_compile_definitions(fold PRIVATE -D_GNU_SOURCE)
 else()
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D_DEFAULT_SOURCE")
+    target_compile_definitions(fold PRIVATE -D_DEFAULT_SOURCE)
 endif()
 
 INSTALL(TARGETS fold DESTINATION ${CMAKE_INSTALL_BINDIR})

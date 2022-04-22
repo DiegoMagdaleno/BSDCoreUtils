@@ -1,10 +1,9 @@
 
 add_executable(comm comm.c)
 
-# TODO: Make this target local only
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
     target_link_libraries(comm PRIVATE compat)
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D__USE_POSIX2")
+    target_compile_definitions(comm PRIVATE -D__USE_POSIX2)
 endif()
 
 INSTALL(TARGETS comm DESTINATION ${CMAKE_INSTALL_BINDIR})

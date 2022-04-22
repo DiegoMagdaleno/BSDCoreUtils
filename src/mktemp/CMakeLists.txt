@@ -1,8 +1,7 @@
 
 add_executable(mktemp mktemp.c)
 
-# TODO: Make this target local only
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D_GNU_SOURCE")
+target_compile_definitions(mktemp PRIVATE -D_GNU_SOURCE)
 
 INSTALL(TARGETS mktemp DESTINATION ${CMAKE_INSTALL_BINDIR})
 
