@@ -36,7 +36,7 @@ if (WIN32)
     find_package(OpenSSL REQUIRED)
 endif()
 
-set(PROGRAM_PREFIX "" CACHE STRING "Sets the command prefix to avoid conflicts")
+set(PROGRAM_PREFIX "" CACHE STRING "Add a prefix to each executable, useful in order to prevent conflicts with default coreutils")
 OPTION(USE_LIBWHEREAMI "Use libwhereami in order to reimplement some BSD functions, only recommended on Linux" OFF)
 
 

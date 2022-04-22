@@ -8,6 +8,7 @@ target_link_libraries(chmod PRIVATE ${OPTLIBS})
 endif()
 
 INSTALL(TARGETS chmod DESTINATION ${CMAKE_INSTALL_BINDIR})
+set_target_properties(chmod PROPERTIES PREFIX ${PROGRAM_PREFIX})
 
 
 install_symlink(${CMAKE_INSTALL_PREFIX}/bin/chmod ${CMAKE_INSTALL_PREFIX}/bin/chgrp)

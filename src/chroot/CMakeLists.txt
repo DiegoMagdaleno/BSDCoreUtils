@@ -2,6 +2,7 @@
 add_executable(chroot chroot.c)
 
 INSTALL(TARGETS chroot DESTINATION ${CMAKE_INSTALL_SBINDIR})
+set_target_properties(chroot PROPERTIES PREFIX ${PROGRAM_PREFIX})
 
 FILE(GLOB MAN8_FILES *.8)
 IF(MAN8_FILES)

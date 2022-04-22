@@ -2,6 +2,7 @@
 add_executable(sleep sleep.c)
 
 INSTALL(TARGETS sleep DESTINATION ${CMAKE_INSTALL_BINDIR})
+set_target_properties(sleep PROPERTIES PREFIX ${PROGRAM_PREFIX})
 
 FILE(GLOB MAN1_FILES *.1)
 IF(MAN1_FILES)

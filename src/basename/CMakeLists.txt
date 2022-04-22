@@ -2,6 +2,7 @@
 add_executable(basename basename.c)
 
 INSTALL(TARGETS basename DESTINATION ${CMAKE_INSTALL_BINDIR})
+set_target_properties(basename PROPERTIES PREFIX ${PROGRAM_PREFIX})
 
 if(WIN32)
 target_link_libraries(basename PRIVATE compat)

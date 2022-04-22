@@ -4,6 +4,7 @@ add_executable(head head.c)
 target_link_libraries(head PRIVATE compat)
 
 INSTALL(TARGETS head DESTINATION ${CMAKE_INSTALL_BINDIR})
+set_target_properties(head PROPERTIES PREFIX ${PROGRAM_PREFIX})
 
 FILE(GLOB MAN1_FILES *.1)
 IF(MAN1_FILES)

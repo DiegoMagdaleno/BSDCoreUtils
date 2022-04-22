@@ -2,6 +2,7 @@
 add_executable(realpath realpath.c)
 
 INSTALL(TARGETS realpath DESTINATION ${CMAKE_INSTALL_BINDIR})
+set_target_properties(realpath PROPERTIES PREFIX ${PROGRAM_PREFIX})
 
 FILE(GLOB MAN1_FILES *.1)
 IF(MAN1_FILES)

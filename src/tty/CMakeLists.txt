@@ -2,6 +2,7 @@
 add_executable(tty tty.c)
 
 INSTALL(TARGETS tty DESTINATION ${CMAKE_INSTALL_BINDIR})
+set_target_properties(tty PROPERTIES PREFIX ${PROGRAM_PREFIX})
 
 FILE(GLOB MAN1_FILES *.1)
 IF(MAN1_FILES)

@@ -3,11 +3,13 @@ add_executable(users users.c)
 
 target_link_libraries(users PRIVATE compat)
 
+# TOOO: Make this target local only
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D_GNU_SOURCE")
 endif()
 
 INSTALL(TARGETS users DESTINATION ${CMAKE_INSTALL_BINDIR})
+set_target_properties(users PROPERTIES PREFIX ${PROGRAM_PREFIX})
 
 FILE(GLOB MAN1_FILES *.1)
 IF(MAN1_FILES)

@@ -4,6 +4,7 @@ add_executable(logname logname.c)
 target_link_libraries(logname PRIVATE compat)
 
 INSTALL(TARGETS logname DESTINATION ${CMAKE_INSTALL_BINDIR})
+set_target_properties(logname PROPERTIES PREFIX ${PROGRAM_PREFIX})
 
 FILE(GLOB MAN1_FILES *.1)
 IF(MAN1_FILES)

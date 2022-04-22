@@ -2,6 +2,7 @@
 add_executable(printenv printenv.c)
 
 INSTALL(TARGETS printenv DESTINATION ${CMAKE_INSTALL_BINDIR})
+set_target_properties(printenv PROPERTIES PREFIX ${PROGRAM_PREFIX})
 
 FILE(GLOB MAN1_FILES *.1)
 IF(MAN1_FILES)

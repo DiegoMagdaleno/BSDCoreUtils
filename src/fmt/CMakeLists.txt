@@ -3,6 +3,7 @@ add_executable(fmt fmt.c)
 
 target_link_libraries(fmt PRIVATE compat)
 
+# Make all of this target local
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D_XOPEN_SOURCE")
 
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
@@ -12,6 +13,7 @@ else()
 endif()
 
 INSTALL(TARGETS fmt DESTINATION ${CMAKE_INSTALL_BINDIR})
+set_target_properties(fmt PROPERTIES PREFIX ${PROGRAM_PREFIX})
 
 FILE(GLOB MAN1_FILES *.1)
 IF(MAN1_FILES)

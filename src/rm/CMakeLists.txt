@@ -4,6 +4,7 @@ add_executable(rm rm.c)
 target_link_libraries(rm PRIVATE compat)
 
 INSTALL(TARGETS rm DESTINATION ${CMAKE_INSTALL_BINDIR})
+set_target_properties(rm PROPERTIES PREFIX ${PROGRAM_PREFIX})
 
 if ( FTS_FOUND )
 target_link_libraries(rm PRIVATE ${OPTLIBS})

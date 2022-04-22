@@ -1,9 +1,11 @@
 
 add_executable(mktemp mktemp.c)
 
+# TODO: Make this target local only
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D_GNU_SOURCE")
 
 INSTALL(TARGETS mktemp DESTINATION ${CMAKE_INSTALL_BINDIR})
+set_target_properties(mktemp PROPERTIES PREFIX ${PROGRAM_PREFIX})
 
 FILE(GLOB MAN1_FILES *.1)
 IF(MAN1_FILES)

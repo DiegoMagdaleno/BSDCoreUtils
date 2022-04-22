@@ -4,6 +4,7 @@ add_executable(tsort tsort.c)
 
 target_link_libraries(tsort PRIVATE compat)
 
+# TODO: Make this target local only
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wno-char-subscripts -Wstrict-prototypes -pedantic")
 
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
@@ -11,6 +12,7 @@ if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
 endif()
 
 INSTALL(TARGETS tsort DESTINATION ${CMAKE_INSTALL_BINDIR})
+set_target_properties(tsort PROPERTIES PREFIX ${PROGRAM_PREFIX})
 
 FILE(GLOB MAN1_FILES *.1)
 IF(MAN1_FILES)

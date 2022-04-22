@@ -6,6 +6,7 @@ target_link_libraries(cat PRIVATE compat)
 endif()
 
 INSTALL(TARGETS cat DESTINATION ${CMAKE_INSTALL_BINDIR})
+set_target_properties(cat PROPERTIES PREFIX ${PROGRAM_PREFIX})
 
 if (WIN32)
 target_link_libraries(cat PRIVATE win2posix)
