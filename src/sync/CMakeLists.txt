@@ -2,7 +2,10 @@
 add_executable(sync sync.c)
 
 INSTALL(TARGETS sync DESTINATION ${CMAKE_INSTALL_BINDIR})
+
+if(PROGRAM_PREFIX)
 set_target_properties(sync PROPERTIES PREFIX ${PROGRAM_PREFIX})
+endif()
 
 FILE(GLOB MAN8_FILES *.8)
 IF(MAN8_FILES)

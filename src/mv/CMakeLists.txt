@@ -13,7 +13,10 @@ target_link_libraries(mv PRIVATE ${OPTLIBS})
 endif()
 
 INSTALL(TARGETS mv DESTINATION ${CMAKE_INSTALL_BINDIR})
+
+if(PROGRAM_PREFIX)
 set_target_properties(mv PROPERTIES PREFIX ${PROGRAM_PREFIX})
+endif()
 
 FILE(GLOB MAN1_FILES *.1)
 IF(MAN1_FILES)

@@ -4,7 +4,10 @@ add_executable(split split.c)
 target_link_libraries(split PRIVATE compat)
 
 INSTALL(TARGETS split DESTINATION ${CMAKE_INSTALL_BINDIR})
+
+if(PROGRAM_PREFIX)
 set_target_properties(split PROPERTIES PREFIX ${PROGRAM_PREFIX})
+endif()
 
 FILE(GLOB MAN1_FILES *.1)
 IF(MAN1_FILES)

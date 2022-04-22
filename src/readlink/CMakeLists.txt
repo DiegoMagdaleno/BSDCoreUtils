@@ -2,7 +2,10 @@
 add_executable(readlink readlink.c)
 
 INSTALL(TARGETS readlink DESTINATION ${CMAKE_INSTALL_BINDIR})
+
+if(PROGRAM_PREFIX)
 set_target_properties(readlink PROPERTIES PREFIX ${PROGRAM_PREFIX})
+endif()
 
 FILE(GLOB MAN1_FILES *.1)
 IF(MAN1_FILES)

@@ -9,7 +9,10 @@ if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
 endif()
 
 INSTALL(TARGETS mknod DESTINATION ${CMAKE_INSTALL_BINDIR})
+
+if(PROGRAM_PREFIX)
 set_target_properties(mknod PROPERTIES PREFIX ${PROGRAM_PREFIX})
+endif()
 
 install_symlink(${CMAKE_INSTALL_PREFIX}/bin/mknod ${CMAKE_INSTALL_PREFIX}/bin/mkfifo)
 

@@ -2,7 +2,10 @@
 add_executable(pwd pwd.c)
 
 INSTALL(TARGETS pwd DESTINATION ${CMAKE_INSTALL_BINDIR})
+
+if(PROGRAM_PREFIX)
 set_target_properties(pwd PROPERTIES PREFIX ${PROGRAM_PREFIX})
+endif()
 
 FILE(GLOB MAN1_FILES *.1)
 IF(MAN1_FILES)

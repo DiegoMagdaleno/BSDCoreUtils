@@ -4,7 +4,10 @@ add_executable(xargs xargs.c strnsubst.c)
 target_link_libraries(xargs PRIVATE compat)
 
 INSTALL(TARGETS xargs DESTINATION ${CMAKE_INSTALL_BINDIR})
+
+if(PROGRAM_PREFIX)
 set_target_properties(xargs PROPERTIES PREFIX ${PROGRAM_PREFIX})
+endif()
 
 FILE(GLOB MAN1_FILES *.1)
 IF(MAN1_FILES)

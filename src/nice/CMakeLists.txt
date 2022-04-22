@@ -4,7 +4,10 @@ add_executable(nice nice.c)
 target_link_libraries(nice PRIVATE compat)
 
 INSTALL(TARGETS nice DESTINATION ${CMAKE_INSTALL_BINDIR})
+
+if(PROGRAM_PREFIX)
 set_target_properties(nice PROPERTIES PREFIX ${PROGRAM_PREFIX})
+endif()
 
 FILE(GLOB MAN1_FILES *.1)
 IF(MAN1_FILES)

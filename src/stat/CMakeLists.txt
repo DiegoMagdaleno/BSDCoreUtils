@@ -4,7 +4,10 @@ add_executable(stat stat.c)
 target_link_libraries(stat PRIVATE compat)
 
 INSTALL(TARGETS stat DESTINATION ${CMAKE_INSTALL_BINDIR})
+
+if(PROGRAM_PREFIX)
 set_target_properties(stat PROPERTIES PREFIX ${PROGRAM_PREFIX})
+endif()
 
 FILE(GLOB MAN1_FILES *.1)
 IF(MAN1_FILES)

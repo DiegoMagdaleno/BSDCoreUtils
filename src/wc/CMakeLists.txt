@@ -4,7 +4,10 @@ add_executable(wc wc.c)
 target_link_libraries(wc PRIVATE compat)
 
 INSTALL(TARGETS wc DESTINATION ${CMAKE_INSTALL_BINDIR})
+
+if(PROGRAM_PREFIX)
 set_target_properties(wc PROPERTIES PREFIX ${PROGRAM_PREFIX})
+endif()
 
 FILE(GLOB MAN1_FILES *.1)
 IF(MAN1_FILES)

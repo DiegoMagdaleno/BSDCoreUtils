@@ -4,7 +4,10 @@ add_executable(nohup nohup.c)
 target_link_libraries(nohup PRIVATE compat)
 
 INSTALL(TARGETS nohup DESTINATION ${CMAKE_INSTALL_BINDIR})
+
+if(PROGRAM_PREFIX)
 set_target_properties(nohup PROPERTIES PREFIX ${PROGRAM_PREFIX})
+endif()
 
 FILE(GLOB MAN1_FILES *.1)
 IF(MAN1_FILES)

@@ -2,7 +2,10 @@
 add_executable(pathchk pathchk.c)
 
 INSTALL(TARGETS pathchk DESTINATION ${CMAKE_INSTALL_BINDIR})
+
+if(PROGRAM_PREFIX)
 set_target_properties(pathchk PROPERTIES PREFIX ${PROGRAM_PREFIX})
+endif()
 
 FILE(GLOB MAN1_FILES *.1)
 IF(MAN1_FILES)

@@ -7,7 +7,10 @@ target_link_libraries(du PRIVATE ${OPTLIBS})
 endif()
 
 INSTALL(TARGETS du DESTINATION ${CMAKE_INSTALL_BINDIR})
+
+if(PROGRAM_PREFIX)
 set_target_properties(du PROPERTIES PREFIX ${PROGRAM_PREFIX})
+endif()
 
 FILE(GLOB MAN1_FILES *.1)
 IF(MAN1_FILES)
