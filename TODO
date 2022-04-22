@@ -36,8 +36,11 @@
 - Update import-src.sh to be able to import new versions and overlay them
   in the source tree so the tree can try to keep up with upstream.
 
+- FIXME:
+      - df claims "permission denied" on statvfs, probably because of docker file systems? Maybe we should skip the
+      - entries we get permission denied on, regardless, GNU's df does not list Docker volumes
+
 - The following utilities don't have CMakeFiles and dont build:
-      - df
       - tail
 
 - Make a ORIGIN file, that says where did we get each port from

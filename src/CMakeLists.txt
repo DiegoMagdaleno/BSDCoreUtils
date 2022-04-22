@@ -12,6 +12,7 @@ list(APPEND crossCompatibleBins
         cut
         date
         dd
+        df
         dirname
         du
         echo

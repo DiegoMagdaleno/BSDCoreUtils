@@ -40,9 +40,10 @@
 
 #include <sys/types.h>
 #include <sys/mount.h>
-#include <ufs/ext2fs/ext2fs.h>
-#include <ufs/ext2fs/ext2fs_dinode.h>
 #include <string.h>
+#ifdef __linux__
+#include <sys/vfs.h>
+#endif
 
 int		e2fs_df(int, char *, struct statfs *);
 
