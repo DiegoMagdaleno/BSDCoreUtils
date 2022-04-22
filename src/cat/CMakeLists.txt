@@ -1,7 +1,9 @@
 
 add_executable(cat cat.c)
 
+if(USE_LIBWHEREAMI)
 target_link_libraries(cat PRIVATE compat)
+endif()
 
 INSTALL(TARGETS cat DESTINATION ${CMAKE_INSTALL_BINDIR})
 

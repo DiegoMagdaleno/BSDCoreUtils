@@ -62,7 +62,12 @@
 #include <libgen.h>
 
 #include "primes.h"
+// Including it in case of musl won't hurt...
 #include "compat.h"
+
+#ifndef USE_LIBWHEREAMI
+extern const char* __progname;
+#endif
 
 /*
  * prime[i] is the (i+1)th prime.
@@ -304,6 +309,10 @@ usqrt(u_int64_t n)
 static void
 usage(void)
 {
+	#ifdef USE_LIBWHEREAMI
 	(void)fprintf(stderr, "usage: %s [number ...]\n", getprogname());
+	#else
+	(void)fprintf(stderr, "usage: %s [number ...]\n", __progname);
+	#endif
 	exit (1);
 }
