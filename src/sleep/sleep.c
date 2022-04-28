@@ -41,7 +41,7 @@
 #include <unistd.h>
 #include <string.h>
 
-extern char *__progname;
+extern const char *__progname;
 
 void alarmh(int);
 void usage(void);

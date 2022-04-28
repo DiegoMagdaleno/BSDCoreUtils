@@ -191,7 +191,7 @@ linkit(char *target, char *source, int isdir)
 void
 usage(void)
 {
-	extern char *__progname;
+	extern const char *__progname;
 
 	(void)fprintf(stderr,
 	    "usage: %s [-fhLnPs] source [target]\n"

@@ -714,7 +714,7 @@ xreallocarray(void *ptr, size_t nmemb, size_t size)
 void
 usage(void)
 {
-	extern char *__progname;
+	extern const char *__progname;
 
 	fprintf(stderr,
 		"usage: %s [-cmnps] [-d chars] [-l number] [-t number]\n"

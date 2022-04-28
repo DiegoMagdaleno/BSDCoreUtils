@@ -93,7 +93,7 @@ main(int argc, char *argv[])
 static void
 usage(void)
 {
-	extern char *__progname;
+	extern const char *__progname;
 	fprintf(stderr, "usage: %s [-n increment] utility [argument ...]\n",
 	    __progname);
 	exit(1);

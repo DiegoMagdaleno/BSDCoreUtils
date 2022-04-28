@@ -3,9 +3,13 @@ add_executable(nl nl.c)
 
 target_link_libraries(nl PRIVATE compat)
 
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D_GNU_SOURCE")
+target_compile_definitions(nl PRIVATE -D_GNU_SOURCE)
 
 INSTALL(TARGETS nl DESTINATION ${CMAKE_INSTALL_BINDIR})
+
+if(PROGRAM_PREFIX)
+set_target_properties(nl PROPERTIES PREFIX ${PROGRAM_PREFIX})
+endif()
 
 FILE(GLOB MAN1_FILES *.1)
 IF(MAN1_FILES)

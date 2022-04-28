@@ -36,8 +36,6 @@
 
 #include <sys/types.h>
 #include <sys/mount.h>
-#include <ufs/ffs/fs.h>
-#include <ufs/ufs/dinode.h>
 
 #include <string.h>
 

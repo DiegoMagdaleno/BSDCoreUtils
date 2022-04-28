@@ -37,7 +37,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-extern char *__progname;
+extern const char *__progname;
 static char *getcwd_logical(void);
 static void usage(void);
 

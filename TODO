@@ -1,4 +1,4 @@
-- The following programs in coreutils are not found in the OpenBSD source tree:
+- The following programs in coreutils are missing from our source tree:
 
       b2sum
       base32
@@ -9,7 +9,6 @@
       md5sum
       numfmt
       ptx
-      realpath
       runcon
       seq
       sha1sum
@@ -28,7 +27,7 @@
 - FIXME Darwin: 
       - Join doesn't build (I don't know what it lacks, but however I am fixing it)
 
-- Maybe incorporate find and xargs in to the tree.
+- Maybe incorporate find in to the tree.
 
 - Maybe incorporate bc and dc in to the tree.
 
@@ -36,3 +35,12 @@
 
 - Update import-src.sh to be able to import new versions and overlay them
   in the source tree so the tree can try to keep up with upstream.
+
+- FIXME:
+      - df claims "permission denied" on statvfs, probably because of docker file systems? Maybe we should skip the
+      - entries we get permission denied on, regardless, GNU's df does not list Docker volumes
+
+- The following utilities don't have CMakeFiles and dont build:
+      - tail
+
+- Make a ORIGIN file, that says where did we get each port from

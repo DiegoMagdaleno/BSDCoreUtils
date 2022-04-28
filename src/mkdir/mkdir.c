@@ -42,7 +42,7 @@
 
 #include "compat.h"
 
-extern char *__progname;
+extern const char *__progname;
 
 int	mkpath(char *, mode_t, mode_t);
 static void usage(void);

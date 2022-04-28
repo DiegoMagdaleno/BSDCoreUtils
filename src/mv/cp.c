@@ -83,7 +83,7 @@ static int     copy_special(struct stat *, int);
 static int     setfile(struct stat *, int);
 
 
-extern char *__progname;
+extern const char *__progname;
 
 static uid_t myuid;
 static int fflag, iflag;

@@ -86,7 +86,7 @@ main(int argc, char *argv[])
 static void
 usage(void)
 {
-	extern char *__progname;
+	extern const char *__progname;
 
 	(void)fprintf(stderr, "usage: %s [-i] [name=value ...] "
 	    "[utility [argument ...]]\n", __progname);

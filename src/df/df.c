@@ -49,9 +49,13 @@
 #include <mntent.h>
 #include <assert.h>
 
+#ifndef _PATH_MOUNTED // Primarly for musl...
+#include <paths.h>
+#endif
+
 #include "compat.h"
 
-extern char *__progname;
+extern const char *__progname;
 
 /* combining data from getmntent() and statvfs() on Linux */
 struct mntinfo {
@@ -346,7 +350,7 @@ prthuman(struct mntinfo *sfsp, unsigned long long used)
 static void
 prtstat(struct mntinfo *sfsp, int maxwidth, int headerlen, int blocksize)
 {
-	uint64_t used, inodes;
+	u_int64_t used, inodes;
 	int64_t availblks;
 
 	(void)printf("%-*.*s", maxwidth, maxwidth, sfsp->f_mntfromname);

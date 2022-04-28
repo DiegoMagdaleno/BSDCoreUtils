@@ -89,7 +89,7 @@ gread(struct termios *tp, char *s)
 			continue;
 		}
 		if (CHK("ispeed")) {
-			/* Thanks Microsoft!:  https://github.com/Microsoft/node-pty/issues/40 */
+			/* Thanks Microsoft: https://github.com/Microsoft/node-pty/issues/40 */
 			(void)sscanf(ep, "%ld", &tmp);
 			cfsetispeed(tp, tmp);
 			continue;

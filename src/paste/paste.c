@@ -240,7 +240,7 @@ tr(char *arg)
 void
 usage(void)
 {
-	extern char *__progname;
+	extern const char *__progname;
 	fprintf(stderr, "usage: %s [-s] [-d list] file ...\n", __progname);
 	exit(1);
 }

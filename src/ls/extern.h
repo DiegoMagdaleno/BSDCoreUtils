@@ -32,7 +32,7 @@
  *	@(#)extern.h	8.1 (Berkeley) 5/31/93
  */
 
-extern char *__progname;
+extern const char *__progname;
 
 int	 acccmp(const FTSENT *, const FTSENT *);
 int	 revacccmp(const FTSENT *, const FTSENT *);

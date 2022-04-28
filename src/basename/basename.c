@@ -30,25 +30,20 @@
  * SUCH DAMAGE.
  */
 
+#include <err.h>
 #include <libgen.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
 
-#ifdef __MINGW32__
-#include "compat.h"
-#endif
-
 static void usage(void);
-static const char *progname;
 
 int
 main(int argc, char *argv[])
 {
 	int ch;
 	char *p;
-	progname = argv[0];
 
 	while ((ch = getopt(argc, argv, "")) != -1) {
 		switch (ch) {
@@ -67,11 +62,8 @@ main(int argc, char *argv[])
 		return 0;
 	}
 	p = basename(*argv);
-	if (!p) {
-		fprintf(stderr, "%s", *argv);
-		return EXIT_FAILURE;
-	}
-
+	if (p == NULL)
+		err(1, "%s", *argv);
 	/*
 	 * If the suffix operand is present, is not identical to the
 	 * characters remaining in string, and is identical to a suffix
@@ -94,9 +86,12 @@ main(int argc, char *argv[])
 	return 0;
 }
 
+extern const char *__progname;
+
 static void
 usage(void)
 {
-	(void)fprintf(stderr, "usage: %s string [suffix]\n", progname);
+
+	(void)fprintf(stderr, "usage: %s string [suffix]\n", __progname);
 	exit(1);
 }

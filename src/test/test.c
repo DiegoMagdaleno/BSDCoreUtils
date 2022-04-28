@@ -160,7 +160,7 @@ static void syntax(const char *op, char *msg);
 int
 main(int argc, char *argv[])
 {
-	extern char *__progname;
+	extern const char *__progname;
 	int	res;
 
 	if (strcmp(__progname, "[") == 0) {

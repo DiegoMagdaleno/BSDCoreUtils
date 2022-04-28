@@ -10,8 +10,12 @@ list(APPEND CompatBase
         common/getbsize.c
         common/merge.c
         common/heapsort.c
-        common/recallocarray.c)
+        common/recallocarray.c
+)
 
+if(USE_LIBWHEREAMI)
+        list(APPEND CompatBase common/progname.c)
+endif()
 
 if (UNIX)
         list(APPEND CompatBase unix/devname.c )
@@ -32,4 +36,8 @@ add_library(
         ${CompatBase}
 )
 
+if(USE_LIBWHEREAMI)
+        target_link_libraries(compat PRIVATE whereami)
+        target_include_directories(compat PRIVATE "${CMAKE_SOURCE_DIR}/libwhereami/src")
+endif()
 target_include_directories(compat PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include")

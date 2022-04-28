@@ -19,7 +19,7 @@
  int
  main(int argc, char *argv[])
  {
--	extern char *__progname;
+-	extern const char *__progname;
 +	char *progname = basename(argv[0]);
  	int short_form = 0, c;
  	char *arch, *opts;

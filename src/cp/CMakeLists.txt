@@ -3,6 +3,10 @@ add_executable(cp cp.c utils.c)
 
 target_link_libraries(cp PRIVATE compat)
 
+if(PROGRAM_PREFIX)
+set_target_properties(cp PROPERTIES PREFIX ${PROGRAM_PREFIX})
+endif()
+
 INSTALL(TARGETS cp DESTINATION ${CMAKE_INSTALL_BINDIR})
 if (FTS_FOUND)
 target_link_libraries(cp PRIVATE ${OPTLIBS})

@@ -47,7 +47,7 @@
 int64_t	tlinect, twordct, tcharct;
 int	doline, doword, dochar, humanchar, multibyte;
 int	rval;
-extern char *__progname;
+extern const char *__progname;
 
 static void print_counts(int64_t, int64_t, int64_t, char *);
 static void format_and_print(int64_t);

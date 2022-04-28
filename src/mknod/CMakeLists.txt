@@ -4,10 +4,14 @@ add_executable(mknod mknod.c)
 target_link_libraries(mknod PRIVATE compat)
 
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D_GNU_SOURCE")
+    target_compile_definitions(mknod PRIVATE -D_GNU_SOURCE)
 endif()
 
 INSTALL(TARGETS mknod DESTINATION ${CMAKE_INSTALL_BINDIR})
+
+if(PROGRAM_PREFIX)
+set_target_properties(mknod PROPERTIES PREFIX ${PROGRAM_PREFIX})
+endif()
 
 install_symlink(${CMAKE_INSTALL_PREFIX}/bin/mknod ${CMAKE_INSTALL_PREFIX}/bin/mkfifo)
 

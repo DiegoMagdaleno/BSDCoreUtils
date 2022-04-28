@@ -14,7 +14,7 @@
  
 +#include "compat.h"
 +
- extern char *__progname;
+ extern const char *__progname;
  
  int fflg, iflg, vflg;
 @@ -224,14 +227,14 @@

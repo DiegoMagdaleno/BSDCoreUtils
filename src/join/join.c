@@ -33,7 +33,6 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/types.h>
 #include <err.h>
 #include <errno.h>
 #include <limits.h>
@@ -43,6 +42,10 @@
 #include <string.h>
 #include <unistd.h>
 #include <wchar.h>
+
+#ifndef u_long
+#include "compat.h"
+#endif
 
 /*
  * There's a structure per input file which encapsulates the state of the
@@ -619,7 +622,7 @@ void
 usage(void)
 {
 	int len;
-	extern char *__progname;
+	extern const char *__progname;
 
 	len = strlen(__progname) + sizeof("usage: ");
 	(void)fprintf(stderr, "usage: %s [-1 field] [-2 field] "

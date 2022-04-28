@@ -26,7 +26,7 @@
  
 +#include "compat.h"
 +
-+extern char *__progname;
++extern const char *__progname;
 +
  #ifdef GNUSORT_COMPATIBILITY
  # define PERMUTE	""

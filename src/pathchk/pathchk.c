@@ -52,7 +52,7 @@ static void	 usage(void);
 static int	 pflag;			/* Perform portability checks */
 static int	 Pflag;			/* Check for empty paths, leading '-' */
 
-extern char *__progname;
+extern const char *__progname;
 
 int
 main(int argc, char *argv[])

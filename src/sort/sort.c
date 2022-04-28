@@ -68,7 +68,7 @@ nl_catd catalog;
 #endif
 
 #ifdef __linux__
-extern char *__progname;
+extern const char *__progname;
 #endif
 
 #define	OPTIONS	"bcCdfghik:Mmno:RrsS:t:T:uVz"

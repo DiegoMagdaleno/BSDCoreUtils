@@ -43,7 +43,7 @@
 
 #include "compat.h"
 
-extern char *__progname;
+extern const char *__progname;
 
 typedef enum {
 	number_all,		/* number all lines */

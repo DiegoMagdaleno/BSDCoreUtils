@@ -8,7 +8,9 @@ target_link_libraries(chmod PRIVATE ${OPTLIBS})
 endif()
 
 INSTALL(TARGETS chmod DESTINATION ${CMAKE_INSTALL_BINDIR})
-
+if(PROGRAM_PREFIX)
+set_target_properties(chmod PROPERTIES PREFIX ${PROGRAM_PREFIX})
+endif()
 
 install_symlink(${CMAKE_INSTALL_PREFIX}/bin/chmod ${CMAKE_INSTALL_PREFIX}/bin/chgrp)
 install_symlink(${CMAKE_INSTALL_PREFIX}/bin/chmod ${CMAKE_INSTALL_PREFIX}/sbin/chown)

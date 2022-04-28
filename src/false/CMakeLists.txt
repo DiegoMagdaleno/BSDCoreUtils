@@ -2,6 +2,9 @@
 add_executable(false false.c)
 
 INSTALL(TARGETS false DESTINATION ${CMAKE_INSTALL_BINDIR})
+if(PROGRAM_PREFIX)
+set_target_properties(false PROPERTIES PREFIX ${PROGRAM_PREFIX})
+endif()
 
 FILE(GLOB MAN1_FILES *.1)
 IF(MAN1_FILES)

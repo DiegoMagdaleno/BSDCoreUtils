@@ -1005,7 +1005,7 @@ main(int argc, char *argv[])
 }
 
 
-extern char *__progname;
+extern const char *__progname;
 
 static void
 usage(void)

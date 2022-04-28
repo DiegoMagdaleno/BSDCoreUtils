@@ -147,7 +147,7 @@ fatalx(const char *fmt, ...)
 void
 usage(void)
 {
-	extern char *__progname;
+	extern const char *__progname;
 
 	(void)fprintf(stderr,
 	    "usage: %s [-dqtu] [-p directory] [template]\n", __progname);

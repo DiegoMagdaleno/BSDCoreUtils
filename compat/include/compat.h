@@ -20,6 +20,7 @@
 #include <windows.h>
 #endif
 
+
 /*
  * Reference from Apple's archived OS X (now macOS documentation)
  * we need to import this else we are going to get a "declaration expected at
@@ -44,6 +45,22 @@
 #include <unistd.h>
 #endif
 
+
+//! Fix a warning that complains about extern declarations
+#ifdef HAVE___PROGNAME
+extern const char *__progname;
+#else
+extern const char *__progname;
+#endif
+
+// Use whereami library
+#ifdef USE_LIBWHEREAMI
+#include "whereami.h"
+#define IS_USING_WHEREAMI_LIBRARY
+void setprogname(const char *progname);
+const char *getprogname(void);
+#endif
+
 /* sys/types.h */
 #if defined __MINGW32__ || defined _MSC_VER
 typedef int gid_t;
@@ -55,6 +72,15 @@ typedef unsigned int u_int;
 #undef u_long
 typedef unsigned long u_long;
 #pragma pop_macro("u_long")
+#endif
+
+/* Primarly musl... */
+#ifndef u_long
+typedef unsigned long u_long;
+#endif
+
+#ifndef u_int
+typedef unsigned int u_int;
 #endif
 
 /* sys/stat.h */

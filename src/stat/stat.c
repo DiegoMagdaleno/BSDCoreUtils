@@ -45,42 +45,21 @@
 #include <string.h>
 #include <time.h>
 #include <unistd.h>
-#include <stdint.h>
 
 #include "compat.h"
 
-#if HAVE_STRUCT_STAT_ST_FLAGS
-#define DEF_F "%#Xf "
-#define RAW_F "%f "
-#define SHELL_F  " st_flags=%f"
-#else /* HAVE_STRUCT_STAT_ST_FLAGS */
-#define DEF_F
-#define RAW_F
-#define SHELL_F
-#endif /* HAVE_STRUCT_STAT_ST_FLAGS */
-
-#if HAVE_STRUCT_STAT_ST_BIRTHTIME
-#define DEF_B "\"%SB\" "
-#define RAW_B "%B "
-#define SHELL_B "st_birthtime=%B "
-#else /* HAVE_STRUCT_STAT_ST_BIRTHTIME */
-#define DEF_B
-#define RAW_B
-#define SHELL_B
-#endif /* HAVE_STRUCT_STAT_ST_BIRTHTIME */
-
 #define DEF_FORMAT \
-	"%d %i %Sp %l %Su %Sg %r %z \"%Sa\" \"%Sm\" \"%Sc\" " DEF_B \
-	"%k %b DEF_F %N"
-#define RAW_FORMAT	"%d %i %#p %l %u %g %r %z %a %m %c " RAW_B \
-	"%k %b RAW_F %N"
+	"%d %i %Sp %l %Su %Sg %r %z \"%Sa\" \"%Sm\" \"%Sc\" " \
+	"%k %b %#Xf %N"
+#define RAW_FORMAT	"%d %i %#p %l %u %g %r %z %a %m %c " \
+	"%k %b %f %N"
 #define LS_FORMAT	"%Sp %l %Su %Sg %Z %Sm %N%SY"
 #define LSF_FORMAT	"%Sp %l %Su %Sg %Z %Sm %N%T%SY"
 #define SHELL_FORMAT \
 	"st_dev=%d st_ino=%i st_mode=%#p st_nlink=%l " \
 	"st_uid=%u st_gid=%g st_rdev=%r st_size=%z " \
-	"st_atime=%a st_mtime=%m st_ctime=%c " SHELL_B \
-	"st_blksize=%k st_blocks=%b" SHELL_F
+	"st_atime=%a st_mtime=%m st_ctime=%c " \
+	"st_blksize=%k st_blocks=%b"
 #define LINUX_FORMAT \
 	"  File: \"%N\"%n" \
 	"  Size: %-11z  FileType: %HT%n" \
@@ -169,7 +148,7 @@ char *timefmt;
 		(*nl) = ((c) == '\n'); \
 	} while (0/*CONSTCOND*/)
 
-extern char *__progname;
+extern const char *__progname;
 
 int
 main(int argc, char *argv[])
@@ -504,7 +483,7 @@ format1(const struct stat *st,
     int flags, int size, int prec, int ofmt,
     int hilo, int what)
 {
-	uint64_t data;
+	u_int64_t data;
 	char lfmt[24], tmp[20];
 	char smode[12], sid[12], path[PATH_MAX + 4];
 	const char *sdata;

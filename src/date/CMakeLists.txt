@@ -4,9 +4,13 @@ add_executable(date date.c)
 target_link_libraries(date PRIVATE compat)
 target_link_libraries(date PRIVATE util)
 
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D_DEFAULT_SOURCE -D_XOPEN_SOURCE")
+target_compile_definitions(date PRIVATE -D_DEFAULT_SOURCE)
+target_compile_definitions(date PRIVATE -D_XOPEN_SOURCE)
 
 INSTALL(TARGETS date DESTINATION ${CMAKE_INSTALL_BINDIR})
+if(PROGRAM_PREFIX)
+set_target_properties(date PROPERTIES PREFIX ${PROGRAM_PREFIX})
+endif()
 
 FILE(GLOB MAN1_FILES *.1)
 IF(MAN1_FILES)

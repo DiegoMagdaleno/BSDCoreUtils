@@ -43,7 +43,7 @@
 
 #include "compat.h"
 
-extern char *__progname;
+extern const char *__progname;
 
 void	current(void);
 void	pretty(struct passwd *);

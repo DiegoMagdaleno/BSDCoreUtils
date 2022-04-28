@@ -17,7 +17,7 @@
 +
  #define MAXIMUM(a, b)	(((a) > (b)) ? (a) : (b))
  
- extern char *__progname;
+ extern const char *__progname;
 @@ -102,14 +106,6 @@
  	argc -= optind;
  	argv += optind;

@@ -253,7 +253,7 @@ obsolete(char *argv[])
 void
 usage(void)
 {
-	extern char *__progname;
+	extern const char *__progname;
 
 	(void)fprintf(stderr,
 	    "usage: %s [-ci] [-d | -u] [-f fields] [-s chars] [input_file [output_file]]\n",

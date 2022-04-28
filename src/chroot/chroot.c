@@ -116,7 +116,7 @@ main(int argc, char **argv)
 void
 usage(void)
 {
-	extern char *__progname;
+	extern const char *__progname;
 
 	(void)fprintf(stderr, "usage: %s [-g group,group,...] "
 	    "newroot [command]\n", __progname);

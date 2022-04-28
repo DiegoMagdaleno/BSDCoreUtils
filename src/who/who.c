@@ -62,7 +62,7 @@
 #endif /* __APPLE__ */
 
 #ifdef __linux__
-extern char *__progname;
+extern const char *__progname;
 #endif
 
 static void output_labels(void);

@@ -10,7 +10,7 @@
  	oexpr	::= aexpr | aexpr "-o" oexpr ;
  	aexpr	::= nexpr | nexpr "-a" aexpr ;
 @@ -161,9 +163,6 @@
- 	extern char *__progname;
+ 	extern const char *__progname;
  	int	res;
  
 -	if (pledge("stdio rpath", NULL) == -1)

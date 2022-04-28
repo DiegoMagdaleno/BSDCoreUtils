@@ -31,8 +31,8 @@
  */
 
 #include <sys/types.h>
-#include <sys/ioctl.h>
 #include <sys/ttydefaults.h>
+#include <sys/ioctl.h>
 
 #include <err.h>
 #include <errno.h>
