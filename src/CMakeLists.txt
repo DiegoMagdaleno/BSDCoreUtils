@@ -51,7 +51,6 @@ list(APPEND crossCompatibleBins
         split
         stat
         sync
-        tail
         tee
         test
         touch
