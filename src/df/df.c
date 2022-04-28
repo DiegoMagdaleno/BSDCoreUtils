@@ -49,6 +49,10 @@
 #include <mntent.h>
 #include <assert.h>
 
+#ifndef _PATH_MOUNTED // Primarly for musl...
+#include <paths.h>
+#endif
+
 #include "compat.h"
 
 extern const char *__progname;
