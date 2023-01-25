@@ -133,7 +133,7 @@ jobs:
         with:
           usesh: true
           prepare:  |
-            pkg install -y ninja pkgconf
+            pkg install -y cmake ninja pkgconf
       - name: configure
         run: |
             mkdir build
