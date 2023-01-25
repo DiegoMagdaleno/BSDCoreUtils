@@ -60,7 +60,7 @@ int	check(char *, char *, struct stat *);
 void	checkdot(char **);
 void	rm_file(char **);
 int	rm_overwrite(char *, struct stat *);
-int	pass(int, off_t, char *, size_t);
+int	pass(int, off_t, char *, ssize_t);
 void	rm_tree(char **);
 void	usage(void);
 
@@ -339,9 +339,9 @@ err:
 }
 
 int
-pass(int fd, off_t len, char *buf, size_t bsize)
+pass(int fd, off_t len, char *buf, ssize_t bsize)
 {
-	size_t wlen;
+	ssize_t wlen;
 
 	for (; len > 0; len -= wlen) {
 		wlen = len < bsize ? len : bsize;
