@@ -125,15 +125,12 @@ jobs:
   freebsd:
     runs-on: macos-12
     name: FreeBSD Test
-    env:
-      CMAKE_GENERATOR: Ninja
     steps:
       - uses: actions/checkout@v3
       - name: Test
         id: test
         uses: vmactions/freebsd-vm@v0
         with:
-          env: 'CMAKE_GENERATOR'
           usesh: true
           prepare:  |
             pkg install -y ninja pkgconf
@@ -144,6 +141,8 @@ jobs:
             cmake \
             -S . \
             -B . \
+            -G Ninja \
+            -DCMAKE_MAKE_PROGRAM=/usr/local/bin/ninja \
             -DCMAKE_BUILD_TYPE=Release \
             -DCMAKE_C_COMPILER=clang \
             -DCMAKE_CXX_COMPILER=clang++ \
