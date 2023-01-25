@@ -133,7 +133,7 @@ jobs:
         with:
           usesh: true
           prepare:  |
-            pkg install -y cmake ninja pkgconf
+            pkg install -y ninja pkgconf
       - name: configure
         run: |
             mkdir build
@@ -142,6 +142,9 @@ jobs:
             -S . \
             -B . \
             -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_MAKE_PROGRAM=ninja \
+            -DCMAKE_C_COMPILER=clang \
+            -DCMAKE_CXX_COMPILER=clang++ \
             -G Ninja \
             -DCMAKE_INSTALL_PREFIX:PATH=installdir \
             -DCMAKE_INSTALL_MANDIR:PATH=installdir/share/man
