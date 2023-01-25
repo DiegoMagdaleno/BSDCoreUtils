@@ -1,7 +1,7 @@
 name: CMake Build Matrix
 
 # Controls when the action will run. Triggers the workflow on push
-on: 
+on:
   push:
   pull_request:
   release:
@@ -17,7 +17,7 @@ jobs:
       - name: dependencies
         run: |
               sudo env DEBIAN_FRONTEND=noninteractive apt-get update && sudo env DEBIAN_FRONTEND=noninteractive apt-get install -y cmake ninja-build
-      
+
       - uses: actions/checkout@v2
 
       - name: configure
@@ -33,11 +33,11 @@ jobs:
               -DCMAKE_CXX_COMPILER=g++ \
               -DCMAKE_INSTALL_PREFIX:PATH=installdir \
               -DCMAKE_INSTALL_MANDIR:PATH=instdir/share/man
-      
+
       - name: build
         shell: bash
         run: cmake --build . --config Release
-      
+
       - name: Install strip
         shell: bash
         run: cmake --install . --strip
@@ -73,7 +73,7 @@ jobs:
       - name: dependencies
         run: |
               sudo env DEBIAN_FRONTEND=noninteractive apt-get update && sudo env DEBIAN_FRONTEND=noninteractive apt-get install -y cmake ninja-build clang
-      
+
       - uses: actions/checkout@v2
 
       - name: configure
@@ -89,11 +89,11 @@ jobs:
               -DCMAKE_CXX_COMPILER=clang++ \
               -DCMAKE_INSTALL_PREFIX:PATH=installdir \
               -DCMAKE_INSTALL_MANDIR:PATH=instdir/share/man
-      
+
       - name: build
         shell: bash
         run: cmake --build . --config Release
-      
+
       - name: Install strip
         shell: bash
         run: cmake --install . --strip
@@ -121,23 +121,23 @@ jobs:
           asset_path: Ubuntu_latest_clang.7z
           asset_name: Ubuntu_latest_clang.7z.zip
           asset_content_type: application/zip
-  
+
   alpine_gcc:
     runs-on: ubuntu-latest
 
     container:
       image: "alpine:latest"
-    
+
     steps:
       - name: dependencies
         run: |
             apk add git libtool ninja linux-headers gcc g++ musl-dev patch cmake flex bison fts-dev p7zip openssl-dev bsd-compat-headers 	ncurses-dev
-      
+
       - uses: actions/checkout@v2
 
       - name: configure
         run: |
-            mkdir build 
+            mkdir build
             mkdir installdir
             cmake \
             -S . \
@@ -156,12 +156,12 @@ jobs:
       - name: Install strip
         shell: bash
         run: cmake --install . --strip
-      
+
       - name: Pack
         shell: bash
         working-directory: installdir
         run: |
-          ls -laR 
+          ls -laR
           7z a ../Alpine_latest_gcc.7z
 
       - name: Upload
@@ -169,7 +169,7 @@ jobs:
         with:
           path: ./Alpine_latest_gcc.7z
           name: Alpine_latest_gcc.7z
-      
+
       - name: Upload release
         if: github.event_name == 'release' && (github.event.action == 'published' || github.event.action == 'created')
         uses: actions/upload-release-asset@v1
@@ -180,4 +180,25 @@ jobs:
           asset_path: Alpine_latest_gcc.7z
           asset_name: Alpine_latest_gcc.7z.zip
           asset_content_type: application/zip
-  
+
+  macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: dependencies
+        run: |
+            brew install ninja
+
+      - name: configure
+        run: |
+              mkdir build
+              mkdir installdir
+              cmake \
+              -S . \
+              -B . \
+              -DCMAKE_BUILD_TYPE=Release \
+              -G Ninja
+
+      - name: build
+        shell: bash
+        run: cmake --build . --config Release
