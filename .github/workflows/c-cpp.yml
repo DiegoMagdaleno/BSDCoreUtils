@@ -143,8 +143,6 @@ jobs:
             -B . \
             -DCMAKE_BUILD_TYPE=Release \
             -G Ninja \
-            -DCMAKE_C_COMPILER=gcc \
-            -DCMAKE_CXX_COMPILER=g++ \
             -DCMAKE_INSTALL_PREFIX:PATH=installdir \
             -DCMAKE_INSTALL_MANDIR:PATH=installdir/share/man
 
