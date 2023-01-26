@@ -122,6 +122,37 @@ jobs:
           asset_name: Ubuntu_latest_clang.7z.zip
           asset_content_type: application/zip
 
+  freebsd:
+    runs-on: macos-12
+    name: FreeBSD Test
+    steps:
+      - uses: actions/checkout@v3
+      - name: Test
+        id: test
+        uses: vmactions/freebsd-vm@v0
+        with:
+          usesh: true
+          prepare:  |
+            pkg install -y ninja pkgconf
+      - name: configure
+        run: |
+            mkdir build
+            mkdir installdir
+            cmake \
+            -S . \
+            -B . \
+            -G Ninja \
+            -DCMAKE_MAKE_PROGRAM=/usr/bin/ninja \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_C_COMPILER=clang \
+            -DCMAKE_CXX_COMPILER=clang++ \
+            -DCMAKE_INSTALL_PREFIX:PATH=installdir \
+            -DCMAKE_INSTALL_MANDIR:PATH=installdir/share/man
+
+      - name: build
+        shell: bash
+        run: cmake --build . --config Release
+
   alpine_gcc:
     runs-on: ubuntu-latest
 
