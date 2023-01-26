@@ -31,14 +31,10 @@ if(LINUX)
             include_directories(BEFORE ${FTS_INCLUDE_DIR})
             set(WITH_EXTERNAL_FTS TRUE)
         else()
+            include(FindAutotools)
             message("Couldn't find external FTS implementation, will try to build one")
             set(FTS_LIBRARY ${CMAKE_INSTALL_PREFIX}/lib/${CMAKE_STATIC_LIBRARY_PREFIX}fts${CMAKE_STATIC_LIBRARY_SUFFIX})
             find_program(MAKE_EXECUTABLE NAMES gmake make REQUIRED)
-            find_program(libtoolize REQUIRED)
-            find_program(aclocal REQUIRED)
-            find_program(autoconf REQUIRED)
-            find_program(autoheader REQUIRED)
-            find_program(automake REQUIRED)
             ExternalProject_Add(libfts
             GIT_REPOSITORY https://github.com/pullmoll/musl-fts.git
             GIT_TAG v1.2.7
