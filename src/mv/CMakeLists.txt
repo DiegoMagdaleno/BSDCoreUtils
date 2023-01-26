@@ -7,8 +7,8 @@ if(${CMAKE_SYSTEM_NAME} STREQUAL "Darwin")
     target_compile_definitions(mv PRIVATE -D_DARWIN_SOURCE)
 endif()
 
-if ( FTS_FOUND )
-target_link_libraries(mv PRIVATE ${OPTLIBS})
+if ( WITH_EXTERNAL_FTS )
+    target_link_libraries(mv PRIVATE fts)
 endif()
 
 INSTALL(TARGETS mv DESTINATION ${CMAKE_INSTALL_BINDIR})

@@ -8,8 +8,9 @@ set_target_properties(cp PROPERTIES PREFIX ${PROGRAM_PREFIX})
 endif()
 
 INSTALL(TARGETS cp DESTINATION ${CMAKE_INSTALL_BINDIR})
-if (FTS_FOUND)
-target_link_libraries(cp PRIVATE ${OPTLIBS})
+
+if (WITH_EXTERNAL_FTS)
+    target_link_libraries(cp PRIVATE fts)
 endif()
 
 FILE(GLOB MAN1_FILES *.1)

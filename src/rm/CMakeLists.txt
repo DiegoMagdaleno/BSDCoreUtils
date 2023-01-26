@@ -8,8 +8,8 @@ if(PROGRAM_PREFIX)
 set_target_properties(rm PROPERTIES PREFIX ${PROGRAM_PREFIX})
 endif()
 
-if ( FTS_FOUND )
-target_link_libraries(rm PRIVATE ${OPTLIBS})
+if ( WITH_EXTERNAL_FTS )
+    target_link_libraries(rm PRIVATE fts)
 endif()
 
 FILE(GLOB MAN1_FILES *.1)
