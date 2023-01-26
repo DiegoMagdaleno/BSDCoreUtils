@@ -3,21 +3,33 @@ project(bsdcoreutils)
 
 set(CMAKE_C_STANDARD 11)
 
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/Modules/")
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
+
+# CMAKE Doesn't really have a Macro to detect Linux, Why?
+if (${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
+    set(LINUX TRUE)
+endif()
+
+include(utils)
 
 # Check for the required additional libraries required on Linux
 # since onn macOS we use Apple's crypto and native BSD functions
 # we don't really need to use any additional libs.
-if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
+if(LINUX)
     message("Looking for required package OpenSSL")
     find_package(OpenSSL REQUIRED)
-    find_package(FTS)
-    if ( FTS_FOUND )
-        message("Using FTS implementation")
-        list(APPEND OPTLIBS ${FTS_LIBRARY})
-        include_directories(BEFORE ${FTS_INCLUDE_DIR})
-    else()
-        message("Your OS doesn't have a separate FTS implementation, assuming one is provided by the LIBC")
+    set(is_musl_test FALSE)
+    is_musl_c(is_musl_test)
+    if(is_musl_test)
+        find_package(FTS)
+        if ( FTS_FOUND )
+            message("Using FTS implementation")
+            list(APPEND OPTLIBS ${FTS_LIBRARY})
+            include_directories(BEFORE ${FTS_INCLUDE_DIR})
+        else()
+            message("Your OS doesn't have a separate FTS implementation, assuming one is provided by the LIBC")
+        endif()
     endif()
     add_definitions("-DDEFFILEMODE=(S_IRUSR|S_IWUSR|S_IRGRP|S_IWGRP|S_IROTH|S_IWOTH)")
     add_definitions("-DACCESSPERMS=(S_IRWXU|S_IRWXG|S_IRWXO)")
@@ -26,10 +38,6 @@ if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
     add_definitions(-DS_BLKSIZE=512)
 endif()
 
-# CMAKE Doesn't really have a Macro to detect Linux, Why?
-if (${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
-set(LINUX TRUE)
-endif()
 
 if (WIN32)
     message("Looking for Win32 OpenSSL")
