@@ -162,7 +162,7 @@ jobs:
     steps:
       - name: dependencies
         run: |
-            apk add git libtool ninja linux-headers gcc g++ musl-dev patch cmake flex bison fts-dev p7zip openssl-dev bsd-compat-headers 	ncurses-dev
+            apk add git libtool ninja linux-headers gcc g++ musl-dev patch cmake flex bison p7zip openssl-dev bsd-compat-headers 	ncurses-dev
 
       - uses: actions/checkout@v2
 
