@@ -157,7 +157,7 @@ jobs:
     runs-on: ubuntu-latest
 
     container:
-      image: "alpine:latest"
+      image: "alpine:edge"
 
     steps:
       - name: dependencies
