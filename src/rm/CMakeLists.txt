@@ -8,7 +8,7 @@ if(PROGRAM_PREFIX)
 set_target_properties(rm PROPERTIES PREFIX ${PROGRAM_PREFIX})
 endif()
 
-if ( WITH_EXTERNAL_FTS )
+if (WITH_EXTERNAL_FTS)
     target_link_libraries(rm PRIVATE fts)
 endif()
 

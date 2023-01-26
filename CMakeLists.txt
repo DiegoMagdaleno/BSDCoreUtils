@@ -3,17 +3,12 @@ project(bsdcoreutils)
 
 set(CMAKE_C_STANDARD 11)
 
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/3rd")
 
 # CMAKE Doesn't really have a Macro to detect Linux, Why?
 if (${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
     set(LINUX TRUE)
 endif()
-
-include(utils)
-include(ExternalProject)
 
 set(WITH_EXTERNAL_FTS FALSE)
 
@@ -21,6 +16,7 @@ set(WITH_EXTERNAL_FTS FALSE)
 # since onn macOS we use Apple's crypto and native BSD functions
 # we don't really need to use any additional libs.
 if(LINUX)
+    include(utils)
     message("Looking for required package OpenSSL")
     find_package(OpenSSL REQUIRED)
     set(is_musl_test FALSE)
