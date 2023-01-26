@@ -55,6 +55,12 @@ extern const char *__progname;
 extern const char *__progname;
 #endif
 
+#if defined(__APPLE__) || defined(__NetBSD__)
+	#define st_atim st_atimespec
+	#define st_ctim st_ctimespec
+	#define st_mtim st_mtimespec
+#endif
+
 // Use whereami library
 #ifdef USE_LIBWHEREAMI
 #include "whereami.h"
@@ -267,3 +273,19 @@ size_t strlcpy (char *, const char *, size_t);
 #endif
 
 void explicit_bzero(void *, size_t );
+
+#ifdef __APPLE__
+#ifndef UTIME_NOW
+#define UTIME_NOW -1
+#endif 
+
+#ifndef UTIME_OMIT
+#define UTIME_OMIT -2
+#endif
+#endif
+
+#if defined(__APPLE__) || defined(__NetBSD__)
+#define st_atim st_atimespec
+#define st_ctim st_ctimespec
+#define st_mtim st_mtimespec
+#endif
