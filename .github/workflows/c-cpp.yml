@@ -142,7 +142,7 @@ jobs:
             -S . \
             -B . \
             -G Ninja \
-            -DCMAKE_MAKE_PROGRAM=/usr/bin/ninja \
+            -DCMAKE_MAKE_PROGRAM=$(which ninja) \
             -DCMAKE_BUILD_TYPE=Release \
             -DCMAKE_C_COMPILER=clang \
             -DCMAKE_CXX_COMPILER=clang++ \
