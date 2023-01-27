@@ -133,25 +133,16 @@ jobs:
         with:
           usesh: true
           prepare:  |
-            pkg install -y ninja pkgconf
+            pkg install -y ninja openssl pkgconf
       - name: configure
         run: |
-            mkdir build
-            mkdir installdir
-            cmake \
-            -S . \
-            -B . \
-            -G Ninja \
-            -DCMAKE_MAKE_PROGRAM=$(which ninja) \
-            -DCMAKE_BUILD_TYPE=Release \
-            -DCMAKE_C_COMPILER=clang \
-            -DCMAKE_CXX_COMPILER=clang++ \
-            -DCMAKE_INSTALL_PREFIX:PATH=installdir \
-            -DCMAKE_INSTALL_MANDIR:PATH=installdir/share/man
+            cmake -B build -G Ninja
+            cd build
+            ninja
 
-      - name: build
-        shell: bash
-        run: cmake --build . --config Release
+      #- name: build
+        #shell: bash
+        #run: cmake --build . --config Release
 
   alpine_gcc:
     runs-on: ubuntu-latest
