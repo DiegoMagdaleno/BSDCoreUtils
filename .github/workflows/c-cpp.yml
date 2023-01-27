@@ -133,16 +133,38 @@ jobs:
         with:
           usesh: true
           prepare:  |
-            pkg install -y ninja openssl pkgconf
+            pkg install -y openssl pkgconf
       - name: configure
         run: |
             cmake -B build
+
+      - name: build
+        shell: bash
+        run: |
             cd build
             make
 
-      #- name: build
-        #shell: bash
-        #run: cmake --build . --config Release
+  openbsd:
+    runs-on: macos-12
+    name: OpenBSD Test
+    steps:
+      - uses: actions/checkout@v3
+      - name: Test in OpenBSD
+        id: test
+        uses: vmactions/openbsd-vm@v0
+        with:
+          usesh: true
+          prepare:  |
+            pkg_add  cmake ninja openssl pkgconf
+      - name: configure
+        run: |
+            cmake -B build -G Ninja
+
+      - name: build
+        shell: bash
+        run: |
+            cd build
+            ninja
 
   alpine_gcc:
     runs-on: ubuntu-latest
