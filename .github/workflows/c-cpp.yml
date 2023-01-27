@@ -136,9 +136,9 @@ jobs:
             pkg install -y ninja openssl pkgconf
       - name: configure
         run: |
-            cmake -B build -G Ninja
+            cmake -B build
             cd build
-            ninja
+            make
 
       #- name: build
         #shell: bash
