@@ -44,6 +44,28 @@ Building from source is a recommended option if you want to read and wish to tak
 
 _3. This is only required on Linux based operating systems, on macOS the native implementation of the hashing algorithms will be used_
 
+**Option 3 - From source on Windows (MSYS2/MinGW)**:
+
+Windows is supported via [MSYS2](https://www.msys2.org/) with the MinGW-w64 toolchain.
+
+1. Install [MSYS2](https://www.msys2.org/) and open a **MINGW64** shell.
+2. Install the required dependencies:
+   ```
+   pacman -S mingw-w64-x86_64-gcc mingw-w64-x86_64-cmake mingw-w64-x86_64-ninja mingw-w64-x86_64-openssl make
+   ```
+3. `cd` into the directory where you cloned/downloaded this repository.
+4. Configure and build:
+   ```
+   cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -G Ninja
+   cmake --build build --config Release
+   ```
+5. Optionally install the tools:
+   ```
+   cmake --install build --prefix /mingw64
+   ```
+
+_Note: The Windows port is experimental. Not all utilities may function identically to their POSIX counterparts due to platform differences._
+
 ## Contributing
 
 Contributions are welcome and encouraged.
